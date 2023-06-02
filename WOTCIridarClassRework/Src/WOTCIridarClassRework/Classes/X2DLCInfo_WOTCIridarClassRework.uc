@@ -2,12 +2,167 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
 static event OnPostTemplatesCreated()
 {
+	PatchSkirmisherAmbush();
+	PatchManualOverride();
+	PatchSkirmisherMelee();
+	PatchSkirmisherInterrupt();
 	PatchFullThrottle();
 	PatchZeroIn();
 	PatchSkirmisherReflex();
 	PatchBattlelord();
 	PatchWhiplash();
 	PatchParkour();
+}
+
+static private function PatchSkirmisherAmbush()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_ModifyReactionFire       ReactionFire;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherAmbush');
+	if (AbilityTemplate == none)	
+		return;
+
+	ReactionFire = new class'X2Effect_ModifyReactionFire';
+	ReactionFire.bAllowCrit = true;
+	ReactionFire.BuildPersistentEffect(1, true, true, true);
+	AbilityTemplate.AddTargetEffect(ReactionFire);
+}
+
+static private function PatchManualOverride()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_Persistent				PersistentEffect;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ManualOverride');
+	if (AbilityTemplate == none)	
+		return;
+
+	RemoveActionCost(AbilityTemplate);
+	AddFreeActionCost(AbilityTemplate);
+	AddCooldown(AbilityTemplate, `GetConfigInt("ManualOverride_Cooldown"));
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_ManualOverride(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			PersistentEffect = new class'X2Effect_Persistent';
+			PersistentEffect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
+			PersistentEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyHelpText(), AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+			PersistentEffect.EffectAddedFn = ManualOverride_EffectAdded;
+			PersistentEffect.EffectRemovedFn = ManualOverride_EffectRemoved;
+			AbilityTemplate.AddTargetEffect(PersistentEffect);
+
+			break;
+		}
+	}
+}
+
+static private function ManualOverride_EffectAdded(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState)
+{
+	local array<name>				AbilityNames;
+	local name						AbilityName;
+	local XComGameState_Unit		UnitState;
+	local StateObjectReference		AbilityRef;
+	local XComGameState_Ability		AbilityState;
+	local XComGameStateHistory		History;
+	local name						ValueName;
+
+	UnitState = XComGameState_Unit(kNewTargetState);
+	if (UnitState == none)
+		return;
+
+	History = `XCOMHISTORY;
+	AbilityNames = `GetConfigArrayName("ManualOverride_Abilities");
+
+	foreach AbilityNames(AbilityName)
+	{
+		AbilityRef = UnitState.FindAbility(AbilityName);
+		if (AbilityRef.ObjectID <= 0)
+			continue;
+
+		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
+		if (AbilityState == none)
+			continue;
+
+		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
+		UnitState.SetUnitFloatValue(ValueName, AbilityState.iCooldown, eCleanup_BeginTactical);
+
+		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+		AbilityState.iCooldown = 0;
+	}
+}
+static private function ManualOverride_EffectRemoved(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed)
+{
+	local array<name>				AbilityNames;
+	local name						AbilityName;
+	local XComGameState_Unit		UnitState;
+	local StateObjectReference		AbilityRef;
+	local XComGameState_Ability		AbilityState;
+	local XComGameStateHistory		History;
+	local name						ValueName;	
+	local UnitValue					UV;
+
+	History = `XCOMHISTORY;
+
+	UnitState = XComGameState_Unit(History.GetGameStateForObjectID(ApplyEffectParameters.TargetStateObjectRef.ObjectID));
+	if (UnitState == none)
+		return;
+
+	UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
+
+	AbilityNames = `GetConfigArrayName("ManualOverride_Abilities");
+
+	foreach AbilityNames(AbilityName)
+	{
+		AbilityRef = UnitState.FindAbility(AbilityName);
+		if (AbilityRef.ObjectID <= 0)
+			continue;
+
+		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
+		if (AbilityState == none)
+			continue;
+
+		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
+		if (!UnitState.GetUnitValue(ValueName, UV))
+			continue;
+
+		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+		AbilityState.iCooldown = UV.fValue - 1;
+		if (AbilityState.iCooldown < 0)
+			AbilityState.iCooldown = 0;
+
+		UnitState.ClearUnitValue(ValueName);
+	}
+}
+
+static private function PatchSkirmisherMelee()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2AbilityCost_ActionPoints        ActionPointCost;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherMelee');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.AbilityCooldown = none;
+	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
+
+	RemoveActionCost(AbilityTemplate);
+
+	ActionPointCost = new class'X2AbilityCost_ActionPoints';
+	ActionPointCost.bMoveCost = true;
+	ActionPointCost.bConsumeAllPoints = false;
+	AbilityTemplate.AbilityCosts.AddItem(ActionPointCost);
 }
 
 static private function PatchFullThrottle()
@@ -59,8 +214,10 @@ static private function PatchZeroIn()
 
 static private function PatchSkirmisherInterrupt()
 {
-	local X2AbilityTemplateManager		AbilityMgr;
-	local X2AbilityTemplate				AbilityTemplate;
+	local X2AbilityTemplateManager					AbilityMgr;
+	local X2AbilityTemplate							AbilityTemplate;
+	local X2Effect_ReserveOverwatchPoints_NoCost	ReserveOverwatchPoints;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherInterruptInput');
@@ -69,6 +226,21 @@ static private function PatchSkirmisherInterrupt()
 
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Interrupt_Cooldown"));
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_ReserveOverwatchPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			ReserveOverwatchPoints = new class'X2Effect_ReserveOverwatchPoints_NoCost';
+			ReserveOverwatchPoints.UseAllPointsWithAbilities.Length = 0;
+			ReserveOverwatchPoints.ReserveType = 'ReserveInterrupt';
+			AbilityTemplate.AddTargetEffect(ReserveOverwatchPoints);
+
+			break;
+		}
+	}
 }
 
 static private function PatchSkirmisherReflex()
@@ -221,6 +393,21 @@ static private function RemoveChargeCost(out X2AbilityTemplate AbilityTemplate)
 	}
 }
 
+static private function RemoveActionCost(out X2AbilityTemplate AbilityTemplate)
+{
+	local int i;
+
+	AbilityTemplate.AbilityCharges = none;
+
+	for (i = AbilityTemplate.AbilityCosts.Length - 1; i >= 0; i--)
+	{
+		if (X2AbilityCost_ActionPoints(AbilityTemplate.AbilityCosts[i]) != none)
+		{
+			AbilityTemplate.AbilityCosts.Remove(i, 1);
+		}
+	}
+}
+
 static private function AddCooldown(out X2AbilityTemplate Template, int Cooldown)
 {
 	local X2AbilityCooldown AbilityCooldown;
@@ -231,4 +418,14 @@ static private function AddCooldown(out X2AbilityTemplate Template, int Cooldown
 		AbilityCooldown.iNumTurns = Cooldown;
 		Template.AbilityCooldown = AbilityCooldown;
 	}
+}
+
+static function AddFreeActionCost(out X2AbilityTemplate Template)
+{
+	local X2AbilityCost_ActionPoints ActionPointCost;
+
+	ActionPointCost = new class'X2AbilityCost_ActionPoints';
+	ActionPointCost.iNumPoints = 1;
+	ActionPointCost.bFreeCost = true;
+	Template.AbilityCosts.AddItem(ActionPointCost);
 }
