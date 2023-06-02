@@ -18,15 +18,14 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219
 [*] Bullpups: mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
 [*] Ripjack attacks now have 10% base crit chance, same as swords.
 [*] Reflex: can trigger once per turn instead of once per mission.
-[*] Zero In: now applies to all attacks, including Overwatch shots.
+[*] Zero In: now applies to all attacks, including Ripjack attacks and Overwatch shots.
 [*] Full Throttle: kills now also reduce cooldown of Grapple by 1.
 [*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
-[*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to use.
+[*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to activate.
 [*] Waylay: now also allows Overwatch shots to crit.
-[*] Reckoning: cooldown removed, but now action cost now scales with distance to the target. Essentially works same as Ranger's Slash, except it doesn't end turn if you still have actions remaining.
+[*] Total Combat: now also grants a grenade-only slot.
+[*] Reckoning: cooldown removed, but now action cost scales with distance to the target. Essentially works same as Ranger's Slash, except it doesn't end turn if you still have actions remaining.
 [*] Battlelord: now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. 
 [*] Manual Override: now is a free action with a 5 turn cooldown, when used it immediately resets cooldowns on all other Skirmisher abilities for one turn. Cooldowns are restored on the next turn.
 [*] Parkour: now grants a Move action after using Grapple.
 [/list]
-
-Add Covering Fire and Blast Padding to deck
