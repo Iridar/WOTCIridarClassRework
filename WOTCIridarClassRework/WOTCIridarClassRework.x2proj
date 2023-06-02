@@ -23,6 +23,9 @@
     <Content Include="Config\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\XComGameData_SoldierSkills.ini">
       <SubType>Content</SubType>
     </Content>
@@ -40,6 +43,15 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\Help.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\ConfigEngine.uc" />
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <SolutionRoot>$(MSBuildProjectDirectory)\..\</SolutionRoot>
