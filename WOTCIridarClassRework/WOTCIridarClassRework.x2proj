@@ -55,6 +55,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReserveOverwatchPoints_NoCost.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_RetainOverwatchOnDamage.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherInterrupt_Fixed.uc">
       <SubType>Content</SubType>
     </Content>

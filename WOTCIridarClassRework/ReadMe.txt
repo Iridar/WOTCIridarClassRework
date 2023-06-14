@@ -13,7 +13,6 @@ TODO: Return Fire needs new icon
 SkirmisherMelee needs new melee puck
 
 Make  Battlelord work with multiple interruptors
-make Waylay not remove Overwatch on damage
 make Full Override affect only Ripjack abilities
 update localization for all changed abilities
 
@@ -34,7 +33,7 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219
 [*] Combat Presence: can be used during Interrupt, immediately granting an Interrupt action to another soldier.
 [*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
 [*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to activate. Multiple units can now interrupt at the same time.
-[*] Waylay: now also allows Overwatch shots to crit.
+[*] Waylay: now also allows to remain on Overwatch upon taking damage.
 [*] Total Combat: now also grants a grenade-only slot.
 [*] Reckoning: cooldown removed, but now action cost scales with distance to the target. Essentially works same as Ranger's Slash, except it doesn't end turn if you still have actions remaining.
 [*] Battlelord: now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. 
