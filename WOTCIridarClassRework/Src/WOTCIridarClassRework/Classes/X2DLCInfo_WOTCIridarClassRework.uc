@@ -12,6 +12,7 @@ static event OnPostTemplatesCreated()
 	PatchBattlelord();
 	PatchWhiplash();
 	PatchParkour();
+	PatchCombatPresence();
 }
 
 static private function PatchSkirmisherAmbush()
@@ -220,6 +221,7 @@ static private function PatchSkirmisherInterrupt()
 	local X2AbilityTemplateManager					AbilityMgr;
 	local X2AbilityTemplate							AbilityTemplate;
 	local X2Effect_ReserveOverwatchPoints_NoCost	ReserveOverwatchPoints;
+	local X2Effect_SkirmisherInterrupt_Fixed		InterruptEffect;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -244,6 +246,76 @@ static private function PatchSkirmisherInterrupt()
 			break;
 		}
 	}
+
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherInterrupt');
+	if (AbilityTemplate == none)
+		return;
+
+	// Replace the Interrupt Effect with an improved version that allows multiple units to interrupt at the same time.
+	for (i = AbilityTemplate.AbilityShooterEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_SkirmisherInterrupt(AbilityTemplate.AbilityShooterEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityShooterEffects.Remove(i, 1);
+
+			InterruptEffect = new class'X2Effect_SkirmisherInterrupt_Fixed';
+			InterruptEffect.BuildPersistentEffect(1, false, , , eGameRule_PlayerTurnBegin);
+			AbilityTemplate.AddShooterEffect(InterruptEffect);
+
+			break;
+		}
+	}
+}
+
+static private function PatchCombatPresence()
+{
+	local X2AbilityTemplateManager					AbilityMgr;
+	local X2AbilityTemplate							AbilityTemplate;
+	local X2Effect_SkirmisherInterrupt_Fixed		InterruptEffect;
+	local X2Effect_GrantActionPoints				ActionPointEffect;
+	local X2Condition_CombatPresenceInterrupt		InterruptCondition;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('CombatPresence');
+	if (AbilityTemplate == none)
+		return;
+
+	// Allow using Combat Presence with Interrupt AP
+	for (i = AbilityTemplate.AbilityCosts.Length - 1; i >= 0; i--)
+	{
+		if (X2AbilityCost_ActionPoints(AbilityTemplate.AbilityCosts[i]) != none)
+		{
+			X2AbilityCost_ActionPoints(AbilityTemplate.AbilityCosts[i]).AllowedTypes.AddItem(class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint);
+			break;
+		}
+	}
+
+	// Make the original action point effect work only while NOT interrupting.
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_GrantActionPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			InterruptCondition = new class'X2Condition_CombatPresenceInterrupt';
+			InterruptCondition.bReverse = true;
+			AbilityTemplate.AbilityTargetEffects[i].TargetConditions.AddItem(InterruptCondition);
+			break;
+		}
+	}
+
+	// When used while Interrupting, make the target unit Interrupt too.
+	InterruptEffect = new class'X2Effect_SkirmisherInterrupt_Fixed';
+	InterruptEffect.BuildPersistentEffect(1, false, , , eGameRule_PlayerTurnBegin);
+	InterruptEffect.TargetConditions.AddItem(new class'X2Condition_CombatPresenceInterrupt');
+	AbilityTemplate.AbilityTargetEffects.InsertItem(0, InterruptEffect);
+
+	// Give the Interrupt point while Interrupting, doh
+	ActionPointEffect = new class'X2Effect_GrantActionPoints';
+	ActionPointEffect.NumActionPoints = 1;
+	ActionPointEffect.PointType = class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint;
+	ActionPointEffect.bSelectUnit = true;
+	ActionPointEffect.TargetConditions.AddItem(new class'X2Condition_CombatPresenceInterrupt');
+	AbilityTemplate.AddTargetEffect(ActionPointEffect);
 }
 
 static private function PatchSkirmisherReflex()

@@ -43,6 +43,9 @@
     <Content Include="Localization\XComGame.int" />
     <Content Include="Localization\WOTCIridarClassRework.int" />
     <Content Include="Src\extra_globals.uci" />
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_CombatPresenceInterrupt.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\Help.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\ConfigEngine.uc" />
@@ -50,6 +53,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReserveOverwatchPoints_NoCost.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherInterrupt_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
