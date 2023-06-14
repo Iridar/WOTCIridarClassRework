@@ -154,6 +154,9 @@ static private function PatchSkirmisherMelee()
 	if (AbilityTemplate == none)	
 		return;
 
+	// Firaxis forgot (?) to change the icon, so it looks like slash.
+	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
+
 	AbilityTemplate.AbilityCooldown = none;
 	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
 

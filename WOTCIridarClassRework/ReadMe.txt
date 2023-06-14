@@ -9,6 +9,16 @@ Created with Enhanced Mod Project Template v1.0
 Get news and updates here: 
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
+TODO: Return Fire needs new icon
+SkirmisherMelee needs new melee puck
+
+Make Interrupt and Battlelord work with multiple interruptors
+
+update localization for all changed abilities
+
+New ability: Kinetic Armor: misses give +2 Shield HP, stacks up to 50% of Max HP.
+New ability: Thunder Harpoon: you can now use Ripjack Grapple to launch grenades at individual enemies. Grenades launched this way deal 50% extra damage to the primary target, and 50% reduced damage to other targets. Additionally, all your equipped damaging grenades gain an extra charge.
+
 
 [WOTC] Critical Skirmishing
 https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219
