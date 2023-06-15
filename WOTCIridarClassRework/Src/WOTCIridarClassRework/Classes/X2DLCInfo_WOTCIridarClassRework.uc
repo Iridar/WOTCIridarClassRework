@@ -13,6 +13,8 @@ static event OnPostTemplatesCreated()
 	PatchWhiplash();
 	PatchParkour();
 	PatchCombatPresence();
+	PatchRetributionAttack();
+	PatchSkirmisherReturnFire();
 }
 
 static private function PatchSkirmisherAmbush()
@@ -72,8 +74,6 @@ static private function PatchManualOverride()
 
 static private function ManualOverride_EffectAdded(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState)
 {
-	local array<name>				AbilityNames;
-	local name						AbilityName;
 	local XComGameState_Unit		UnitState;
 	local StateObjectReference		AbilityRef;
 	local XComGameState_Ability		AbilityState;
@@ -85,16 +85,14 @@ static private function ManualOverride_EffectAdded(X2Effect_Persistent Persisten
 		return;
 
 	History = `XCOMHISTORY;
-	AbilityNames = `GetConfigArrayName("ManualOverride_Abilities");
 
-	foreach AbilityNames(AbilityName)
+	foreach UnitState.Abilities(AbilityRef)
 	{
-		AbilityRef = UnitState.FindAbility(AbilityName);
-		if (AbilityRef.ObjectID <= 0)
-			continue;
-
 		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
 		if (AbilityState == none)
+			continue;
+
+		if (!AbilityHasActionCost(AbilityState, UnitState))
 			continue;
 
 		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
@@ -104,10 +102,36 @@ static private function ManualOverride_EffectAdded(X2Effect_Persistent Persisten
 		AbilityState.iCooldown = 0;
 	}
 }
+static private function bool AbilityHasActionCost(XComGameState_Ability AbilityState, XComGameState_Unit SourceUnit)
+{
+	local X2AbilityCost					Cost;
+	local X2AbilityCost_ActionPoints	ActionPointCost;
+	local X2AbilityTemplate				Template;
+
+	Template = AbilityState.GetMyTemplate();
+	if (Template == none)
+		return false;
+
+	foreach Template.AbilityCosts(Cost)
+	{
+		ActionPointCost = X2AbilityCost_ActionPoints(Cost);
+		if (ActionPointCost == none)
+			continue;
+
+		if (ActionPointCost.bFreeCost)
+			continue;
+
+		if (ActionPointCost.ConsumeAllPoints(AbilityState, SourceUnit) ||
+			ActionPointCost.GetPointCost(AbilityState, SourceUnit) > 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 static private function ManualOverride_EffectRemoved(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed)
 {
-	local array<name>				AbilityNames;
-	local name						AbilityName;
 	local XComGameState_Unit		UnitState;
 	local StateObjectReference		AbilityRef;
 	local XComGameState_Ability		AbilityState;
@@ -123,14 +147,8 @@ static private function ManualOverride_EffectRemoved(X2Effect_Persistent Persist
 
 	UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
 
-	AbilityNames = `GetConfigArrayName("ManualOverride_Abilities");
-
-	foreach AbilityNames(AbilityName)
+	foreach UnitState.Abilities(AbilityRef)
 	{
-		AbilityRef = UnitState.FindAbility(AbilityName);
-		if (AbilityRef.ObjectID <= 0)
-			continue;
-
 		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
 		if (AbilityState == none)
 			continue;
@@ -147,6 +165,7 @@ static private function ManualOverride_EffectRemoved(X2Effect_Persistent Persist
 		UnitState.ClearUnitValue(ValueName);
 	}
 }
+
 
 static private function PatchSkirmisherMelee()
 {
@@ -226,6 +245,7 @@ static private function PatchSkirmisherInterrupt()
 	local X2AbilityTemplate							AbilityTemplate;
 	local X2Effect_ReserveOverwatchPoints_NoCost	ReserveOverwatchPoints;
 	local X2Effect_SkirmisherInterrupt_Fixed		InterruptEffect;
+	local X2Condition_UnitEffects					EffectCondition;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -250,6 +270,10 @@ static private function PatchSkirmisherInterrupt()
 			break;
 		}
 	}
+
+	EffectCondition = new class'X2Condition_UnitEffects';
+	EffectCondition.AddExcludeEffect(class'X2Effect_Battlelord'.default.EffectName, 'AA_DuplicateEffectIgnored');
+	AbilityTemplate.AbilityShooterConditions.AddItem(EffectCondition);
 
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherInterrupt');
 	if (AbilityTemplate == none)
@@ -277,7 +301,8 @@ static private function PatchCombatPresence()
 	local X2AbilityTemplate							AbilityTemplate;
 	local X2Effect_SkirmisherInterrupt_Fixed		InterruptEffect;
 	local X2Effect_GrantActionPoints				ActionPointEffect;
-	local X2Condition_CombatPresenceInterrupt		InterruptCondition;
+	local X2Condition_UnitEffectsOnSource			UnitEffects;
+	local X2Effect_Battlelord_CombatPresence		BattlelordEffect;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -296,21 +321,35 @@ static private function PatchCombatPresence()
 	}
 
 	// Make the original action point effect work only while NOT interrupting.
+	// (Still gives it while Battlelording)
 	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
 	{
 		if (X2Effect_GrantActionPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
 		{
-			InterruptCondition = new class'X2Condition_CombatPresenceInterrupt';
-			InterruptCondition.bReverse = true;
-			AbilityTemplate.AbilityTargetEffects[i].TargetConditions.AddItem(InterruptCondition);
+			UnitEffects = new class'X2Condition_UnitEffectsOnSource';
+			UnitEffects.AddExcludeEffect(class'X2Effect_SkirmisherInterrupt'.default.EffectName, 'AA_AbilityUnavailable');
+
+			AbilityTemplate.AbilityTargetEffects[i].TargetConditions.AddItem(UnitEffects);
 			break;
 		}
 	}
 
+	// When used while Battlelording, make the target unit enter Battlelord for one action too.
+	BattlelordEffect = new class'X2Effect_Battlelord_CombatPresence';
+	BattlelordEffect.BuildPersistentEffect(1, false, , , eGameRule_PlayerTurnBegin);
+
+	UnitEffects = new class'X2Condition_UnitEffectsOnSource';
+	UnitEffects.AddRequireEffect(class'X2Effect_Battlelord'.default.EffectName, 'AA_AbilityUnavailable');
+	BattlelordEffect.TargetConditions.AddItem(UnitEffects);
+	AbilityTemplate.AbilityTargetEffects.InsertItem(0, BattlelordEffect);
+
 	// When used while Interrupting, make the target unit Interrupt too.
 	InterruptEffect = new class'X2Effect_SkirmisherInterrupt_Fixed';
 	InterruptEffect.BuildPersistentEffect(1, false, , , eGameRule_PlayerTurnBegin);
-	InterruptEffect.TargetConditions.AddItem(new class'X2Condition_CombatPresenceInterrupt');
+
+	UnitEffects = new class'X2Condition_UnitEffectsOnSource';
+	UnitEffects.AddRequireEffect(class'X2Effect_SkirmisherInterrupt'.default.EffectName, 'AA_AbilityUnavailable');
+	InterruptEffect.TargetConditions.AddItem(UnitEffects);
 	AbilityTemplate.AbilityTargetEffects.InsertItem(0, InterruptEffect);
 
 	// Give the Interrupt point while Interrupting, doh
@@ -318,7 +357,7 @@ static private function PatchCombatPresence()
 	ActionPointEffect.NumActionPoints = 1;
 	ActionPointEffect.PointType = class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint;
 	ActionPointEffect.bSelectUnit = true;
-	ActionPointEffect.TargetConditions.AddItem(new class'X2Condition_CombatPresenceInterrupt');
+	ActionPointEffect.TargetConditions.AddItem(UnitEffects);
 	AbilityTemplate.AddTargetEffect(ActionPointEffect);
 }
 
@@ -350,10 +389,27 @@ static private function PatchSkirmisherReflex()
 	}
 }
 
+static private function PatchRetributionAttack()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('RetributionAttack');
+	if (AbilityTemplate == none)
+		return;
+
+	AddCooldown(AbilityTemplate, `GetConfigInt("Retribution_Cooldown"));
+}
+
+
 static private function PatchBattlelord()
 {
 	local X2AbilityTemplateManager		AbilityMgr;
 	local X2AbilityTemplate				AbilityTemplate;
+	local X2Effect_Battlelord_Fixed		BattlelordEffect;
+	local X2Condition_UnitActionPoints	ActionPointCondition;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Battlelord');
@@ -362,6 +418,28 @@ static private function PatchBattlelord()
 
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Battlelord_Cooldown"));
+
+	// When interrupt is activated by the player, it just gives the unit a reserve action point.
+	// Actual interrupt effect will be applied when interrupting. So have to check for the action point.
+	ActionPointCondition = new class'X2Condition_UnitActionPoints';
+	ActionPointCondition.AddActionPointCheck(1, 'ReserveInterrupt', true, eCheck_LessThan, 1);
+	AbilityTemplate.AbilityShooterConditions.AddItem(ActionPointCondition);
+
+	// Replace the Battlelord effect with one that allows multiple units to Battlelord now.
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_Battlelord(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			BattlelordEffect = new class'X2Effect_Battlelord_Fixed';
+			BattlelordEffect.BuildPersistentEffect(1, false, , , eGameRule_PlayerTurnBegin);
+			BattlelordEffect.SetDisplayInfo(ePerkBuff_Bonus, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocLongDescription, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+			AbilityTemplate.AddTargetEffect(BattlelordEffect);
+
+			break;
+		}
+	}
 }
 
 
@@ -455,6 +533,28 @@ static private function PatchWhiplash()
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Whiplash_Cooldown"));
 	
+}
+
+static private function PatchSkirmisherReturnFire()
+{
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2AbilityTemplate				AbilityTemplate;
+	local X2Effect						Effect;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherReturnFire');
+	if (AbilityTemplate == none)
+		return;
+	
+	AbilityTemplate.IconImage = "img:///IRIClassReworkUI.perk_ReturnFire"; // Icon copied from PCP with permission
+	
+	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+	{
+		if (X2Effect_Persistent(Effect) != none)
+		{
+			X2Effect_Persistent(Effect).IconImage = AbilityTemplate.IconImage;
+		}
+	}
 }
 
 static private function RemoveChargeCost(out X2AbilityTemplate AbilityTemplate)

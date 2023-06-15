@@ -1,4 +1,14 @@
-class X2Effect_SkirmisherInterrupt_Fixed extends X2Effect_SkirmisherInterrupt;
+class X2Effect_Battlelord_Fixed extends X2Effect_Battlelord;
+
+function RegisterForEvents(XComGameState_Effect EffectGameState)
+{
+	local X2EventManager EventMan;
+	local Object EffectObj;
+
+	EventMan = `XEVENTMGR;
+	EffectObj = EffectGameState;
+	EventMan.RegisterForEvent(EffectObj, 'ExhaustedActionPoints', class'XComGameState_Effect'.static.BattlelordListener, ELD_OnStateSubmitted);
+}
 
 simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState, XComGameState_Effect NewEffectState)
 {
@@ -9,7 +19,7 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 
 	TargetUnit = XComGameState_Unit(kNewTargetState);
 	GroupState = TargetUnit.GetGroupMembership();
-	TargetUnit.SetUnitFloatValue('SkirmisherInterruptOriginalGroup', GroupState.ObjectID, eCleanup_BeginTactical);
+	TargetUnit.SetUnitFloatValue('BattlelordOriginalGroup', GroupState.ObjectID, eCleanup_BeginTactical);
 
 	// ---- Start New Code ---
 	// Search for other units on the same team also affected by the Interrupt effect,
@@ -36,7 +46,7 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 	}
 	// ---- End New Code ---
 
-	GroupState = XComGameState_AIGroup(NewGameState.CreateNewStateObject(class'XComGameState_AIGroup'));	
+	GroupState = XComGameState_AIGroup(NewGameState.CreateNewStateObject(class'XComGameState_AIGroup'));
 	GroupState.AddUnitToGroup(TargetUnit.ObjectID, NewGameState);
 	GroupState.bSummoningSicknessCleared = true;
 }
@@ -54,8 +64,8 @@ simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParame
 		NewGameState.RemoveStateObject(GroupState.ObjectID);
 	}
 
-	TargetUnit.GetUnitValue('SkirmisherInterruptOriginalGroup', GroupValue);
+	TargetUnit.GetUnitValue('BattlelordOriginalGroup', GroupValue);
 	GroupState = XComGameState_AIGroup(NewGameState.ModifyStateObject(class'XComGameState_AIGroup', GroupValue.fValue));
 	GroupState.AddUnitToGroup(TargetUnit.ObjectID, NewGameState);
-	TargetUnit.ClearUnitValue('SkirmisherInterruptOriginalGroup');
+	TargetUnit.ClearUnitValue('BattlelordOriginalGroup');
 }

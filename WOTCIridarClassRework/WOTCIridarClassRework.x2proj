@@ -32,6 +32,9 @@
     <Content Include="Config\XComGameData_SoldierSkills.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ContentForCook\IRIClassReworkUI.upk">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ReadMe.txt" />
     <Content Include="ModPreview.jpg" />
     <Content Include="ContentOptions.json" />
@@ -43,12 +46,15 @@
     <Content Include="Localization\XComGame.int" />
     <Content Include="Localization\WOTCIridarClassRework.int" />
     <Content Include="Src\extra_globals.uci" />
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_CombatPresenceInterrupt.uc">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\Help.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\ConfigEngine.uc" />
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Battlelord_CombatPresence.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Battlelord_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">
       <SubType>Content</SubType>
     </Content>

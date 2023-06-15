@@ -19,6 +19,7 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 	local UnitValue ReflexValue, TotalValue;
 	local XComGameState_Unit TargetUnit, SourceUnit;
 	local XComGameState_Ability AbilityState;
+	local bool bActionGiven;
 
 	EffectGameState = XComGameState_Effect(CallbackData);
 
@@ -57,6 +58,8 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 						TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
 						TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, TotalValue.fValue + 1, eCleanup_BeginTurn);
 						TargetUnit.ActionPoints.AddItem(class'X2CharacterTemplateManager'.default.StandardActionPoint);
+
+						bActionGiven = true;
 					}
 				}
 				//	if it's not their turn, increment the counter for next turn
@@ -69,10 +72,12 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 						TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
 						TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, 1, eCleanup_BeginTurn);
 						TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, TotalValue.fValue + 1, eCleanup_BeginTurn);
+					
+						bActionGiven = true;
 					}
 				}
 
-				if (NewGameState != none)
+				if (NewGameState != none && bActionGiven)
 				{
 					NewGameState.ModifyStateObject(class'XComGameState_Ability', EffectGameState.ApplyEffectParameters.AbilityStateObjectRef.ObjectID);
 					XComGameStateContext_ChangeContainer(NewGameState.GetContext()).BuildVisualizationFn = class'XComGameState_Effect'.static.TriggerAbilityFlyoverVisualizationFn;

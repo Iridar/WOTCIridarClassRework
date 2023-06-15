@@ -17,7 +17,7 @@ function RegisterForEvents(XComGameState_Effect EffectGameState)
 	}
 }
 
-static function EventListenerReturn OnOverrideDamageRemovesReserveActionPoints(Object EventData, Object EventSource, XComGameState NewGameState, Name EventID, Object CallbackObject)
+static private function EventListenerReturn OnOverrideDamageRemovesReserveActionPoints(Object EventData, Object EventSource, XComGameState NewGameState, Name EventID, Object CallbackObject)
 {
     local XComGameState_Unit	UnitState;
     local XComLWTuple			Tuple;
