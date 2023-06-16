@@ -61,9 +61,6 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReserveOverwatchPoints_NoCost.uc">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_RetainOverwatchOnDamage.uc">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReturnFireIgnoresCover.uc">
       <SubType>Content</SubType>
     </Content>

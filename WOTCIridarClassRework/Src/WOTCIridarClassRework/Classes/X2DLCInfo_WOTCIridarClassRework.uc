@@ -2,7 +2,6 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
 static event OnPostTemplatesCreated()
 {
-	PatchSkirmisherAmbush();
 	PatchManualOverride();
 	PatchSkirmisherMelee();
 	PatchSkirmisherInterrupt();
@@ -15,27 +14,6 @@ static event OnPostTemplatesCreated()
 	PatchCombatPresence();
 	PatchRetributionAttack();
 	PatchSkirmisherReturnFire();
-}
-
-static private function PatchSkirmisherAmbush()
-{
-	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
-	local X2Effect_RetainOverwatchOnDamage  RetainOverwatchOnDamage;
-
-	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherAmbush');
-	if (AbilityTemplate == none)	
-		return;
-
-	// Remove the redundant pure passive icon effect
-	AbilityTemplate.AbilityTargetEffects.Length = 0;
-
-	// Replace with the new effect
-	RetainOverwatchOnDamage = new class'X2Effect_RetainOverwatchOnDamage';
-	RetainOverwatchOnDamage.BuildPersistentEffect(1, true, false);
-	RetainOverwatchOnDamage.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocLongDescription, AbilityTemplate.IconImage, true,, AbilityTemplate.AbilitySourceName);
-	AbilityTemplate.AddTargetEffect(RetainOverwatchOnDamage);
 }
 
 static private function PatchManualOverride()
