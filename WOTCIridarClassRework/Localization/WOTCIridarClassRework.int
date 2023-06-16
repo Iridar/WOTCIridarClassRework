@@ -1,2 +1,3 @@
 [Help]
-SomeString = "localized_value"
+
+ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Ability:IRI_ZeroIn_Crit/> critical chance until the end of turn."

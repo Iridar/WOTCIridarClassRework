@@ -11,7 +11,22 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 
 
 update localization for all changed abilities
-list incompatible mods
+Kinetic Armor icon
+xcom row
+
+Waylay -> enter a special form of Overwatch that allows you fire as many shots as you have ammo. Waylay is not removed by damage.
+
+Zero In -> consecutive attacks grant +10% hit chance and +10% crit chance. Lasts until the end of your turn. Additionally, your reaction attacks can deal critical damage.
+
+try to befriend battlelord and interrupt after all
+
+retest all abilities since they were reassigned to different source slots
+
+Template Master - required
+
+[WotC] Weapon Fixes
+https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501
+Required to make Skirmisher Return fire properly interact with Stock upgrade, Holo Targeting and Shredder.
 
 [h1]SKIRMISHER[/h1]
 
@@ -38,6 +53,7 @@ New XCOM abilities added to the random deck.
 [*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
 [*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to activate. Multiple units can now interrupt at the same time. Cannot use Interrupt and Battlelord together.
 [*] Waylay: now also allows to remain on Overwatch upon taking damage.
+[*] Return Fire: now included into main ability tree and ignores enemy cover defense.
 [*] Total Combat: now also grants a grenade-only slot.
 [*] Retribution: now can trigger only once per turn.
 [*] Reckoning: cooldown removed, but now action cost scales with distance to the target. Essentially works same as Ranger's Slash, except it doesn't end turn if you still have actions remaining.
@@ -49,7 +65,18 @@ New XCOM abilities added to the random deck.
 [*] New ability: Kinetic Armor -> misses grant +2 Ablative HP, up to its own cap of +8 Ablative HP at the same time.
 [/list]
 
+
+
 [h1]INCOMPATIBLE AND REDUNDANT MODS[/h1]
 
-[WOTC] Critical Skirmishing
-https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219
+Some changes are inspired by following mods. Not a single line of code or asset was borrowed or copied.
+
+I did copy a few icons from Shiremct's Proficiency mods, with permission.
+
+THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.
+
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]

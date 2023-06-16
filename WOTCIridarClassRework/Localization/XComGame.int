@@ -1,16 +1,88 @@
-[HoloTargeting X2AbilityTemplate]
-LocFriendlyName="Holo Targeting"
-LocLongDescription="Any directed <Ability:WeaponName/> shot, hit or miss, will mark the target, increasing your squad's aim by +<Ability:HOLOTARGETAIMBONUS/> against this target."
-LocHelpText="Shooting at a target grants bonus Aim to allies against that target"
-LocPromotionPopupText="<Bullet/> Directed <Ability:WeaponName/>-specific abilities will grant Holo Targeting.<br/><Bullet/> Any <Ability:ClassName/> abilities that target multiple units will not grant Holo Targeting.<br/>"
-LocFlyOverText="Holo Targeting"
+[SkirmisherReflex X2AbilityTemplate]
+LocLongDescription="When fired upon, gain one extra action on the next turn. Triggers once per turn."
+LocHelpText="When fired upon, gain one extra action on the next turn. Triggers once per turn."
+LocPromotionPopupText="<Bullet/> The Grapple makes the Skirmisher a great advance scout, and Reflex rewards their aggressive positioning.<br/><Bullet/> Reflex can only be triggered once per turn.<br/>"
 
-[BattleScanner X2WeaponTemplate]
-FriendlyName="Battle Scanner"
-FriendlyNamePlural="Battle Scanners"
-BriefSummary="The Battle Scanner provides extra vision on the battlefield. Soldiers deploy it like a grenade, throwing it to a hidden area of the map that they want to reveal. Any hidden or disguised enemies will be revealed as well."
-TacticalText="<Bullet/> Battle Scanners reveal an area hidden by the \"fog of war\" for multiple turns.\n<Bullet/> Battle Scanners also reveal hidden or disguised enemies."
-AbilityDescName="shotgun"
+[Parkour X2AbilityTemplate]
+LocLongDescription="Gain a Move-only action after using Grapple."
+LocHelpText="Gain a Move-only action after using Grapple."
 
-[ClausMecShotgun_CV_Schematic X2SchematicTemplate]
-m_strClassLabel="RANGER"
+[ParkourPassive X2AbilityTemplate]
+LocLongDescription="Gain a Move-only action after using Grapple."
+LocHelpText="Gain a Move-only action after using Grapple."
+
+[FullThrottle X2AbilityTemplate]
+LocLongDescription="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+LocHelpText="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+
+[FullThrottlePassive X2AbilityTemplate]
+LocLongDescription="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+LocHelpText="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+
+[SkirmisherAmbush X2AbilityTemplate]
+LocFriendlyName="Waylay"
+LocLongDescription="Overwatch grants an additional reaction shot for each unused action point. Additionally, taking damage no longer removes Overwatch."
+LocHelpText="Overwatch grants an additional reaction shot for each unused action point. Additionally, taking damage no longer removes Overwatch."
+
+[CombatPresence X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Combat Presence can be used to get squadmates out of tough situations where they need an extra attack or move.<br/><Bullet/> Combat Presence has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Combat Presence can be used during Interrupt and Battlelord."
+
+[TotalCombat X2AbilityTemplate]
+LocLongDescription="Gain a grenade-only inventory slot. Throwing a grenade or using an item no longer ends the turn."
+LocHelpText="Gain a grenade-only inventory  slot. Throwing a grenade or using an item no longer ends the turn."
+
+[ZeroIn X2AbilityTemplate]
+LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn. Additionally, your reaction attacks can deal critical damage."
+LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn. Additionally, your reaction attacks can deal critical damage."
+
+[Retribution X2AbilityTemplate]
+LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+
+[RetributionAttack X2AbilityTemplate]
+LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+
+[Reckoning X2AbilityTemplate]
+LocLongDescription="Unlocks the <Ability:SecondaryWeaponName/> slash attack. Reckoning does not end turn, but performing a \"Dash\" attack will consume additional action points."
+LocHelpText="Unlocks the <Ability:SecondaryWeaponName/> slash attack. Reckoning does not end turn, but performing a \"Dash\" attack will consume additional action points."
+
+
+[Whiplash X2AbilityTemplate]
+LocFriendlyName="Whiplash"
+LocLongDescription="Attack an enemy with an electrical lash. Deals increased damage to robotic units. This attack does not cost an action."
+LocHelpText="A free attack with an electrical lash. Deals increased damage to robotic units."
+LocPromotionPopupText="<Bullet/> Whiplash damage increases with Ripjack upgrades."
+
+[ManualOverride X2AbilityTemplate]
+LocFriendlyName="Manual Override"
+LocLongDescription="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
+LocHelpText="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
+
+[SkirmisherReturnFire X2AbilityTemplate]
+LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
+LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
+
+; TODO: Add coldowns to promotion text
+
+[SkirmisherInterrupt X2AbilityTemplate]
+LocFriendlyName="Interrupt"
+LocLongDescription="A powerful form of Overwatch. Instead of firing automatically, perform any single action."
+LocHelpText="A powerful form of Overwatch. Instead of firing automatically, perform any single action."
+LocFlyOverText="Interrupt"
+LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/>"
+
+[SkirmisherInterruptInput X2AbilityTemplate]
+LocFriendlyName="Interrupt"
+LocLongDescription="A powerful form of Overwatch. Instead of firing automatically, perform any single action."
+LocHelpText="A powerful form of Overwatch. Instead of firing automatically, perform any single action."
+LocFlyOverText="Interrupt"
+LocPromotionPopupText="<br/><Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/>"
+
+[Battlelord X2AbilityTemplate]
+LocFriendlyName="Battlelord"
+LocLongDescription="After each enemy in line of sight takes a turn, take an immediate action."
+LocHelpText="After each enemy in line of sight takes a turn, take an immediate action."
+LocFlyOverText="Battlelord"
+LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Battlelord can only be used once per mission.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/>"
+
