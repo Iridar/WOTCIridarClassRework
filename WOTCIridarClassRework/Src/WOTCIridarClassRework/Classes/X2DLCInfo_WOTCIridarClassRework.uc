@@ -620,6 +620,24 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = SKColor(`GetConfigInt(InString));
 		return true;
 
+	case "Whiplash_Cooldown":
+		OutString = SKColor(`GetConfigInt(InString));
+		return true;
+
+	case "ManualOverride_Cooldown":
+		OutString = SKColor(`GetConfigInt(InString));
+		return true;
+	
+	case "Interrupt_Cooldown":
+		OutString = SKColor(`GetConfigInt(InString));
+		return true;
+
+	case "Battlelord_Cooldown":
+		OutString = SKColor(`GetConfigInt(InString));
+		return true;
+		
+		
+
 	case "IRI_ZeroIn_Aim":
 		OutString = SKColor(GetZeroInAimBonus(ParseObj, StrategyParseOb, GameState));
 		return true;
@@ -627,6 +645,8 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 	case "IRI_ZeroIn_Crit":
 		OutString = SKColor(GetZeroInCritBonus(ParseObj, StrategyParseOb, GameState));
 		return true;
+
+		
 
 	// ======================================================================================================================
 	//												TEMPLAR TAGS

@@ -10,17 +10,9 @@ Get news and updates here:
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
 
-update localization for all changed abilities
-Kinetic Armor icon
-xcom row
-
-Waylay -> enter a special form of Overwatch that allows you fire as many shots as you have ammo. Waylay is not removed by damage.
-
-Zero In -> consecutive attacks grant +10% hit chance and +10% crit chance. Lasts until the end of your turn. Additionally, your reaction attacks can deal critical damage.
-
 try to befriend battlelord and interrupt after all
 
-retest all abilities since they were reassigned to different source slots
+[h1]REQUIREMENTS[/h1]
 
 Template Master - required
 
@@ -47,12 +39,12 @@ New XCOM abilities added to the random deck.
 [*] Bullpups: mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
 [*] Ripjack attacks now have 10% base crit chance, same as swords.
 [*] Reflex: can trigger once per turn instead of once per mission.
-[*] Zero In: now applies to all attacks, including Ripjack attacks and Overwatch shots.
+[*] Zero In: reworked, now stacks are granted by all bullpup attacks, including reaction shots, and melee attacks, and stacks gained on the enemy turn (e.g. from Overwatch) last until the end of your following turn.
 [*] Full Throttle: kills now also reduce cooldown of Grapple by 1.
 [*] Combat Presence: can be used during Interrupt, immediately granting an Interrupt action to another soldier. Can be used during Battlelord, immediately granting a standard action to another soldier.
 [*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
 [*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to activate. Multiple units can now interrupt at the same time. Cannot use Interrupt and Battlelord together.
-[*] Waylay: now also allows to remain on Overwatch upon taking damage.
+[*] Waylay: reworked. Now it simply gives Overwatch an extra shot and allows to remain on Overwatch upon taking damage.
 [*] Return Fire: now included into main ability tree and ignores enemy cover defense.
 [*] Total Combat: now also grants a grenade-only slot.
 [*] Retribution: now can trigger only once per turn.
