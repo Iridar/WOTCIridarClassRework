@@ -27,6 +27,7 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	//local XComGameState_Item	SourceWeapon;
 	local UnitValue				UValue;
 	local X2AbilityTemplate		AbilityTemplate;
+	local XComGameState_Unit	TargetUnit;
 
 	AbilityContext = XComGameStateContext_Ability(GameState.GetContext());
 	if (AbilityContext == none || AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt)
@@ -64,9 +65,14 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	if (UnitState == none)
 		return ELR_NoInterrupt;
 
+	// Only against enemy units
+	TargetUnit = XComGameState_Unit(GameState.GetGameStateForObjectID(AbilityContext.InputContext.PrimaryTarget.ObjectID));
+	if (TargetUnit == none || !UnitState.IsEnemyUnit(UnitState))
+		return ELR_NoInterrupt;
+
 	// Only damaging abilities
-	//if (!AbilityState.GetMyTemplate().TargetEffectsDealDamage(AbilityState.GetSourceWeapon(), AbilityState))
-	//	return ELR_NoInterrupt;
+	if (!AbilityState.GetMyTemplate().TargetEffectsDealDamage(AbilityState.GetSourceWeapon(), AbilityState))
+		return ELR_NoInterrupt;
 		
 	NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState("ZeroIn Increment");
 	UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
