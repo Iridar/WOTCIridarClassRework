@@ -404,7 +404,7 @@ static private function PatchBattlelord()
 		return;
 
 	RemoveChargeCost(AbilityTemplate);
-	AddCooldown(AbilityTemplate, `GetConfigInt("Battlelord_Cooldown"));
+	//AddCooldown(AbilityTemplate, `GetConfigInt("Battlelord_Cooldown"));
 
 	// When interrupt is activated by the player, it just gives the unit a reserve action point.
 	// Actual interrupt effect will be applied when interrupting. So have to check for the action point.
@@ -633,9 +633,9 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 
-	case "Battlelord_Cooldown":
-		OutString = SKColor(`GetConfigInt(InString) - 1);
-		return true;
+	//case "Battlelord_Cooldown":
+	//	OutString = SKColor(`GetConfigInt(InString) - 1);
+	//	return true;
 		
 	case "Interrupt_NumPoints":
 		OutString = SKColor(`GetConfigInt(InString));

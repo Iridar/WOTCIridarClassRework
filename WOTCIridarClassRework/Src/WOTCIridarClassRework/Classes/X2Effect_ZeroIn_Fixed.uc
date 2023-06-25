@@ -29,6 +29,8 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	local X2AbilityTemplate		AbilityTemplate;
 	local XComGameState_Unit	TargetUnit;
 
+	`AMLOG("Running");
+
 	AbilityContext = XComGameStateContext_Ability(GameState.GetContext());
 	if (AbilityContext == none || AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt)
 		return ELR_NoInterrupt;
@@ -36,6 +38,8 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	// Only unit-targeted abilities
 	//if (AbilityContext.InputContext.PrimaryTarget.ObjectID <= 0)
 	//	return ELR_NoInterrupt;
+
+	`AMLOG("Have context");
 
 	AbilityState = XComGameState_Ability(EventData);
 	if (AbilityState == none)
@@ -67,7 +71,7 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 
 	// Only against enemy units
 	TargetUnit = XComGameState_Unit(GameState.GetGameStateForObjectID(AbilityContext.InputContext.PrimaryTarget.ObjectID));
-	if (TargetUnit == none || !UnitState.IsEnemyUnit(UnitState))
+	if (TargetUnit == none || !TargetUnit.IsEnemyUnit(UnitState))
 		return ELR_NoInterrupt;
 
 	// Only damaging abilities
@@ -80,16 +84,17 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	UnitState.SetUnitFloatValue(default.UnitValueName, UValue.fValue + 1, eCleanup_BeginTactical); // Unit Value cleansed at the end of turn by EffectTickedFn
 
 	//	show flyover for boost, but only if they have actions left to potentially use them
-	if (UnitState.ActionPoints.Length > 0 || AbilityHasReserveActionCost(AbilityTemplate))
+	if (UnitState.ActionPoints.Length > 0 || AbilityHasReserveActionCost(AbilityTemplate) || UnitState.IsUnitAffectedByEffectName(class'X2Effect_Battlelord_Fixed'.default.EffectName))
 	{
 		NewGameState.ModifyStateObject(class'XComGameState_Ability', EffectGameState.ApplyEffectParameters.AbilityStateObjectRef.ObjectID);		//	create this for the vis function
 		XComGameStateContext_ChangeContainer(NewGameState.GetContext()).BuildVisualizationFn = EffectGameState.TriggerAbilityFlyoverVisualizationFn;
 	}
-	SubmitNewGameState(NewGameState);
+	`GAMERULES.SubmitGameState(NewGameState);
 	
 	return ELR_NoInterrupt;
 }
 
+// I.e. it's an overwatch shot
 static private function bool AbilityHasReserveActionCost(const X2AbilityTemplate Template)
 {
 	local X2AbilityCost Cost;
@@ -104,23 +109,6 @@ static private function bool AbilityHasReserveActionCost(const X2AbilityTemplate
 		return true;
 	}
 	return false;
-}
-
-static private function SubmitNewGameState(out XComGameState NewGameState)
-{
-	local X2TacticalGameRuleset TacticalRules;
-	local XComGameStateHistory History;
-
-	if (NewGameState.GetNumGameStateObjects() > 0)
-	{
-		TacticalRules = `TACTICALRULES;
-		TacticalRules.SubmitGameState(NewGameState);
-	}
-	else
-	{
-		History = `XCOMHISTORY;
-		History.CleanupPendingGameState(NewGameState);
-	}
 }
 
 function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit Attacker, XComGameState_Unit Target, XComGameState_Ability AbilityState, class<X2AbilityToHitCalc> ToHitType, bool bMelee, bool bFlanking, bool bIndirectFire, out array<ShotModifierInfo> ShotModifiers)

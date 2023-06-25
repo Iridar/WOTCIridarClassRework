@@ -75,5 +75,5 @@ LocHelpText="A powerful form of Overwatch. Instead of firing automatically, perf
 LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/><Bullet/> Use Combat Presence while interrupting to give one of your Interrupt actions to another soldier.<br/><Bullet/> <Ability:Interrupt_Cooldown/> turn cooldown."
 
 [Battlelord X2AbilityTemplate]
-LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> <Ability:Battlelord_Cooldown/> turn cooldown."
+LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> Battlelord's cooldown is equal to the number of actions granted."
 

@@ -34,7 +34,7 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 				ModInfo.ModType = eHit_Success;
 				ModInfo.Reason = AppliedAbility != none ? AppliedAbility.GetMyTemplate().LocFriendlyName : "";
 				ModInfo.Value = class'X2AbilityToHitCalc_StandardAim'.default.LOW_COVER_BONUS;
-				//ShotModifiers.AddItem(ModInfo);
+				ShotModifiers.AddItem(ModInfo);
 				break;
 			case CT_Standing:
 				AppliedAbility = XComGameState_Ability(`XCOMHISTORY.GetGameStateForObjectID(EffectState.ApplyEffectParameters.AbilityStateObjectRef.ObjectID));
@@ -42,7 +42,7 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 				ModInfo.ModType = eHit_Success;
 				ModInfo.Reason = AppliedAbility != none ? AppliedAbility.GetMyTemplate().LocFriendlyName : "";
 				ModInfo.Value = class'X2AbilityToHitCalc_StandardAim'.default.HIGH_COVER_BONUS;
-				//ShotModifiers.AddItem(ModInfo);
+				ShotModifiers.AddItem(ModInfo);
 				break;
 			default:
 				break;

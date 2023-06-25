@@ -6,10 +6,13 @@ function RegisterForEvents(XComGameState_Effect EffectGameState)
 {
 	local X2EventManager EventMan;
 	local Object EffectObj;
+	local XComGameState_Ability AbilityState;
+
+	AbilityState = XComGameState_Ability(`XCOMHISTORY.GetGameStateForObjectID(EffectGameState.ApplyEffectParameters.AbilityStateObjectRef.ObjectID));
 
 	EventMan = `XEVENTMGR;
 	EffectObj = EffectGameState;
-	EventMan.RegisterForEvent(EffectObj, 'ExhaustedActionPoints', class'XComGameState_Effect'.static.BattlelordListener, ELD_OnStateSubmitted);
+	EventMan.RegisterForEvent(EffectObj, 'ExhaustedActionPoints', BattlelordListener, ELD_OnStateSubmitted,, ,, AbilityState);
 }
 
 simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState, XComGameState_Effect NewEffectState)
@@ -81,6 +84,8 @@ simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParame
 	local XComGameState_Unit	TargetUnit;
 	local XComGameState_AIGroup	GroupState;
 	local UnitValue				GroupValue;
+	local XComGameState_Ability	AbilityState;
+	local UnitValue				BattlelordInterrupts;
 
 	TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(class'XComGameState_Unit', ApplyEffectParameters.TargetStateObjectRef.ObjectID));
 	if (TargetUnit != none && TargetUnit.GetUnitValue('BattlelordOriginalGroup', GroupValue))
@@ -94,7 +99,86 @@ simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParame
 		GroupState = XComGameState_AIGroup(NewGameState.ModifyStateObject(class'XComGameState_AIGroup', GroupValue.fValue));
 		GroupState.AddUnitToGroup(TargetUnit.ObjectID, NewGameState);
 		TargetUnit.ClearUnitValue('BattlelordOriginalGroup');
+			
+		if (TargetUnit.GetUnitValue('BattlelordInterrupts', BattlelordInterrupts))
+		{
+			// Set the cooldown to be the same as the number of actions taken.
+			// Doing so only in the event listener is not enough, because when the effect is removed at player turn start,
+			// the cooldown will tick once, and will not be equal to the number of actions taken anymore.
+			AbilityState = XComGameState_Ability(NewGameState.GetGameStateForObjectID(ApplyEffectParameters.AbilityStateObjectRef.ObjectID));
+			if (AbilityState == none)
+			{
+				AbilityState = XComGameState_Ability(`XCOMHISTORY.GetGameStateForObjectID(ApplyEffectParameters.AbilityStateObjectRef.ObjectID));
+				if (AbilityState != none)
+				{
+					AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+				}
+			}
+			if (AbilityState != none)
+			{
+				AbilityState.iCooldown = BattlelordInterrupts.fValue;
+			}
+
+			TargetUnit.ClearUnitValue('BattlelordInterrupts');	
+		}
 	}
+}
+
+static private function EventListenerReturn BattlelordListener(Object EventData, Object EventSource, XComGameState GameState, Name EventID, Object CallbackData)
+{
+	local XComGameState_Unit			SourceUnit;
+	local XComGameState_Unit			TargetUnit;
+	local XComGameStateContext_Ability	AbilityContext;
+	local XComGameState					NewGameState;
+	local X2TacticalGameRuleset			TacticalRules;
+	local GameRulesCache_VisibilityInfo	VisInfo;
+	local UnitValue						BattlelordInterrupts;
+	local XComGameState_Ability			AbilityState;
+
+	TargetUnit = XComGameState_Unit(EventData);
+	if (TargetUnit == none)
+		return ELR_NoInterrupt;
+
+	AbilityContext = XComGameStateContext_Ability(GameState.GetContext());
+	if (AbilityContext == none || AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt)
+		return ELR_NoInterrupt;
+
+	AbilityState = XComGameState_Ability(CallbackData);
+	if (AbilityState == none)
+		return ELR_NoInterrupt;
+
+	SourceUnit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(AbilityState.OwnerStateObject.ObjectID));
+	if (SourceUnit == none || !SourceUnit.IsAbleToAct())
+	{
+		//`redscreen("@dkaplan: Skirmisher Battlelord interruption was prevented due to the Skirmisher being Unable to Act.");
+		return ELR_NoInterrupt;
+	}
+
+	if (!SourceUnit.IsEnemyUnit(TargetUnit) || TargetUnit.GetTeam() == eTeam_TheLost)
+		return ELR_NoInterrupt;
+
+	TacticalRules = `TACTICALRULES;
+	if (!TacticalRules.VisibilityMgr.GetVisibilityInfo(SourceUnit.ObjectID, TargetUnit.ObjectID, VisInfo))
+		return ELR_NoInterrupt;
+	
+	if (!VisInfo.bClearLOS)
+		return ELR_NoInterrupt;
+	
+	NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState("Battlelord Interrupt Initiative");
+	SourceUnit = XComGameState_Unit(NewGameState.ModifyStateObject(SourceUnit.Class, SourceUnit.ObjectID));
+
+	SourceUnit.GetUnitValue('BattlelordInterrupts', BattlelordInterrupts);
+	SourceUnit.SetUnitFloatValue('BattlelordInterrupts', BattlelordInterrupts.fValue + 1, eCleanup_BeginTactical);
+
+	// Set the cooldown to the number of actions taken every time so the player can easily track it
+	// and predict the cooldown
+	AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+	AbilityState.iCooldown = BattlelordInterrupts.fValue + 1;
+
+	TacticalRules.InterruptInitiativeTurn(NewGameState, SourceUnit.GetGroupMembership().GetReference());
+	TacticalRules.SubmitGameState(NewGameState);
+	
+	return ELR_NoInterrupt;
 }
 
 //function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<name> ActionPoints, XComGameState_Effect EffectState)
