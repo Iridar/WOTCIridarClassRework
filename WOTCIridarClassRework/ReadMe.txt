@@ -40,7 +40,7 @@ New XCOM abilities added to the random deck.
 [*] Bullpups: mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
 [*] Ripjack attacks now have 10% base crit chance, same as swords.
 [*] Reflex: can trigger once per turn instead of once per mission.
-[*] Zero In: reworked, now stacks are granted by all bullpup attacks, including reaction shots, and melee attacks, and stacks gained on the enemy turn (e.g. from Overwatch) last until the end of your following turn.
+[*] Zero In: reworked, now stacks are granted by all bullpup attacks, including reaction shots, and melee attacks, and stacks gained on the enemy turn (e.g. from Overwatch) last until the end of your following turn. Additionally, your reaction attacks can deal critical damage.
 [*] Full Throttle: kills now also reduce cooldown of Grapple by 1.
 [*] Combat Presence: can be used during Interrupt, immediately granting an Interrupt action to another soldier. Can be used during Battlelord, immediately granting a standard action to another soldier.
 [*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
@@ -55,7 +55,7 @@ New XCOM abilities added to the random deck.
 [*] Parkour: now grants a Move action after using Grapple.
 [*] New ability: Predator Strike -> executes an adjacent humanoid enemy. If that enemy is ADVENT, you also reveal the closest ADVENT unit in the fog of war until the end of turn.
 [*] New ability: Thunder Lance -> use your grapple to launch grenades. Launched grenades have extra range and deal double damage to targets they impact directly.
-[*] New ability: Kinetic Armor -> misses grant +2 Ablative HP, up to its own cap of +8 Ablative HP at the same time.
+[*] New ability: Kinetic Armor -> Absorb missed enemy attacks to generate Shield HP equal to the damage avoided. The shield lasts until the end of your turn. This effect can trigger once per turn."
 [/list]
 
 
@@ -73,3 +73,45 @@ THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
+
+
+
+# General
+
+* Bullpups - mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
+* Ripjack attacks now have 10% base crit chance, same as swords.
+* Parkour - now grants a Move action after using Grapple.
+
+# Hussar
+
+Classic melee Skirmisher gameplay you know and love. High mobility, offensive use of the Grapple and Ripjack.
+
+* Reckoning - now works same as Ranger's Slash, but doesn't end turn.
+* Wrath
+* Full Throttle - kills grant +2 Mobility until the end of turn and reduce Grapple's cooldown by 1.
+* Retribution - same as vanilla Bladestorm, but can trigger only once per turn.
+* (NEW) Predator Strike - a melee attack that executes an adjacent humanoid enemy. If that enemy is ADVENT, you also reveal the closest ADVENT unit in the fog of war until the end of turn.
+* Manual Override - a free action with a 5 turn cooldown, when used it temporarily removes active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn.
+
+# Judge
+
+Thrives under pressure, can hold a position while showering enemies with reaction attacks.
+
+* Reflex - when attacked, gain an extra action point next turn. Can trigger once per turn instead of once per mission.
+* Waylay - gives Overwatch an extra shot and allows to remain on Overwatch upon taking damage.
+* Return Fire - when attacked, once per turn return fire with your bullpup, ignoring enemy cover defense.
+* Zero In - bullpup and melee attacks grant a stacking buff until the end of your turn of +10 Aim and +10 Crit. Stacks can be built with reaction attacks during enemy turn. Also allows reaction attacks to crit.
+* (NEW) Kinetic Armor - absorb missed enemy attacks to generate Shield HP equal to the damage avoided. The shield lasts until the end of your turn. This effect can trigger once per turn."
+* Judgement
+
+# Tactician[/b]
+
+Master of breaking the flow of enemy actions and the ultimate team player.
+
+* Interrupt - now has a 3 turn cooldown instead of 1 use per mission and grants two interrupt action points. Essentially Run and Gun with a twist.
+* Combat Presence - same, but can be used during Interrupt and Battlelord.
+* Total Combat - using items and grenades doesn't end turn and you also gain grenade-only slot.
+* Whiplash - now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics, down from +100%.
+* (NEW) Thunder Lance - use your grapple to launch grenades. Launched grenades have extra range and deal double damage to targets they impact directly.
+* Battlelord - now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. Multiple units can now use Battlelord at the same time. Cannot use Interrupt and Battlelord together.
+

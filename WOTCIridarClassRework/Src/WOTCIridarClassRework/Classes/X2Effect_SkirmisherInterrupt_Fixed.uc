@@ -8,7 +8,13 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 	local XComGameState_AIGroup	GroupState;
 
 	TargetUnit = XComGameState_Unit(kNewTargetState);
+	if (TargetUnit == none)
+		return;
+
 	GroupState = TargetUnit.GetGroupMembership();
+	if (GroupState == none)
+		return;
+
 	TargetUnit.SetUnitFloatValue('SkirmisherInterruptOriginalGroup', GroupState.ObjectID, eCleanup_BeginTactical);
 
 	// ---- Start New Code ---
@@ -43,19 +49,44 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 
 simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed, XComGameState_Effect RemovedEffectState)
 {
-	local XComGameState_Unit TargetUnit;
-	local XComGameState_AIGroup GroupState;
-	local UnitValue GroupValue;
+	local XComGameState_Unit	TargetUnit;
+	local XComGameState_AIGroup	GroupState;
+	local UnitValue				GroupValue;
 
 	TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(class'XComGameState_Unit', ApplyEffectParameters.TargetStateObjectRef.ObjectID));
-	GroupState = TargetUnit.GetGroupMembership();
-	if (GroupState.m_arrMembers.Length == 1 && GroupState.m_arrMembers[0].ObjectID == TargetUnit.ObjectID)
+	if (TargetUnit != none && TargetUnit.GetUnitValue('SkirmisherInterruptOriginalGroup', GroupValue))
 	{
-		NewGameState.RemoveStateObject(GroupState.ObjectID);
-	}
+		GroupState = TargetUnit.GetGroupMembership();
+		if (GroupState.m_arrMembers.Length == 1 && GroupState.m_arrMembers[0].ObjectID == TargetUnit.ObjectID)
+		{
+			NewGameState.RemoveStateObject(GroupState.ObjectID);
+		}
 
-	TargetUnit.GetUnitValue('SkirmisherInterruptOriginalGroup', GroupValue);
-	GroupState = XComGameState_AIGroup(NewGameState.ModifyStateObject(class'XComGameState_AIGroup', GroupValue.fValue));
-	GroupState.AddUnitToGroup(TargetUnit.ObjectID, NewGameState);
-	TargetUnit.ClearUnitValue('SkirmisherInterruptOriginalGroup');
+		GroupState = XComGameState_AIGroup(NewGameState.ModifyStateObject(class'XComGameState_AIGroup', GroupValue.fValue));
+		GroupState.AddUnitToGroup(TargetUnit.ObjectID, NewGameState);
+		TargetUnit.ClearUnitValue('SkirmisherInterruptOriginalGroup');
+	}
+}
+
+function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<name> ActionPoints, XComGameState_Effect EffectState)
+{
+	local UnitValue				GroupValue;
+	local XComGameState_AIGroup	GroupState;
+	local int					iNumPoints;
+	local int					i;
+
+	GroupState = UnitState.GetGroupMembership();
+	UnitState.GetUnitValue('SkirmisherInterruptOriginalGroup', GroupValue);
+
+	if (GroupState.ObjectID != GroupValue.fValue && UnitState.IsAbleToAct())
+	{
+		ActionPoints.Length = 0;
+
+		iNumPoints = `GetConfigInt("Interrupt_NumPoints");
+
+		for (i = 0; i < iNumPoints; i++)
+		{
+			ActionPoints.AddItem(class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint);
+		}
+	}	
 }

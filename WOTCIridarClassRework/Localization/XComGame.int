@@ -12,8 +12,8 @@ LocLongDescription="Gain a Move-only action after using Grapple."
 LocHelpText="Gain a Move-only action after using Grapple."
 
 [FullThrottle X2AbilityTemplate]
-LocLongDescription="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of the turn."
-LocHelpText="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of the turn."
+LocLongDescription="Kills reduce Grapple's current cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of the turn."
+LocHelpText="Kills reduce Grapple's current cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of the turn."
 
 [FullThrottlePassive X2AbilityTemplate]
 LocLongDescription="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
@@ -27,8 +27,8 @@ LocLongDescription="Gain a grenade-only inventory slot. Throwing a grenade or us
 LocHelpText="Gain a grenade-only inventory  slot. Throwing a grenade or using an item no longer ends the turn."
 
 [ZeroIn X2AbilityTemplate]
-LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn. Additionally, your reaction attacks can deal critical damage."
-LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn. Additionally, your reaction attacks can deal critical damage."
+LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn."
+LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn."
 LocPromotionPopupText="<Bullet/> The Skirmisher's ability to accrue many actions per turn can result in massive bonuses from Zero In.<br/><Bullet/> Use Overwatch and other reaction attacks to gain an advantage on the following turn."
 
 [Retribution X2AbilityTemplate]
@@ -40,13 +40,14 @@ LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that
 LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
 
 [Reckoning X2AbilityTemplate]
-LocLongDescription="Unlocks the <Ability:SecondaryWeaponName/> slash attack. Reckoning does not end turn, but performing a \"Dash\" attack will consume additional action points."
-LocHelpText="Unlocks the <Ability:SecondaryWeaponName/> slash attack. Reckoning does not end turn, but performing a \"Dash\" attack will consume additional action points."
+LocLongDescription="Unlocks the <Ability:SecondaryWeaponName/> slash attack. The Slash does not end turn, but performing a \"Dash\" attack will consume additional action points."
+LocHelpText="Unlocks the <Ability:SecondaryWeaponName/> slash attack. The Slash does not end turn, but performing a \"Dash\" attack will consume additional action points."
+LocPromotionPopupText="<Bullet/> You can trigger the Slash ability by placing the movement cursor over an enemy.<br/><Bullet/> A Skirmisher can perform a \"Dash\" move, using both actions to move, and still trigger a Slash attack against an adjacent enemy."
 
 [SkirmisherMelee X2AbilityTemplate]
 LocLongDescription="Attack any enemy within movement range with your <Ability:SecondaryWeaponName/>. Does not end turn."
 LocHelpText="Attack an enemy within movement range with your <Ability:SecondaryWeaponName/>. Does not end turn."
-LocPromotionPopupText="<Bullet/> You can trigger the Slash ability by placing the movement cursor over an enemy.<br/><Bullet/> A Skirmisher can perform a \"Dash\" move, using both actions to move, and still trigger a Reckoning attack against an adjacent enemy."
+LocPromotionPopupText="<Bullet/> You can trigger the Slash ability by placing the movement cursor over an enemy.<br/><Bullet/> A Skirmisher can perform a \"Dash\" move, using both actions to move, and still trigger a Slash attack against an adjacent enemy."
 
 [Whiplash X2AbilityTemplate]
 LocLongDescription="Attack an enemy with an electrical lash. Deals increased damage to robotic units. This attack does not cost an action."
@@ -64,14 +65,15 @@ LocHelpText="When targeted by enemy fire, automatically fire back with your <Abi
 LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
 
 [SkirmisherInterrupt X2AbilityTemplate]
-LocLongDescription="Respond to the next enemy action with an action of your own. Interrupt does not cost an action to activate."
-LocHelpText="Respond to the next enemy action with an action of your own. Interrupt does not cost an action to activate."
+LocLongDescription="A powerful form of Overwatch. Instead of firing automatically, perform any <Ability:Interrupt_NumPoints/> actions."
+LocHelpText="A powerful form of Overwatch. Instead of firing automatically, perform any <Ability:Interrupt_NumPoints/> actions."
+LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/><Bullet/> Use Combat Presence while interrupting to give one of your Interrupt actions to another soldier.<br/><Bullet/> <Ability:Interrupt_Cooldown/> turn cooldown."
 
 [SkirmisherInterruptInput X2AbilityTemplate]
-LocLongDescription="Respond to the next enemy action with an action of your own. Interrupt does not cost an action to activate."
-LocHelpText="Respond to the next enemy action with an action of your own. Interrupt does not cost an action to activate."
-LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/><Bullet/> Use Combat Presence while interrupting to give your Interrupt action to another soldier.<br/><Bullet/> <Ability:Interrupt_Cooldown/> turn cooldown."
+LocLongDescription="A powerful form of Overwatch. Instead of firing automatically, perform any <Ability:Interrupt_NumPoints/> actions."
+LocHelpText="A powerful form of Overwatch. Instead of firing automatically, perform any <Ability:Interrupt_NumPoints/> actions."
+LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch. <br/><Bullet/> Use Combat Presence while interrupting to give one of your Interrupt actions to another soldier.<br/><Bullet/> <Ability:Interrupt_Cooldown/> turn cooldown."
 
 [Battlelord X2AbilityTemplate]
-LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Battlelord can only be used once per mission.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> <Ability:Battlelord_Cooldown/> turn cooldown."
+LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> <Ability:Battlelord_Cooldown/> turn cooldown."
 

@@ -229,7 +229,7 @@ static private function PatchSkirmisherInterrupt()
 {
 	local X2AbilityTemplateManager					AbilityMgr;
 	local X2AbilityTemplate							AbilityTemplate;
-	local X2Effect_ReserveOverwatchPoints_NoCost	ReserveOverwatchPoints;
+	//local X2Effect_ReserveOverwatchPoints_NoCost	ReserveOverwatchPoints;
 	local X2Effect_SkirmisherInterrupt_Fixed		InterruptEffect;
 	local X2Condition_UnitEffects					EffectCondition;
 	local int i;
@@ -242,21 +242,22 @@ static private function PatchSkirmisherInterrupt()
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Interrupt_Cooldown"));
 
-	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
-	{
-		if (X2Effect_ReserveOverwatchPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
-		{
-			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+	//for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	//{
+	//	if (X2Effect_ReserveOverwatchPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
+	//	{
+	//		AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+	//
+	//		ReserveOverwatchPoints = new class'X2Effect_ReserveOverwatchPoints_NoCost';
+	//		ReserveOverwatchPoints.UseAllPointsWithAbilities.Length = 0;
+	//		ReserveOverwatchPoints.ReserveType = 'ReserveInterrupt';
+	//		AbilityTemplate.AddTargetEffect(ReserveOverwatchPoints);
+	//
+	//		break;
+	//	}
+	//}
 
-			ReserveOverwatchPoints = new class'X2Effect_ReserveOverwatchPoints_NoCost';
-			ReserveOverwatchPoints.UseAllPointsWithAbilities.Length = 0;
-			ReserveOverwatchPoints.ReserveType = 'ReserveInterrupt';
-			AbilityTemplate.AddTargetEffect(ReserveOverwatchPoints);
-
-			break;
-		}
-	}
-
+	// Disallow Interrupting while Battlelord is active
 	EffectCondition = new class'X2Condition_UnitEffects';
 	EffectCondition.AddExcludeEffect(class'X2Effect_Battlelord'.default.EffectName, 'AA_DuplicateEffectIgnored');
 	AbilityTemplate.AbilityShooterConditions.AddItem(EffectCondition);
@@ -621,22 +622,24 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		return true;
 
 	case "Whiplash_Cooldown":
-		OutString = SKColor(`GetConfigInt(InString));
+		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 
 	case "ManualOverride_Cooldown":
-		OutString = SKColor(`GetConfigInt(InString));
+		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 	
 	case "Interrupt_Cooldown":
-		OutString = SKColor(`GetConfigInt(InString));
+		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 
 	case "Battlelord_Cooldown":
-		OutString = SKColor(`GetConfigInt(InString));
+		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 		
-		
+	case "Interrupt_NumPoints":
+		OutString = SKColor(`GetConfigInt(InString));
+		return true;
 
 	case "IRI_ZeroIn_Aim":
 		OutString = SKColor(GetZeroInAimBonus(ParseObj, StrategyParseOb, GameState));
