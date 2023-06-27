@@ -9,6 +9,14 @@ Created with Enhanced Mod Project Template v1.0
 Get news and updates here: 
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
+
+TODO
+
+- Ensure Random Deck always has 2 empty spots
+
+
+
+
 [h1]REQUIREMENTS[/h1]
 
 Template Master - required

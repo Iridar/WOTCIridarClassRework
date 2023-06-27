@@ -1,6 +1,6 @@
 [SkirmisherReflex X2AbilityTemplate]
-LocLongDescription="When fired upon, gain one extra action on the next turn. Triggers once per turn."
-LocHelpText="When fired upon, gain one extra action on the next turn. Triggers once per turn."
+LocLongDescription="When attacked, gain one extra action on the next turn. Triggers once per turn."
+LocHelpText="When attacked, gain one extra action on the next turn. Triggers once per turn."
 LocPromotionPopupText="<Bullet/> The Grapple makes the Skirmisher a great advance scout, and Reflex rewards their aggressive positioning.<br/><Bullet/> Reflex can only be triggered once per turn.<br/>"
 
 [Parkour X2AbilityTemplate]
@@ -16,8 +16,8 @@ LocLongDescription="Kills reduce Grapple's current cooldown by <Ability:FullThro
 LocHelpText="Kills reduce Grapple's current cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of the turn."
 
 [FullThrottlePassive X2AbilityTemplate]
-LocLongDescription="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
-LocHelpText="Kills reduce Grapple's cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+LocLongDescription="Kills reduce Grapple's current cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
+LocHelpText="Kills reduce Grapple's current cooldown by <Ability:FullThrottle_CooldownReduction/> turn and grant +<Ability:FULLTHROTTLEMOBILITY/> mobility until the end of turn."
 
 [CombatPresence X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Combat Presence can be used to get squadmates out of tough situations where they need an extra attack or move.<br/><Bullet/> Combat Presence has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Combat Presence can be used during Interrupt and Battlelord."
@@ -61,8 +61,8 @@ LocHelpText="Temporarily remove active cooldowns from all abilities that cost ac
 LocPromotionPopupText="<Bullet/> Use the Skirmisher's abilities early and often to take full advantage of Manual Override.<br/><Bullet/> <Ability:ManualOverride_Cooldown/> turn cooldown.<br/>"
 
 [SkirmisherReturnFire X2AbilityTemplate]
-LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
-LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
+LocHelpText="When targeted by an enemy attack, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
+LocLongDescription="When targeted by an enemy attack, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
 
 [SkirmisherInterrupt X2AbilityTemplate]
 LocLongDescription="A powerful form of Overwatch. Instead of firing automatically, perform any <Ability:Interrupt_NumPoints/> actions."
