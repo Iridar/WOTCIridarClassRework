@@ -3,6 +3,7 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 static event OnPostTemplatesCreated()
 {
 	class'Skirmisher'.static.PatchAbilities();
+	class'Ranger'.static.PatchAbilities();
 }
 
 
@@ -57,6 +58,14 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = SKColor(GetZeroInCritBonus(ParseObj, StrategyParseOb, GameState));
 		return true;
 
+	// ======================================================================================================================
+	//												RANGER TAGS
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	case "IRI_Conceal_DetectionRadiusModifier":
+		OutString = string(int(`GetConfigFloat("IRI_Conceal_DetectionRadiusModifier") * 100));
+		return true;
+		
 		
 
 	// ======================================================================================================================

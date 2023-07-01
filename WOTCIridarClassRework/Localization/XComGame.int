@@ -1,3 +1,7 @@
+; ================================================
+;				SKIRMISHER
+; ------------------------------------------------
+
 [SkirmisherReflex X2AbilityTemplate]
 LocLongDescription="When attacked, gain one extra action on the next turn. Triggers once per turn."
 LocHelpText="When attacked, gain one extra action on the next turn. Triggers once per turn."
@@ -77,3 +81,26 @@ LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt
 [Battlelord X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> Battlelord's cooldown is equal to the number of actions granted."
 
+; ================================================
+;				RANGER
+; ------------------------------------------------
+
+[Phantom X2AbilityTemplate]
+LocLongDescription="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+LocHelpText="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+
+[IRI_RN_ConcealDetectionRadiusReduction X2AbilityTemplate]
+LocFriendlyName="Conceal"
+LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+
+[Shadowstrike X2AbilityTemplate]
+LocFriendlyName="Shadowstrike"
+LocLongDescription="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
+LocHelpText="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
+LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger re-enters concealment in a mission.<br/>"
+
+[IRI_RN_Shadowstrike_OnBreakConcealment X2AbilityTemplate]
+LocFriendlyName="Shadowstrike"
+LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
+LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
