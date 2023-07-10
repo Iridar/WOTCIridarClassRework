@@ -8,8 +8,6 @@ static final function PatchAbilities()
 	PatchGuardianForIntercept();
 }
 
-
-
 static private function PatchSwordSlice()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
