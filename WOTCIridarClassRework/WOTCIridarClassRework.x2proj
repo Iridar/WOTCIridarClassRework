@@ -55,6 +55,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\Skirmisher.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2AbilityCost_RN_SlashActionPoints.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Ability_ClassRework.uc">
       <SubType>Content</SubType>
     </Content>
