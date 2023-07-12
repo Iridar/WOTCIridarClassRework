@@ -13,7 +13,7 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 TODO
 
 - Ensure Random Deck always has 2 empty spots
-
+- Translate ClassRework/XComGame.int to Russian
 
 
 

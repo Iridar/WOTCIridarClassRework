@@ -12,6 +12,9 @@
   <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
+    <Folder Include="Config\Sharpshooter" />
+    <Folder Include="Config\Ranger" />
+    <Folder Include="Config\Skirmisher" />
     <Folder Include="Localization\" />
     <Folder Include="Src\" />
     <Folder Include="Content\" />
@@ -20,16 +23,34 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\XComClassData.ini">
+    <Content Include="Config\Ranger\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\XComClassRework.ini">
+    <Content Include="Config\Ranger\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\XComGameData.ini">
+    <Content Include="Config\Sharpshooter\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\XComGameData_SoldierSkills.ini">
+    <Content Include="Config\Sharpshooter\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComGameData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComGameData_SoldierSkills.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComTemplateCreator.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
@@ -41,8 +62,6 @@
     <Content Include="Config\Base\XComEditor.ini" />
     <Content Include="Config\Base\XComEngine.ini" />
     <Content Include="Config\Base\XComGame.ini" />
-    <Content Include="Config\XComTemplateCreator.ini" />
-    <Content Include="Config\XComTemplateEditor.ini" />
     <Content Include="Localization\XComGame.int" />
     <Content Include="Localization\WOTCIridarClassRework.int" />
     <Content Include="Src\extra_globals.uci" />
@@ -50,6 +69,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Ranger.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Sharpshooter.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Skirmisher.uc">
@@ -80,6 +102,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReturnFireIgnoresCover.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Serial_AimPenalty.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherInterrupt_Fixed.uc">

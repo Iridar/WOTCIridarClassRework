@@ -1,3 +1,7 @@
 [Help]
 
 ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Ability:IRI_ZeroIn_Crit/> critical chance until the end of turn."
+
+[Sharpshooter]
+
+strSerialAimPenaltyEffectDesc = "Serial: aim reduced by <Ability:IRI_SH_Serial_AimPenalty/>."

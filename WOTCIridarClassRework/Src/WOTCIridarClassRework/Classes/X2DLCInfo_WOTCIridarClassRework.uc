@@ -4,6 +4,7 @@ static event OnPostTemplatesCreated()
 {
 	class'Skirmisher'.static.PatchAbilities();
 	class'Ranger'.static.PatchAbilities();
+	class'Sharpshooter'.static.PatchAbilities();
 }
 
 
@@ -66,6 +67,14 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = string(int(`GetConfigFloat("IRI_Conceal_DetectionRadiusModifier") * 100));
 		return true;
 		
+	// ======================================================================================================================
+	//												SHARPSHOOTER TAGS
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	case "IRI_SH_Serial_AimPenalty":
+		OutString = string(int(GetUnitValue(class'X2Effect_Serial_AimPenalty'.default.EffectName, ParseObj, StrategyParseOb, GameState)) * `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot"));
+		return true;
+		
 		
 
 	// ======================================================================================================================
@@ -84,13 +93,13 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 
 static private function string GetZeroInAimBonus(Object ParseObj, Object StrategyParseObj, XComGameState GameState)
 {
-	return string(GetZeroInValue(ParseObj, StrategyParseObj, GameState) * class'X2Effect_ZeroIn'.default.LockedInAimPerShot);
+	return string(int(GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, ParseObj, StrategyParseObj, GameState)) * class'X2Effect_ZeroIn'.default.LockedInAimPerShot);
 }
 static private function string GetZeroInCritBonus(Object ParseObj, Object StrategyParseObj, XComGameState GameState)
 {
-	return string(GetZeroInValue(ParseObj, StrategyParseObj, GameState) * class'X2Effect_ZeroIn'.default.CritPerShot);
+	return string(int(GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, ParseObj, StrategyParseObj, GameState)) * class'X2Effect_ZeroIn'.default.CritPerShot);
 }
-static private function int GetZeroInValue(Object ParseObj, Object StrategyParseObj, XComGameState GameState)
+static private function float GetUnitValue(const name ValueName, Object ParseObj, Object StrategyParseObj, XComGameState GameState)
 {
 	local XComGameState_Effect	EffectState;
 	local XComGameState_Ability	AbilityState;
@@ -102,7 +111,7 @@ static private function int GetZeroInValue(Object ParseObj, Object StrategyParse
 		UnitState = XComGameState_Unit(StrategyParseObj);
 		if (UnitState != none)
 		{
-			if (UnitState.GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, UV))
+			if (UnitState.GetUnitValue(ValueName, UV))
 			{
 				return UV.fValue;
 			}
@@ -116,7 +125,7 @@ static private function int GetZeroInValue(Object ParseObj, Object StrategyParse
 			UnitState = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(EffectState.ApplyEffectParameters.TargetStateObjectRef.ObjectID));
 			if (UnitState != none)
 			{
-				if (UnitState.GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, UV))
+				if (UnitState.GetUnitValue(ValueName, UV))
 				{
 					return UV.fValue;
 				}
@@ -130,7 +139,7 @@ static private function int GetZeroInValue(Object ParseObj, Object StrategyParse
 				UnitState = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(AbilityState.OwnerStateObject.ObjectID));
 				if (UnitState != none)
 				{
-					if (UnitState.GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, UV))
+					if (UnitState.GetUnitValue(ValueName, UV))
 					{
 						return UV.fValue;
 					}

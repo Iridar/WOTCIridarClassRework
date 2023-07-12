@@ -85,7 +85,6 @@ static private function PatchShadowstrike()
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
 	local X2Effect_ToHitModifier			ToHitModifier;
-	local X2Condition_Visibility			VisCondition;
 	local X2Effect							TargetEffect;
 	local int i;
 
