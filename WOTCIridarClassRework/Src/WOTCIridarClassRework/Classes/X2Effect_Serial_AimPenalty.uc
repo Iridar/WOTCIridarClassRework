@@ -1,7 +1,7 @@
 class X2Effect_Serial_AimPenalty extends X2Effect_Persistent;
 
 //var int AimPenaltyPerShot;
-var float DamagePenaltyPerShot;
+var int DamagePenaltyPerShot;
 
 function RegisterForEvents(XComGameState_Effect EffectGameState)
 {

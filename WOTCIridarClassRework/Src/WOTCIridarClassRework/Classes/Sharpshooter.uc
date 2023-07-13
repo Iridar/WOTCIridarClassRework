@@ -11,6 +11,32 @@ static final function PatchAbilities()
 	PatchDeadeyeDuncan();
 	PatchDeathFromAbove();
 	PatchSharpshooterAim();
+	PatchReturnFire();
+}
+
+static private function PatchReturnFire()
+{
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2AbilityTemplate				AbilityTemplate;
+	local X2Effect						Effect;
+	local X2Effect_ReturnFire			FireEffect;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ReturnFire');
+	if (AbilityTemplate == none)
+		return;
+
+	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+	{
+		FireEffect = X2Effect_ReturnFire(Effect);
+		if (X2Effect_ReturnFire(Effect) == none)
+			continue;
+
+		FireEffect.bPreEmptiveFire = true;
+		break;
+	}
+	
+	AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
 }
 
 static private function PatchSharpshooterAim()
@@ -18,7 +44,6 @@ static private function PatchSharpshooterAim()
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
 	local X2DataTemplate					DataTemplate;
-	local X2Effect							Effect;
 	local X2Effect_SH_SharpshooterAim		AimEffect;
 	local X2Condition_AbilityProperty		AbilityCondition;
 	local int i;
@@ -179,7 +204,7 @@ static private function PatchSerial()
 
 	AimPenalty = new class'X2Effect_Serial_AimPenalty';
 	//AimPenalty.AimPenaltyPerShot = `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot");
-	AimPenalty.DamagePenaltyPerShot = `GetConfigFloat("IRI_SH_Serial_DamagePenaltyPerShot");
+	AimPenalty.DamagePenaltyPerShot = `GetConfigInt("IRI_SH_Serial_DamagePenaltyPerShot");
 	AimPenalty.SetDisplayInfo(ePerkBuff_Penalty, AbilityTemplate.LocFriendlyName, default.strSerialAimPenaltyEffectDesc, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
 	AbilityTemplate.AddTargetEffect(AimPenalty);
 }

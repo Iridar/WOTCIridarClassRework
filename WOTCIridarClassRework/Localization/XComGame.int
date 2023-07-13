@@ -109,6 +109,8 @@ LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit ch
 ;				SHARPSHOOTER
 ; ------------------------------------------------
 
+[Squadsight X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Squadsight is best augmented by high ground, allowing <Ability:ClassName/>s relatively clear sight lines and an additional aim bonus to offset Squadsight's aim penalty.<br/><Bullet/> When using Squadsight, there is no limit on how far your targets can be, but an aim penalty accumulates with distance."
 
 
 [InTheZone X2AbilityTemplate]
@@ -138,3 +140,8 @@ LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot b
 LocLongDescription="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
 LocHelpText="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
 LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all ranged attacks.<br/>"
+
+
+[ReturnFire X2AbilityTemplate]
+LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."

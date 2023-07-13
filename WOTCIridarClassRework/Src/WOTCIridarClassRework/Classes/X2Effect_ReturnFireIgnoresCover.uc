@@ -10,15 +10,18 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 	local ShotModifierInfo					ModInfo;
 	local GameRulesCache_VisibilityInfo		VisInfo;
 	local XComGameState_Ability				AppliedAbility;
-	local X2AbilityToHitCalc_StandardAim	StandardAim;
+	//local X2AbilityToHitCalc_StandardAim	StandardAim;
 
 	// Only from the same weapon
 	if (EffectState.ApplyEffectParameters.ItemStateObjectRef != AbilityState.SourceWeapon) 
 		return;
 
 	// Only for Reaction Fire
-	StandardAim = X2AbilityToHitCalc_StandardAim(AbilityState.GetMyTemplate().AbilityToHitCalc);
-	if (StandardAim == none || !StandardAim.bReactionFire)
+	//StandardAim = X2AbilityToHitCalc_StandardAim(AbilityState.GetMyTemplate().AbilityToHitCalc);
+	//if (StandardAim == none || !StandardAim.bReactionFire)
+	//	return;
+
+	if (AbilityState.GetMyTemplateName() != 'PistolReturnFire')
 		return;
 
 	//	Compensate aim penalty for shooting through cover
