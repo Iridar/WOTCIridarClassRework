@@ -59,7 +59,6 @@ static private function PatchFanFire()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
-	local X2Effect_Serial_AimPenalty		AimPenalty;
 	local X2AbilityCost_ActionPoints		ActionCost;
 	local X2AbilityCost						AbilityCost;
 
@@ -91,7 +90,8 @@ static private function PatchSerial()
 		return;
 
 	AimPenalty = new class'X2Effect_Serial_AimPenalty';
-	AimPenalty.AimPenaltyPerShot = `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot");
+	//AimPenalty.AimPenaltyPerShot = `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot");
+	AimPenalty.DamagePenaltyPerShot = `GetConfigFloat("IRI_SH_Serial_DamagePenaltyPerShot");
 	AimPenalty.SetDisplayInfo(ePerkBuff_Penalty, AbilityTemplate.LocFriendlyName, default.strSerialAimPenaltyEffectDesc, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
 	AbilityTemplate.AddTargetEffect(AimPenalty);
 }

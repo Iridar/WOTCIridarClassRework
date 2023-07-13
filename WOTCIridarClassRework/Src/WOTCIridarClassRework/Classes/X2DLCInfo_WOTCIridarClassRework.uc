@@ -71,8 +71,8 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 	//												SHARPSHOOTER TAGS
 	// ----------------------------------------------------------------------------------------------------------------------
 
-	case "IRI_SH_Serial_AimPenalty":
-		OutString = string(int(GetUnitValue(class'X2Effect_Serial_AimPenalty'.default.EffectName, ParseObj, StrategyParseOb, GameState)) * `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot"));
+	case "IRI_SH_Serial_DamagePenaltyPerShot":
+		OutString = string(int(GetUnitValue(class'X2Effect_Serial_AimPenalty'.default.EffectName, ParseObj, StrategyParseOb, GameState)) * `GetConfigInt("IRI_SH_Serial_DamagePenaltyPerShot"));
 		return true;
 		
 		

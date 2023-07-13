@@ -2,7 +2,7 @@ class X2Effect_SH_DeadeyeDamage extends X2Effect_DeadeyeDamage;
 
 function float GetPostDefaultAttackingDamageModifier_CH(XComGameState_Effect EffectState, XComGameState_Unit SourceUnit, Damageable Target, XComGameState_Ability AbilityState, const out EffectAppliedData ApplyEffectParameters, float CurrentDamage, X2Effect_ApplyWeaponDamage WeaponDamageEffect, XComGameState NewGameState) 
 {
-	if (AbilityState.GetMyTemplateName() == 'Deadeye' && class'XComGameStateContext_Ability'.static.IsHitResultHit(AppliedData.AbilityResultContext.HitResult))
+	if (AbilityState.GetMyTemplateName() == 'Deadeye' && class'XComGameStateContext_Ability'.static.IsHitResultHit(ApplyEffectParameters.AbilityResultContext.HitResult))
 	{
 		return DamageMultiplier * CurrentDamage; 
 	}

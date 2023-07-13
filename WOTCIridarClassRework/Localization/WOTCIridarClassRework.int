@@ -4,4 +4,4 @@ ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Abil
 
 [Sharpshooter]
 
-strSerialAimPenaltyEffectDesc = "Serial: aim reduced by <Ability:IRI_SH_Serial_AimPenalty/>."
+strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."

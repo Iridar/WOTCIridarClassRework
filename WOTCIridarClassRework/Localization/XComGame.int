@@ -104,3 +104,31 @@ LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger r
 LocFriendlyName="Shadowstrike"
 LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
 LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
+
+; ================================================
+;				SHARPSHOOTER
+; ------------------------------------------------
+
+
+
+[InTheZone X2AbilityTemplate]
+LocLongDescription="A powerful chained shot ability. Each <Ability:WeaponName/> kill refunds action points, but further attacks have their damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."
+LocHelpText=A powerful chained shot ability. Each <Ability:WeaponName/> kill refunds action points, but further attacks have their damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."
+LocPromotionPopupText="<Bullet/> Serial is meant to chain enemy kills in a single action, as every kill is essentially free.<br/><Bullet/> Serial has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+
+[DeathFromAbove X2AbilityTemplate]
+LocLongDescription="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."
+LocHelpText="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."
+
+
+[Deadeye X2AbilityTemplate]
+LocLongDescription="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
+LocHelpText="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
+LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot by <Ability:IRI_SH_DeadEye_AimPenalty/>, but increases the overall damage of the shot by <Ability:DeadEyeDmg/>%.<br/><Bullet/> Deadeye has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+
+[DeadeyeDamage X2AbilityTemplate]
+LocLongDescription="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
+LocHelpText="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
+LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot by <Ability:IRI_SH_DeadEye_AimPenalty/>, but increases the overall damage of the shot by <Ability:DeadEyeDmg/>%.<br/><Bullet/> Deadeye has a <Ability:SelfCooldown/> turn cooldown.<br/>"
