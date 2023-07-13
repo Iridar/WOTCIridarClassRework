@@ -110,6 +110,12 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_DeadeyeDamage.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_DeathFromAbove.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_SharpshooterAim.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherInterrupt_Fixed.uc">
       <SubType>Content</SubType>
     </Content>

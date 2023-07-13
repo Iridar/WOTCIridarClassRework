@@ -5,3 +5,4 @@ ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Abil
 [Sharpshooter]
 
 strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."
+SharpshooterAimBonusDesc = "This unit will receive a +<Ability:SHARPSHOOTERAIMBONUS/> Aim bonus on all attacks this turn."

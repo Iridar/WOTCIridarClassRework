@@ -1,6 +1,7 @@
 class Sharpshooter extends Common abstract;
 
 var localized string strSerialAimPenaltyEffectDesc;
+var localized string SharpshooterAimBonusDesc;
 
 static final function PatchAbilities()
 {
@@ -8,6 +9,93 @@ static final function PatchAbilities()
 	PatchFanFire();
 	PatchDeadeye();
 	PatchDeadeyeDuncan();
+	PatchDeathFromAbove();
+	PatchSharpshooterAim();
+}
+
+static private function PatchSharpshooterAim()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2DataTemplate					DataTemplate;
+	local X2Effect							Effect;
+	local X2Effect_SH_SharpshooterAim		AimEffect;
+	local X2Condition_AbilityProperty		AbilityCondition;
+	local int i;
+
+	AimEffect = new class'X2Effect_SH_SharpshooterAim';
+	AimEffect.BuildPersistentEffect(2, false, true, false, eGameRule_PlayerTurnEnd);
+	AimEffect.SetDisplayInfo(ePerkBuff_Bonus, class'X2Ability_SharpshooterAbilitySet'.default.SharpshooterAimBonusName, default.SharpshooterAimBonusDesc, "img:///UILibrary_PerkIcons.UIPerk_aim");
+	
+	AbilityCondition = new class'X2Condition_AbilityProperty';
+	AbilityCondition.OwnerHasSoldierAbilities.AddItem('SharpshooterAim');
+	AimEffect.TargetConditions.AddItem(AbilityCondition);
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	foreach AbilityMgr.IterateTemplates(DataTemplate)
+	{
+		AbilityTemplate = X2AbilityTemplate(DataTemplate);
+		if (AbilityTemplate == none)
+			continue;
+
+		for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+		{
+			if (X2Effect_SharpshooterAim(AbilityTemplate.AbilityTargetEffects[i]) != none)
+			{
+				AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+				AbilityTemplate.AddTargetEffect(AimEffect);
+				break;
+			}
+		}
+
+		for (i = AbilityTemplate.AbilityShooterEffects.Length - 1; i >= 0; i--)
+		{
+			if (X2Effect_SharpshooterAim(AbilityTemplate.AbilityShooterEffects[i]) != none)
+			{
+				AbilityTemplate.AbilityShooterEffects.Remove(i, 1);
+				AbilityTemplate.AddShooterEffect(AimEffect);
+				break;
+			}
+		}
+
+		for (i = AbilityTemplate.AbilityMultiTargetEffects.Length - 1; i >= 0; i--)
+		{
+			if (X2Effect_SharpshooterAim(AbilityTemplate.AbilityMultiTargetEffects[i]) != none)
+			{
+				AbilityTemplate.AbilityMultiTargetEffects.Remove(i, 1);
+				AbilityTemplate.AddMultiTargetEffect(AimEffect);
+				break;
+			}
+		}
+	}
+}
+
+static private function PatchDeathFromAbove()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_SH_DeathFromAbove		DeathFromAbove;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('DeathFromAbove');
+	if (AbilityTemplate == none)	
+		return;
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_DeathFromAbove(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			DeathFromAbove = new class'X2Effect_SH_DeathFromAbove';
+			DeathFromAbove.BuildPersistentEffect(1, true, false, false);
+			DeathFromAbove.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false,,AbilityTemplate.AbilitySourceName);
+			AbilityTemplate.AddTargetEffect(DeathFromAbove);
+
+			break;
+		}
+	}
 }
 
 static private function PatchDeadeyeDuncan()

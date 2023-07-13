@@ -132,3 +132,9 @@ LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot b
 LocLongDescription="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocHelpText="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot by <Ability:IRI_SH_DeadEye_AimPenalty/>, but increases the overall damage of the shot by <Ability:DeadEyeDmg/>%.<br/><Bullet/> Deadeye has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+
+[SharpshooterAim X2AbilityTemplate]
+LocLongDescription="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
+LocHelpText="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
+LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all ranged attacks.<br/>"
