@@ -35,6 +35,9 @@
     <Content Include="Config\Sharpshooter\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Sharpshooter\XComGameCore.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Skirmisher\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
