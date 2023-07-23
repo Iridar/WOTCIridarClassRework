@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
+    <Folder Include="Config\Grenadier" />
     <Folder Include="Config\Sharpshooter" />
     <Folder Include="Config\Ranger" />
     <Folder Include="Config\Skirmisher" />
@@ -23,6 +24,9 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Grenadier\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Ranger\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
@@ -71,6 +75,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\Common.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Grenadier.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Ranger.uc">
       <SubType>Content</SubType>
     </Content>
@@ -96,6 +103,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Battlelord_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_BlastPaddingExtended.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">

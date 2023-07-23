@@ -5,6 +5,8 @@ static event OnPostTemplatesCreated()
 	class'Skirmisher'.static.PatchAbilities();
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
+	class'Grenadier'.static.PatchAbilities();
+	
 }
 
 

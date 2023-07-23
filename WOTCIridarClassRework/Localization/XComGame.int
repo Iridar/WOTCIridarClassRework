@@ -95,7 +95,6 @@ LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Concea
 LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 
 [Shadowstrike X2AbilityTemplate]
-LocFriendlyName="Shadowstrike"
 LocLongDescription="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
 LocHelpText="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
 LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger re-enters concealment in a mission.<br/>"
@@ -145,3 +144,5 @@ LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all range
 [ReturnFire X2AbilityTemplate]
 LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
 LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+
+
