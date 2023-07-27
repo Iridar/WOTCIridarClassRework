@@ -27,6 +27,9 @@
     <Content Include="Config\Grenadier\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Grenadier\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Ranger\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
@@ -111,6 +114,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReliableWorldDamage.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReserveOverwatchPoints_NoCost.uc">
       <SubType>Content</SubType>
     </Content>
@@ -135,7 +141,13 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_TriggerSuppressionShot.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2VersionCheck.uc">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

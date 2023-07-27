@@ -6,9 +6,7 @@ static event OnPostTemplatesCreated()
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
 	class'Grenadier'.static.PatchAbilities();
-	
 }
-
 
 // --------------------------
 

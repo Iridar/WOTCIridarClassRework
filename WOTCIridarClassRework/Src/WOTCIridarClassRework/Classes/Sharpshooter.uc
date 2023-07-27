@@ -1,4 +1,4 @@
-class Sharpshooter extends Common abstract;
+class Sharpshooter extends Common;
 
 var localized string strSerialAimPenaltyEffectDesc;
 var localized string SharpshooterAimBonusDesc;
@@ -20,6 +20,7 @@ static private function PatchReturnFire()
 	local X2AbilityTemplate				AbilityTemplate;
 	local X2Effect						Effect;
 	local X2Effect_ReturnFire			FireEffect;
+	local X2AbilityToHitCalc_StandardAim ToHitCalc;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ReturnFire');
@@ -36,7 +37,16 @@ static private function PatchReturnFire()
 		break;
 	}
 	
-	AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('PistolReturnFire');
+	if (AbilityTemplate == none)
+		return;
+
+	ToHitCalc = X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc);
+	if (ToHitCalc == none)
+		return;
+
+	ToHitCalc.bIgnoreCoverBonus = true;
+	//AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
 }
 
 static private function PatchSharpshooterAim()

@@ -1,4 +1,4 @@
-class Skirmisher extends Common abstract;
+class Skirmisher extends Common;
 
 static final function PatchAbilities()
 {
@@ -544,6 +544,6 @@ static private function PatchSkirmisherReturnFire()
 		}
 	}
 
-	AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
+	//AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
 }
 

@@ -12,19 +12,20 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 
 TODO
 
+- Purge the version check file
 - Ensure Random Deck always has 2 empty spots
 - Translate ClassRework/XComGame.int and Perk Pack to Russian
 - Make some abilities from the perk pack cross class
+- Check that all weapon abilities work with weapon upgrades
+- Recheck that return fire ignores cover
 Integrate relevant stuff from Weapon Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501 and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719
 Patch Saturation Fire and other abilities to build interrupt game state
 
 Blast Padding - integrate More Effective Blast Padding https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477
-Demolition - either make it a guaranteed hit or integrate Collateral Demolition. The latter seems more interesting, but might be a bit OP.
-Suppression - reduce aim penalty, but make it Disorient? Make reaction shot ignore cover?
-Chain Shot - move aim penalty from first shot to the second.
-Rupture - correct description to make it clear bonus damage is applied to Rupture itself too.
-Holo Targeting - add to Saturation Fire and Collateral Damage
 
+Rupture - correct description to make it clear bonus damage is applied to Rupture itself too.
+
+Fix Collateral Damage, update localization for changed abilities.
 
 
 [h1]REQUIREMENTS[/h1]

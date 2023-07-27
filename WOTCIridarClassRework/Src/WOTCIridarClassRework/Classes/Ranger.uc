@@ -1,4 +1,4 @@
-class Ranger extends Common abstract;
+class Ranger extends Common;
 
 static final function PatchAbilities()
 {

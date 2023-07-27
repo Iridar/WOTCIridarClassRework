@@ -6,7 +6,6 @@ static function array<X2DataTemplate> CreateTemplates()
 
 	Templates.AddItem(IRI_RN_ConcealDetectionRadiusReduction());
 	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
-	
 
 	return Templates;
 }
