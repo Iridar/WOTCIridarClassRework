@@ -141,9 +141,6 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_TriggerSuppressionShot.uc">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
       <SubType>Content</SubType>
     </Content>

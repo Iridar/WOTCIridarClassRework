@@ -146,3 +146,17 @@ LocHelpText="When targeted by enemy fire, automatically fire back with your <Abi
 LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
 
 
+; ================================================
+;				GRENADIER
+; ------------------------------------------------
+
+[BlastPadding X2AbilityTemplate]
+LocLongDescription="Your gear includes layers of extra padding and blast plates, granting a bonus point of Armor and <Ability:BlastPadding/>% less damage from explosive damage."
+
+[ChainShot X2AbilityTemplate]
+LocLongDescription="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
+LocHelpText="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
+
+[Suppression X2AbilityTemplate]
+LocLongDescription="Fire a barrage that pins down your target, removing Overwatch, imposing a <Ability:SUPPRESSIONPENALTY/> Aim penalty, and granting a preemptive reaction shot that ignores cover if the target attempts to move or attack."
+LocHelpText="Penalize target's aim and shoot them if they move or attack."
