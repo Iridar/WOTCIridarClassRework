@@ -18,7 +18,7 @@ static private function PatchSwordSlice()
 	if (AbilityTemplate == none)	
 		return;
 
-	RemoveActionCost(AbilityTemplate);
+	RemoveActionAndChargeCost(AbilityTemplate);
 
 	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
 }

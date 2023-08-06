@@ -108,7 +108,7 @@ static final protected function RemoveChargeCost(out X2AbilityTemplate AbilityTe
 	}
 }
 
-static final protected function RemoveActionCost(out X2AbilityTemplate AbilityTemplate)
+static final protected function RemoveActionAndChargeCost(out X2AbilityTemplate AbilityTemplate)
 {
 	local int i;
 
@@ -120,6 +120,36 @@ static final protected function RemoveActionCost(out X2AbilityTemplate AbilityTe
 		{
 			AbilityTemplate.AbilityCosts.Remove(i, 1);
 		}
+	}
+}
+
+static final protected function AddActionPointNameToActionCost(out X2AbilityTemplate AbilityTemplate, const name ActionPointName)
+{
+	local X2AbilityCost_ActionPoints	ActionCost;
+	local X2AbilityCost					AbilityCost;
+
+	foreach AbilityTemplate.AbilityCosts(AbilityCost)
+	{
+		ActionCost = X2AbilityCost_ActionPoints(AbilityCost);
+		if (ActionCost == none)
+			continue;
+
+		ActionCost.AllowedTypes.AddItem(ActionPointName);
+	}
+}
+
+static final protected function MakeNotEndTurn(out X2AbilityTemplate AbilityTemplate)
+{
+	local X2AbilityCost_ActionPoints	ActionCost;
+	local X2AbilityCost					AbilityCost;
+
+	foreach AbilityTemplate.AbilityCosts(AbilityCost)
+	{
+		ActionCost = X2AbilityCost_ActionPoints(AbilityCost);
+		if (ActionCost == none)
+			continue;
+
+		ActionCost.bConsumeAllPoints = false;
 	}
 }
 

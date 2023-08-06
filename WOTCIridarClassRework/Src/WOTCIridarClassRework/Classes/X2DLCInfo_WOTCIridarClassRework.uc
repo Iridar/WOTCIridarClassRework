@@ -6,6 +6,7 @@ static event OnPostTemplatesCreated()
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
 	class'Grenadier'.static.PatchAbilities();
+	class'Specialist'.static.PatchAbilities();
 }
 
 // --------------------------
@@ -85,6 +86,15 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		return true;
 		
 		
+	// ======================================================================================================================
+	//												SPECIALIST TAGS
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	case "IRI_SP_MedicalProtocol_InitialCharges":
+	case "IRI_SP_MedicalProtocol_BonusChargesPerMedikit":
+		OutString = string(`GetConfigInt(InString));
+		return true;
+
 
 	// ======================================================================================================================
 	//												TEMPLAR TAGS

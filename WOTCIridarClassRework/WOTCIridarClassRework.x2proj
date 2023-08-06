@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\Specialist" />
     <Folder Include="Config\Sharpshooter" />
     <Folder Include="Config\Ranger" />
     <Folder Include="Config\Skirmisher" />
@@ -63,6 +64,12 @@
     <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Specialist\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Specialist\XComTemplateEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
       <SubType>Content</SubType>
     </Content>
@@ -90,13 +97,25 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\Skirmisher.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Specialist.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2AbilityCharges_GremlinHeal_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2AbilityCost_RN_SlashActionPoints.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Ability_ClassRework.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_RevivalProtocol_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_SourceIsConcealed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_RevivalProtocolAP.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
@@ -109,6 +128,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_BlastPaddingExtended.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">
@@ -142,9 +164,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2VersionCheck.uc">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

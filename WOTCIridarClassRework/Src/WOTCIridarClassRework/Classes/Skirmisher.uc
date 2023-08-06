@@ -29,7 +29,7 @@ static private function PatchManualOverride()
 	if (AbilityTemplate == none)	
 		return;
 
-	RemoveActionCost(AbilityTemplate);
+	RemoveActionAndChargeCost(AbilityTemplate);
 	AddFreeActionCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("ManualOverride_Cooldown"));
 
@@ -163,7 +163,7 @@ static private function PatchSkirmisherMelee()
 	AbilityTemplate.AbilityCooldown = none;
 	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
 
-	RemoveActionCost(AbilityTemplate);
+	RemoveActionAndChargeCost(AbilityTemplate);
 
 	ActionPointCost = new class'X2AbilityCost_ActionPoints';
 	ActionPointCost.bMoveCost = true;
@@ -299,14 +299,7 @@ static private function PatchCombatPresence()
 		return;
 
 	// Allow using Combat Presence with Interrupt AP
-	for (i = AbilityTemplate.AbilityCosts.Length - 1; i >= 0; i--)
-	{
-		if (X2AbilityCost_ActionPoints(AbilityTemplate.AbilityCosts[i]) != none)
-		{
-			X2AbilityCost_ActionPoints(AbilityTemplate.AbilityCosts[i]).AllowedTypes.AddItem(class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint);
-			break;
-		}
-	}
+	AddActionPointNameToActionCost(AbilityTemplate, class'X2CharacterTemplateManager'.default.SkirmisherInterruptActionPoint);
 
 	// Make the original action point effect work only while NOT interrupting.
 	// (Still gives it while Battlelording)

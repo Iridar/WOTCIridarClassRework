@@ -23,7 +23,7 @@ Patch Saturation Fire and other abilities to build interrupt game state
 
 Blast Padding - integrate More Effective Blast Padding https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477
 
-Rupture - correct description to make it clear bonus damage is applied to Rupture itself too.
+Rupture - correct description to make it clear bonus damage is applied to Rupture itself too. And forbid using it while disoriented.
 
 Fix Collateral Damage, update localization for changed abilities.
 
@@ -89,6 +89,9 @@ THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
+
 
 
 

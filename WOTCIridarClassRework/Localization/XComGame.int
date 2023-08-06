@@ -160,3 +160,23 @@ LocHelpText="Fire your <Ability:WeaponName/> at the selected target. If the shot
 [Suppression X2AbilityTemplate]
 LocLongDescription="Fire a barrage that pins down your target, removing Overwatch, imposing a <Ability:SUPPRESSIONPENALTY/> Aim penalty, and granting a preemptive reaction shot that ignores cover if the target attempts to move or attack."
 LocHelpText="Penalize target's aim and shoot them if they move or attack."
+
+
+; ================================================
+;				SPECIALIST
+; ------------------------------------------------
+
+[MedicalProtocol X2AbilityTemplate]
+LocLongDescription="The GREMLIN can perform healing actions remotely: GREMLIN Heal and GREMLIN Stabilize. The GREMLIN has <Ability:IRI_SP_MedicalProtocol_InitialCharges/> charges. If a medikit is equipped, the GREMLIN will gain <Ability:IRI_SP_MedicalProtocol_BonusChargesPerMedikit/> additional charges."
+
+[CombatProtocol X2AbilityTemplate]
+LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Does not end turn."
+LocHelpText="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Requires line of sight to the target. Does not end turn."
+
+[HaywireProtocol X2AbilityTemplate]
+LocLongDescription="You may target robotic and mechanical enemies with your GREMLIN, attempting to hack them and seize control. Does not end turn."
+LocHelpText="Attempt to seize control of targeted enemy robot. Does not end turn."
+
+[CapacitorDischarge X2AbilityTemplate]
+LocLongDescription="Send the GREMLIN to a location where it emits a substantial armor-piercing electric discharge, damaging and potentially stunning all nearby units. Robotic units take more damage."
+LocHelpText="Send the GREMLIN to electrocute all units in a radius, dealing armor-piercing damage and potentially stunning them. Robotic units take more damage."
