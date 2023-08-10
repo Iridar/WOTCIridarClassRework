@@ -9,10 +9,13 @@ Created with Enhanced Mod Project Template v1.0
 Get news and updates here: 
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
+[WOTC] Electrical Damage Consistency
+https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338
+
 
 TODO
 
-- Purge the version check file
+- Ensure Covering Fire is cross class
 - Ensure Random Deck always has 2 empty spots
 - Translate ClassRework/XComGame.int and Perk Pack to Russian
 - Make some abilities from the perk pack cross class
