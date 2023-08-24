@@ -64,6 +64,9 @@
     <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Specialist\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Specialist\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>

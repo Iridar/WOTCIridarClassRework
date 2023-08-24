@@ -2,6 +2,14 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
 static event OnPostTemplatesCreated()
 {
+	local CHHelpers CHHelpersObj;
+
+	CHHelpersObj = class'CHHelpers'.static.GetCDO();
+	if (CHHelpersObj != none)
+	{
+		CHHelpersObj.AddPrioritizeRightClickMeleeCallback(PrioritizeRightClickMelee);
+	}
+
 	class'Skirmisher'.static.PatchAbilities();
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
@@ -10,6 +18,40 @@ static event OnPostTemplatesCreated()
 }
 
 // --------------------------
+
+
+// To avoid crashes associated with garbage collection failure when transitioning between Tactical and Strategy,
+// this function must be bound to the ClassDefaultObject of your class. Having this function in a class that 
+// `extends X2DownloadableContentInfo` is the easiest way to ensure that.
+static private function EHLDelegateReturn PrioritizeRightClickMelee(XComGameState_Unit UnitState, out XComGameState_Ability PrioritizedMeleeAbility, optional XComGameState_BaseObject TargetObject)
+{
+	local XComGameStateHistory  History;
+	local GameRulesCache_Unit   UnitCache;
+	local XComGameState_Ability AbilityState;
+	local AvailableAction       AvAction;
+
+	`LOG(UnitState.GetFullName() @ "originally selected:" @ PrioritizedMeleeAbility.GetMyTemplateName() @ "Target unit is:" @ XComGameState_Unit(TargetObject).GetFullName(),, 'IRITEST');
+
+	// Otherwise use the original logic for selecting the ability
+	if (`TACTICALRULES.GetGameRulesCache_Unit(UnitState.GetReference(), UnitCache))
+	{
+		History = `XCOMHISTORY;
+
+		// Issue #1138 - optimization: replaced for() with faster foreach()
+		foreach UnitCache.AvailableActions(AvAction)
+		{
+			AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AvAction.AbilityObjectRef.ObjectID));
+			if (AbilityState != none && class'X2AbilityTrigger_EndOfMove'.static.AbilityHasEndOfMoveTrigger(AbilityState.GetMyTemplate()))
+			{
+				`LOG(UnitState.GetFullName() @ AbilityState.GetMyTemplateName(),, 'IRITEST');
+				if (AbilityState.GetMyTemplateName() == 'SwordSlice')
+					PrioritizedMeleeAbility = AbilityState;
+			}
+		}
+	}
+
+    return EHLDR_NoInterrupt;
+}
 
 
 

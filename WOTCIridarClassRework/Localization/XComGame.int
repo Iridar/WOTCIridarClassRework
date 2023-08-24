@@ -167,7 +167,7 @@ LocHelpText="Penalize target's aim and shoot them if they move or attack."
 ; ------------------------------------------------
 
 [MedicalProtocol X2AbilityTemplate]
-LocLongDescription="The GREMLIN can perform healing actions remotely: GREMLIN Heal and GREMLIN Stabilize. The GREMLIN has <Ability:IRI_SP_MedicalProtocol_InitialCharges/> charges. If a medikit is equipped, the GREMLIN will gain <Ability:IRI_SP_MedicalProtocol_BonusChargesPerMedikit/> additional charges."
+LocLongDescription="The GREMLIN can perform healing actions remotely: GREMLIN Heal and GREMLIN Stabilize. These actions share <Ability:IRI_SP_MedicalProtocol_InitialCharges/> charges. If a medikit is equipped, <Ability:IRI_SP_MedicalProtocol_BonusChargesPerMedikit/> additional charges are granted."
 
 [CombatProtocol X2AbilityTemplate]
 LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Does not end turn."

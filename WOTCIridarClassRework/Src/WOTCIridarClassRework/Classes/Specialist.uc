@@ -12,6 +12,25 @@ static final function PatchAbilities()
 	PatchHaywireProtocol();
 	PatchCapacitorDischarge();
 	PatchRevival();
+	PatchGremlins();
+}
+
+static private function PatchGremlins()
+{
+	local X2ItemTemplateManager		ItemMgr;
+	local X2WeaponTemplate			WeaponTemplate;
+	local array<X2WeaponTemplate>	WeaponTemplates;
+
+	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
+	WeaponTemplates = ItemMgr.GetAllWeaponTemplates();
+
+	foreach WeaponTemplates(WeaponTemplate)
+	{
+		if (WeaponTemplate.WeaponCat != class'X2GremlinTemplate'.default.WeaponCat || !WeaponTemplate.IsA('X2GremlinTemplate'))
+			continue;
+
+		WeaponTemplate.Abilities.AddItem('IRI_SP_ScoutingProtocol');
+	}
 }
 
 
@@ -70,6 +89,9 @@ static private function PatchHaywireProtocol()
 	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Scan');
+	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('FinalizeIntrusion');
 	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 }
 
