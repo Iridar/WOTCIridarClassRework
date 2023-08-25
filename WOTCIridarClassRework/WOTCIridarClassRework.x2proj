@@ -166,6 +166,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SP_CoveringFireIgnoreCover.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
       <SubType>Content</SubType>
     </Content>

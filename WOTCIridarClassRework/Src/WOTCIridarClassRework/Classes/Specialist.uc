@@ -13,6 +13,27 @@ static final function PatchAbilities()
 	PatchCapacitorDischarge();
 	PatchRevival();
 	PatchGremlins();
+	PatchCoveringFire();
+	//PatchThreatAssessment(); // Done in PatchAidProtocol()
+}
+
+
+static private function PatchCoveringFire()
+{
+	local X2AbilityTemplateManager				AbilityMgr;
+	local X2AbilityTemplate						AbilityTemplate;
+	local X2Effect_SP_CoveringFireIgnoreCover	Effect;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('CoveringFire');
+	if (AbilityTemplate == none)	
+		return;
+
+	Effect = new class'X2Effect_SP_CoveringFireIgnoreCover';
+	Effect.AllowedAbilities = `GetConfigArrayName("IRI_SP_CoveringFire_AllowedAbilitiesIgnoreCover");
+	Effect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false, , AbilityTemplate.AbilitySourceName);
+	Effect.BuildPersistentEffect(1, true);
+	AbilityTemplate.AddTargetEffect(Effect);
 }
 
 static private function PatchGremlins()
@@ -32,9 +53,6 @@ static private function PatchGremlins()
 		WeaponTemplate.Abilities.AddItem('IRI_SP_ScoutingProtocol');
 	}
 }
-
-
-
 
 static private function PatchCapacitorDischarge()
 {
@@ -62,10 +80,6 @@ static private function PatchHaywireProtocol()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
-	local X2AbilityCharges_RevivalProtocol	Charges;
-	local X2Effect_GiveStandardActionPoints GiveStandardActionPoints;
-	local X2Effect_RemoveEffects			RemoveStunned;
-	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('FinalizeHaywire');
@@ -205,8 +219,10 @@ static private function PatchCombatProtocol()
 
 static private function PatchAidProtocol()
 {
-	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
+	local X2AbilityTemplateManager				AbilityMgr;
+	local X2AbilityTemplate						AbilityTemplate;
+	local X2Effect_SP_CoveringFireIgnoreCover	Effect;
+	local X2Condition_AbilityProperty			AbilityCondition;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('AidProtocol');
@@ -214,6 +230,18 @@ static private function PatchAidProtocol()
 		return;
 
 	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+
+	Effect = new class'X2Effect_SP_CoveringFireIgnoreCover';
+	Effect.AllowedAbilities = `GetConfigArrayName("IRI_SP_CoveringFire_AllowedAbilitiesIgnoreCover");
+	Effect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false, , AbilityTemplate.AbilitySourceName);
+	Effect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
+	Effect.bForThreatAssessment = true;
+
+	AbilityCondition = new class'X2Condition_AbilityProperty';
+	AbilityCondition.OwnerHasSoldierAbilities.AddItem('ThreatAssessment');
+	Effect.TargetConditions.AddItem(AbilityCondition);
+
+	AbilityTemplate.AddTargetEffect(Effect);
 }
 
 static private function PatchGremlinHeal()

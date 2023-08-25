@@ -180,3 +180,11 @@ LocHelpText="Attempt to seize control of targeted enemy robot. Does not end turn
 [CapacitorDischarge X2AbilityTemplate]
 LocLongDescription="Send the GREMLIN to a location where it emits a substantial armor-piercing electric discharge, damaging and potentially stunning all nearby units. Robotic units take more damage."
 LocHelpText="Send the GREMLIN to electrocute all units in a radius, dealing armor-piercing damage and potentially stunning them. Robotic units take more damage."
+
+[CoveringFire X2AbilityTemplate]
+LocLongDescription="Your Overwatch gains an additional shot. All your Overwatch shots can be triggered by any enemy action, not just movement, and ignore the target's cover Defense bonus."
+LocHelpText="Overwatch shots are triggered by any enemy action and ignore their cover Defense bonus."
+
+[ThreatAssessment X2AbilityTemplate]
+LocLongDescription="Your Aid Protocol now grants its target an Overwatch shot, which can be triggered by any enemy action, not just movement, and ignores the target's cover Defense bonus. Aid Protocol cooldown is increased by 1 turn."
+LocHelpText="Your Aid Protocol now grants its target an Overwatch shot, which can be triggered by any enemy action, not just movement, and ignores the target's cover Defense bonus. Aid Protocol cooldown is increased by 1 turn."
