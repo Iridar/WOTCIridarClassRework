@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\Templar" />
     <Folder Include="Config\Specialist" />
     <Folder Include="Config\Sharpshooter" />
     <Folder Include="Config\Ranger" />
@@ -73,6 +74,12 @@
     <Content Include="Config\Specialist\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Templar\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Templar\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
       <SubType>Content</SubType>
     </Content>
@@ -101,6 +108,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Specialist.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Templar.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2AbilityCharges_GremlinHeal_Fixed.uc">
@@ -134,6 +144,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_PersistentVoidConduit_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">

@@ -2,11 +2,13 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
 static event OnPostTemplatesCreated()
 {
+	// TODO: Add switches for all of these
 	class'Skirmisher'.static.PatchAbilities();
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
 	class'Grenadier'.static.PatchAbilities();
 	class'Specialist'.static.PatchAbilities();
+	class'Templar'.static.PatchAbilities();
 }
 
 // --------------------------

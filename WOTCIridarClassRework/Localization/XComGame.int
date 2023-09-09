@@ -2,6 +2,8 @@
 ;				SKIRMISHER
 ; ------------------------------------------------
 
+; TODO: Skirmisher tutorials
+
 [SkirmisherReflex X2AbilityTemplate]
 LocLongDescription="When attacked, gain one extra action on the next turn. Triggers once per turn."
 LocHelpText="When attacked, gain one extra action on the next turn. Triggers once per turn."
@@ -188,3 +190,9 @@ LocHelpText="Overwatch shots are triggered by any enemy action and ignore their 
 [ThreatAssessment X2AbilityTemplate]
 LocLongDescription="Your Aid Protocol now grants its target an Overwatch shot, which can be triggered by any enemy action, not just movement, and ignores the target's cover Defense bonus. Aid Protocol cooldown is increased by 1 turn."
 LocHelpText="Your Aid Protocol now grants its target an Overwatch shot, which can be triggered by any enemy action, not just movement, and ignores the target's cover Defense bonus. Aid Protocol cooldown is increased by 1 turn."
+
+; ================================================
+;				TEMPLAR
+; ------------------------------------------------
+
+; TODO: Templar tutorials
