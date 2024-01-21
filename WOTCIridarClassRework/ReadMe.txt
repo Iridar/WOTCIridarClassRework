@@ -141,3 +141,14 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 * (NEW) Thunder Lance - use your grapple to launch grenades. Launched grenades have extra range and deal double damage to targets they impact directly.
 * Battlelord - now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. Multiple units can now use Battlelord at the same time. Cannot use Interrupt and Battlelord together.
 
+
+[h1]RANGER[/h1]
+[list]
+[*] Ability tree rearranged.
+[*] Phantom now additionally reduces concealment detection range by 50%.
+[*] Shadowstrike now actually applies its bonus while concealed instead of against enemies that can't see the Ranger. The bonus is now also provided for the entire turn the concealment was broken, which allows it to apply to melee attacks.
+[*] Conceal - updated description to mention it can't be used while flanked.
+[*] Implacable - updated description to no longer say you can't attack after gaining the bonus Move.
+[*] Untouchable - updated description to no longer say you have to get a kill on your turn. Added a flyover and a buff chevron when the Untouchable bonus is gained. 
+[*] Rapid Fire - now has a 1 turn cooldown (down from 5). Cooldown is now mentioned in the extended description.
+[/list]
