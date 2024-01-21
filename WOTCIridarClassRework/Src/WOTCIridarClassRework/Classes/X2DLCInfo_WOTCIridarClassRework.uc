@@ -68,6 +68,11 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 	case "IRI_Conceal_DetectionRadiusModifier":
 		OutString = string(int(`GetConfigFloat("IRI_Conceal_DetectionRadiusModifier") * 100));
 		return true;
+
+	case "IRI_DeepCover_ArmorBonus":
+		OutString = string(`GetConfigInt(InString));
+		return true;
+		
 		
 	// ======================================================================================================================
 	//												SHARPSHOOTER TAGS
