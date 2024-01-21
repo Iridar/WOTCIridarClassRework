@@ -6,6 +6,8 @@ static final function PatchAbilities()
 	PatchPhantom();
 	PatchRapidFire();
 	PatchGuardianForIntercept();
+	PatchShadowstrike();
+	PatchUntouchable();
 }
 
 // Necessary only in a scenario where Slash doesn't end turn.
@@ -23,6 +25,75 @@ static final function PatchAbilities()
 //
 //	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
 //}
+
+
+static private function PatchUntouchable()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_UntouchableBuff			UntouchableBuff;
+	local string							strEffectDesc;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Untouchable');
+	if (AbilityTemplate == none)	
+		return;
+
+	if (GetLanguage() == "INT")
+	{
+		strEffectDesc = `GetLocalizedString("Untouchable_Buff_Description");
+	}
+	else
+	{
+		strEffectDesc = AbilityTemplate.GetMyLongDescription();
+	}
+	UntouchableBuff = new class'X2Effect_UntouchableBuff';
+	
+	UntouchableBuff.SetDisplayInfo(ePerkBuff_Bonus, AbilityTemplate.LocFriendlyName, strEffectDesc, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+	AbilityTemplate.AddTargetEffect(UntouchableBuff);
+}
+
+static private function PatchShadowstrike()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_ToHitModifier			ToHitModifier;
+	local X2Effect							TargetEffect;
+	local X2Effect_ShadowstrikeBuff			ShadowstrikeBuff;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Shadowstrike');
+	if (AbilityTemplate == none)	
+		return;
+
+	foreach AbilityTemplate.AbilityTargetEffects(TargetEffect)
+	{
+		ToHitModifier = X2Effect_ToHitModifier(TargetEffect);
+		if (ToHitModifier == none)
+			continue;
+
+		//ToHitModifier.bDisplayInSpecialDamageMessageUI = true; // Works only when modifying damage.
+
+		for (i = ToHitModifier.ToHitConditions.Length - 1; i >= 0; i--)
+		{
+			if (X2Condition_Visibility(ToHitModifier.ToHitConditions[i]) != none)
+			{
+				ToHitModifier.ToHitConditions.Remove(i, 1);
+
+				ToHitModifier.ToHitConditions.AddItem(new class'X2Condition_SourceIsConcealed');
+				break;
+			}
+		}
+		//break;
+	}
+
+	ShadowstrikeBuff = new class'X2Effect_ShadowstrikeBuff';
+	ShadowstrikeBuff.SetDisplayInfo(ePerkBuff_Bonus, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+	AbilityTemplate.AddTargetEffect(ShadowstrikeBuff);
+
+	AbilityTemplate.AdditionalAbilities.AddItem('IRI_RN_Shadowstrike_OnBreakConcealment');
+}
 
 static private function PatchGuardianForIntercept()
 {
@@ -72,22 +143,26 @@ static private function PatchPhantom()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_PersistentStatChange		Effect;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Phantom');
 	if (AbilityTemplate == none)	
 		return;
 
-	AbilityTemplate.AdditionalAbilities.AddItem('IRI_RN_ConcealDetectionRadiusReduction');
+	//AbilityTemplate.AdditionalAbilities.AddItem('IRI_RN_ConcealDetectionRadiusReduction');
+
+	Effect = new class'X2Effect_PersistentStatChange';
+	Effect.AddPersistentStatChange(eStat_DetectionModifier, `GetConfigFloat("IRI_Conceal_DetectionRadiusModifier")); // MODOP_PostMultiplication doesn't work.
+	Effect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false, , AbilityTemplate.AbilitySourceName);
+	Effect.BuildPersistentEffect(1, true);
+	AbilityTemplate.AddTargetEffect(Effect);
 }
 
 static private function PatchRapidFire()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
-	local X2Effect_ToHitModifier			ToHitModifier;
-	local X2Effect							TargetEffect;
-	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('RapidFire');

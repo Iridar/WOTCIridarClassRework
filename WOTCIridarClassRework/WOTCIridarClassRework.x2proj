@@ -164,6 +164,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Serial_AimPenalty.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ShadowstrikeBuff.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_DeadeyeDamage.uc">
       <SubType>Content</SubType>
     </Content>
@@ -180,6 +183,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SP_CoveringFireIgnoreCover.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_UntouchableBuff.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">

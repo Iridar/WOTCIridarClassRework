@@ -4,9 +4,43 @@ static function array<X2DataTemplate> CreateTemplates()
 {
 	local array<X2DataTemplate> Templates;
 
-	Templates.AddItem(IRI_RN_ConcealDetectionRadiusReduction());
+	//Templates.AddItem(IRI_RN_ConcealDetectionRadiusReduction());
+	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
 
 	return Templates;
+}
+
+static function X2AbilityTemplate IRI_RN_Shadowstrike_OnBreakConcealment()
+{
+	local X2AbilityTemplate			Template;
+	local X2Effect_ToHitModifier	Effect;
+	
+	`CREATE_X2ABILITY_TEMPLATE(Template, 'IRI_RN_Shadowstrike_OnBreakConcealment');
+
+	Template.AbilitySourceName = 'eAbilitySource_Perk';
+	Template.IconImage = "img:///UILibrary_PerkIcons.UIPerk_shadowstrike";
+	SetHidden(Template);
+
+	// High priority so that we get our bonuses even if we get concealment broken in the middle of another action.
+	SetSelfTarget_WithEventTrigger(Template, 'UnitConcealmentBroken', ELD_OnStateSubmitted, eFilter_Unit, 100);
+
+	Effect = new class'X2Effect_ToHitModifier';
+	Effect.EffectName = 'IRI_RN_Shadowstrike_OnBreakConcealment';
+	Effect.DuplicateResponse = eDupe_Ignore;
+	Effect.BuildPersistentEffect(1, false,,, eGameRule_PlayerTurnEnd);
+	//Effect.bDisplayInSpecialDamageMessageUI = true; // Works only when modifying damage.
+	Effect.SetDisplayInfo(ePerkBuff_Bonus, Template.LocFriendlyName, Template.GetMyLongDescription(), Template.IconImage,,,Template.AbilitySourceName);
+	Effect.AddEffectHitModifier(eHit_Success, class'X2Ability_RangerAbilitySet'.default.SHADOWSTRIKE_AIM, Template.LocFriendlyName);
+	Effect.AddEffectHitModifier(eHit_Crit, class'X2Ability_RangerAbilitySet'.default.SHADOWSTRIKE_CRIT, Template.LocFriendlyName);
+	Template.AddTargetEffect(Effect);
+
+	Template.bShowActivation = false;
+	Template.bSkipFireAction = true;
+	Template.Hostility = eHostility_Neutral;
+	Template.BuildNewGameStateFn = TypicalAbility_BuildGameState;
+	Template.BuildVisualizationFn = TypicalAbility_BuildVisualization;
+
+	return Template;
 }
 
 static function X2AbilityTemplate IRI_RN_ConcealDetectionRadiusReduction()
@@ -23,8 +57,8 @@ static function X2AbilityTemplate IRI_RN_ConcealDetectionRadiusReduction()
 	SetHidden(Template);
 
 	Effect = new class'X2Effect_PersistentStatChange';
-	Effect.AddPersistentStatChange(eStat_DetectionModifier, `GetConfigFloat("IRI_Conceal_DetectionRadiusModifier"), MODOP_PostMultiplication);
-	Effect.SetDisplayInfo(ePerkBuff_Passive, Template.LocFriendlyName, Template.GetMyLongDescription(), Template.IconImage, true, , Template.AbilitySourceName);
+	Effect.AddPersistentStatChange(eStat_DetectionModifier, `GetConfigFloat("IRI_Conceal_DetectionRadiusModifier")); // MODOP_PostMultiplication doesn't work.
+	Effect.SetDisplayInfo(ePerkBuff_Passive, Template.LocFriendlyName, Template.GetMyLongDescription(), Template.IconImage, false, , Template.AbilitySourceName);
 	Effect.BuildPersistentEffect(1, true);
 	Template.AddTargetEffect(Effect);
 

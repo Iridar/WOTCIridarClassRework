@@ -91,10 +91,50 @@ LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail 
 LocLongDescription="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 LocHelpText="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 
-[IRI_RN_ConcealDetectionRadiusReduction X2AbilityTemplate]
-LocFriendlyName="Conceal"
-LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
-LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+; [IRI_RN_ConcealDetectionRadiusReduction X2AbilityTemplate]
+; LocFriendlyName="Conceal"
+; LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+; LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+
+[Shadowstrike X2AbilityTemplate]
+; LocFriendlyName="Shadowstrike"
+LocLongDescription="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance when attacking enemies while concealed and on the turn the concealment is broken."
+LocHelpText="Gain bonus aim and bonus criticial hit chance when attacking enemies while concealed and on the turn the concealment is broken."
+; LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger re-enters concealment in a mission.<br/>"
+
+[IRI_RN_Shadowstrike_OnBreakConcealment X2AbilityTemplate]
+LocFriendlyName="Shadowstrike"
+LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
+LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
+
+[Stealth X2AbilityTemplate]
+; LocFriendlyName="Conceal"
+; LocLongDescription="Immediately enter concealment once per mission."
+; LocHelpText="Immediately enter concealment once per mission."
+; LocFlyOverText="Conceal"
+LocPromotionPopupText="<Bullet/> Concealment can be entered at any location, but when done inside the detection radii of nearby enemies the Ranger will be revealed when flanked.<br/><Bullet/> Can't be used while flanked."
+
+[Implacable X2AbilityTemplate]
+; LocFriendlyName="Implacable"
+; LocLongDescription="If you score one or more kills on your turn, you are granted a single bonus move."
+; LocHelpText="Gain up to one move per turn after making a kill."
+; LocFlyOverText="Implacable"
+; LocPromotionPopupText="<Bullet/> The <Ability:ClassName/>'s attacks cannot be used after gaining a bonus move from Implacable.<br/>"
+LocPromotionPopupText=""
+
+[Untouchable X2AbilityTemplate]
+; LocFriendlyName="Untouchable"
+LocLongDescription="If you score a kill, the next attack against you during the enemy turn will miss."
+LocHelpText="If you score a kill, the next attack against you during the enemy turn will miss."
+; LocFlyOverText="Untouchable"
+; LocPromotionPopupText="<Bullet/> When Untouchable is triggered, the <Ability:ClassName/> is immune to the next damage dealing attack during the enemy turn, even Area of Effect attacks.<br/>"
+
+[RapidFire X2AbilityTemplate]
+; LocFriendlyName="Rapid Fire"
+; LocLongDescription="Fire twice in a row at an enemy. Each shot suffers an Aim penalty of <Ability:RAPIDFIREPENALTY/>."
+; LocHelpText="Fire twice in a row at an enemy. Each shot suffers an Aim penalty of <Ability:RAPIDFIREPENALTY/>."
+; LocFlyOverText="Rapid Fire"
+LocPromotionPopupText="<Bullet/> Rapid Fire is a devastating ability for dealing ranged damage.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 ; ================================================
 ;				SHARPSHOOTER
