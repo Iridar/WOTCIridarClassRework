@@ -2,26 +2,27 @@ class Ranger extends Common;
 
 static final function PatchAbilities()
 {
-	PatchSwordSlice();
+	//PatchSwordSlice();
 	PatchPhantom();
 	PatchRapidFire();
 	PatchGuardianForIntercept();
 }
 
-static private function PatchSwordSlice()
-{
-	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
-
-	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SwordSlice');
-	if (AbilityTemplate == none)	
-		return;
-
-	RemoveActionAndChargeCost(AbilityTemplate);
-
-	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
-}
+// Necessary only in a scenario where Slash doesn't end turn.
+//static private function PatchSwordSlice()
+//{
+//	local X2AbilityTemplateManager			AbilityMgr;
+//	local X2AbilityTemplate					AbilityTemplate;
+//
+//	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+//	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SwordSlice');
+//	if (AbilityTemplate == none)	
+//		return;
+//
+//	RemoveActionAndChargeCost(AbilityTemplate);
+//
+//	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
+//}
 
 static private function PatchGuardianForIntercept()
 {

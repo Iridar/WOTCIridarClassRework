@@ -163,6 +163,10 @@ static final protected function AddCooldown(out X2AbilityTemplate Template, int 
 		AbilityCooldown.iNumTurns = Cooldown;
 		Template.AbilityCooldown = AbilityCooldown;
 	}
+	else
+	{
+		Template.AbilityCooldown = none;
+	}
 }
 
 static final protected function AddFreeActionCost(out X2AbilityTemplate Template)
