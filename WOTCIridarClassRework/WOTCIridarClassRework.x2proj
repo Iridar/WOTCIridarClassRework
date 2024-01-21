@@ -143,9 +143,6 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_BlastPaddingExtended.uc">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_DeepCoverArmorBonus.uc">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
       <SubType>Content</SubType>
     </Content>

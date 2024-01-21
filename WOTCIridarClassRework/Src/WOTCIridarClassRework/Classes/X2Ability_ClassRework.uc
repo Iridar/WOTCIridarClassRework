@@ -6,38 +6,8 @@ static function array<X2DataTemplate> CreateTemplates()
 
 	//Templates.AddItem(IRI_RN_ConcealDetectionRadiusReduction());
 	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
-	//Templates.AddItem(IRI_RN_DeepCover_Wrapper());
 
 	return Templates;
-}
-
-static function X2AbilityTemplate IRI_RN_DeepCover_Wrapper()
-{
-	local X2AbilityTemplate						Template;
-	local X2AbilityCost_ActionPoints			ActionPointCost;
-	local X2Effect_ImmediateAbilityActivation	ActivateHunkerDown;
-	
-	Template = class'X2Ability_DefaultAbilitySet'.static.AddHunkerDownAbility('IRI_RN_DeepCover_Wrapper');
-
-	Template.bShowActivation = true;
-	Template.bSkipFireAction = true;
-	Template.BuildVisualizationFn = TypicalAbility_BuildVisualization;
-
-	Template.AbilityCosts.Length = 0;
-	ActionPointCost = new class'X2AbilityCost_ActionPoints';
-	ActionPointCost.iNumPoints = 1;
-	ActionPointCost.bConsumeAllPoints = true;
-	ActionPointCost.bFreeCost = true;
-	Template.AbilityCosts.AddItem(ActionPointCost);
-
-	Template.AbilityTargetEffects.Length = 0;
-	ActivateHunkerDown = new class'X2Effect_ImmediateAbilityActivation';
-	ActivateHunkerDown.AbilityName = 'HunkerDown';
-	Template.AddTargetEffect(ActivateHunkerDown);
-
-	Template.OverrideAbilities.AddItem('HunkerDown');
-
-	return Template;
 }
 
 static function X2AbilityTemplate IRI_RN_Shadowstrike_OnBreakConcealment()
