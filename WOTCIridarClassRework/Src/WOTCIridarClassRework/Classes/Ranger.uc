@@ -8,6 +8,7 @@ static final function PatchAbilities()
 	PatchGuardianForIntercept();
 	PatchShadowstrike();
 	PatchUntouchable();
+	PatchDeepCover();
 }
 
 // Necessary only in a scenario where Slash doesn't end turn.
@@ -25,6 +26,37 @@ static final function PatchAbilities()
 //
 //	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
 //}
+
+static private function PatchDeepCover()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2AbilityTemplate					HunkerDownAbility;
+	local X2AbilityTemplate					DeepCoverAbility;
+	local X2Effect_UntouchableBuff			UntouchableBuff;
+	local string							strEffectDesc;
+	local X2Effect_PersistentStatChange		PersistentStatChangeEffect;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	DeepCoverAbility = AbilityMgr.FindAbilityTemplate('DeepCover');
+	if (DeepCoverAbility == none)	
+		return;
+
+	DeepCoverAbility.AdditionalAbilities.AddItem('IRI_RN_DeepCover_ArmorBonus');
+	
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IRI_RN_DeepCover_ArmorBonus');
+	if (AbilityTemplate == none)	
+		return;
+	
+	// Easer to add this effect in OPTC so I can use Hunker Down's original localization.
+	PersistentStatChangeEffect = new class'X2Effect_PersistentStatChange';
+	PersistentStatChangeEffect.EffectName = 'IRI_RN_DeepCover_ArmorBonus';
+	PersistentStatChangeEffect.BuildPersistentEffect(1,,,, eGameRule_PlayerTurnBegin);
+	PersistentStatChangeEffect.SetDisplayInfo(ePerkBuff_Bonus, DeepCoverAbility.LocFriendlyName, DeepCoverAbility.GetMyHelpText(), DeepCoverAbility.IconImage);
+	PersistentStatChangeEffect.AddPersistentStatChange(eStat_ArmorMitigation, `GetConfigInt("IRI_DeepCover_ArmorBonus"));
+	PersistentStatChangeEffect.DuplicateResponse = eDupe_Refresh;
+	AbilityTemplate.AddTargetEffect(PersistentStatChangeEffect);
+}
 
 
 static private function PatchUntouchable()

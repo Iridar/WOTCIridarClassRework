@@ -6,8 +6,126 @@ static function array<X2DataTemplate> CreateTemplates()
 
 	//Templates.AddItem(IRI_RN_ConcealDetectionRadiusReduction());
 	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
+	Templates.AddItem(IRI_RN_DeepCover_ArmorBonus());
 
 	return Templates;
+}
+
+static function X2AbilityTemplate IRI_RN_DeepCover_ArmorBonus()
+{
+	local X2AbilityTemplate					Template;
+	local X2AbilityTrigger_EventListener    Trigger;
+	
+	`CREATE_X2ABILITY_TEMPLATE(Template, 'IRI_RN_DeepCover_ArmorBonus');
+
+	Template.AbilitySourceName = 'eAbilitySource_Perk';
+	Template.IconImage = "img:///UILibrary_PerkIcons.UIPerk_one_for_all";
+	Template.AbilityTargetStyle = default.SelfTarget;
+	Template.AbilityToHitCalc = default.DeadEye;
+	SetHidden(Template);
+
+	Trigger = new class'X2AbilityTrigger_EventListener';
+	Trigger.ListenerData.Deferral = ELD_OnStateSubmitted;
+	Trigger.ListenerData.EventID = 'PlayerTurnEnded';
+	Trigger.ListenerData.Filter = eFilter_Player;
+	Trigger.ListenerData.Priority = 55; // Slightly higher priority to run before vanilla Deep Cover trigger.
+	Trigger.ListenerData.EventFn = DeepCover_ArmorBonus_TurnEndListener;
+	Template.AbilityTriggers.AddItem(Trigger);
+
+	Trigger = new class'X2AbilityTrigger_EventListener';
+	Trigger.ListenerData.Deferral = ELD_OnStateSubmitted;
+	Trigger.ListenerData.EventID = 'AbilityActivated';
+	Trigger.ListenerData.Filter = eFilter_Unit;
+	Trigger.ListenerData.EventFn = DeepCover_ArmorBonus_AbilityActivatedListener;
+	Template.AbilityTriggers.AddItem(Trigger);
+
+	Template.bShowActivation = false;
+	Template.bSkipFireAction = true;
+	Template.Hostility = eHostility_Neutral;
+	Template.BuildNewGameStateFn = TypicalAbility_BuildGameState;
+	Template.BuildVisualizationFn = TypicalAbility_BuildVisualization;
+
+	return Template;
+}
+
+static private function EventListenerReturn DeepCover_ArmorBonus_AbilityActivatedListener(Object EventData, Object EventSource, XComGameState GameState, Name EventID, Object CallbackData)
+{
+	local XComGameState_Unit			UnitState;
+	local UnitValue						UV;
+	local XComGameState_Ability			AbilityState;
+	local XComGameStateContext_Ability	AbilityContext;
+
+	`AMLOG("Running");
+
+	AbilityContext = XComGameStateContext_Ability(GameState.GetContext());
+	if (AbilityContext == none || AbilityContext.InputContext.AbilityTemplateName != 'HunkerDown')
+		return ELR_NoInterrupt;
+
+	if (AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt)
+		return ELR_NoInterrupt;
+
+	`AMLOG("For Hunker Down");
+
+	AbilityState = XComGameState_Ability(CallbackData);
+	if (AbilityState == none)
+		return ELR_NoInterrupt;
+
+	UnitState = XComGameState_Unit(EventSource);
+	if (UnitState == none)
+		return ELR_NoInterrupt;
+
+		`AMLOG("Initial checks done");
+
+	if (UnitState.GetUnitValue('IRI_RN_DeepCover_ArmorBonus', UV))
+		return ELR_NoInterrupt;
+
+	`AMLOG("No unit value, activating ability");
+	
+	AbilityState.AbilityTriggerAgainstSingleTarget(UnitState.GetReference(), false);
+
+	return ELR_NoInterrupt;
+}
+
+static private function EventListenerReturn DeepCover_ArmorBonus_TurnEndListener(Object EventData, Object EventSource, XComGameState GameState, Name EventID, Object CallbackData)
+{
+	local XComGameState_Unit	UnitState;
+	local UnitValue				AttacksThisTurn;
+	local StateObjectReference	HunkerDownRef;
+	local XComGameState_Ability	HunkerDownState;
+	local XComGameStateHistory	History;
+	local XComGameState			NewGameState;
+	local XComGameState_Ability	AbilityState;
+
+	`AMLOG("Running");
+
+	AbilityState = XComGameState_Ability(CallbackData);
+	if (AbilityState == none)
+		return ELR_NoInterrupt;
+
+	History = `XCOMHISTORY;
+	UnitState = XComGameState_Unit(History.GetGameStateForObjectID(AbilityState.OwnerStateObject.ObjectID));
+
+	if (UnitState == none || UnitState.IsHunkeredDown())
+		return ELR_NoInterrupt;
+
+	if (UnitState.GetUnitValue('AttacksThisTurn', AttacksThisTurn) && AttacksThisTurn.fValue != 0)
+		return ELR_NoInterrupt;
+
+	`AMLOG("Checks done");
+	
+	HunkerDownRef = UnitState.FindAbility('HunkerDown');
+	HunkerDownState = XComGameState_Ability(History.GetGameStateForObjectID(HunkerDownRef.ObjectID));
+	if (HunkerDownState != none && HunkerDownState.CanActivateAbility(UnitState,,true) == 'AA_Success')
+	{
+		`AMLOG("Marking unit with unit value");
+		// Deep Cover is about to activate. Mark the unit with a unit value to prevent them from gaining the Armor Bonus.
+		NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState(string(GetFuncName()));
+		UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
+		UnitState.SetUnitFloatValue('IRI_RN_DeepCover_ArmorBonus', 1.0f, eCleanup_BeginTurn);
+		`TACTICALRULES.SubmitGameState(NewGameState);
+	}
+
+	return ELR_NoInterrupt;
 }
 
 static function X2AbilityTemplate IRI_RN_Shadowstrike_OnBreakConcealment()
