@@ -178,3 +178,28 @@ static final protected function AddFreeActionCost(out X2AbilityTemplate Template
 	ActionPointCost.bFreeCost = true;
 	Template.AbilityCosts.AddItem(ActionPointCost);
 }
+
+static final protected function CopyLocalization(X2AbilityTemplateManager AbilityTemplateManager, name TemplateName, name DonorTemplateName)
+{
+	local X2AbilityTemplate Template;
+	local X2AbilityTemplate DonorTemplate;
+
+	Template = AbilityTemplateManager.FindAbilityTemplate(TemplateName);
+	DonorTemplate = AbilityTemplateManager.FindAbilityTemplate(DonorTemplateName);
+
+	if (Template != none && DonorTemplate != none)
+	{
+		Template.LocFriendlyName = DonorTemplate.LocFriendlyName;
+		Template.LocHelpText = DonorTemplate.LocHelpText;                   
+		Template.LocLongDescription = DonorTemplate.LocLongDescription;
+		Template.LocPromotionPopupText = DonorTemplate.LocPromotionPopupText;
+		Template.LocFlyOverText = DonorTemplate.LocFlyOverText;
+		Template.LocMissMessage = DonorTemplate.LocMissMessage;
+		Template.LocHitMessage = DonorTemplate.LocHitMessage;
+		Template.LocFriendlyNameWhenConcealed = DonorTemplate.LocFriendlyNameWhenConcealed;      
+		Template.LocLongDescriptionWhenConcealed = DonorTemplate.LocLongDescriptionWhenConcealed;   
+		Template.LocDefaultSoldierClass = DonorTemplate.LocDefaultSoldierClass;
+		Template.LocDefaultPrimaryWeapon = DonorTemplate.LocDefaultPrimaryWeapon;
+		Template.LocDefaultSecondaryWeapon = DonorTemplate.LocDefaultSecondaryWeapon;
+	}
+}
