@@ -3,6 +3,7 @@ class Templar extends Common;
 static final function PatchAbilities()
 {
 	//PatchVoidConduit();
+	// TODO: Patch Parry to be uninterruptble and not offensive
 }
 
 static private function PatchVoidConduit()

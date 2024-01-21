@@ -94,8 +94,12 @@ THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=700550966]Quickdraw Fix[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1267996790]Quickdraw Sensitivity[/url][/b]
 
-
+[WOTC] A Better Ghost
+https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
+Not incompatible, but pointless
 
 
 # General

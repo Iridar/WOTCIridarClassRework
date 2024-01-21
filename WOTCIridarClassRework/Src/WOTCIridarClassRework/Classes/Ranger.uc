@@ -3,8 +3,8 @@ class Ranger extends Common;
 static final function PatchAbilities()
 {
 	PatchSwordSlice();
-	PatchConceal();
-	PatchShadowstrike();
+	PatchPhantom();
+	PatchRapidFire();
 	PatchGuardianForIntercept();
 }
 
@@ -67,7 +67,7 @@ static private function PatchGuardianForIntercept()
 	}
 }
 
-static private function PatchConceal()
+static private function PatchPhantom()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
@@ -80,7 +80,7 @@ static private function PatchConceal()
 	AbilityTemplate.AdditionalAbilities.AddItem('IRI_RN_ConcealDetectionRadiusReduction');
 }
 
-static private function PatchShadowstrike()
+static private function PatchRapidFire()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
@@ -89,29 +89,9 @@ static private function PatchShadowstrike()
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Shadowstrike');
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('RapidFire');
 	if (AbilityTemplate == none)	
 		return;
 
-	foreach AbilityTemplate.AbilityTargetEffects(TargetEffect)
-	{
-		ToHitModifier = X2Effect_ToHitModifier(TargetEffect);
-		if (ToHitModifier == none)
-			continue;
-
-
-		for (i = ToHitModifier.ToHitConditions.Length - 1; i >= 0; i--)
-		{
-			if (X2Condition_Visibility(ToHitModifier.ToHitConditions[i]) != none)
-			{
-				ToHitModifier.ToHitConditions.Remove(i, 1);
-
-				ToHitModifier.ToHitConditions.AddItem(new class'X2Condition_SourceIsConcealed');
-				break;
-			}
-		}
-		//break;
-	}
-
-	AbilityTemplate.AdditionalAbilities.AddItem('IRI_RN_Shadowstrike_OnBreakConcealment');
+	AddCooldown(AbilityTemplate, `GetConfigFloat("IRI_RapidFire_Cooldown"));
 }

@@ -112,7 +112,7 @@ static final protected function RemoveActionAndChargeCost(out X2AbilityTemplate 
 {
 	local int i;
 
-	AbilityTemplate.AbilityCharges = none;
+	RemoveChargeCost(AbilityTemplate);
 
 	for (i = AbilityTemplate.AbilityCosts.Length - 1; i >= 0; i--)
 	{

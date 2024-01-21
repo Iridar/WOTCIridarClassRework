@@ -96,16 +96,6 @@ LocFriendlyName="Conceal"
 LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 
-[Shadowstrike X2AbilityTemplate]
-LocLongDescription="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
-LocHelpText="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance while concealed and on the turn your concealment is broken."
-LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger re-enters concealment in a mission.<br/>"
-
-[IRI_RN_Shadowstrike_OnBreakConcealment X2AbilityTemplate]
-LocFriendlyName="Shadowstrike"
-LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
-LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
-
 ; ================================================
 ;				SHARPSHOOTER
 ; ------------------------------------------------
