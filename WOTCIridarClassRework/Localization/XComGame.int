@@ -145,8 +145,8 @@ LocHelpText="If you did not attack this turn, hunker down automatically. Additio
 ;				SHARPSHOOTER
 ; ------------------------------------------------
 
-[Squadsight X2AbilityTemplate]
-LocPromotionPopupText="<Bullet/> Squadsight is best augmented by high ground, allowing <Ability:ClassName/>s relatively clear sight lines and an additional aim bonus to offset Squadsight's aim penalty.<br/><Bullet/> When using Squadsight, there is no limit on how far your targets can be, but an aim penalty accumulates with distance."
+[PistolStandardShot X2AbilityTemplate]
+LocPromotionPopupText=""
 
 
 [InTheZone X2AbilityTemplate]
