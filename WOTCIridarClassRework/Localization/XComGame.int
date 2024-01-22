@@ -146,14 +146,12 @@ LocHelpText="If you did not attack this turn, hunker down automatically. Additio
 ; ------------------------------------------------
 
 [PistolStandardShot X2AbilityTemplate]
+; This is just confusing.
+;LocPromotionPopupText="<Bullet/> The <Ability:SecondaryWeaponName/> allows <Ability:ClassName/> to attack or Overwatch when spending other action points.<br>"
 LocPromotionPopupText=""
 
-
 [InTheZone X2AbilityTemplate]
-LocLongDescription="A powerful chained shot ability. Each <Ability:WeaponName/> kill refunds action points, but further attacks have their damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."
-LocHelpText=A powerful chained shot ability. Each <Ability:WeaponName/> kill refunds action points, but further attacks have their damage reduced by <Ability:IRI_SH_Serial_DamagePenaltyPerShot/>."
-LocPromotionPopupText="<Bullet/> Serial is meant to chain enemy kills in a single action, as every kill is essentially free.<br/><Bullet/> Serial has a <Ability:SelfCooldown/> turn cooldown.<br/>"
-
+LocPromotionPopupText="<Bullet/> Serial is meant to chain enemy kills in a single action, as every kill is essentially free.<br/><Bullet/> Every successful kill reduces critical hit chance by <Ability:IRI_SH_Serial_CritChancePenaltyPerShot/> until the end of turn.<br/><Bullet/> Serial has a <Ability:SelfCooldown/> turn cooldown.<br/>"
 
 [DeathFromAbove X2AbilityTemplate]
 LocLongDescription="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."

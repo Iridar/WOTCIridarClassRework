@@ -83,12 +83,12 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = string(`GetConfigInt(InString));
 		return true;
 
-	case "IRI_SH_Serial_DamagePenaltyPerShot":
+	case "IRI_SH_Serial_CritChancePenaltyPerShot":
 		OutString = string(`GetConfigInt(InString));
 		return true;
 
-	case "IRI_SH_Serial_DamagePenalty":
-		OutString = string(int(GetUnitValue(class'X2Effect_Serial_AimPenalty'.default.EffectName, ParseObj, StrategyParseOb, GameState)) * `GetConfigInt("IRI_SH_Serial_DamagePenaltyPerShot"));
+	case "IRI_SH_Serial_CritChancePenalty":
+		OutString = string(int(GetUnitValue(class'X2Effect_Serial_AimPenalty'.default.EffectName, ParseObj, StrategyParseOb, GameState)) * `GetConfigInt("IRI_SH_Serial_CritChancePenaltyPerShot"));
 		return true;
 		
 		

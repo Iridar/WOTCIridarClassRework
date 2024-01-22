@@ -8,5 +8,5 @@ DeepCover_ArmorBonus_Description = "Armor increased by +<Ability:IRI_DeepCover_A
 
 [Sharpshooter]
 
-strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_DamagePenalty/>."
+strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_CritChancePenalty/>."
 SharpshooterAimBonusDesc = "This unit will receive a +<Ability:SHARPSHOOTERAIMBONUS/> Aim bonus on all attacks this turn."

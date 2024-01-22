@@ -1,7 +1,6 @@
 class X2Effect_Serial_AimPenalty extends X2Effect_Persistent;
 
-//var int AimPenaltyPerShot;
-var int DamagePenaltyPerShot;
+var int CritChancePenaltyPerShot;
 
 function RegisterForEvents(XComGameState_Effect EffectGameState)
 {
@@ -45,39 +44,22 @@ static private function EventListenerReturn OnSerialKiller(Object EventData, Obj
     return ELR_NoInterrupt;
 }
 
-function int GetAttackingDamageModifier(XComGameState_Effect EffectState, XComGameState_Unit Attacker, Damageable TargetDamageable, XComGameState_Ability AbilityState, const out EffectAppliedData AppliedData, const int CurrentDamage, optional XComGameState NewGameState) 
+function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit Attacker, XComGameState_Unit Target, XComGameState_Ability AbilityState, class<X2AbilityToHitCalc> ToHitType, bool bMelee, bool bFlanking, bool bIndirectFire, out array<ShotModifierInfo> ShotModifiers)
 {
-	local UnitValue UV;
-	local int Penalty;
+	local UnitValue			UV;
+	local ShotModifierInfo	ShotInfo;
 
 	if (AbilityState.SourceWeapon.ObjectID != EffectState.ApplyEffectParameters.ItemStateObjectRef.ObjectID)
-		return 0; 
+		return;
 
-	if (Attacker.GetUnitValue(default.EffectName, UV))
-	{
-		Penalty = DamagePenaltyPerShot * UV.fValue;
-		if (CurrentDamage + Penalty < 1)
-			Penalty = CurrentDamage - 1;
+	if (!Attacker.GetUnitValue(default.EffectName, UV))
+		return;
 
-		return Penalty;
-	}
-	return 0; 
+	ShotInfo.Value = CritChancePenaltyPerShot * UV.fValue;
+	ShotInfo.ModType = eHit_Crit;
+	ShotInfo.Reason = FriendlyName;
+	ShotModifiers.AddItem(ShotInfo);
 }
-
-
-//function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit Attacker, XComGameState_Unit Target, XComGameState_Ability AbilityState, class<X2AbilityToHitCalc> ToHitType, bool bMelee, bool bFlanking, bool bIndirectFire, out array<ShotModifierInfo> ShotModifiers)
-//{
-//	local UnitValue UV;
-//	local ShotModifierInfo ShotMod;
-//
-//	if (Attacker.GetUnitValue(default.EffectName, UV))
-//	{
-//		ShotMod.ModType = eHit_Success;
-//		ShotMod.Value = UV.fValue * AimPenaltyPerShot;
-//		ShotMod.Reason = FriendlyName;
-//		ShotModifiers.AddItem(ShotMod);
-//	}
-//}
 
 defaultproperties
 {

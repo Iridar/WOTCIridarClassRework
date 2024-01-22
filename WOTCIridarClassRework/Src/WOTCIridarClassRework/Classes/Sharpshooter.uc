@@ -214,7 +214,7 @@ static private function PatchSerial()
 
 	AimPenalty = new class'X2Effect_Serial_AimPenalty';
 	//AimPenalty.AimPenaltyPerShot = `GetConfigInt("IRI_SH_Serial_AimPenaltyPerShot");
-	AimPenalty.DamagePenaltyPerShot = `GetConfigInt("IRI_SH_Serial_DamagePenaltyPerShot");
+	AimPenalty.CritChancePenaltyPerShot = `GetConfigInt("IRI_SH_Serial_CritChancePenaltyPerShot");
 	AimPenalty.SetDisplayInfo(ePerkBuff_Penalty, AbilityTemplate.LocFriendlyName, default.strSerialAimPenaltyEffectDesc, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
 	AbilityTemplate.AddTargetEffect(AimPenalty);
 }

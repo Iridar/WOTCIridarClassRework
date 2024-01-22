@@ -150,6 +150,19 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Conceal - updated description to mention it can't be used while flanked.
 [*] Implacable - updated description to no longer say you can't attack after gaining the bonus Move.
 [*] Untouchable - updated description to no longer say you have to get a kill on your turn. Added a flyover and a buff chevron when the Untouchable bonus is gained. 
-[*] Rapid Fire - now has a 1 turn cooldown (down from 4). Cooldown is now mentioned in the extended description.
+[*] Rapid Fire - now has a 4 turn cooldown (down from 5). Cooldown is now mentioned in the extended description.
 [*] Deep Cover - now makes Hunker Down grant +2 Armor, if Hunker Down is used manually.
+[/list]
+
+[h1]SHARPSHOOTER[/h1]
+[list]
+[*] Ability tree rearranged.
+[*] Squadsight - removed hidden crit chance penalty.
+[*] Fire Pistol - removed extended description, as it was pointless and confusing.
+[*] Return Fire - now preemptive and ignores cover defense bonus.
+[*] Deadeye - aim penalty is now flat -20 Aim and damage boost now applies to the total attack's damage.
+[*] Death From Above - now triggers once per turn and works with pistols.
+[*] Aim - aim bonus now applies to all attacks made this turn.
+[*] Serial - added -20 Crit penalty after each kill (vanilla description mentions a crit chance penalty, but it's not implemented in vanilla)
+[*] Fan Fire - now ends turn.
 [/list]
