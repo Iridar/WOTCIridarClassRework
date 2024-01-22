@@ -5,8 +5,52 @@ static final function PatchAbilities()
 	PatchBlastPadding();
 	PatchSaturationFire();
 	PatchChainShot();
+	PatchDemolition();
 	//PatchSuppression();
 	PatchSuppressionShot();
+	//PatchRupture();
+}
+
+
+//static private function PatchRupture()
+//{
+//	local X2AbilityTemplateManager			AbilityMgr;
+//	local X2AbilityTemplate					AbilityTemplate;
+//	local X2AbilityToHitCalc_StandardAim	StandardAim;
+//
+//	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+//	AbilityTemplate = AbilityMgr.FindAbilityTemplate('BulletShred');
+//	if (AbilityTemplate == none)
+//		return;
+//
+//	AbilityTemplate.AddTargetEffect(new class'X2Effect_RuptureDamagePreview');
+//
+//	StandardAim = X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc);
+//	if (StandardAim == none)
+//		return;
+//	//StandardAim.bHitsAreCrits = true;
+//	StandardAim.BuiltInCritMod = 100;
+//}
+
+static private function PatchDemolition()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	//local X2AbilityToHitCalc_StandardAim	StandardAim;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Demolition');
+	if (AbilityTemplate == none)
+		return;
+
+	//AbilityTemplate.bLimitTargetIcons = false;
+	AbilityTemplate.DisplayTargetHitChance = false;
+	//StandardAim = new class'X2AbilityToHitCalc_StandardAim';
+	//StandardAim.bGuaranteedHit = true;
+	AbilityTemplate.AbilityToHitCalc = default.DeadEye;
+
+	AbilityTemplate.AddTargetEffect(class'X2Ability_GrenadierAbilitySet'.static.HoloTargetEffect());
+	AbilityTemplate.AssociatedPassives.AddItem('HoloTargeting');
 }
 
 //static private function PatchSuppression()

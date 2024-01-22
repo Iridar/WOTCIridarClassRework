@@ -188,6 +188,9 @@ LocLongDescription="When targeted by enemy fire, automatically fire back with yo
 [BlastPadding X2AbilityTemplate]
 LocLongDescription="Your gear includes layers of extra padding and blast plates, granting a bonus point of Armor and <Ability:BlastPadding/>% less damage from explosive damage."
 
+[HeavyOrdnance X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> All grenades are viable for Heavy Ordnance, even non-offensive ones like Smoke Grenades.<br/>"
+
 [ChainShot X2AbilityTemplate]
 LocLongDescription="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
 LocHelpText="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
@@ -196,6 +199,9 @@ LocHelpText="Fire your <Ability:WeaponName/> at the selected target. If the shot
 LocLongDescription="Fire a barrage that pins down your target, removing Overwatch, imposing a <Ability:SUPPRESSIONPENALTY/> Aim penalty, and granting a preemptive reaction shot that ignores cover if the target attempts to move or attack."
 LocHelpText="Penalize target's aim and shoot them if they move or attack."
 
+;[BulletShred X2AbilityTemplate]
+;LocLongDescription="A Rupture shot deals critical damage, increased by +<Ability:RuptureAmount/>. Target takes additional +<Ability:RuptureAmount/> damage from all attacks in the future."
+;LocHelpText="A Rupture shot deals critical damage, increased by +<Ability:RuptureAmount/>. Target takes additional +<Ability:RuptureAmount/> damage from all attacks in the future."
 
 ; ================================================
 ;				SPECIALIST

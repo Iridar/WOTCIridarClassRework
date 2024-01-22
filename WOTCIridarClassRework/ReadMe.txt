@@ -86,16 +86,24 @@ I did copy a few icons from Shiremct's Proficiency mods, with permission.
 
 THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.
 
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=700550966]Quickdraw Fix[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1267996790]Quickdraw Sensitivity[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1525019760][WotC]Better Demolishing![/url][/b]
+
+
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=700550966]Quickdraw Fix[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1267996790]Quickdraw Sensitivity[/url][/b]
+
+
+
+
+
 
 [WOTC] A Better Ghost
 https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
@@ -165,4 +173,14 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Aim - aim bonus now applies to all attacks made this turn.
 [*] Serial - added -20 Crit penalty after each kill (vanilla description mentions a crit chance penalty, but it's not implemented in vanilla)
 [*] Fan Fire - now ends turn.
+[/list]
+
+[h1]GRENADIER[/h1]
+[list]
+[*] Blast Padding - now applies to environmental damage.
+[*] Demolition - now a guaranteed hit and applies Holo Targeting.
+[*] Suppression - now preemptively triggers on attacks, ignores cover defense bonus.
+[*] Heavy Ordnance - corrected description to no longer mention Battle Scanners.
+[*] Chain Shot - aim penalty moved from the first shot to the second one.
+[*] Saturation Fire - now applies ammo effects and is more reliable at destroying cover.
 [/list]
