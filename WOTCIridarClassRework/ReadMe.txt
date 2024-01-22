@@ -150,5 +150,6 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Conceal - updated description to mention it can't be used while flanked.
 [*] Implacable - updated description to no longer say you can't attack after gaining the bonus Move.
 [*] Untouchable - updated description to no longer say you have to get a kill on your turn. Added a flyover and a buff chevron when the Untouchable bonus is gained. 
-[*] Rapid Fire - now has a 1 turn cooldown (down from 5). Cooldown is now mentioned in the extended description.
+[*] Rapid Fire - now has a 1 turn cooldown (down from 4). Cooldown is now mentioned in the extended description.
+[*] Deep Cover - now makes Hunker Down grant +2 Armor, if Hunker Down is used manually.
 [/list]

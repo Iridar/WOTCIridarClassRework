@@ -30,34 +30,53 @@ static final function PatchAbilities()
 static private function PatchDeepCover()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
 	local X2AbilityTemplate					HunkerDownAbility;
 	local X2AbilityTemplate					DeepCoverAbility;
-	local X2Effect_UntouchableBuff			UntouchableBuff;
-	local string							strEffectDesc;
 	local X2Effect_PersistentStatChange		PersistentStatChangeEffect;
+	local X2Condition_UnitValue				UnitValueCondition;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	DeepCoverAbility = AbilityMgr.FindAbilityTemplate('DeepCover');
 	if (DeepCoverAbility == none)	
 		return;
 
-	DeepCoverAbility.AdditionalAbilities.AddItem('IRI_RN_DeepCover_ArmorBonus');
-	
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IRI_RN_DeepCover_ArmorBonus');
-	if (AbilityTemplate == none)	
+	DeepCoverAbility.AddTargetEffect(new class'X2Effect_DeepCover_Tracker');
+
+	HunkerDownAbility = AbilityMgr.FindAbilityTemplate('HunkerDown');
+	if (HunkerDownAbility == none)	
 		return;
+
+	UnitValueCondition = new class'X2Condition_UnitValue';
+	UnitValueCondition.AddCheckValue('IRI_RN_DeepCover_ArmorBonus_Value', 0, eCheck_Exact);
 	
-	// Easer to add this effect in OPTC so I can use Hunker Down's original localization.
 	PersistentStatChangeEffect = new class'X2Effect_PersistentStatChange';
 	PersistentStatChangeEffect.EffectName = 'IRI_RN_DeepCover_ArmorBonus';
 	PersistentStatChangeEffect.BuildPersistentEffect(1,,,, eGameRule_PlayerTurnBegin);
-	PersistentStatChangeEffect.SetDisplayInfo(ePerkBuff_Bonus, DeepCoverAbility.LocFriendlyName, DeepCoverAbility.GetMyHelpText(), DeepCoverAbility.IconImage);
+	PersistentStatChangeEffect.SetDisplayInfo(ePerkBuff_Bonus, DeepCoverAbility.LocFriendlyName, `GetLocalizedString("DeepCover_ArmorBonus_Description"), DeepCoverAbility.IconImage);
 	PersistentStatChangeEffect.AddPersistentStatChange(eStat_ArmorMitigation, `GetConfigInt("IRI_DeepCover_ArmorBonus"));
 	PersistentStatChangeEffect.DuplicateResponse = eDupe_Refresh;
-	AbilityTemplate.AddTargetEffect(PersistentStatChangeEffect);
+	PersistentStatChangeEffect.TargetConditions.AddItem(UnitValueCondition);
+	PersistentStatChangeEffect.VisualizationFn = DeepCover_ArmorBonus_Visualization;
+	HunkerDownAbility.AddTargetEffect(PersistentStatChangeEffect);
 }
 
+static private function DeepCover_ArmorBonus_Visualization(XComGameState VisualizeGameState, out VisualizationActionMetadata ActionMetadata, const name EffectApplyResult)
+{
+	local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2AbilityTemplate				AbilityTemplate;
+
+	if (EffectApplyResult != 'AA_Success')
+		return;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('DeepCover');
+	if (AbilityTemplate == none)	
+		return;
+
+	SoundAndFlyOver = X2Action_PlaySoundAndFlyOver(class'X2Action_PlaySoundAndFlyOver'.static.AddToVisualizationTree(ActionMetadata, VisualizeGameState.GetContext(), false, ActionMetadata.LastActionAdded));
+	SoundAndFlyOver.SetSoundAndFlyOverParameters(None, AbilityTemplate.LocFriendlyName, '', eColor_Good, AbilityTemplate.IconImage, `DEFAULTFLYOVERLOOKATTIME, true);
+}
 
 static private function PatchUntouchable()
 {

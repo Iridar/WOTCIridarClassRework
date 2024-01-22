@@ -137,7 +137,7 @@ LocHelpText="If you score a kill, the next attack against you during the enemy t
 LocPromotionPopupText="<Bullet/> Rapid Fire is a devastating ability for dealing ranged damage.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [DeepCover X2AbilityTemplate]
-LocFriendlyName="Deep Cover"
+; LocFriendlyName="Deep Cover"
 LocLongDescription="If you did not attack this turn, hunker down automatically. Additionally, Hunker Down now provides +<Ability:IRI_DeepCover_ArmorBonus/> Armor, if activated manually."
 LocHelpText="If you did not attack this turn, hunker down automatically. Additionally, Hunker Down now provides +<Ability:IRI_DeepCover_ArmorBonus/> Armor, if activated manually."
 

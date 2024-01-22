@@ -4,6 +4,8 @@ ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Abil
 
 Untouchable_Buff_Description = "The next attack against you during the enemy turn will miss."
 
+DeepCover_ArmorBonus_Description = "Armor increased by +<Ability:IRI_DeepCover_ArmorBonus/>."
+
 [Sharpshooter]
 
 strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_DamagePenalty/>."
