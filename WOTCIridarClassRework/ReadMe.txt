@@ -83,9 +83,11 @@ New XCOM abilities added to the random deck.
 
 [h1]INCOMPATIBLE AND REDUNDANT MODS[/h1]
 
-Some changes are inspired by following mods. Not a single line of code or asset was borrowed or copied.
+Some changes are inspired by following mods. 
 
 I did copy a few icons from Shiremct's Proficiency mods, with permission.
+
+Other than that, not a single line of code or asset was borrowed or copied.
 
 [b]THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.[/b]
 
@@ -95,6 +97,8 @@ I did copy a few icons from Shiremct's Proficiency mods, with permission.
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1525019760][WotC]Better Demolishing![/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2648230104]Sacrifice Targeting Fix[/url][/b]
+
 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]

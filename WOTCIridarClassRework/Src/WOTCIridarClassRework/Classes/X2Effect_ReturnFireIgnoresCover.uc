@@ -58,5 +58,5 @@ defaultproperties
 	iNumTurns = 1
 	bInfiniteDuration = true
 	DuplicateResponse = eDupe_Ignore
-	EffectName = "X2Effect_ReturnFireIgnoresCover_Effect"
+	EffectName = "IRI_SH_X2Effect_ReturnFireIgnoresCover_Effect"
 }
