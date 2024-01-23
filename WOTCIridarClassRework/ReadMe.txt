@@ -27,6 +27,10 @@ TODO
 - Check which abilities don't build interrupt game state but should
 - Forbid using Rupture while disoriented
 
+; [XComGame.X2SoldierClassTemplateManager]
+; +ExtraCrossClassAbilities = (AbilityName="EverVigilant")
+; +ExtraCrossClassAbilities = (AbilityName="IRI_AWC_MedicinePouch")
+
 Integrate relevant stuff from Weapon Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501 
 and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719
 
@@ -35,6 +39,7 @@ and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails
 [list]
 [*] [url=https://steamcommunity.com/workshop/filedetails/?id=1134256495][b]X2WOTCCommunityHighlander[/b][/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2363075446][b][WOTC] Iridar's Template Master - Core[/b][/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2166295671][b][WOTC] Core Collection Meta Mod[/b][/url] - fixes SPARK Bulwark and other bugs.
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501][b][WotC] Weapon Fixes[/b][/url] - required to make Skirmisher Return fire properly interact with Stock upgrade, Holo Targeting and Shredder.
 
 [/list]
@@ -83,11 +88,9 @@ New XCOM abilities added to the random deck.
 
 [h1]INCOMPATIBLE AND REDUNDANT MODS[/h1]
 
-Some changes are inspired by following mods. 
-
 I did copy a few icons from Shiremct's Proficiency mods, with permission.
 
-Other than that, not a single line of code or asset was borrowed or copied.
+Some changes are inspired by following mods, but unless specified, not a single line of code or asset was copied.
 
 [b]THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.[/b]
 
@@ -97,8 +100,9 @@ Other than that, not a single line of code or asset was borrowed or copied.
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1525019760][WotC]Better Demolishing![/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2648230104]Sacrifice Targeting Fix[/url][/b]
-
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2648230104]Sacrifice Targeting Fix[/url][/b] - integrated with permission.
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1440747908][WOTC] SPARK Repair Fix/url][/b] - integrated with permission.
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338][WOTC] Electrical Damage Consistency[/url][/b]
 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]
@@ -106,8 +110,8 @@ Other than that, not a single line of code or asset was borrowed or copied.
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
 
-[WOTC] Electrical Damage Consistency
-https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338
+
+
 
 [WOTC] A Better Ghost
 https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
@@ -200,4 +204,13 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Ever Vigilant - using Reliable Ever Vigilant is recommended.
 [*] Restoration - bugfixes.
 [*] Capacitor Discharge - damage now ignores armor.
+[/list]
+
+
+[h1]SPARK[/h1]
+[list]
+[*] Bulwark - updated description to mention enemies receive cover too.
+[*] Repair - amount repaired now scales with BIT tier. Cures acid and other stuff normally healed by Medikit, though SPARK is immune to it anyway.
+[*] Bombard - now shreds 1/2/3 armor.
+[*] Sacrifice - integrated Sacrifice Targeting Fix.
 [/list]

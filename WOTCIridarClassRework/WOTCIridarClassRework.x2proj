@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\SPARK" />
     <Folder Include="Config\Templar" />
     <Folder Include="Config\Specialist" />
     <Folder Include="Config\Sharpshooter" />
@@ -26,9 +27,6 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\Grenadier\XComClassData.ini">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -65,7 +63,10 @@
     <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\Specialist\XComClassData.ini">
+    <Content Include="Config\SPARK\XComGameData_WeaponData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\SPARK\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Specialist\XComClassRework.ini">
@@ -105,6 +106,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Skirmisher.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Spark.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Specialist.uc">
@@ -192,6 +196,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2TargetingMethod_SacrificeSnapToTile.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2TargetingMethod_TopDown_NoCameraLock.uc">

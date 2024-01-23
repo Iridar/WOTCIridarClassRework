@@ -227,8 +227,25 @@ LocHelpText="Overwatch shots are triggered by any enemy action, and ignore the t
 [ScanningProtocol X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Scanning Protocol has one charge per mission, but upgrading your GREMLIN will lead to more Scanning Protocol charges.<br/><Bullet/> In addition to hidden and disguised enemies, enemies blocked from line of sight by walls or obstructions will also be revealed by Scanning Protocol.<br/>"
 
+[IntrusionProtocol X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Remotely hack ADVENT targets, including mission objectives, with your <Ability:SECONDARYWEAPONNAME/> drone. <br/><Bullet/> Upgrade your <Ability:SECONDARYWEAPONNAME/> drone to increase this soldier's hacking stat.<br/>"
+
+
+; ================================================
+;				SPARK
+; ------------------------------------------------
+
+[SparkRifle_MG X2WeaponTemplate]
+AbilityDescName="heavy autocannon"
+
+[SparkRifle_BM X2WeaponTemplate]
+AbilityDescName="heavy autocannon"
+
+[Bulwark X2AbilityTemplate]
+LocLongDescription="Gain a bonus point of Armor, and always provide high cover to all adjacent units, friend or foe."
+LocHelpText="Gain a bonus point of Armor, and always provide high cover to all adjacent units, friend or foe."
+LocPromotionPopupText="<Bullet/> Bulwark adds one point of Armor.<br/><Bullet/> Any unit, friend or foe, standing adjacent to the SPARK will gain the high cover Defense bonus. Be careful about moving the SPARK to near enemies, as they may take advantage of the cover provided by the SPARK, even against the SPARK itself.<br/>"
+
 ; ================================================
 ;				TEMPLAR
 ; ------------------------------------------------
-
-; TODO: Templar tutorials
