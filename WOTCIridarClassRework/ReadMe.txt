@@ -9,35 +9,38 @@ Created with Enhanced Mod Project Template v1.0
 Get news and updates here: 
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
-[WOTC] Electrical Damage Consistency
-https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338
+[WOTC] Iridar's Soldier Class Overhaul
+
+This mod overhauls the four base game classes, three WOTC classes, and SPARKs by fixing bugs, doing small balancing tweaks and in some cases reordering abilities in the ability tree.
+
+This mod is intended as the go-to mod to fix all the various issues with vanilla classes, without the need to collect dozens of mods that individually fix small issues. It integrates fixes from a lot of existing mods, making them incompatible or redundant.
 
 
 TODO
 
 - Ensure Covering Fire is cross class
-- Ensure Random Deck always has 2 empty spots
-- Translate ClassRework/XComGame.int and Perk Pack to Russian
-- Make some abilities from the perk pack cross class
-- Check that all weapon abilities work with weapon upgrades
+- Translate ClassRework/XComGame.int to Russian
+- Check that all weapon abilities work with weapon upgrades/ammo/shredder
 - Recheck that return fire ignores cover
-Integrate relevant stuff from Weapon Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501 and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719
-Patch Saturation Fire and other abilities to build interrupt game state
+- Faction heroes
+- SPARK
+- Check which abilities don't build interrupt game state but should
+- Forbid using Rupture while disoriented
 
-Blast Padding - integrate More Effective Blast Padding https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477
-
-Rupture - correct description to make it clear bonus damage is applied to Rupture itself too. And forbid using it while disoriented.
-
-Fix Collateral Damage, update localization for changed abilities.
+Integrate relevant stuff from Weapon Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501 
+and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719
 
 
 [h1]REQUIREMENTS[/h1]
+[list]
+[*] [url=https://steamcommunity.com/workshop/filedetails/?id=1134256495][b]X2WOTCCommunityHighlander[/b][/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2363075446][b][WOTC] Iridar's Template Master - Core[/b][/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501][b][WotC] Weapon Fixes[/b][/url] - required to make Skirmisher Return fire properly interact with Stock upgrade, Holo Targeting and Shredder.
 
-Template Master - required
+[/list]
 
-[WotC] Weapon Fixes
-https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501
-Required to make Skirmisher Return fire properly interact with Stock upgrade, Holo Targeting and Shredder.
+
+
 
 [h1]SKIRMISHER[/h1]
 
@@ -84,26 +87,23 @@ Some changes are inspired by following mods. Not a single line of code or asset 
 
 I did copy a few icons from Shiremct's Proficiency mods, with permission.
 
-THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.
+[b]THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.[/b]
 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=700550966]Quickdraw Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1267996790]Quickdraw Sensitivity[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1525019760][WotC]Better Demolishing![/url][/b]
-
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1862336674](WOTC) Revival Protocol Charges Fix[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1123037187][WotC] Revival Protocol Fixes[/url][/b]
 
-
-
-
-
+[WOTC] Electrical Damage Consistency
+https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338
 
 [WOTC] A Better Ghost
 https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
