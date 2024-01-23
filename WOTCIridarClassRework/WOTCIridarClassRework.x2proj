@@ -194,6 +194,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2TargetingMethod_TopDown_NoCameraLock.uc">
+      <SubType>Content</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <SolutionRoot>$(MSBuildProjectDirectory)\..\</SolutionRoot>

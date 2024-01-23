@@ -184,3 +184,16 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Chain Shot - aim penalty moved from the first shot to the second one.
 [*] Saturation Fire - now applies ammo effects and is more reliable at destroying cover.
 [/list]
+
+[h1]SPECIALIST[/h1]
+[list]
+[*] Combat Protocol - no longer ends turn.
+[*] Revival Protocol - bugfixes, charges changed to 1/2/3.
+[*] Haywire Protocol - no longer ends turn.
+[*] Scanning Protocol - unlocked camera while targeting. Charges changed to 1/2/3.
+[*] Covering Fire - now ignores cover defense bonus.
+[*] Threat Assessment - now ignores cover defense bonus.
+[*] Ever Vigilant - using Reliable Ever Vigilant is recommended.
+[*] Restoration - bugfixes.
+[*] Capacitor Discharge - damage now ignores armor.
+[/list]

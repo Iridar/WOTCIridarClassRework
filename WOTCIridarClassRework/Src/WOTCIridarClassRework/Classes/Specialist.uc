@@ -4,19 +4,56 @@ var private name GremlinActionPoint;
 
 static final function PatchAbilities()
 {
-	PatchAidProtocol();
-	PatchGremlinHeal();
-	PatchGremlinStabilize();
 	PatchCombatProtocol();
 	PatchRevivalProtocol();
 	PatchHaywireProtocol();
+	PatchScanningProtocol();
+
+	PatchCoveringFire();
+	PatchAidProtocol();
+	//PatchThreatAssessment(); // Done in PatchAidProtocol()
+	//PatchGremlinHeal();
+	//PatchGremlinStabilize();
+	//PatchGremlins();
+
 	PatchCapacitorDischarge();
 	PatchRevival();
-	PatchGremlins();
-	PatchCoveringFire();
-	//PatchThreatAssessment(); // Done in PatchAidProtocol()
 }
 
+
+static private function PatchScanningProtocol()
+{
+	local X2AbilityTemplateManager				AbilityMgr;
+	local X2AbilityTemplate						AbilityTemplate;
+	//local X2AbilityTarget_Cursor				CursorTarget;
+	//local X2Effect								Effect;
+	//local X2Effect_PersistentSquadViewer		SquadViewer;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ScanningProtocol');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.TargetingMethod = class'X2TargetingMethod_TopDown_NoCameraLock';
+	// AbilityTemplate.TargetingMethod = class'X2TargetingMethod_GremlinAOE';
+	// 
+	// CursorTarget = new class'X2AbilityTarget_Cursor';
+	// CursorTarget.FixedAbilityRange = 24; //`TILESTOMETERS(`GetConfigInt("IRI_SP_ScanningProtocol_DistanceTiles"));
+	// AbilityTemplate.AbilityTargetStyle = CursorTarget;
+	// 
+	// foreach AbilityTemplate.AbilityShooterEffects(Effect)
+	// {
+	// 	SquadViewer = X2Effect_PersistentSquadViewer(Effect);
+	// 	if (SquadViewer == none)
+	// 		continue;
+	// 
+	// 	SquadViewer.bUseSourceLocation = false;
+	// }
+	// 
+	// AbilityTemplate.CustomSelfFireAnim = 'NO_ScanningProtocol';
+	// AbilityTemplate.BuildNewGameStateFn = class'X2Ability_SpecialistAbilitySet'.static.SendGremlinToLocation_BuildGameState;
+	// AbilityTemplate.BuildVisualizationFn = class'X2Ability_SpecialistAbilitySet'.static.CapacitorDischarge_BuildVisualization;
+}
 
 static private function PatchCoveringFire()
 {
@@ -86,27 +123,27 @@ static private function PatchHaywireProtocol()
 	if (AbilityTemplate == none)	
 		return;
 
-	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 	
 	MakeNotEndTurn(AbilityTemplate);
 
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('HaywireProtocol');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
-
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Chest');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
-	
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Workstation');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
-
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_ObjectiveChest');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
-
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Scan');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
-
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('FinalizeIntrusion');
-	if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('HaywireProtocol');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Chest');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Workstation');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_ObjectiveChest');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('IntrusionProtocol_Scan');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//
+	//AbilityTemplate = AbilityMgr.FindAbilityTemplate('FinalizeIntrusion');
+	//if (AbilityTemplate != none) AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 }
 
 
@@ -213,7 +250,7 @@ static private function PatchCombatProtocol()
 	if (AbilityTemplate == none)	
 		return;
 
-	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 	MakeNotEndTurn(AbilityTemplate);
 }
 
@@ -229,7 +266,7 @@ static private function PatchAidProtocol()
 	if (AbilityTemplate == none)	
 		return;
 
-	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 
 	Effect = new class'X2Effect_SP_CoveringFireIgnoreCover';
 	Effect.AllowedAbilities = `GetConfigArrayName("IRI_SP_CoveringFire_AllowedAbilitiesIgnoreCover");
