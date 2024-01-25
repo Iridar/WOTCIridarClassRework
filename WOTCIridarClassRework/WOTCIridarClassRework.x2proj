@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\Reaper" />
     <Folder Include="Config\SPARK" />
     <Folder Include="Config\Templar" />
     <Folder Include="Config\Specialist" />
@@ -34,6 +35,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Ranger\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Reaper\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Reaper\XComGameData_SoldierSkills.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Sharpshooter\XComClassData.ini">
@@ -102,6 +109,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\Ranger.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\Reaper.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Sharpshooter.uc">
       <SubType>Content</SubType>
     </Content>
@@ -145,6 +155,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_BlastPaddingExtended.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Charges.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_DeepCover_Tracker.uc">

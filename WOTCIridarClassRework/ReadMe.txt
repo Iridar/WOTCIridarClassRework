@@ -214,3 +214,13 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Bombard - now shreds 1/2/3 armor.
 [*] Sacrifice - integrated Sacrifice Targeting Fix.
 [/list]
+
+RandomAbilityDecks=(DeckName="ReaperXComAbilities",          
+Abilities=(
+(AbilityName="Shredder",  ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
+(AbilityName="Squadsight"),               
+(AbilityName="KillZone", ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
+(AbilityName="TacticalRigging"),               
+(AbilityName="HoloTargeting",  ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
+(AbilityName="Deadeye", ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
+(),               (),               ()))

@@ -25,7 +25,7 @@ static private function PatchRepair()
 	{
 		RemoveEffects.DamageTypesToRemove.AddItem(HealType);
 	}
-	Template.AddTargetEffect(RemoveEffects);
+	AbilityTemplate.AddTargetEffect(RemoveEffects);
 }
 
 

@@ -230,6 +230,46 @@ LocPromotionPopupText="<Bullet/> Scanning Protocol has one charge per mission, b
 [IntrusionProtocol X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Remotely hack ADVENT targets, including mission objectives, with your <Ability:SECONDARYWEAPONNAME/> drone. <br/><Bullet/> Upgrade your <Ability:SECONDARYWEAPONNAME/> drone to increase this soldier's hacking stat.<br/>"
 
+; ================================================
+;				REAPER
+; ------------------------------------------------
+
+[Shadow X2AbilityTemplate]
+LocLongDescription="Grants the soldier Shadow, an advanced form of concealment where attacking only has a chance to reveal the soldier."
+LocPromotionPopupText="<Bullet/> Chance to be revealed from Shadow increases as the soldier performs more attacks.<br/><Bullet/> Soldier has increased mobility while in Shadow.<br/><Bullet/> Enemy detection radii are smaller to soldiers in Shadow.<br/>"
+
+[RemoteStart X2AbilityTemplate]
+LocLongDescription="Detonate an environmental explosive, causing it to deal double damage within twice its normal radius. Does not reveal the Reaper. Cannot target Claymores."
+LocHelpText="Detonate an environmental explosive, causing it to deal double damage within twice its normal radius. Does not reveal the Reaper. Cannot target Claymores."
+LocPromotionPopupText="<Bullet/> Remote Start can target environmental explosives like cars and fuel barrels, but not Claymores.<br/><Bullet/> Make sure squadmates are clear of the blast zone!<br/><Bullet/> Remote Start requires <Ability:SelfAmmoCost/> ammo point, and has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+[SilentKiller X2AbilityTemplate]
+LocLongDescription="Kills with the Vektor rifle do not increase the Reaper's chance to break out of Shadow."
+LocHelpText="Kills with the Vektor rifle do not increase the Reaper's chance to break out of Shadow."
+LocPromotionPopupText="<Bullet/> A Reaper that only deals killing blows can remain in Shadow indefinitely.<br/><Bullet/> If the Reaper fails to deliver a killing blow with an attack, then that and further attacks will still be subject to a chance to reveal the Reaper.<br/>"
+
+[Needle X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Only applies while the Reaper is in Shadow.<br/>"
+
+[Sting X2AbilityTemplate]
+LocLongDescription="Fire a shot while in Shadow. Always deals critical damage. Guaranteed to remain in Shadow."
+LocHelpText="Fire a shot while in Shadow. Always deals critical damage. Guaranteed to remain in Shadow."
+LocPromotionPopupText="<Bullet/> Sting allows for the Reaper to attack in situations where they absolutely do not want to be revealed.<br/><Bullet/> Sting has <Ability:IRI_RP_StingCharges/> charges per mission, requires <Ability:SelfAmmoCost/> ammo points, and has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+[SoulReaper X2AbilityTemplate]
+LocLongDescription="Fire at a target until you run out of ammo or it dies. Banish shots cannot crit. The final shot always reveals the Reaper."
+LocHelpText="Fire at a target until you run out of ammo or it dies. Banish shots cannot crit. The final shot always reveals the Reaper."
+LocPromotionPopupText="<Bullet/> Each shot in Banish rolls a separate chance to hit and cannot crit.<br/><Bullet/> Banish can only be activated once per mission.<br/><Bullet/> Upgrade your Vektor Rifle with an Expanded Magazine to increase the potency of Banish.<br/><Bullet/> Banish cannot be activated with only 1 ammo remaining.<br/>"
+
+[ImprovisedSilencer X2AbilityTemplate]
+LocLongDescription="Remove the chance of being revealed on the first shot after entering Shadow."
+LocHelpText="Remove the chance of being revealed on the first shot after entering Shadow."
+LocPromotionPopupText="<Bullet/> The chance of being revealed on the first shot of the mission is removed as well."
+
+[ShadowRising X2AbilityTemplate]
+LocLongDescription="Shadow gains an additional charge."
+LocHelpText="Shadow gains an additional charge."
+LocPromotionPopupText=""
 
 ; ================================================
 ;				SPARK
@@ -249,3 +289,4 @@ LocPromotionPopupText="<Bullet/> Bulwark adds one point of Armor.<br/><Bullet/> 
 ; ================================================
 ;				TEMPLAR
 ; ------------------------------------------------
+

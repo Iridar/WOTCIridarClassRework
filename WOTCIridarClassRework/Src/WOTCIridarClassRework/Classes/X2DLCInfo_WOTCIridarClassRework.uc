@@ -4,11 +4,14 @@ static event OnPostTemplatesCreated()
 {
 	// TODO: Add switches for all of these
 	class'Skirmisher'.static.PatchAbilities();
+	class'Templar'.static.PatchAbilities();
+
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
 	class'Grenadier'.static.PatchAbilities();
 	class'Specialist'.static.PatchAbilities();
-	class'Templar'.static.PatchAbilities();
+	class'SPARK'.static.PatchAbilities();
+	class'Reaper'.static.PatchAbilities();
 }
 
 // --------------------------
@@ -71,6 +74,14 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 
 	case "IRI_DeepCover_ArmorBonus":
 		OutString = string(`GetConfigInt(InString));
+		return true;
+
+	// ======================================================================================================================
+	//												REAPER TAGS
+	// ----------------------------------------------------------------------------------------------------------------------
+
+	case "IRI_RP_StingCharges":
+		OutString = string(class'X2Ability_ReaperAbilitySet'.default.StingCharges);
 		return true;
 		
 		
