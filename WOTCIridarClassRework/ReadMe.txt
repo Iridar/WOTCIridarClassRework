@@ -200,12 +200,22 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Haywire Protocol - no longer ends turn.
 [*] Scanning Protocol - unlocked camera while targeting. Charges changed to 1/2/3.
 [*] Covering Fire - now ignores cover defense bonus.
-[*] Threat Assessment - now ignores cover defense bonus.
+[*] Threat Assessment - now ignores cover defense bonus, but the Covering Fire effect is removed after taking one Overwatch shot.
 [*] Ever Vigilant - using Reliable Ever Vigilant is recommended.
 [*] Restoration - bugfixes.
 [*] Capacitor Discharge - damage now ignores armor.
 [/list]
 
+[h1]REAPER[/h1]
+[list]
+[*] Ability tree reordered.
+[*] Shadow, Remote Start, Silent Killer, Needle, Banish - corrected descriptions for clarity.
+[*] Soul Harvest - increased Crit Chance boost per kill from 5 to 10 and max Crit Chance boost from 20 to 40. This lets you reach 100% crit at full stacks against flanked enemies if you use either upgraded Superior Laser Sight or Talon Ammo.
+[*] Sting - now a guaranteed crit and resets its charge when entering Shadow. Cooldown removed (yes, it had a cooldown despite having only one charge).
+[*] New ability: Improvised Silencer - Remove the chance of being revealed on the first shot after entering Shadow.
+[*] New ability: Shadow Rising - Shadow gains an additional charge.
+[*] New Ability: Death Dealer - Critical shots against a flanked target while in Shadow will deal double critical damage.
+[/list]
 
 [h1]SPARK[/h1]
 [list]

@@ -252,9 +252,9 @@ LocPromotionPopupText="<Bullet/> A Reaper that only deals killing blows can rema
 LocPromotionPopupText="<Bullet/> Only applies while the Reaper is in Shadow.<br/>"
 
 [Sting X2AbilityTemplate]
-LocLongDescription="Fire a shot while in Shadow. Always deals critical damage. Guaranteed to remain in Shadow."
-LocHelpText="Fire a shot while in Shadow. Always deals critical damage. Guaranteed to remain in Shadow."
-LocPromotionPopupText="<Bullet/> Sting allows for the Reaper to attack in situations where they absolutely do not want to be revealed.<br/><Bullet/> Sting has <Ability:IRI_RP_StingCharges/> charges per mission, requires <Ability:SelfAmmoCost/> ammo points, and has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+LocLongDescription="Fire a silent precision shot from the Shadow that always deals critical damage and ensures the Reaper stays in the Shadow. Can be used <Ability:IRI_RP_StingCharges/> times after entering Shadow."
+LocHelpText="Fire a silent precision shot from the Shadow that always deals critical damage and ensures the Reaper stays in the Shadow. Can be used <Ability:IRI_RP_StingCharges/> times after entering Shadow."
+LocPromotionPopupText="<Bullet/> Sting allows the Reaper to attack in situations where they absolutely do not want to be revealed.<br/><Bullet/> Sting has <Ability:IRI_RP_StingCharges/> charge(s), refreshed whenever the Reaper enters Shadow."
 
 [SoulReaper X2AbilityTemplate]
 LocLongDescription="Fire at a target until you run out of ammo or it dies. Banish shots cannot crit. The final shot always reveals the Reaper."
