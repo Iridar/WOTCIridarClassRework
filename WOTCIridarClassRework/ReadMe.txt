@@ -200,7 +200,7 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] Haywire Protocol - no longer ends turn.
 [*] Scanning Protocol - unlocked camera while targeting. Charges changed to 1/2/3.
 [*] Covering Fire - now ignores cover defense bonus.
-[*] Threat Assessment - now ignores cover defense bonus, but the Covering Fire effect is removed after taking one Overwatch shot.
+[*] Threat Assessment - now properly works for Templars. Now also ignores cover defense bonus, but the Covering Fire effect is removed after taking one Overwatch shot.
 [*] Ever Vigilant - using Reliable Ever Vigilant is recommended.
 [*] Restoration - bugfixes.
 [*] Capacitor Discharge - damage now ignores armor.

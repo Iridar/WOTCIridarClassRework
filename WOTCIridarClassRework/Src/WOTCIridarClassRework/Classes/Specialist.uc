@@ -1,6 +1,7 @@
-class Specialist extends Common;
+class Specialist extends Common config(ClassRework);
 
 var private name GremlinActionPoint;
+var config array<name> ClassesUsePistolForThreatAssessment;
 
 static final function PatchAbilities()
 {
@@ -258,27 +259,73 @@ static private function PatchAidProtocol()
 {
 	local X2AbilityTemplateManager				AbilityMgr;
 	local X2AbilityTemplate						AbilityTemplate;
-	local X2Effect_SP_CoveringFireIgnoreCover	Effect;
+	local X2Effect_SP_CoveringFireIgnoreCover	IgnoreCoverEffect;
 	local X2Condition_AbilityProperty			AbilityCondition;
+	local X2Effect								Effect;
+	local X2Effect_ThreatAssessment				AssThreatEffect;
+	local X2Condition_UnitProperty				UnitCondition;
+	local X2Condition							Condition;
+	local name									ClassName;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('AidProtocol');
 	if (AbilityTemplate == none)	
 		return;
 
+	// #1. Make Threat Assessment put Templars on Pistol Overwatch.
+	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+	{
+		AssThreatEffect = X2Effect_ThreatAssessment(Effect);
+		if (AssThreatEffect == none)
+			continue;
+
+		if (AssThreatEffect.EffectName == 'ThreatAssessment_CF')
+		{
+			foreach AssThreatEffect.TargetConditions(Condition)
+			{
+				UnitCondition = X2Condition_UnitProperty(Condition);
+				if (UnitCondition == none)
+					continue;
+
+				foreach default.ClassesUsePistolForThreatAssessment(ClassName)
+				{
+					UnitCondition.ExcludeSoldierClasses.AddItem(ClassName);
+				}
+				break;
+			}
+		}
+
+		if (AssThreatEffect.EffectName == 'PistolThreatAssessment')
+		{
+			foreach AssThreatEffect.TargetConditions(Condition)
+			{
+				UnitCondition = X2Condition_UnitProperty(Condition);
+				if (UnitCondition == none)
+					continue;
+
+				foreach default.ClassesUsePistolForThreatAssessment(ClassName)
+				{
+					UnitCondition.RequireSoldierClasses.AddItem(ClassName);
+				}
+				break;
+			}
+		}
+	}
+
 	//AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 
-	Effect = new class'X2Effect_SP_CoveringFireIgnoreCover';
-	Effect.AllowedAbilities = `GetConfigArrayName("IRI_SP_CoveringFire_AllowedAbilitiesIgnoreCover");
-	Effect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false, , AbilityTemplate.AbilitySourceName);
-	Effect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
-	Effect.bForThreatAssessment = true;
+	// #2. Make it ignore cover.
+	IgnoreCoverEffect = new class'X2Effect_SP_CoveringFireIgnoreCover';
+	IgnoreCoverEffect.AllowedAbilities = `GetConfigArrayName("IRI_SP_CoveringFire_AllowedAbilitiesIgnoreCover");
+	IgnoreCoverEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false, , AbilityTemplate.AbilitySourceName);
+	IgnoreCoverEffect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
+	IgnoreCoverEffect.bForThreatAssessment = true;
 
 	AbilityCondition = new class'X2Condition_AbilityProperty';
 	AbilityCondition.OwnerHasSoldierAbilities.AddItem('ThreatAssessment');
-	Effect.TargetConditions.AddItem(AbilityCondition);
+	IgnoreCoverEffect.TargetConditions.AddItem(AbilityCondition);
 
-	AbilityTemplate.AddTargetEffect(Effect);
+	AbilityTemplate.AddTargetEffect(IgnoreCoverEffect);
 }
 
 static private function PatchGremlinHeal()
