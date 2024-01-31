@@ -2,8 +2,6 @@
 ;				SKIRMISHER
 ; ------------------------------------------------
 
-; TODO: Skirmisher tutorials
-
 [SkirmisherReflex X2AbilityTemplate]
 LocLongDescription="When attacked, gain one extra action on the next turn. Triggers once per turn."
 LocHelpText="When attacked, gain one extra action on the next turn. Triggers once per turn."
@@ -33,17 +31,17 @@ LocLongDescription="Gain a grenade-only inventory slot. Throwing a grenade or us
 LocHelpText="Gain a grenade-only inventory  slot. Throwing a grenade or using an item no longer ends the turn."
 
 [ZeroIn X2AbilityTemplate]
-LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn."
-LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINAIM/> hit chance and +<Ability:ZEROINCRIT/> critical chance until the end of turn."
+LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINCRIT/> critical chance until the end of the turn. Attacks against the same target also gain +<Ability:ZEROINAIM/> hit chance."
+LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINCRIT/> critical chance until the end of the turn. Attacks against the same target also gain +<Ability:ZEROINAIM/> hit chance."
 LocPromotionPopupText="<Bullet/> The Skirmisher's ability to accrue many actions per turn can result in massive bonuses from Zero In.<br/><Bullet/> Use Overwatch and other reaction attacks to gain an advantage on the following turn."
 
-[Retribution X2AbilityTemplate]
-LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
-LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+; [Retribution X2AbilityTemplate]
+; LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+; LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
 
-[RetributionAttack X2AbilityTemplate]
-LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
-LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+; [RetributionAttack X2AbilityTemplate]
+; LocLongDescription="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
+; LocHelpText="Free <Ability:SecondaryWeaponName/> attack on any enemy that enters or attacks from melee range. Triggers once per turn."
 
 [Reckoning X2AbilityTemplate]
 LocLongDescription="Unlocks the <Ability:SecondaryWeaponName/> slash attack. The Slash does not end turn, but performing a \"Dash\" attack will consume additional action points."
@@ -56,15 +54,21 @@ LocHelpText="Attack an enemy within movement range with your <Ability:SecondaryW
 LocPromotionPopupText="<Bullet/> You can trigger the Slash ability by placing the movement cursor over an enemy.<br/><Bullet/> A Skirmisher can perform a \"Dash\" move, using both actions to move, and still trigger a Slash attack against an adjacent enemy."
 
 [Whiplash X2AbilityTemplate]
-LocLongDescription="Attack an enemy with an electrical lash. Deals increased damage to robotic units. This attack does not cost an action."
-LocHelpText="A free attack with an electrical lash. Deals increased damage to robotic units."
+LocLongDescription="Attack an enemy with an electrical lash. Pierces armor. Deals increased damage to robotic units. This attack does not cost an action."
+LocHelpText="A free attack with an electrical lash. Pierces armor. Deals increased damage to robotic units."
 LocPromotionPopupText="<Bullet/> Whiplash damage increases with Ripjack upgrades.<br/><Bullet/> <Ability:Whiplash_Cooldown/> turn cooldown."
 
 [ManualOverride X2AbilityTemplate]
 LocFriendlyName="Manual Override"
-LocLongDescription="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
-LocHelpText="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
-LocPromotionPopupText="<Bullet/> Use the Skirmisher's abilities early and often to take full advantage of Manual Override.<br/><Bullet/> <Ability:ManualOverride_Cooldown/> turn cooldown.<br/>"
+LocLongDescription="Activate to consume an action point and lower all ability cooldowns by 1."
+LocHelpText="Lower all ability cooldowns by 1."
+LocPromotionPopupText="<Bullet/> Manual Override allows sacrificing an action point to reduce cooldowns on all abilities.<br/><Bullet/> Manual Override can be used multiple times in one turn, as long as you have enough action points.<br/><Bullet/> Use the Skirmisher's abilities early and often to take full advantage of Manual Override.<br/>"
+
+; [ManualOverride X2AbilityTemplate]
+; LocFriendlyName="Manual Override"
+; LocLongDescription="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
+; LocHelpText="Temporarily remove active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn."
+; LocPromotionPopupText="<Bullet/> Use the Skirmisher's abilities early and often to take full advantage of Manual Override.<br/><Bullet/> <Ability:ManualOverride_Cooldown/> turn cooldown.<br/>"
 
 [SkirmisherReturnFire X2AbilityTemplate]
 LocHelpText="When targeted by an enemy attack, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
@@ -82,6 +86,12 @@ LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt
 
 [Battlelord X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> Battlelord's cooldown is equal to the number of actions granted."
+
+[SkirmisherAmbush X2AbilityTemplate]
+LocLongDescription="Gain the ability to critically hit when taking overwatch and reaction shots, and an additional Overwatch shot for every additional action point spent on activating Overwatch."
+LocHelpText="Gain the ability to critically hit when taking overwatch and reaction shots, and an additional Overwatch shot for every additional action point spent on activating Overwatch."
+
+
 
 ; ================================================
 ;				RANGER

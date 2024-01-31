@@ -2,20 +2,37 @@ class Skirmisher extends Common;
 
 static final function PatchAbilities()
 {
-	PatchManualOverride();
+	PatchSkirmisherReflex();
+	//PatchManualOverride();
 	PatchSkirmisherMelee();
 	PatchSkirmisherInterrupt();
 	PatchFullThrottle();
 	PatchZeroIn();
-	PatchSkirmisherReflex();
 	PatchBattlelord();
 	PatchWhiplash();
 	PatchParkour();
 	PatchCombatPresence();
 	PatchRetributionAttack();
 	PatchSkirmisherReturnFire();
+	PatchSkirmisherAmbush();
 }
 
+static private function PatchSkirmisherAmbush()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_ModifyReactionFire       ReactionFire;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherAmbush');
+	if (AbilityTemplate == none)	
+		return;
+
+	ReactionFire = new class'X2Effect_ModifyReactionFire';
+	ReactionFire.bAllowCrit = true;
+	ReactionFire.BuildPersistentEffect(1, true, true, true);
+	AbilityTemplate.AddTargetEffect(ReactionFire);
+}
 
 static private function PatchManualOverride()
 {
@@ -501,12 +518,14 @@ static private function PatchWhiplash()
 
 	DamageEffect = new class'X2Effect_ApplyWeaponDamage';
 	DamageEffect.bIgnoreBaseDamage = true;
+	DamageEffect.bIgnoreArmor = true;
 	DamageEffect.DamageTag = 'Whiplash';
 	DamageEffect.TargetConditions.AddItem(OnlyOrganic);
 	AbilityTemplate.AddTargetEffect(DamageEffect);
 
 	DamageEffect = new class'X2Effect_ApplyWeaponDamage';
 	DamageEffect.bIgnoreBaseDamage = true;
+	DamageEffect.bIgnoreArmor = true;
 	DamageEffect.DamageTag = 'Whiplash_Robotic';
 	DamageEffect.TargetConditions.AddItem(OnlyRobotic);
 	AbilityTemplate.AddTargetEffect(DamageEffect);

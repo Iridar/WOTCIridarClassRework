@@ -83,6 +83,10 @@ static private function EventListenerReturn ZeroInListener(Object EventData, Obj
 	UnitState.GetUnitValue(default.UnitValueName, UValue);
 	UnitState.SetUnitFloatValue(default.UnitValueName, UValue.fValue + 1, eCleanup_BeginTactical); // Unit Value cleansed at the end of turn by EffectTickedFn
 
+	TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
+	TargetUnit.GetUnitValue(default.UnitValueName, UValue);
+	TargetUnit.SetUnitFloatValue(default.UnitValueName, UValue.fValue + 1, eCleanup_BeginTurn);
+
 	//	show flyover for boost, but only if they have actions left to potentially use them
 	if (UnitState.ActionPoints.Length > 0 || AbilityHasReserveActionCost(AbilityTemplate) || UnitState.IsUnitAffectedByEffectName(class'X2Effect_Battlelord_Fixed'.default.EffectName))
 	{
@@ -115,6 +119,7 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 {
 	local ShotModifierInfo ShotMod;
 	local UnitValue ShotsValue;
+	local UnitValue TargetShotsValue;
 
 	if (bIndirectFire)
 		return;
@@ -128,10 +133,14 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 		ShotMod.Value = ShotsValue.fValue * default.CritPerShot;
 		ShotModifiers.AddItem(ShotMod);
 
-		ShotMod.ModType = eHit_Success;
-		ShotMod.Reason = FriendlyName;
-		ShotMod.Value = ShotsValue.fValue * default.LockedInAimPerShot;
-		ShotModifiers.AddItem(ShotMod);
+		Target.GetUnitValue(UnitValueName, TargetShotsValue);
+		if (TargetShotsValue.fValue > 0)
+		{
+			ShotMod.ModType = eHit_Success;
+			ShotMod.Reason = FriendlyName;
+			ShotMod.Value = TargetShotsValue.fValue * default.LockedInAimPerShot;
+			ShotModifiers.AddItem(ShotMod);
+		}
 	}
 }
 

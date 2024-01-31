@@ -34,6 +34,7 @@ static private function PatchDeepCover()
 	local X2AbilityTemplate					DeepCoverAbility;
 	local X2Effect_PersistentStatChange		PersistentStatChangeEffect;
 	local X2Condition_UnitValue				UnitValueCondition;
+	local X2Condition_AbilityProperty           AbilityCondition;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	DeepCoverAbility = AbilityMgr.FindAbilityTemplate('DeepCover');
@@ -48,6 +49,9 @@ static private function PatchDeepCover()
 
 	UnitValueCondition = new class'X2Condition_UnitValue';
 	UnitValueCondition.AddCheckValue('IRI_RN_DeepCover_ArmorBonus_Value', 0, eCheck_Exact);
+
+	AbilityCondition = new class'X2Condition_AbilityProperty';
+	AbilityCondition.OwnerHasSoldierAbilities.AddItem('DeepCover');
 	
 	PersistentStatChangeEffect = new class'X2Effect_PersistentStatChange';
 	PersistentStatChangeEffect.EffectName = 'IRI_RN_DeepCover_ArmorBonus';
@@ -56,6 +60,7 @@ static private function PatchDeepCover()
 	PersistentStatChangeEffect.AddPersistentStatChange(eStat_ArmorMitigation, `GetConfigInt("IRI_DeepCover_ArmorBonus"));
 	PersistentStatChangeEffect.DuplicateResponse = eDupe_Refresh;
 	PersistentStatChangeEffect.TargetConditions.AddItem(UnitValueCondition);
+	PersistentStatChangeEffect.TargetConditions.AddItem(AbilityCondition);
 	PersistentStatChangeEffect.VisualizationFn = DeepCover_ArmorBonus_Visualization;
 	HunkerDownAbility.AddTargetEffect(PersistentStatChangeEffect);
 }

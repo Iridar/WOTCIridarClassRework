@@ -297,6 +297,8 @@ static private function PatchAidProtocol()
 
 		if (AssThreatEffect.EffectName == 'PistolThreatAssessment')
 		{
+			AssThreatEffect.AbilityToActivate = 'PistolOverwatchShot';
+
 			foreach AssThreatEffect.TargetConditions(Condition)
 			{
 				UnitCondition = X2Condition_UnitProperty(Condition);

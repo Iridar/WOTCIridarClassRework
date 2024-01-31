@@ -118,46 +118,6 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
 Not incompatible, but pointless
 
 
-# General
-
-* Bullpups - mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
-* Ripjack attacks now have 10% base crit chance, same as swords.
-* Parkour - now grants a Move action after using Grapple.
-
-# Hussar
-
-Classic melee Skirmisher gameplay you know and love. High mobility, offensive use of the Grapple and Ripjack.
-
-* Reckoning - now works same as Ranger's Slash, but doesn't end turn.
-* Wrath
-* Full Throttle - kills grant +2 Mobility until the end of turn and reduce Grapple's cooldown by 1.
-* Retribution - same as vanilla Bladestorm, but can trigger only once per turn.
-* (NEW) Predator Strike - a melee attack that executes an adjacent humanoid enemy. If that enemy is ADVENT, you also reveal the closest ADVENT unit in the fog of war until the end of turn.
-* Manual Override - a free action with a 5 turn cooldown, when used it temporarily removes active cooldowns from all abilities that cost action points. Cooldowns are restored at the start of the next turn.
-
-# Judge
-
-Thrives under pressure, can hold a position while showering enemies with reaction attacks.
-
-* Reflex - when attacked, gain an extra action point next turn. Can trigger once per turn instead of once per mission.
-* Waylay - gives Overwatch an extra shot and allows to remain on Overwatch upon taking damage.
-* Return Fire - when attacked, once per turn return fire with your bullpup, ignoring enemy cover defense.
-* Zero In - bullpup and melee attacks grant a stacking buff until the end of your turn of +10 Aim and +10 Crit. Stacks can be built with reaction attacks during enemy turn. Also allows reaction attacks to crit.
-* (NEW) Kinetic Armor - absorb missed enemy attacks to generate Shield HP equal to the damage avoided. The shield lasts until the end of your turn. This effect can trigger once per turn."
-* Judgement
-
-# Tactician[/b]
-
-Master of breaking the flow of enemy actions and the ultimate team player.
-
-* Interrupt - now has a 3 turn cooldown instead of 1 use per mission and grants two interrupt action points. Essentially Run and Gun with a twist.
-* Combat Presence - same, but can be used during Interrupt and Battlelord.
-* Total Combat - using items and grenades doesn't end turn and you also gain grenade-only slot.
-* Whiplash - now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics, down from +100%.
-* (NEW) Thunder Lance - use your grapple to launch grenades. Launched grenades have extra range and deal double damage to targets they impact directly.
-* Battlelord - now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. Multiple units can now use Battlelord at the same time. Cannot use Interrupt and Battlelord together.
-
-
 [h1]RANGER[/h1]
 [list]
 [*] Ability tree rearranged.
@@ -215,6 +175,29 @@ Master of breaking the flow of enemy actions and the ultimate team player.
 [*] New ability: Improvised Silencer - Remove the chance of being revealed on the first shot after entering Shadow.
 [*] New ability: Shadow Rising - Shadow gains an additional charge.
 [*] New Ability: Death Dealer - Critical shots against a flanked target while in Shadow will deal double critical damage.
+[/list]
+
+[h1]SKIRMISHER[/h1]
+[list]
+[*] Ability tree reordered.
+[*] Reckoning - no longer has a cooldown, but dash attacks (outside blue move range) consume more action points.
+[*] Reflex - now triggers once per turn instead of once per mission.
+[*] Total Combat - now also grants a Grenade-only slot. Now a cross-class perk, but not available to Grenadiers.
+[*] Interrupt - now grants two actions and has a 3 turn cooldown instead of one use per mission. Multiple units can Interrupt together now.
+[*] Zero In - now works with melee attacks and grants +20 Crit per attack (up from +10).
+[*] Combat Presence - can now be used during Interrupt and Battlelord.
+[*] Full Throttle - now also lowers Grapple's cooldown when procs.
+[*] Return Fire - now a part of the main ability tree and ignores enemy's Cover defense.
+[*] Waylay - corrected description for clarity. Now allows reaction attacks to crit.
+[*] Whiplash - now has a 4 turn cooldown instead of one use per mission. Damage values rebalanced. Now pierces armor and can crit.
+[*] Manual Override - corrected description to make it clear it's an active ability.
+[*] Battlelord - fixed bug that prevented it from triggering more than once. Multiple units can use Battlelord together now. Battlelord and Interrupt cannot be used at the same time.
+[*] Parkour - using Grapple now grants a move-only action. Replaces the old effect.
+[*] Ripjacks - now have 10% innate chance to crit, same as swords.
+[*] Bullpups - mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
+[*] New ability: Forward Operator -> immediately gain an extra action when a new group of enemies is revealed. Triggers once per turn.
+[*] New ability: Thunder Lance -> Launch grenades with your grappling hook, extending their range by 6 tiles and dealing double damage and bypassing armor on direct impact.
+[*] New ability: Tactical Readiness -> using Hunker down grants you an extra action point on your next turn.
 [/list]
 
 [h1]SPARK[/h1]
