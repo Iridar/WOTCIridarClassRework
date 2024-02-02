@@ -177,15 +177,15 @@ static private function PatchSkirmisherMelee()
 	// Firaxis forgot (?) to change the icon, so it looks like slash.
 	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
 
-	// Reset Cooldown
 	AbilityTemplate.AbilityCooldown = none;
 	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
 
-	// Replace action cost
 	RemoveActionAndChargeCost(AbilityTemplate);
 
-	// Fixed moving melee cost for abilities that don't end turn
-	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
+	ActionPointCost = new class'X2AbilityCost_ActionPoints';
+	ActionPointCost.bMoveCost = true;
+	ActionPointCost.bConsumeAllPoints = false;
+	AbilityTemplate.AbilityCosts.AddItem(ActionPointCost);
 }
 
 static private function PatchFullThrottle()
