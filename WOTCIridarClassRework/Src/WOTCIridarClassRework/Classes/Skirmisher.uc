@@ -167,7 +167,7 @@ static private function PatchSkirmisherMelee()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
-	local X2AbilityCost_ActionPoints        ActionPointCost;
+	local X2Effect_OverrideDeathAction		OverrideDeathAction;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherMelee');
@@ -177,15 +177,108 @@ static private function PatchSkirmisherMelee()
 	// Firaxis forgot (?) to change the icon, so it looks like slash.
 	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
 
+	// Reset Cooldown
 	AbilityTemplate.AbilityCooldown = none;
 	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
 
+	// Replace action cost
 	RemoveActionAndChargeCost(AbilityTemplate);
 
-	ActionPointCost = new class'X2AbilityCost_ActionPoints';
-	ActionPointCost.bMoveCost = true;
-	ActionPointCost.bConsumeAllPoints = false;
-	AbilityTemplate.AbilityCosts.AddItem(ActionPointCost);
+	// Fixed moving melee cost for abilities that don't end turn
+	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
+
+	// Use skulljack animations for ripjack melee kill strikes when possible
+	AbilityTemplate.BuildVisualizationFn = PredatorStrike_BuildVisualization;
+
+	// Animations for this fire action are loaded by Perk Content for this ability in the Perk Pack.
+	// A bit noodly, but I can't be assed to copy over the assets.
+	AbilityTemplate.ActionFireClass = class'X2Action_PredatorStrike';
+	AbilityTemplate.CinescriptCameraType = "IRI_PredatorStrike_Camera";
+	AbilityTemplate.bOverrideMeleeDeath = false;
+
+	OverrideDeathAction = new class'X2Effect_OverrideDeathAction';
+	OverrideDeathAction.DeathActionClass = class'X2Action_PredatorStrike_Death';
+	OverrideDeathAction.EffectName = 'IRI_SK_PredatorStrike_DeathActionEffect';
+
+	// Not sure if the override death effect actually needs to be first, but just in case.
+	AbilityTemplate.AbilityTargetEffects.InsertItem(0, OverrideDeathAction);
+
+	
+}
+
+static private function PredatorStrike_BuildVisualization(XComGameState VisualizeGameState)
+{	
+	local XComGameStateVisualizationMgr VisMgr;
+	local X2Action						FireAction;
+	local XComGameStateContext_Ability	AbilityContext;
+	local X2Action_MoveTurn				MoveTurnAction;
+	local VisualizationActionMetadata   ActionMetadata;
+	local VisualizationActionMetadata   EmptyTrack;
+	local XComGameStateHistory			History;
+	local XComGameState_Unit			SourceUnit;
+	local XComGameState_Unit			TargetUnit;
+	local X2Action_PlayAnimation		PlayAnimation;
+	local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
+	local X2Action						DeathAction;
+	local TTile							TurnTileLocation;
+
+	class'X2Ability'.static.TypicalAbility_BuildVisualization(VisualizeGameState);
+
+	History = `XCOMHISTORY;
+	VisMgr = `XCOMVISUALIZATIONMGR;
+
+	AbilityContext = XComGameStateContext_Ability(VisualizeGameState.GetContext());
+	if (AbilityContext == none)
+		return;
+
+	TargetUnit = XComGameState_Unit(VisualizeGameState.GetGameStateForObjectID(AbilityContext.InputContext.PrimaryTarget.ObjectID));
+	if (TargetUnit == none)
+		return;
+	SourceUnit = XComGameState_Unit(VisualizeGameState.GetGameStateForObjectID(AbilityContext.InputContext.SourceObject.ObjectID));
+	if (SourceUnit == none)
+		return;
+
+	FireAction = VisMgr.GetNodeOfType(VisMgr.BuildVisTree, class'X2Action_PredatorStrike',, AbilityContext.InputContext.SourceObject.ObjectID);
+	if (FireAction == none)
+		return;
+
+	//	Make the shooter rotate towards the target. This doesn't always happen automatically in time.
+	ActionMetadata = FireAction.Metadata;
+	MoveTurnAction = X2Action_MoveTurn(class'X2Action_MoveTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, true, FireAction.ParentActions[0]));
+	MoveTurnAction.m_vFacePoint =  `XWORLD.GetPositionFromTileCoordinates(TargetUnit.TileLocation);
+	MoveTurnAction.UpdateAimTarget = true;
+
+	ActionMetadata = EmptyTrack;
+	ActionMetadata.StateObject_OldState = History.GetGameStateForObjectID(TargetUnit.ObjectID, eReturnType_Reference, VisualizeGameState.HistoryIndex - 1);
+	ActionMetadata.StateObject_NewState = TargetUnit;
+	ActionMetadata.VisualizeActor = History.GetVisualizer(TargetUnit.ObjectID);
+		
+	// Make target rotate towards the shooter, but on the same Z as the target, for better animation alignment.
+	TurnTileLocation = SourceUnit.TileLocation;
+	TurnTileLocation.Z = TargetUnit.TileLocation.Z;
+
+	MoveTurnAction = X2Action_MoveTurn(class'X2Action_MoveTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, FireAction.ParentActions[0]));
+	MoveTurnAction.m_vFacePoint =  `XWORLD.GetPositionFromTileCoordinates(TurnTileLocation);
+	MoveTurnAction.UpdateAimTarget = true;
+
+	//	Make the target play its idle animation to prevent it from turning back to their original facing direction right away.
+	PlayAnimation = X2Action_PlayAnimation(class'X2Action_PlayAnimation'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, MoveTurnAction));
+	PlayAnimation.Params.AnimName = 'HL_Idle';
+	PlayAnimation.Params.BlendTime = 0.3f;		
+
+	if (AbilityContext.IsResultContextMiss())
+	{
+		PlayAnimation = X2Action_PlayAnimation(class'X2Action_PlayAnimation'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, FireAction.ParentActions[0]));
+		PlayAnimation.Params.AnimName = 'FF_SkulljackedMiss';
+		return;
+	}
+
+	DeathAction = VisMgr.GetNodeOfType(VisMgr.BuildVisTree, class'X2Action_PredatorStrike_Death',, TargetUnit.ObjectID);
+	if (DeathAction != none)
+	{
+		SoundAndFlyOver = X2Action_PlaySoundAndFlyOver(class'X2Action_PlaySoundAndFlyOver'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, DeathAction));
+		SoundAndFlyOver.SetSoundAndFlyOverParameters(None, class'X2Effect_Executed'.default.UnitExecutedFlyover, '', eColor_Bad);
+	}
 }
 
 static private function PatchFullThrottle()
