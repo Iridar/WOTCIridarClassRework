@@ -21,11 +21,15 @@ HL_HurtFrontA
 	
 function Init()
 {
+	local XComGameState_Unit PrimaryTargetState;
+
 	super.Init();
+
+	PrimaryTargetState = XComGameState_Unit(History.GetGameStateForObjectID(PrimaryTargetID));
 
 	TargetPawn = TargetUnit.GetPawn();
 	
-	if (TargetPawn.GetAnimTreeController().CanPlayAnimation('FF_SkulljackedStart'))
+	if (TargetPawn != none && PrimaryTargetState!= none && PrimaryTargetState.IsDead() && TargetPawn.GetAnimTreeController().CanPlayAnimation('FF_SkulljackedStart'))
 	{
 		bDoOverride = true;
 

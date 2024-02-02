@@ -4,7 +4,9 @@ static final function PatchAbilities()
 {
 	PatchSkirmisherReflex();
 	//PatchManualOverride();
+	PatchJustice();
 	PatchSkirmisherMelee();
+	PatchSkirmisherPostAbilityMelee();
 	PatchSkirmisherInterrupt();
 	PatchFullThrottle();
 	PatchZeroIn();
@@ -16,6 +18,36 @@ static final function PatchAbilities()
 	PatchSkirmisherReturnFire();
 	PatchSkirmisherAmbush();
 }
+
+static private function PatchJustice()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_GetOverHere_Fixed		GetOverHereEffect;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Justice');
+	if (AbilityTemplate == none)	
+		return;
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_GetOverHere(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			GetOverHereEffect = new class'X2Effect_GetOverHere_Fixed';
+ 			GetOverHereEffect.OverrideStartAnimName = 'NO_GrapplePullStart';
+ 			GetOverHereEffect.OverrideStopAnimName = 'NO_GrapplePullStop';
+			GetOverHereEffect.RequireVisibleTile = true;
+			AbilityTemplate.AbilityTargetEffects.InsertItem(0, GetOverHereEffect);
+			break;
+		}
+	}
+}
+
+
 
 static private function PatchSkirmisherAmbush()
 {
@@ -163,26 +195,20 @@ static private function ManualOverride_EffectRemoved(X2Effect_Persistent Persist
 }
 
 
-static private function PatchSkirmisherMelee()
+static private function PatchSkirmisherPostAbilityMelee()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
 	local X2Effect_OverrideDeathAction		OverrideDeathAction;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherMelee');
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherPostAbilityMelee');
 	if (AbilityTemplate == none)	
 		return;
 
 	// Firaxis forgot (?) to change the icon, so it looks like slash.
 	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
-
-	// Reset Cooldown
-	AbilityTemplate.AbilityCooldown = none;
-	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
-
-	// Replace action cost
-	RemoveActionAndChargeCost(AbilityTemplate);
 
 	// Fixed moving melee cost for abilities that don't end turn
 	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
@@ -196,14 +222,22 @@ static private function PatchSkirmisherMelee()
 	AbilityTemplate.CinescriptCameraType = "IRI_PredatorStrike_Camera";
 	AbilityTemplate.bOverrideMeleeDeath = false;
 
-	OverrideDeathAction = new class'X2Effect_OverrideDeathAction';
-	OverrideDeathAction.DeathActionClass = class'X2Action_PredatorStrike_Death';
-	OverrideDeathAction.EffectName = 'IRI_SK_PredatorStrike_DeathActionEffect';
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_ApplyWeaponDamage(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
 
-	// Not sure if the override death effect actually needs to be first, but just in case.
-	AbilityTemplate.AbilityTargetEffects.InsertItem(0, OverrideDeathAction);
+			OverrideDeathAction = new class'X2Effect_OverrideDeathAction';
+			OverrideDeathAction.DeathActionClass = class'X2Action_PredatorStrike_Death';
+			OverrideDeathAction.EffectName = 'IRI_SK_PredatorStrike_DeathActionEffect';
+			AbilityTemplate.AddTargetEffect(OverrideDeathAction);
 
-	
+			AbilityTemplate.AddTargetEffect(new class'X2Effect_PredatorStrike');
+
+			break;
+		}
+	}
 }
 
 static private function PredatorStrike_BuildVisualization(XComGameState VisualizeGameState)
@@ -211,15 +245,15 @@ static private function PredatorStrike_BuildVisualization(XComGameState Visualiz
 	local XComGameStateVisualizationMgr VisMgr;
 	local X2Action						FireAction;
 	local XComGameStateContext_Ability	AbilityContext;
-	local X2Action_MoveTurn				MoveTurnAction;
+	local X2Action_SnapTurn				MoveTurnAction;
 	local VisualizationActionMetadata   ActionMetadata;
 	local VisualizationActionMetadata   EmptyTrack;
 	local XComGameStateHistory			History;
 	local XComGameState_Unit			SourceUnit;
 	local XComGameState_Unit			TargetUnit;
 	local X2Action_PlayAnimation		PlayAnimation;
-	local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
-	local X2Action						DeathAction;
+	//local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
+	//local X2Action						DeathAction;
 	local TTile							TurnTileLocation;
 
 	class'X2Ability'.static.TypicalAbility_BuildVisualization(VisualizeGameState);
@@ -244,9 +278,9 @@ static private function PredatorStrike_BuildVisualization(XComGameState Visualiz
 
 	//	Make the shooter rotate towards the target. This doesn't always happen automatically in time.
 	ActionMetadata = FireAction.Metadata;
-	MoveTurnAction = X2Action_MoveTurn(class'X2Action_MoveTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, true, FireAction.ParentActions[0]));
+	MoveTurnAction = X2Action_SnapTurn(class'X2Action_SnapTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, true, FireAction.ParentActions[0]));
 	MoveTurnAction.m_vFacePoint =  `XWORLD.GetPositionFromTileCoordinates(TargetUnit.TileLocation);
-	MoveTurnAction.UpdateAimTarget = true;
+	//MoveTurnAction.UpdateAimTarget = true;
 
 	ActionMetadata = EmptyTrack;
 	ActionMetadata.StateObject_OldState = History.GetGameStateForObjectID(TargetUnit.ObjectID, eReturnType_Reference, VisualizeGameState.HistoryIndex - 1);
@@ -257,9 +291,10 @@ static private function PredatorStrike_BuildVisualization(XComGameState Visualiz
 	TurnTileLocation = SourceUnit.TileLocation;
 	TurnTileLocation.Z = TargetUnit.TileLocation.Z;
 
-	MoveTurnAction = X2Action_MoveTurn(class'X2Action_MoveTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, FireAction.ParentActions[0]));
+	MoveTurnAction = X2Action_SnapTurn(class'X2Action_SnapTurn'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, FireAction.ParentActions[0]));
 	MoveTurnAction.m_vFacePoint =  `XWORLD.GetPositionFromTileCoordinates(TurnTileLocation);
-	MoveTurnAction.UpdateAimTarget = true;
+	//MoveTurnAction.SyncZ = true;
+	//MoveTurnAction.UpdateAimTarget = true;
 
 	//	Make the target play its idle animation to prevent it from turning back to their original facing direction right away.
 	PlayAnimation = X2Action_PlayAnimation(class'X2Action_PlayAnimation'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, MoveTurnAction));
@@ -273,12 +308,36 @@ static private function PredatorStrike_BuildVisualization(XComGameState Visualiz
 		return;
 	}
 
-	DeathAction = VisMgr.GetNodeOfType(VisMgr.BuildVisTree, class'X2Action_PredatorStrike_Death',, TargetUnit.ObjectID);
-	if (DeathAction != none)
-	{
-		SoundAndFlyOver = X2Action_PlaySoundAndFlyOver(class'X2Action_PlaySoundAndFlyOver'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, DeathAction));
-		SoundAndFlyOver.SetSoundAndFlyOverParameters(None, class'X2Effect_Executed'.default.UnitExecutedFlyover, '', eColor_Bad);
-	}
+	//DeathAction = VisMgr.GetNodeOfType(VisMgr.BuildVisTree, class'X2Action_PredatorStrike_Death',, TargetUnit.ObjectID);
+	//if (DeathAction != none)
+	//{
+	//	SoundAndFlyOver = X2Action_PlaySoundAndFlyOver(class'X2Action_PlaySoundAndFlyOver'.static.AddToVisualizationTree(ActionMetadata, AbilityContext, false, DeathAction));
+	//	SoundAndFlyOver.SetSoundAndFlyOverParameters(None, class'X2Effect_Executed'.default.UnitExecutedFlyover, '', eColor_Bad);
+	//}
+}
+
+static private function PatchSkirmisherMelee()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherMelee');
+	if (AbilityTemplate == none)	
+		return;
+
+	// Firaxis forgot (?) to change the icon, so it looks like slash.
+	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
+
+	// Reset Cooldown
+	AbilityTemplate.AbilityCooldown = none;
+	AddCooldown(AbilityTemplate, `GetConfigInt("Reckoning_Cooldown"));
+
+	// Replace action cost
+	RemoveActionAndChargeCost(AbilityTemplate);
+
+	// Fixed moving melee cost for abilities that don't end turn
+	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
 }
 
 static private function PatchFullThrottle()

@@ -11,8 +11,8 @@ simulated function ApplyCost(XComGameStateContext_Ability AbilityContext, XComGa
 	if (bFreeCost || ModifiedUnitState.GetMyTemplate().bIsCosmetic || (`CHEATMGR != none && `CHEATMGR.bUnlimitedActions))
 		return;
 
-	//Deduct the appropriate number of action points
-	if( ConsumeAllPoints(kAbility, ModifiedUnitState) )
+	// Deduct the appropriate number of action points
+	if (ConsumeAllPoints(kAbility, ModifiedUnitState))
 	{
 		iPointsConsumed = ModifiedUnitState.NumAllActionPoints();
 		ModifiedUnitState.ActionPoints.Length = 0;		
@@ -21,12 +21,12 @@ simulated function ApplyCost(XComGameStateContext_Ability AbilityContext, XComGa
 	{
 		AbilityContext.PostBuildVisualizationFn.AddItem(kAbility.DidNotConsumeAll_PostBuildVisualization);
 
-		if (bMoveCost)
+		if (bMoveCost && AbilityContext.InputContext.MovementPaths[PathIndex].MovementTiles.Length > 0)
 		{
 			PathIndex = AbilityContext.GetMovePathIndex(ModifiedUnitState.ObjectID);
 			iPointsToTake = 1;
 			
-			for(i = AbilityContext.InputContext.MovementPaths[PathIndex].MovementTiles.Length - 1; i >= 0; --i)
+			for (i = AbilityContext.InputContext.MovementPaths[PathIndex].MovementTiles.Length - 1; i >= 0; i--)
 			{
 				if(AbilityContext.InputContext.MovementPaths[PathIndex].MovementTiles[i] == ModifiedUnitState.TileLocation)
 				{
@@ -34,7 +34,7 @@ simulated function ApplyCost(XComGameStateContext_Ability AbilityContext, XComGa
 					break;
 				}
 			}
-			for (i = 0; i < AbilityContext.InputContext.MovementPaths[PathIndex].CostIncreases.Length; ++i)
+			for (i = 0; i < AbilityContext.InputContext.MovementPaths[PathIndex].CostIncreases.Length; i++)
 			{
 				if (AbilityContext.InputContext.MovementPaths[PathIndex].CostIncreases[i] <= FarthestTile)
 					iPointsToTake++;
@@ -47,9 +47,9 @@ simulated function ApplyCost(XComGameStateContext_Ability AbilityContext, XComGa
 		//  Assume that AllowedTypes is built with the most specific point types at the end, which we should
 		//  consume before more general types. e.g. Consume "reflex" if that is allowed before "standard" if that is also allowed.
 		//  If this isn't good enough we may want to provide a specific way of ordering the priority for action point consumption.
-		for (i = AllowedTypes.Length - 1; i >= 0 && iPointsConsumed < iPointsToTake; --i)
+		for (i = AllowedTypes.Length - 1; i >= 0 && iPointsConsumed < iPointsToTake; i--)
 		{
-			for (j = ModifiedUnitState.ActionPoints.Length - 1; j >= 0 && iPointsConsumed < iPointsToTake; --j)
+			for (j = ModifiedUnitState.ActionPoints.Length - 1; j >= 0 && iPointsConsumed < iPointsToTake; j--)
 			{
 				// Iridar: assume the attack part of the slash costs one "allowed" AP,
 				// and the rest of the cost comes from movement.
