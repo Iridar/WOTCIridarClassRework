@@ -52,6 +52,9 @@
     <Content Include="Config\Sharpshooter\XComGameCore.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Skirmisher\XComCamera.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Skirmisher\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
@@ -134,6 +137,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Ability_ClassRework.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Action_PredatorStrike.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Action_PredatorStrike_Death.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_RevivalProtocol_Fixed.uc">
