@@ -1,18 +1,32 @@
 class X2Effect_Charges extends X2Effect;
 
-var name	AbilityName;
+var array<name>	AbilityNames;
+
 var int		Charges;
 var bool	bSetCharges;
+var bool	bRespectInitialCharges;
 
 simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState, XComGameState_Effect NewEffectState)
 {
 	local XComGameState_Unit	UnitState;
-	local XComGameState_Ability	AbilityState;
-	local StateObjectReference	AbilityRef;
+	local name					AbilityName;
 
 	UnitState = XComGameState_Unit(kNewTargetState);
 	if (UnitState == none)
 		return;
+
+	foreach AbilityNames(AbilityName)
+	{
+		IncreaseAbilityCharges(UnitState, AbilityName, NewGameState);
+	}
+}
+
+private function IncreaseAbilityCharges(const XComGameState_Unit UnitState, const name AbilityName, XComGameState NewGameState)
+{
+	local XComGameState_Ability	AbilityState;
+	local StateObjectReference	AbilityRef;
+	local X2AbilityTemplate		AbilityTemplate;
+	local int					iInitialCharges;
 
 	AbilityRef = UnitState.FindAbility(AbilityName);
 	AbilityState = XComGameState_Ability(`XCOMHISTORY.GetGameStateForObjectID(AbilityRef.ObjectID));
@@ -24,22 +38,29 @@ simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffe
 	{
 		AbilityState.iCharges = Charges;
 	}
-	else
+	else 
 	{
 		AbilityState.iCharges += Charges;
+	}
+
+	if (bRespectInitialCharges)
+	{
+		AbilityTemplate = AbilityState.GetMyTemplate();
+		if (AbilityTemplate != none && AbilityTemplate.AbilityCharges != none)
+		{
+			iInitialCharges = AbilityTemplate.AbilityCharges.GetInitialCharges(AbilityState, UnitState);
+			if (AbilityState.iCharges > iInitialCharges)
+			{
+				AbilityState.iCharges = iInitialCharges;
+			}
+		}
 	}
 }
 
 simulated function AddX2ActionsForVisualization(XComGameState VisualizeGameState, out VisualizationActionMetadata ActionMetadata, const name EffectApplyResult)
 {
-	local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
-	local X2AbilityTemplate				AbilityTemplate;
-	local XComGameState_Ability			OldAbilityState;
-	local XComGameState_Ability			NewAbilityState;
-	local string						strFlyover;
-	local XComGameState_Unit			UnitState;
-	local StateObjectReference			AbilityRef;
-	local int							ChargesDiff;
+	local XComGameState_Unit	UnitState;
+	local name					AbilityName;
 
 	super.AddX2ActionsForVisualization(VisualizeGameState, ActionMetadata, EffectApplyResult);
 	if (EffectApplyResult != 'AA_Success')
@@ -48,6 +69,22 @@ simulated function AddX2ActionsForVisualization(XComGameState VisualizeGameState
 	UnitState = XComGameState_Unit(ActionMetadata.StateObject_NewState);
 	if (UnitState == none)	
 		return;
+
+	foreach AbilityNames(AbilityName)
+	{
+		VisualizeAbilityChargesChange(UnitState, AbilityName, ActionMetadata, VisualizeGameState);
+	}	
+}
+
+private function VisualizeAbilityChargesChange(const XComGameState_Unit UnitState, const name AbilityName, out VisualizationActionMetadata ActionMetadata, XComGameState VisualizeGameState)
+{
+	local X2Action_PlaySoundAndFlyOver	SoundAndFlyOver;
+	local X2AbilityTemplate				AbilityTemplate;
+	local XComGameState_Ability			OldAbilityState;
+	local XComGameState_Ability			NewAbilityState;
+	local string						strFlyover;
+	local StateObjectReference			AbilityRef;
+	local int							ChargesDiff;
 
 	AbilityRef = UnitState.FindAbility(AbilityName);
 	NewAbilityState = XComGameState_Ability(VisualizeGameState.GetGameStateForObjectID(AbilityRef.ObjectID));

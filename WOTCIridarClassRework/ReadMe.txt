@@ -18,6 +18,7 @@ This mod is intended as the go-to mod to fix all the various issues with vanilla
 
 TODO
 
+
 - Ensure Covering Fire is cross class
 - Translate ClassRework/XComGame.int to Russian
 - Check that all weapon abilities work with weapon upgrades/ammo/shredder

@@ -5,6 +5,7 @@ static function array<X2DataTemplate> CreateTemplates()
 	local array<X2DataTemplate> Templates;
 
 	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
+	Templates.AddItem(PurePassive('IRI_RP_MakeshiftExplosives', "img:///IRIClassReworkUI.UIPerk_MakeshiftExplosives", true /*cross class*/, 'eAbilitySource_Perk', true /*display in UI*/));
 
 	return Templates;
 }

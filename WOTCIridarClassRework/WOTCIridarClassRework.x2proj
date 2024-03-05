@@ -202,6 +202,12 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReturnFireIgnoresCover.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_RP_BloodTrail.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_RP_Executioner.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Serial_AimPenalty.uc">
       <SubType>Content</SubType>
     </Content>
