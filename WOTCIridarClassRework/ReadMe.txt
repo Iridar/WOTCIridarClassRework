@@ -173,9 +173,13 @@ Not incompatible, but pointless
 [*] Shadow, Remote Start, Silent Killer, Needle, Banish - corrected descriptions for clarity.
 [*] Soul Harvest - increased Crit Chance boost per kill from 5 to 10 and max Crit Chance boost from 20 to 40. This lets you reach 100% crit at full stacks against flanked enemies if you use either upgraded Superior Laser Sight or Talon Ammo.
 [*] Sting - now a guaranteed crit and resets its charge when entering Shadow. Cooldown removed (yes, it had a cooldown despite having only one charge).
+[*] Blood Trail - bonus damage now applies to bleeding units.
+[*] New ability: Wounding Shot - Fire a shot while in Shadow, causing the target to bleed and reducing their Mobility by 33%. Reveals the Reaper.
 [*] New ability: Improvised Silencer - Remove the chance of being revealed on the first shot after entering Shadow.
+[*] New ability: Takedown - While in Shadow, deliver a flanking critical strike with a knife, dealing 6 damage. If this attack kills the target, the Reaper is not revealed. Takedown can also be used to silently knock out a group of civilians. One charge, resets when entering Shadow.
 [*] New ability: Shadow Rising - Shadow gains an additional charge.
 [*] New Ability: Death Dealer - Critical shots against a flanked target while in Shadow will deal double critical damage.
+[*] New ability: Makeshift Explosives - Restock one Claymore whenever you enter Shadow.
 [/list]
 
 [h1]SKIRMISHER[/h1]
