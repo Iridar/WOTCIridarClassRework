@@ -117,7 +117,9 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 	//												TEMPLAR TAGS
 	// ----------------------------------------------------------------------------------------------------------------------
 
-		
+	case "IRI_TM_VoidConduit_HPDrain":
+		OutString = string(class'X2Ability_TemplarAbilitySet'.default.VoidConduitPerActionDamage * 2);
+		return true;
 
 	// ----------------------------------------------------------------------------------------------------------------------
 	default:

@@ -16,8 +16,8 @@ $builder = [BuildProject]::new("WOTCIridarClassRework", $srcDirectory, $sdkPath,
 # git submodule add https://github.com/X2CommunityCore/X2WOTCCommunityHighlander.git
 
 # Uncomment the next line to enable building against Highlander.
-$builder.IncludeSrc("$srcDirectory\X2WOTCCommunityHighlander\X2WOTCCommunityHighlander\Src")
-$builder.IncludeSrc("$srcDirectory\CustomSrc")
+$builder.IncludeSrc("C:\Users\Iridar\Documents\Firaxis ModBuddy\X2WOTCCommunityHighlander\X2WOTCCommunityHighlander\Src")
+# $builder.IncludeSrc("$srcDirectory\CustomSrc")
 $builder.IncludeSrc("C:\Users\Iridar\Documents\Firaxis ModBuddy\CustomSrc")
 
 switch ($config)

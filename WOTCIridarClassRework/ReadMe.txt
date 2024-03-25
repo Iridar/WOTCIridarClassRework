@@ -18,7 +18,8 @@ This mod is intended as the go-to mod to fix all the various issues with vanilla
 
 TODO
 
-
+- Mentally Awake doesn't work in TQL, test in a campaign
+- Update Templar tutorial tooltip "Each point of Focus increases..."
 - Ensure Covering Fire is cross class
 - Translate ClassRework/XComGame.int to Russian
 - Check that all weapon abilities work with weapon upgrades/ammo/shredder
@@ -204,6 +205,36 @@ Not incompatible, but pointless
 [*] New ability: Thunder Lance -> Launch grenades with your grappling hook, extending their range by 6 tiles and dealing double damage and bypassing armor on direct impact.
 [*] New ability: Tactical Readiness -> using Hunker down grants you an extra action point on your next turn.
 [/list]
+
+
+[h1]TEMPLAR[/h1]
+[list]
+[*] Ability tree almost entirely redesigned.
+[*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus.
+[*] Templar Focus - having Focus no longer provides passive benefits of any kind, and most abilities no longer have Focus scaling.
+[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, psionic enemies are crit for +2 extra damage. Description now mentions that it ignores armor. Can be interrupted now.
+[*] Parry - now is a defensive ability that cannot be interrupted.
+[*] Aftershock - no longer stacks with itself.
+[*] Amplify - no longer costs Focus to use. Can be used with regular or Momentum action, does not end turn. Now makes target take +33% base damage from the next attack.
+[*] Reflect - now requires Parry and works like an empowered version of Parry that costs 1 Focus and a Momentum action to reflect the next attack directed at the Templar. Focus cost is not applied if no attack is reflected. Reflected attack can miss, the chance to hit is equal to Templar's Aim. Enemy cover defense is ignored.
+[*] Invert - now can target both allied and enemy units, no longer costs Focus, and can be used with Momentum actions. 
+[*] Void Conduit - no longer costs AP to use and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now.
+[*] Ionic Storm - now triggers Momentum. Damage rebalanced from 1-3 / 2-6 / 
+[*] Pillar - removed from the tree due to currently unsolvable bugs with the way it grants cover.
+[*] Overcharge, Deflect, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
+[*] Bladestorm and Reaper are removed as possible XCOM row perks.
+[*] New ability: Soul Shot - a ranged version of Rend that can miss. Has innate bonus of +20 Aim.
+[*] New ability: Overdraw (replaces Overcharge) - Rend and Soul Shot always generate a point of Focus, even when they don't kill the target.
+[*] New ability: Contemplation - your abilities mark enemies. When an ally kills a marked enemy, you generate a point of Focus. Only one target can be marked at a time.
+[*] New ability: Fervor (replaces Deflect) - for each point of Focus you spend, gain a psionic shield that blocks 3 damage. Stacks indefinitely.
+[*] New ability: Spectral Stride - activate to allow yourself to walk through obstacles and jump to the top of ledges and structures until the end of turn. 3 turn cooldown. Free action.
+[*] New ability: Zeal - a version of Bladestorm that does not generate Focus on kills.
+[*] New ability: Surge (replaces Arc Wave) - using Volt charges your shard gauntlets, causing your next Rend or Soul Shot to apply Volt's damage in the area around the main target.
+[/list]
+
+
+
+
 
 [h1]SPARK[/h1]
 [list]

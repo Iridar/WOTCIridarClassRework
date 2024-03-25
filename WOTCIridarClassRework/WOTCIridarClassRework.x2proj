@@ -91,6 +91,12 @@
     <Content Include="Config\Templar\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Templar\XComGameData_SoldierSkills.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Templar\XComTemplateEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
       <SubType>Content</SubType>
     </Content>
@@ -191,6 +197,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReduceCooldown.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReliableKnockback.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReliableWorldDamage.uc">
