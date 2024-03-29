@@ -334,3 +334,17 @@ LocFriendlyName="Ionic Storm"
 LocLongDescription="Summon lightning to strike all nearby enemies. Damage increases with Focus level. Costs all Focus, but generates Focus on kills."
 LocHelpText="Summon lightning to strike all nearby enemies. Costs all Focus, but generates Focus on kills."
 LocPromotionPopupText="<Bullet/> Ionic Storm's radius increases at higher Focus levels.<br/><Bullet/> Ionic Storm deals double damage to Psionic units.<br/><Bullet/> Use Ionic Storm at a high Focus level when it will kill many targets to immediately refund the Focus cost.<br/><Bullet/> Ionic Storm has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+[TemplarBladestorm X2AbilityTemplate]
+LocFriendlyName="Zeal"
+LocLongDescription="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocHelpText="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocFlyOverText="Zeal"
+LocPromotionPopupText="<Bullet/> If an enemy begins their turn in an adjacent tile, Zeal will trigger if that enemy tries to attack the <Ability:ClassName/>.<br/><Bullet/> Position the <Ability:ClassName/> offensively near enemies to \"trap\" them with Zeal.<br/><Bullet/> If an enemy does not begin their turn in an adjacent tile, then Zeal will trigger when that enemy moves into melee range.<br/>"
+
+[TemplarBladestormAttack X2AbilityTemplate]
+LocFriendlyName="Zeal"
+LocLongDescription="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocHelpText="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocFlyOverText="Zeal"
+LocPromotionPopupText="<Bullet/> If an enemy begins their turn in an adjacent tile, Zeal will trigger if that enemy tries to attack the <Ability:ClassName/>.<br/><Bullet/> If an enemy does not begin their turn in an adjacent tile, then Zeal will trigger when that enemy moves into melee range.<br/>"
