@@ -211,23 +211,26 @@ Not incompatible, but pointless
 [*] Ability tree almost entirely redesigned.
 [*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus.
 [*] Templar Focus - having Focus no longer provides passive benefits of any kind, and most abilities no longer have Focus scaling.
-[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, psionic enemies are crit for +2 extra damage. Description now mentions that it ignores armor. Can be interrupted now.
+[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, crits psionic enemies for +2 extra damage. Description now mentions that it ignores armor. Can be interrupted now.
 [*] Parry - now is a defensive ability that cannot be interrupted.
 [*] Aftershock - no longer stacks with itself.
 [*] Amplify - no longer costs Focus to use. Can be used with regular or Momentum action, does not end turn. Now makes target take +33% base damage from the next attack.
 [*] Reflect - now requires Parry and works like an empowered version of Parry that costs 1 Focus and a Momentum action to reflect the next attack directed at the Templar. Focus cost is not applied if no attack is reflected. Reflected attack can miss, the chance to hit is equal to Templar's Aim. Enemy cover defense is ignored.
+[*] Deflect - now is an active ability. Free action that costs 2 Focus, and allows the Templar to deflect the next attack directed at them. Lasts indefinitely, doesn't stack.
+[*] Stun Strike - now is a guaranteed hit and can be interrupted, and instead of disorientation stuns the target.
 [*] Invert - now can target both allied and enemy units, no longer costs Focus, and can be used with Momentum actions. 
-[*] Void Conduit - no longer costs AP to use and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now.
-[*] Ionic Storm - now triggers Momentum and instead of using its own damage values just hits enemies with Volt. Hits them twice if used at 2 Focus.
+[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now.
+[*] Ionic Storm - now triggers Momentum and instead of using its own damage values just hits enemies with Volt. Hits twice if used at 2 Focus.
 [*] Pillar - removed from the tree due to currently unsolvable bugs with the way it grants cover.
 [*] Overcharge, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
 [*] Bladestorm - renamed to "Zeal" and is always present in the ability tree (no longer an XCOM row random perk).
-[*] Reaper - removed as possible XCOM row perks. Sort of replaced by Overload.
+[*] Reaper - removed as possible XCOM row perks. Sort of replaced by Arc Overload.
 [*] New ability: Soul Shot - a ranged version of Rend that can miss. Has innate bonus of +20 Aim.
 [*] New ability: Overdraw (replaces Overcharge) - Rend and Soul Shot always generate a point of Focus, even when they don't kill the target.
 [*] New ability: Seal - your abilities mark enemies until the end of turn. If an ally kills a marked enemy, you generate 1 Focus. Triggers once per turn.
 [*] New ability: Spectral Stride - activate to allow yourself to walk through obstacles and jump to the top of ledges and structures until the end of turn. 3 turn cooldown. Free action.
 [*] New ability: Surge (replaces Arc Wave) - spending Focus charges your shard gauntlets, causing your next Rend or Soul Shot to generate a psionic wave that will hit other enemies near the primary target with Volt.
+[*] New ability: Arc Overload - when at maximum Focus, activate to become overloaded until the end of turn. While overloaded, killing an enemy with Volt grants an action point.
 [/list]
 
 

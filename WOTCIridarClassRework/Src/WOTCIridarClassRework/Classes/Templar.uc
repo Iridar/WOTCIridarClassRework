@@ -2,9 +2,40 @@ class Templar extends Common;
 
 static final function PatchAbilities()
 {
+	PatchTemplarBladestorm();
 	PatchVoidConduit();
 	PatchParryActivate();
 	PatchStunStrike();
+}
+
+static private function PatchTemplarBladestorm()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					Template;
+	local X2Effect							Effect;
+	local X2Effect_Persistent				PersistentEffect;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	Template = AbilityMgr.FindAbilityTemplate('TemplarBladestorm');
+	if (Template == none)	
+		return;
+
+	Template.IconImage = "img:///IRIClassReworkUI.UIPerk_Zeal";
+
+	foreach Template.AbilityTargetEffects(Effect)
+	{
+		PersistentEffect = X2Effect_Persistent(Effect);
+		if (PersistentEffect == none)
+			continue;
+
+		PersistentEffect.IconImage = "img:///IRIClassReworkUI.UIPerk_Zeal";
+	}
+
+	Template = AbilityMgr.FindAbilityTemplate('TemplarBladestormAttack');
+	if (Template == none)	
+		return;
+
+	Template.IconImage = "img:///IRIClassReworkUI.UIPerk_Zeal";
 }
 
 static private function PatchStunStrike()
@@ -20,10 +51,10 @@ static private function PatchStunStrike()
 
 	for (i = Template.AbilityTargetEffects.Length - 1; i >= 0; i--)
 	{
-		if (X2Effect_Knockback(Template.AbilityTargetEffects[i]) != none)
-		{
-			Template.AbilityTargetEffects.Remove(i, 1);
-		}
+		//if (X2Effect_Knockback(Template.AbilityTargetEffects[i]) != none)
+		//{
+		//	Template.AbilityTargetEffects.Remove(i, 1);
+		//}
 
 		if (X2Effect_Persistent(Template.AbilityTargetEffects[i]).EffectName == class'X2AbilityTemplateManager'.default.DisorientedName)
 		{
@@ -37,17 +68,17 @@ static private function PatchStunStrike()
 
 	Template.AddTargetEffect(class'X2StatusEffects'.static.CreateStunnedStatusEffect(2, 100, false));
 
-	Template.AddTargetEffect(new class'X2Effect_ReliableKnockback');
+	//Template.AddTargetEffect(new class'X2Effect_ReliableKnockback');
 
-	Template.AddTargetEffect(GetConcentrationEffect());
+	Template.AddTargetEffect(GetSealEffect());
 }
 
-// Concentration effect doesn't exist in the Class Rework, only in the perk pack, so copy it from the new Rend ability template.
-static private function X2Effect GetConcentrationEffect()
+// Seal effect doesn't exist in the Class Rework, only in the perk pack, so copy it from the new Rend ability template.
+static private function X2Effect GetSealEffect()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					RendTemplate;
-	local X2Effect							ConcentrationEffect;
+	local X2Effect							SealEffect;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -57,11 +88,11 @@ static private function X2Effect GetConcentrationEffect()
 
 	for (i = RendTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
 	{
-		if (X2Effect_Persistent(RendTemplate.AbilityTargetEffects[i]).EffectName == 'IRI_TM_Concentration_Effect')
+		if (X2Effect_Persistent(RendTemplate.AbilityTargetEffects[i]).EffectName == 'IRI_TM_Seal_Effect')
 		{
-			ConcentrationEffect = RendTemplate.AbilityTargetEffects[i];
+			SealEffect = RendTemplate.AbilityTargetEffects[i];
 
-			return ConcentrationEffect;
+			return SealEffect;
 		}
 	}
 
@@ -95,6 +126,8 @@ static private function PatchVoidConduit()
 	Template = AbilityMgr.FindAbilityTemplate('VoidConduit');
 	if (Template == none)	
 		return;
+
+	Template.IconImage = "img:///IRIClassReworkUI.UIPerk_VoidConduit_New";
 
 	// Remove AP cost and increase Focus cost
 	for (i = Template.AbilityCosts.Length - 1; i >= 0; i--)
@@ -143,7 +176,7 @@ static private function PatchVoidConduit()
 	// No longer deals initial damage, so damage preview is unnecessary.
 	Template.DamagePreviewFn = VoidConduitDamagePreview;
 
-	Template.AddTargetEffect(GetConcentrationEffect());
+	Template.AddTargetEffect(GetSealEffect());
 }
 
 static private function bool VoidConduitDamagePreview(XComGameState_Ability AbilityState, StateObjectReference TargetRef, out WeaponDamageValue MinDamagePreview, out WeaponDamageValue MaxDamagePreview, out int AllowsShield)
