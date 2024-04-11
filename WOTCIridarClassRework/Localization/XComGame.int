@@ -342,13 +342,13 @@ LocPromotionPopupText="<Bullet/> Ionic Storm's radius increases at higher Focus 
 
 [TemplarBladestorm X2AbilityTemplate]
 LocFriendlyName="Zeal"
-LocLongDescription="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
-LocHelpText="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocLongDescription="Free shard gauntlet attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocHelpText="Free shard gauntlet attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
 LocFlyOverText="Zeal"
 LocPromotionPopupText="<Bullet/> If an enemy begins their turn in an adjacent tile, Zeal will trigger if that enemy attempts to move or use any abilities.<br/><Bullet/> If an enemy does not begin their turn in an adjacent tile, then Zeal will trigger when that enemy moves into melee range.<br/><Bullet/> Position the <Ability:ClassName/> offensively near enemies to \"trap\" them with Zeal."
 
 [TemplarBladestormAttack X2AbilityTemplate]
 LocFriendlyName="Zeal"
-LocLongDescription="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
-LocHelpText="Free <Ability:WeaponName/> attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocLongDescription="Free shard gauntlet attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
+LocHelpText="Free shard gauntlet attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
 LocFlyOverText="Zeal"

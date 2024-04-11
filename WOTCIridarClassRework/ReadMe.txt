@@ -209,7 +209,7 @@ Not incompatible, but pointless
 [h1]TEMPLAR[/h1]
 [list]
 [*] Ability tree almost entirely redesigned.
-[*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus.
+[*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus. New icon.
 [*] Templar Focus - having Focus no longer provides passive benefits of any kind, and most abilities no longer have Focus scaling.
 [*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, crits psionic enemies for +2 extra damage. Description now mentions that it ignores armor. Can be interrupted now.
 [*] Parry - now is a defensive ability that cannot be interrupted.
@@ -219,11 +219,11 @@ Not incompatible, but pointless
 [*] Deflect - now is an active ability. Free action that costs 2 Focus, and allows the Templar to deflect the next attack directed at them. Lasts indefinitely, doesn't stack.
 [*] Stun Strike - now is a guaranteed hit and can be interrupted, and instead of disorientation stuns the target.
 [*] Invert - now can target both allied and enemy units, no longer costs Focus, and can be used with Momentum actions. 
-[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now.
+[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now. New icon.
 [*] Ionic Storm - now triggers Momentum and instead of using its own damage values just hits enemies with Volt. Hits twice if used at 2 Focus.
 [*] Pillar - removed from the tree due to currently unsolvable bugs with the way it grants cover.
 [*] Overcharge, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
-[*] Bladestorm - renamed to "Zeal" and is always present in the ability tree (no longer an XCOM row random perk).
+[*] Bladestorm - renamed to "Zeal" and is always present in the ability tree (no longer an XCOM row random perk). New icon.
 [*] Reaper - removed as possible XCOM row perks. Sort of replaced by Arc Overload.
 [*] New ability: Soul Shot - a ranged version of Rend that can miss. Has innate bonus of +20 Aim.
 [*] New ability: Overdraw (replaces Overcharge) - Rend and Soul Shot always generate a point of Focus, even when they don't kill the target.

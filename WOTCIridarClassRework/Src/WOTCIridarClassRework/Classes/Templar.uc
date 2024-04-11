@@ -36,6 +36,8 @@ static private function PatchTemplarBladestorm()
 		return;
 
 	Template.IconImage = "img:///IRIClassReworkUI.UIPerk_Zeal";
+
+	Template.AddTargetEffect(GetSealEffect());
 }
 
 static private function PatchStunStrike()
