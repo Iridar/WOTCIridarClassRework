@@ -3,7 +3,6 @@ class Skirmisher extends Common;
 static final function PatchAbilities()
 {
 	PatchSkirmisherReflex();
-	//PatchManualOverride();
 	PatchJustice();
 	PatchSkirmisherMelee();
 	PatchSkirmisherPostAbilityMelee();
@@ -14,9 +13,11 @@ static final function PatchAbilities()
 	PatchWhiplash();
 	PatchParkour();
 	PatchCombatPresence();
-	PatchRetributionAttack();
 	PatchSkirmisherReturnFire();
 	PatchSkirmisherAmbush();
+
+	//PatchRetributionAttack();
+	//PatchManualOverride();
 }
 
 static private function PatchJustice()
@@ -66,135 +67,6 @@ static private function PatchSkirmisherAmbush()
 	AbilityTemplate.AddTargetEffect(ReactionFire);
 }
 
-static private function PatchManualOverride()
-{
-	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
-	local X2Effect_Persistent				PersistentEffect;
-	local int i;
-
-	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ManualOverride');
-	if (AbilityTemplate == none)	
-		return;
-
-	RemoveActionAndChargeCost(AbilityTemplate);
-	AddFreeActionCost(AbilityTemplate);
-	AddCooldown(AbilityTemplate, `GetConfigInt("ManualOverride_Cooldown"));
-
-	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
-	{
-		if (X2Effect_ManualOverride(AbilityTemplate.AbilityTargetEffects[i]) != none)
-		{
-			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
-
-			PersistentEffect = new class'X2Effect_Persistent';
-			PersistentEffect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
-			PersistentEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocHelpText, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
-			PersistentEffect.EffectAddedFn = ManualOverride_EffectAdded;
-			PersistentEffect.EffectRemovedFn = ManualOverride_EffectRemoved;
-			AbilityTemplate.AddTargetEffect(PersistentEffect);
-
-			break;
-		}
-	}
-}
-
-static private function ManualOverride_EffectAdded(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState)
-{
-	local XComGameState_Unit		UnitState;
-	local StateObjectReference		AbilityRef;
-	local XComGameState_Ability		AbilityState;
-	local XComGameStateHistory		History;
-	local name						ValueName;
-
-	UnitState = XComGameState_Unit(kNewTargetState);
-	if (UnitState == none)
-		return;
-
-	History = `XCOMHISTORY;
-
-	foreach UnitState.Abilities(AbilityRef)
-	{
-		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
-		if (AbilityState == none)
-			continue;
-
-		if (!AbilityHasActionCost(AbilityState, UnitState))
-			continue;
-
-		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
-		UnitState.SetUnitFloatValue(ValueName, AbilityState.iCooldown, eCleanup_BeginTactical);
-
-		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
-		AbilityState.iCooldown = 0;
-	}
-}
-static private function bool AbilityHasActionCost(XComGameState_Ability AbilityState, XComGameState_Unit SourceUnit)
-{
-	local X2AbilityCost					Cost;
-	local X2AbilityCost_ActionPoints	ActionPointCost;
-	local X2AbilityTemplate				Template;
-
-	Template = AbilityState.GetMyTemplate();
-	if (Template == none)
-		return false;
-
-	foreach Template.AbilityCosts(Cost)
-	{
-		ActionPointCost = X2AbilityCost_ActionPoints(Cost);
-		if (ActionPointCost == none)
-			continue;
-
-		if (ActionPointCost.bFreeCost)
-			continue;
-
-		if (ActionPointCost.ConsumeAllPoints(AbilityState, SourceUnit) ||
-			ActionPointCost.GetPointCost(AbilityState, SourceUnit) > 0)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-static private function ManualOverride_EffectRemoved(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed)
-{
-	local XComGameState_Unit		UnitState;
-	local StateObjectReference		AbilityRef;
-	local XComGameState_Ability		AbilityState;
-	local XComGameStateHistory		History;
-	local name						ValueName;	
-	local UnitValue					UV;
-
-	History = `XCOMHISTORY;
-
-	UnitState = XComGameState_Unit(History.GetGameStateForObjectID(ApplyEffectParameters.TargetStateObjectRef.ObjectID));
-	if (UnitState == none)
-		return;
-
-	UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
-
-	foreach UnitState.Abilities(AbilityRef)
-	{
-		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
-		if (AbilityState == none)
-			continue;
-
-		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
-		if (!UnitState.GetUnitValue(ValueName, UV))
-			continue;
-
-		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
-		AbilityState.iCooldown = UV.fValue - 1;
-		if (AbilityState.iCooldown < 0)
-			AbilityState.iCooldown = 0;
-
-		UnitState.ClearUnitValue(ValueName);
-	}
-}
-
-
 static private function PatchSkirmisherPostAbilityMelee()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
@@ -209,9 +81,6 @@ static private function PatchSkirmisherPostAbilityMelee()
 
 	// Firaxis forgot (?) to change the icon, so it looks like slash.
 	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_Reckoning";
-
-	// Fixed moving melee cost for abilities that don't end turn
-	AbilityTemplate.AbilityCosts.AddItem(new class'X2AbilityCost_RN_SlashActionPoints');
 
 	// Use skulljack animations for ripjack melee kill strikes when possible
 	AbilityTemplate.BuildVisualizationFn = PredatorStrike_BuildVisualization;
@@ -711,3 +580,132 @@ static private function PatchSkirmisherReturnFire()
 	//AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
 }
 
+// Alternative implementation - makes Manual Override temporarily remove cooldowns from all abilities that have them, then restore them next turn.
+/*
+static private function PatchManualOverride()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_Persistent				PersistentEffect;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ManualOverride');
+	if (AbilityTemplate == none)	
+		return;
+
+	RemoveActionAndChargeCost(AbilityTemplate);
+	AddFreeActionCost(AbilityTemplate);
+	AddCooldown(AbilityTemplate, `GetConfigInt("ManualOverride_Cooldown"));
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_ManualOverride(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+
+			PersistentEffect = new class'X2Effect_Persistent';
+			PersistentEffect.BuildPersistentEffect(1, false, false, false, eGameRule_PlayerTurnBegin);
+			PersistentEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocHelpText, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+			PersistentEffect.EffectAddedFn = ManualOverride_EffectAdded;
+			PersistentEffect.EffectRemovedFn = ManualOverride_EffectRemoved;
+			AbilityTemplate.AddTargetEffect(PersistentEffect);
+
+			break;
+		}
+	}
+}
+
+static private function ManualOverride_EffectAdded(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState)
+{
+	local XComGameState_Unit		UnitState;
+	local StateObjectReference		AbilityRef;
+	local XComGameState_Ability		AbilityState;
+	local XComGameStateHistory		History;
+	local name						ValueName;
+
+	UnitState = XComGameState_Unit(kNewTargetState);
+	if (UnitState == none)
+		return;
+
+	History = `XCOMHISTORY;
+
+	foreach UnitState.Abilities(AbilityRef)
+	{
+		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
+		if (AbilityState == none)
+			continue;
+
+		if (!AbilityHasActionCost(AbilityState, UnitState))
+			continue;
+
+		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
+		UnitState.SetUnitFloatValue(ValueName, AbilityState.iCooldown, eCleanup_BeginTactical);
+
+		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+		AbilityState.iCooldown = 0;
+	}
+}
+static private function bool AbilityHasActionCost(XComGameState_Ability AbilityState, XComGameState_Unit SourceUnit)
+{
+	local X2AbilityCost					Cost;
+	local X2AbilityCost_ActionPoints	ActionPointCost;
+	local X2AbilityTemplate				Template;
+
+	Template = AbilityState.GetMyTemplate();
+	if (Template == none)
+		return false;
+
+	foreach Template.AbilityCosts(Cost)
+	{
+		ActionPointCost = X2AbilityCost_ActionPoints(Cost);
+		if (ActionPointCost == none)
+			continue;
+
+		if (ActionPointCost.bFreeCost)
+			continue;
+
+		if (ActionPointCost.ConsumeAllPoints(AbilityState, SourceUnit) ||
+			ActionPointCost.GetPointCost(AbilityState, SourceUnit) > 0)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+static private function ManualOverride_EffectRemoved(X2Effect_Persistent PersistentEffect, const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed)
+{
+	local XComGameState_Unit		UnitState;
+	local StateObjectReference		AbilityRef;
+	local XComGameState_Ability		AbilityState;
+	local XComGameStateHistory		History;
+	local name						ValueName;	
+	local UnitValue					UV;
+
+	History = `XCOMHISTORY;
+
+	UnitState = XComGameState_Unit(History.GetGameStateForObjectID(ApplyEffectParameters.TargetStateObjectRef.ObjectID));
+	if (UnitState == none)
+		return;
+
+	UnitState = XComGameState_Unit(NewGameState.ModifyStateObject(UnitState.Class, UnitState.ObjectID));
+
+	foreach UnitState.Abilities(AbilityRef)
+	{
+		AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(AbilityRef.ObjectID));
+		if (AbilityState == none)
+			continue;
+
+		ValueName = name(AbilityState.GetMyTemplateName() @ "_IRI_MO_Cooldown");
+		if (!UnitState.GetUnitValue(ValueName, UV))
+			continue;
+
+		AbilityState = XComGameState_Ability(NewGameState.ModifyStateObject(AbilityState.Class, AbilityState.ObjectID));
+		AbilityState.iCooldown = UV.fValue - 1;
+		if (AbilityState.iCooldown < 0)
+			AbilityState.iCooldown = 0;
+
+		UnitState.ClearUnitValue(ValueName);
+	}
+}*/

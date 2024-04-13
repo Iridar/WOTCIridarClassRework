@@ -5,7 +5,6 @@ static event OnPostTemplatesCreated()
 	// TODO: Add switches for all of these
 	class'Skirmisher'.static.PatchAbilities();
 	class'Templar'.static.PatchAbilities();
-
 	class'Ranger'.static.PatchAbilities();
 	class'Sharpshooter'.static.PatchAbilities();
 	class'Grenadier'.static.PatchAbilities();
@@ -273,4 +272,20 @@ static private function string GetPercentValue(string ConfigName)
 	PercentValue = `GetConfigFloat(ConfigName) * 100;
 
 	return string(PercentValue);
+}
+
+static function WeaponInitialized(XGWeapon WeaponArchetype, XComWeapon Weapon, optional XComGameState_Item ItemState = none)
+{
+    if (ItemState == none) 
+	{	
+		ItemState = XComGameState_Item(`XCOMHISTORY.GetGameStateForObjectID(WeaponArchetype.ObjectID));
+	}
+	if (ItemState == none)
+		return;
+
+	// Add FanFire animations to autopistols.
+	if (ItemState.GetWeaponCategory() == 'sidearm')
+	{
+		Weapon.CustomUnitPawnAnimsets.AddItem(AnimSet(`CONTENT.RequestGameArchetype("IRIClassRework_Templar.AS_Autopistol_FanFire")));
+	}
 }

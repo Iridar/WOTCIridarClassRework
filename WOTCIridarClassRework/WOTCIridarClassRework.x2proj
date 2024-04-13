@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\ClassRework" />
     <Folder Include="Config\Reaper" />
     <Folder Include="Config\SPARK" />
     <Folder Include="Config\Templar" />
@@ -28,6 +29,9 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\ClassRework\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -59,6 +63,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Skirmisher\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Skirmisher\XComGame.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Skirmisher\XComGameData.ini">
@@ -98,6 +105,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ContentForCook\IRIClassRework_Templar.upk">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ReadMe.txt" />

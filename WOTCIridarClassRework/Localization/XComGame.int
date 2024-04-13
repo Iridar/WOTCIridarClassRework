@@ -166,6 +166,7 @@ LocPromotionPopupText="<Bullet/> Serial is meant to chain enemy kills in a singl
 [DeathFromAbove X2AbilityTemplate]
 LocLongDescription="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."
 LocHelpText="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."
+LocPromotionPopupText="<Bullet/> Death From Above can combo well with <Ability:SecondaryWeaponName/> abilities, or can simply make the <Ability:ClassName/> more mobile.<br/><Bullet/> Death From Above does not grant any action points if the attack did not cost any action points."
 
 
 [Deadeye X2AbilityTemplate]
@@ -189,6 +190,13 @@ LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all range
 [ReturnFire X2AbilityTemplate]
 LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
 LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+
+[FanFire X2AbilityTemplate]
+LocLongDescription="Fire the <Ability:IRI_BoundWeaponName/> three times at the same target."
+
+[Faceoff X2AbilityTemplate]
+LocLongDescription="Fire once at every visible enemy with your <Ability:IRI_BoundWeaponName/>."
+LocHelpText="Fire once at every visible enemy with your <Ability:IRI_BoundWeaponName/>."
 
 
 ; ================================================
@@ -239,6 +247,13 @@ LocPromotionPopupText="<Bullet/> Scanning Protocol has one charge per mission, b
 
 [IntrusionProtocol X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Remotely hack ADVENT targets, including mission objectives, with your <Ability:SECONDARYWEAPONNAME/> drone. <br/><Bullet/> Upgrade your <Ability:SECONDARYWEAPONNAME/> drone to increase this soldier's hacking stat.<br/>"
+
+[FieldMedic X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> If the <Ability:ClassName/> has the Medical Protocol ability, the GREMLIN gains additional charges as well.<br/>"
+
+[EverVigilant X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Ever Vigilant enables an extremely mobile style of play for the <Ability:ClassName/>.<br/><Bullet/> Any action other than moving or grappling will invalidate Ever Vigilant.<br/>"
+
 
 ; ================================================
 ;				REAPER
@@ -324,8 +339,8 @@ LocHelpText="Consume Momentum to parry the next attack directed at the <Ability:
 
 [StunStrike X2AbilityTemplate]
 LocFriendlyName="Stun Strike"
-LocLongDescription="Strike an enemy with Psionic force, stunning them for one turn and knocking them back in the direction of the attack. Costs 1 Focus and 1 action point. Does not end turn."
-LocHelpText="Knock an enemy back in the direction of the attack and stun them for one turn. Does not end turn. Costs 1 Focus."
+LocLongDescription="Strike an enemy with Psionic force, stunning them for one turn with a chance of knocking them back in the direction of the attack. Costs 1 Focus and 1 action point. Does not end turn."
+LocHelpText="Stun an enemy for one turn with a chance to knock them back. Does not end turn."
 LocPromotionPopupText="<Bullet/> Stun Strike does not end the Templar's turn, but has a <Ability:SelfCooldown/> turn cooldown.<br/>" 
 
 [VoidConduit X2AbilityTemplate]

@@ -17,14 +17,10 @@ This mod is intended as the go-to mod to fix all the various issues with vanilla
 
 
 TODO
-- new icon for Zeal
 - Mentally Awake doesn't work in TQL, test in a campaign
 - Update Templar tutorial tooltip "Each point of Focus increases..."
-- Ensure Covering Fire is cross class
 - Translate ClassRework/XComGame.int to Russian
 - Check that all weapon abilities work with weapon upgrades/ammo/shredder
-- Recheck that return fire ignores cover
-
 - Check which abilities don't build interrupt game state but should
 - Forbid using Rupture while disoriented
 
@@ -45,7 +41,7 @@ and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails
 
 [/list]
 
-
+; TODO: Mark Reliable Vigilant as required
 
 
 [h1]SKIRMISHER[/h1]
@@ -185,7 +181,9 @@ Not incompatible, but pointless
 [h1]SKIRMISHER[/h1]
 [list]
 [*] Ability tree reordered.
-[*] Reckoning - no longer has a cooldown, but dash attacks (outside blue move range) consume more action points.
+[*] Justice - fixed a visual bug that makes the enemy float in the air if it's pulled into high cover and then killed.
+[*] Wrath and Justice - now have a special execution animation when killing humanoid enemies.
+[*] Reckoning - no longer has a cooldown, but dash attacks (outside blue move range) consume more action points. Now has a proper icon.
 [*] Reflex - now triggers once per turn instead of once per mission.
 [*] Total Combat - now also grants a Grenade-only slot. Now a cross-class perk, but not available to Grenadiers.
 [*] Interrupt - now grants two actions and has a 3 turn cooldown instead of one use per mission. Multiple units can Interrupt together now.
@@ -225,6 +223,7 @@ Not incompatible, but pointless
 [*] Overcharge, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
 [*] Bladestorm - renamed to "Zeal" and is always present in the ability tree (no longer an XCOM row random perk). New icon.
 [*] Reaper - removed as possible XCOM row perks. Sort of replaced by Arc Overload.
+[*] XCOM row perks - significantly expanded with more fun picks. Fortress removed for the crime of being stupid and OP.
 [*] New ability: Soul Shot - a ranged version of Rend that can miss. Has innate bonus of +20 Aim.
 [*] New ability: Overdraw (replaces Overcharge) - Rend and Soul Shot always generate a point of Focus, even when they don't kill the target.
 [*] New ability: Seal - your abilities mark enemies until the end of turn. If an ally kills a marked enemy, you generate 1 Focus. Triggers once per turn.
