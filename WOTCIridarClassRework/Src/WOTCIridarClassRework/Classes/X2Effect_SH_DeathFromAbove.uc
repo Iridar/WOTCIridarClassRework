@@ -1,6 +1,7 @@
-class X2Effect_SH_DeathFromAbove extends X2Effect_DeathFromAbove;
+class X2Effect_SH_DeathFromAbove extends X2Effect_DeathFromAbove config(ClassRework);
 
 var private name ValueName;
+var config array<name> SecondStageAbilities; // Array of two stage abilities like Chain Shot and Rapid Fire
 
 function bool PostAbilityCostPaid(XComGameState_Effect EffectState, XComGameStateContext_Ability AbilityContext, XComGameState_Ability kAbility, XComGameState_Unit SourceUnit, XComGameState_Item AffectWeapon, XComGameState NewGameState, const array<name> PreCostActionPoints, const array<name> PreCostReservePoints)
 {
@@ -27,7 +28,7 @@ function bool PostAbilityCostPaid(XComGameState_Effect EffectState, XComGameStat
 		if (TargetUnit.IsDead() && PrevTargetUnit != None && SourceUnit.HasHeightAdvantageOver(PrevTargetUnit, true))
 		{
 			//  Check if the attack cost us action points.
-			if (!AbilityArraysMatch(SourceUnit.ActionPoints, PreCostActionPoints))
+			if (!AbilityArraysMatch(SourceUnit.ActionPoints, PreCostActionPoints) || default.SecondStageAbilities.Find(AbilityContext.InputContext.AbilityTemplateName) != INDEX_NONE)
 			{
 				AbilityState = XComGameState_Ability(History.GetGameStateForObjectID(EffectState.ApplyEffectParameters.AbilityStateObjectRef.ObjectID));
 				if (AbilityState != none)

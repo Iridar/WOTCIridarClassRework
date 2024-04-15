@@ -11,6 +11,153 @@ static event OnPostTemplatesCreated()
 	class'Specialist'.static.PatchAbilities();
 	class'SPARK'.static.PatchAbilities();
 	class'Reaper'.static.PatchAbilities();
+
+	//CheckClassAbilities();
+}
+
+static private function CheckClassAbilities()
+{
+	local X2SoldierClassTemplateManager ClassMgr;
+	local X2SoldierClassTemplate ClassTemplate;
+	local array<name> ClassNames;
+	local name ClassName;
+	local SoldierClassRank SoldierRank;
+	local SoldierClassAbilitySlot AbilitySlot;
+
+	ClassNames.AddItem('Ranger');
+	ClassNames.AddItem('Sharpshooter');
+	ClassNames.AddItem('Grenadier');
+	ClassNames.AddItem('Specialist');
+	ClassNames.AddItem('PsiOperative');
+	ClassNames.AddItem('Skirmisher');
+	ClassNames.AddItem('Reaper');
+	ClassNames.AddItem('Templar');
+
+	ClassMgr = class'X2SoldierClassTemplateManager'.static.GetSoldierClassTemplateManager();
+
+	foreach ClassNames(ClassName)
+	{
+		ClassTemplate = ClassMgr.FindSoldierClassTemplate(ClassName);
+
+		foreach ClassTemplate.SoldierRanks(SoldierRank)
+		{
+			foreach SoldierRank.AbilitySlots(AbilitySlot)
+			{
+				CheckAbility(AbilitySlot.AbilityType.AbilityName);
+			}
+		}
+	}
+}
+
+static final protected function CheckAbility(const name AbilityName)
+{
+	local X2AbilityTemplate				AbilityTemplate;
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2Effect_ApplyWeaponDamage	DamageEffect;
+	local X2Effect						Effect;
+	local bool							bEffectFound;
+	local int							iNumIssuesFound;
+	local name							AdditionalAbility;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate(AbilityName);
+
+	foreach AbilityTemplate.AdditionalAbilities(AdditionalAbility)
+	{
+		CheckAbility(AdditionalAbility);
+	}
+
+	if (AbilityTemplate.AbilityTargetStyle.IsA('X2AbilityTarget_Self'))
+		return;
+
+	`AMLOG("### Begin checking ability:" @ AbilityName);
+
+	if (!AbilityTemplate.bAllowAmmoEffects)
+	{
+		iNumIssuesFound++;
+		`AMLOG("Does not apply ammo effects!");
+	}
+	if (!AbilityTemplate.bAllowBonusWeaponEffects)
+	{
+		iNumIssuesFound++;
+		`AMLOG("Does not apply bonus effects!");
+	}
+	if (!AbilityTemplate.bAllowFreeFireWeaponUpgrade)
+	{
+		iNumIssuesFound++;
+		`AMLOG("Does not allow Hair Trigger!");
+	}
+
+	if (AbilityTemplate.AbilityTargetEffects.Length > 0)
+	{	
+		// Add Stock Damage effect
+		bEffectFound = false;
+		foreach AbilityTemplate.AbilityTargetEffects(Effect)
+		{
+			DamageEffect = X2Effect_ApplyWeaponDamage(Effect);
+			if (DamageEffect == none)
+				continue;
+
+			if (DamageEffect.DamageTag == 'Miss' && !DamageEffect.bApplyOnHit && DamageEffect.bApplyOnMiss && DamageEffect.bIgnoreBaseDamage)
+			{
+				bEffectFound = true;
+				break;
+			}
+		}
+		if (!bEffectFound)
+		{
+			iNumIssuesFound++;
+			`AMLOG("Does not apply Stock Miss Damage!");
+		}
+
+		// Add Holo Targeting effect
+		bEffectFound = false;
+		foreach AbilityTemplate.AbilityTargetEffects(Effect)
+		{
+			if (X2Effect_HoloTarget(Effect) != none)
+			{
+				bEffectFound = true;
+				break;
+			}			
+		}
+		if (!bEffectFound)
+		{
+			iNumIssuesFound++;
+			`AMLOG("Does not apply Holo Targeting!");
+		}
+	}
+	
+	if (AbilityTemplate.AbilityMultiTargetEffects.Length > 0 && AbilityTemplate.AbilityMultiTargetStyle != none)
+	{
+		// Add Stock Damage effect
+		bEffectFound = false;
+		foreach AbilityTemplate.AbilityMultiTargetEffects(Effect)
+		{
+			DamageEffect = X2Effect_ApplyWeaponDamage(Effect);
+			if (DamageEffect == none)
+				continue;
+
+			if (DamageEffect.DamageTag == 'Miss' && !DamageEffect.bApplyOnHit && DamageEffect.bApplyOnMiss && DamageEffect.bIgnoreBaseDamage)
+			{
+				bEffectFound = true;
+				break;
+			}
+		}
+		if (!bEffectFound)
+		{
+			iNumIssuesFound++;
+			`AMLOG("Does not apply Stock damage to multi targets!");
+		}
+	}
+
+	if (iNumIssuesFound > 0)
+	{
+		`AMLOG("+++ WARNING, Found issues:" @ iNumIssuesFound);
+	}
+	else
+	{
+		`AMLOG("--- ALL CLEAR");
+	}
 }
 
 // --------------------------

@@ -9,8 +9,44 @@ static final function PatchAbilities()
 	//PatchSuppression();
 	PatchSuppressionShot();
 	//PatchRupture();
+
+	PatchBulletShred();
+	PatchHailOfBullets();
 }
 
+static private function PatchHailOfBullets()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('HailOfBullets');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.bAllowFreeFireWeaponUpgrade = true;
+}
+
+static private function PatchBulletShred()
+{
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Condition_UnitEffects			UnitEffects;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('BulletShred');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
+
+	// For some reason Firaxis decided to allow using Rupture while disoriented.
+	UnitEffects = new class'X2Condition_UnitEffects';
+	UnitEffects.AddExcludeEffect(class'X2AbilityTemplateManager'.default.DisorientedName, 'AA_UnitIsDisoriented');
+	AbilityTemplate.AbilityShooterConditions.AddItem(UnitEffects);
+
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
+}
 
 //static private function PatchRupture()
 //{
@@ -123,6 +159,8 @@ static private function PatchChainShot()
 	if (AbilityTemplate == none || AbilityTemplate2 == none)	
 		return;
 
+	AbilityTemplate.bAllowFreeFireWeaponUpgrade = true;
+
 	ToHitCalc = X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc);
 	ToHitCalc2 = X2AbilityToHitCalc_StandardAim(AbilityTemplate2.AbilityToHitCalc);
 	if (ToHitCalc == none || ToHitCalc2 == none)	
@@ -130,6 +168,8 @@ static private function PatchChainShot()
 
 	ToHitCalc2.BuiltInHitMod = ToHitCalc.BuiltInHitMod;
 	ToHitCalc.BuiltInHitMod = 0;
+
+	AbilityTemplate2.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
 }
 
 static private function PatchSaturationFire()
@@ -153,6 +193,8 @@ static private function PatchSaturationFire()
 	WorldDamage.bSkipGroundTiles = true;
 	AbilityTemplate.AddShooterEffect(WorldDamage);
 	AbilityTemplate.bRecordValidTiles = true; // For the world damage effect
+
+	Template.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
 }
 
 static private function PatchBlastPadding()

@@ -6,6 +6,102 @@ static final function PatchAbilities()
 	PatchBloodTrail();
 	PatchImprovisedSilencer();
 	PatchExecutioner();
+	PatchSoulReaper();
+
+	MakeInterruptible('ThrowClaymore');
+	MakeInterruptible('ThrowShrapnel');
+	MakeInterruptible('HomingMine');
+	MakeInterruptible('RemoteStart');
+}
+
+static private function PatchSoulReaper()
+{
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2AbilityTemplate				AbilityTemplate;
+	local int i;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SoulReaper');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
+
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SoulReaperContinue');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;	
+
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
+
+	for (i=0; i < AbilityTemplate.AbilityTriggers.length; i++)
+	{
+		if (X2AbilityTrigger_EventListener(AbilityTemplate.AbilityTriggers[i]) != none)
+		{
+			X2AbilityTrigger_EventListener(AbilityTemplate.AbilityTriggers[i]).ListenerData.EventFn = SoulReaperListener;
+			break;
+		}
+	}
+}
+
+// Copied from MrNice's Ability Interaction Fixes and restyled a bit.
+static private function EventListenerReturn SoulReaperListener(Object EventData, Object EventSource, XComGameState GameState, Name EventID, Object CallbackData)
+{
+	local XComGameStateHistory			History;
+	local XComGameState_Ability			AbilityState;
+	local XComGameStateContext_Ability	AbilityContext;
+	local XComGameState_Unit			SourceUnit;
+	local XComGameState_Unit			TargetUnit;
+	local array<StateObjectReference>	PossibleTargets;
+	local StateObjectReference			BestTargetRef;
+	local int							BestTargetHP;
+	local bool							bAbilityTriggered;
+	local int i;
+	
+	AbilityContext = XComGameStateContext_Ability(GameState.GetContext());
+	if (AbilityContext == none || AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt)
+		return ELR_NoInterrupt;
+
+	SourceUnit = XComGameState_Unit(GameState.GetGameStateForObjectID(AbilityContext.InputContext.SourceObject.ObjectID));
+	if (SourceUnit == none)
+		return ELR_NoInterrupt;
+
+	AbilityState = XComGameState_Ability(CallbackData);
+	if (AbilityState == none)
+		return ELR_NoInterrupt;
+
+	bAbilityTriggered = AbilityState.AbilityTriggerAgainstSingleTarget(AbilityContext.InputContext.PrimaryTarget, false);
+
+	if (!bAbilityTriggered && SourceUnit.HasSoldierAbility('SoulHarvester'))
+	{
+		//	find all possible new targets and select one with the highest HP to fire against
+		History = `XCOMHISTORY;
+		
+		class'X2TacticalVisibilityHelpers'.static.GetAllVisibleEnemyUnitsForUnit(SourceUnit.ObjectID, PossibleTargets, AbilityState.GetMyTemplate().AbilityTargetConditions);
+		BestTargetHP = -1;
+
+		for (i = 0; i < PossibleTargets.Length; ++i)
+		{
+			TargetUnit = XComGameState_Unit(History.GetGameStateForObjectID(PossibleTargets[i].ObjectID));
+			if (TargetUnit.GetCurrentStat(eStat_HP) > BestTargetHP)
+			{
+				BestTargetHP = TargetUnit.GetCurrentStat(eStat_HP);
+				BestTargetRef = PossibleTargets[i];
+			}
+		}
+		if (BestTargetRef.ObjectID > 0)
+		{
+			bAbilityTriggered = AbilityState.AbilityTriggerAgainstSingleTarget(BestTargetRef, false);
+		}
+	}
+
+	if (!bAbilityTriggered)
+	{
+		SourceUnit.BreakConcealment();
+	}
+	
+	return ELR_NoInterrupt;
 }
 
 static private function PatchExecutioner()

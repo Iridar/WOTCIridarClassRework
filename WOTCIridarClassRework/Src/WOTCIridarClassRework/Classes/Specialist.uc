@@ -112,6 +112,8 @@ static private function PatchCapacitorDischarge()
 
 		DamageEffect.bIgnoreArmor = true;
 	}
+
+	AbilityTemplate.BuildInterruptGameStateFn = none; // Decided that GREMLIN abilities shouldn't be interruptible. None of the others are, anyway.
 }
 
 static private function PatchHaywireProtocol()

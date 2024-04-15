@@ -9,28 +9,20 @@ Created with Enhanced Mod Project Template v1.0
 Get news and updates here: 
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
-[WOTC] Iridar's Soldier Class Overhaul
-
-This mod overhauls the four base game classes, three WOTC classes, and SPARKs by fixing bugs, doing small balancing tweaks and in some cases reordering abilities in the ability tree.
-
-This mod is intended as the go-to mod to fix all the various issues with vanilla classes, without the need to collect dozens of mods that individually fix small issues. It integrates fixes from a lot of existing mods, making them incompatible or redundant.
-
+----------------------------------------------------------
 
 TODO
-- Mentally Awake doesn't work in TQL, test in a campaign
-- Update Templar tutorial tooltip "Each point of Focus increases..."
 - Translate ClassRework/XComGame.int to Russian
-- Check that all weapon abilities work with weapon upgrades/ammo/shredder
-- Check which abilities don't build interrupt game state but should
-- Forbid using Rupture while disoriented
 
-; [XComGame.X2SoldierClassTemplateManager]
-; +ExtraCrossClassAbilities = (AbilityName="EverVigilant")
-; +ExtraCrossClassAbilities = (AbilityName="IRI_AWC_MedicinePouch")
+----------------------------------------------------------
 
-Integrate relevant stuff from Weapon Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501 
-and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719
+[WOTC] Iridar's Soldier Class Overhaul
 
+This mod overhauls the four base game classes, three WOTC classes, and SPARKs by fixing bugs, tweaking balance, reordering ability trees and adding new perks. A few perks are completely replaced or overhauled significantly.
+
+This mod is intended as the go-to mod for fixing all the various issues with vanilla classes, without the need to collect dozens of mods that individually fix small issues. It integrates fixes from a lot of existing mods, making them incompatible or redundant.
+
+In general the purpose of this mod is to make using vanilla classes more fun, very few things have been nerfed.
 
 [h1]REQUIREMENTS[/h1]
 [list]
@@ -38,59 +30,15 @@ and Ability Interaction Fixes https://steamcommunity.com/sharedfiles/filedetails
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2363075446][b][WOTC] Iridar's Template Master - Core[/b][/url]
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2166295671][b][WOTC] Core Collection Meta Mod[/b][/url] - fixes SPARK Bulwark and other bugs.
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1737532501][b][WotC] Weapon Fixes[/b][/url] - required to make Skirmisher Return fire properly interact with Stock upgrade, Holo Targeting and Shredder.
-
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2071833199][b][WOTC] Reliable Ever Vigilant[/b][/url] - fixes Ever Vigilant.
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1124794449][b][WOTC] Cinematic Rapid Fire[/b][/url] - fixes visualization for Banish/Annihilate.
 [/list]
-
-; TODO: Mark Reliable Vigilant as required
-
-
-[h1]SKIRMISHER[/h1]
-
-Skirmishers are universally considered to be the weakest faction hero class. Many of their abilities are either useless or broken, and many can be used only once per mission.
-Their Bullpups also have poor scaling. So the result is that they have essentially only one viable build, and even that falls off towards the late game significantly.
-
-Summary of the changes: higher tier Bullpups buffed, charge-based abilities switched to cooldowns, broken abilities fixed, inferior abilities buffed, boring and bad abilities reworked. New abilities added.
-Ability tree is rearranged into three coherent specializations with different playstyles and sensible progression.
-Three new Major-rank abilities added to further improve their late game.
-New XCOM abilities added to the random deck.
-
-[b]Hussar[/b] - classic melee Skirmisher gameplay you know and love. High mobility, offensive use of the Grapple and Ripjack.
-[b]Judge[/b] - thrives under pressure, can hold a position while showering enemies with reaction attacks.
-[b]Tactician[/b] - master of breaking the flow of enemy actions and the ultimate team player.
-
-[h1]CHANGELOG[/h1]
-[list]
-[*] Bullpups: mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
-[*] Ripjack attacks now have 10% base crit chance, same as swords.
-[*] Reflex: can trigger once per turn instead of once per mission.
-[*] Zero In: reworked, now stacks are granted by all bullpup attacks, including reaction shots, and melee attacks, and stacks gained on the enemy turn (e.g. from Overwatch) last until the end of your following turn. Additionally, your reaction attacks can deal critical damage.
-[*] Full Throttle: kills now also reduce cooldown of Grapple by 1.
-[*] Combat Presence: can be used during Interrupt, immediately granting an Interrupt action to another soldier. Can be used during Battlelord, immediately granting a standard action to another soldier.
-[*] Whiplash: now has 5 turn cooldown instead of 1 use per mission. Damage scales from 4 to 8 damage, and can crit for additional 1 to 3 damage depending on Ripjack tier. Robotic units now take ~50% increased base damage compared to organics.
-[*] Interrupt: now has 5 turn cooldown instead of 1 use per mission and does not cost any action points to activate. Multiple units can now interrupt at the same time. Cannot use Interrupt and Battlelord together.
-[*] Waylay: reworked. Now it simply gives Overwatch an extra shot and allows to remain on Overwatch upon taking damage.
-[*] Return Fire: now included into main ability tree and ignores enemy cover defense.
-[*] Total Combat: now also grants a grenade-only slot.
-[*] Retribution: now can trigger only once per turn.
-[*] Reckoning: cooldown removed, but now action cost scales with distance to the target. Essentially works same as Ranger's Slash, except it doesn't end turn if you still have actions remaining.
-[*] Battlelord: now has 5 turn cooldown instead of 1 use per mission. Fixed bug that allowed it to trigger only once. Multiple units can now use Battlelord at the same time. Cannot use Interrupt and Battlelord together.
-[*] Manual Override: now is a free action with a 5 turn cooldown, when used it temporarily resets cooldowns on all abilities that cost action points for one turn. Cooldowns are restored on the next turn.
-[*] Parkour: now grants a Move action after using Grapple.
-[*] New ability: Predator Strike -> executes an adjacent humanoid enemy. If that enemy is ADVENT, you also reveal the closest ADVENT unit in the fog of war until the end of turn.
-[*] New ability: Thunder Lance -> use your grapple to launch grenades. Launched grenades have extra range and deal double damage to targets they impact directly.
-[*] New ability: Kinetic Armor -> Absorb missed enemy attacks to generate Shield HP equal to the damage avoided. The shield lasts until the end of your turn. This effect can trigger once per turn."
-[/list]
-
 
 
 [h1]INCOMPATIBLE AND REDUNDANT MODS[/h1]
 
-I did copy a few icons from Shiremct's Proficiency mods, with permission.
-
-Some changes are inspired by following mods, but unless specified, not a single line of code or asset was copied.
-
 [b]THE FOLLOWING MODS SHOULD NOT BE USED ALONGSIDE THIS MOD. AT BEST THEY WOULD BE REDUNDANT, AT WORST - INCOMPATIBLE.[/b]
-
+[list]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=700550966]Quickdraw Fix[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1267996790]Quickdraw Sensitivity[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1379047477]More Effective Blast Padding[/url][/b]
@@ -100,22 +48,29 @@ Some changes are inspired by following mods, but unless specified, not a single 
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2648230104]Sacrifice Targeting Fix[/url][/b] - integrated with permission.
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1440747908][WOTC] SPARK Repair Fix/url][/b] - integrated with permission.
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1396894338][WOTC] Electrical Damage Consistency[/url][/b]
-
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1393922219][WOTC] Critical Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1557499446]Hero Rebalance - Skirmisher[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752][WOTC] A Better Ghost[/url][/b] - Class Rework replaces original Ghost ability for Templars with a new one, so this mod would be pointless, unless you have another soldier class that uses the old Ghost.
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719][WOTC] Ability Interaction Fixes[/url][/b] - all relevant fixes are integrated.
+[/list]
+
+[h1]CREDITS[/h1]
+
+Thanks to [b]Shiremct[/b] for allowing me to copy a few ability icons from his Proficiency mods.
+Some changes are inspired by other mods listed above, but unless specified, not a single line of code or asset was copied.
+
+Please [b][url=https://www.patreon.com/Iridar]support me on Patreon[/url][/b] if you require tech support, have a suggestion for a feature, or simply wish to help me create more awesome mods.
 
 
-
-
-[WOTC] A Better Ghost
-https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752
-Not incompatible, but pointless
 
 
 [h1]RANGER[/h1]
+
+Vanilla Rangers are already in the great state, but are completely outclassed by Reapers for purposes of scouting. This mod somewhat remedies the situation, and in general buffs some of the least used abilities. 
+
 [list]
 [*] Ability tree rearranged.
 [*] Phantom now additionally reduces concealment detection range by 50%.
@@ -128,6 +83,9 @@ Not incompatible, but pointless
 [/list]
 
 [h1]SHARPSHOOTER[/h1]
+
+Key feature is that some of the Sniper perks can now interact with Pistols. Weaker abilities buffed.
+
 [list]
 [*] Ability tree rearranged.
 [*] Squadsight - removed hidden crit chance penalty.
@@ -141,6 +99,9 @@ Not incompatible, but pointless
 [/list]
 
 [h1]GRENADIER[/h1]
+
+Bugfixes and improvements to weaker abilities. 
+
 [list]
 [*] Blast Padding - now applies to environmental damage.
 [*] Demolition - now a guaranteed hit and applies Holo Targeting.
@@ -148,9 +109,13 @@ Not incompatible, but pointless
 [*] Heavy Ordnance - corrected description to no longer mention Battle Scanners.
 [*] Chain Shot - aim penalty moved from the first shot to the second one.
 [*] Saturation Fire - now applies ammo effects and is more reliable at destroying cover.
+[*] Rupture - no longer usable while Disoriented.
 [/list]
 
 [h1]SPECIALIST[/h1]
+
+Mostly bugfixes and consistency improvements. Notably, all Protocol abilities no longer end turn.
+
 [list]
 [*] Combat Protocol - no longer ends turn.
 [*] Revival Protocol - bugfixes, charges changed to 1/2/3.
@@ -164,6 +129,9 @@ Not incompatible, but pointless
 [/list]
 
 [h1]REAPER[/h1]
+
+Vanilla Reapers are already excellent, so this rework mostly just fills the holes in their ability tree and buffs some of the weaker abilities, as well as improving the clarity of the in-game descriptions for some of the more confusing ones.
+
 [list]
 [*] Ability tree reordered.
 [*] Shadow, Remote Start, Silent Killer, Needle, Banish - corrected descriptions for clarity.
@@ -179,6 +147,14 @@ Not incompatible, but pointless
 [/list]
 
 [h1]SKIRMISHER[/h1]
+
+Skirmishers are considered by most to be the weakest faction hero class. Many of their abilities are either useless or broken, and many can be used only once per mission. Their Bullpups also have poor scaling. So the result is that they have essentially only one viable build, and even that falls off towards the late game significantly.
+
+This mod changes Skirmishers somewhat extensively, replacing charges with cooldowns, fixing bugs, improving utility and buffing weak abilities. The three specializations are:
+[b]Hussar[/b] - classic melee Skirmisher gameplay you know and love. High mobility, offensive use of the Grapple and Ripjack.
+[b]Judge[/b] - thrives under pressure, can hold a position while showering enemies with reaction attacks.
+[b]Tactician[/b] - master of breaking the flow of enemy actions and the ultimate team player.
+
 [list]
 [*] Ability tree reordered.
 [*] Justice - fixed a visual bug that makes the enemy float in the air if it's pulled into high cover and then killed.
@@ -205,11 +181,16 @@ Not incompatible, but pointless
 
 
 [h1]TEMPLAR[/h1]
+
+Templars are redesigned from the ground up to resolve their inner conflict with Focus. In vanilla, they have many cool abilities that cost Focus that just never get used, because there are too many reasons to hoard Focus and in general invest into abilities that enhance Rend. 
+
+The new Templar is all about spending Focus, particularly on Volt, which is now a free action, and meant to complement your Rend to keep up the damage output. Many abilities were overhauled to be simpler and with a more clear purpose.
+
 [list]
 [*] Ability tree almost entirely redesigned.
 [*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus. New icon.
 [*] Templar Focus - having Focus no longer provides passive benefits of any kind, and most abilities no longer have Focus scaling.
-[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, crits psionic enemies for +2 extra damage. Description now mentions that it ignores armor. Can be interrupted now.
+[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, crits psionic enemies for +2 extra damage. Description now mentions that it ignores armor.
 [*] Parry - now is a defensive ability that cannot be interrupted.
 [*] Aftershock - no longer stacks with itself.
 [*] Amplify - no longer costs Focus to use. Can be used with regular or Momentum action, does not end turn. Now makes target take +33% base damage from the next attack.
@@ -217,7 +198,7 @@ Not incompatible, but pointless
 [*] Deflect - now is an active ability. Free action that costs 2 Focus, and allows the Templar to deflect the next attack directed at them. Lasts indefinitely, doesn't stack.
 [*] Stun Strike - now is a guaranteed hit and can be interrupted, and instead of disorientation stuns the target.
 [*] Invert - now can target both allied and enemy units, no longer costs Focus, and can be used with Momentum actions. 
-[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. Can be interrupted now. New icon.
+[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. New icon.
 [*] Ionic Storm - now triggers Momentum and instead of using its own damage values just hits enemies with Volt. Hits twice if used at 2 Focus.
 [*] Pillar - removed from the tree due to currently unsolvable bugs with the way it grants cover.
 [*] Overcharge, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
@@ -232,10 +213,6 @@ Not incompatible, but pointless
 [*] New ability: Arc Overload - when at maximum Focus, activate to become overloaded until the end of turn. While overloaded, killing an enemy with Volt grants an action point.
 [/list]
 
-
-
-
-
 [h1]SPARK[/h1]
 [list]
 [*] Bulwark - updated description to mention enemies receive cover too.
@@ -244,12 +221,18 @@ Not incompatible, but pointless
 [*] Sacrifice - integrated Sacrifice Targeting Fix.
 [/list]
 
-RandomAbilityDecks=(DeckName="ReaperXComAbilities",          
-Abilities=(
-(AbilityName="Shredder",  ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
-(AbilityName="Squadsight"),               
-(AbilityName="KillZone", ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
-(AbilityName="TacticalRigging"),               
-(AbilityName="HoloTargeting",  ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
-(AbilityName="Deadeye", ApplyToWeaponSlot=eInvSlot_PrimaryWeapon),               
-(),               (),               ()))
+[h1]ABILITY INTERRUPTION CHANGES[/h1]
+Made a pass over all abilities used by the vanilla classes to make sure they can be interrupted by abilities like Covering Fire when it makes sense.
+[list]
+[*] If it's an offensive ability, it can be interrupted, even if it's a free action. 
+[*] Neutral abilities can be interrupted if they're not a free action.
+[*] Defensive abilities cannot be interrupted. This includes Overwatch.
+[*] Exception from this are Specialist's GREMLIN abilities - none of them can be interrupted. Previously, only Capacitor Discharge was interruptible.
+[/list]
+
+[h1]CROSS-CLASS ABILITY CHANGES[/h1]
+[list]
+[*] Faction heroes now will have a much larger variety of XCOM abilities. 
+[*] Cross-class abilities for regular soldiers are also somewhat expanded.
+[*] Colonel-rank perks, like Rapid Fire and Saturation Fire, can no longer be cross-class abilities.
+[/list]

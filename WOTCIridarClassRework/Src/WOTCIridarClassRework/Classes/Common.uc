@@ -72,24 +72,24 @@ static final protected function EnsureWeaponUpgradeInteraction(out X2AbilityTemp
 			AbilityTemplate.AddMultiTargetEffect(default.WeaponUpgradeMissDamage);
 		}
 
-		// Add Holo Targeting effect
-		bEffectFound = false;
-		foreach AbilityTemplate.AbilityMultiTargetEffects(Effect)
-		{
-			if (X2Effect_HoloTarget(Effect) != none)
-			{
-				bEffectFound = true;
-				break;
-			}			
-		}
-		if (!bEffectFound)
-		{
-			AbilityTemplate.AddMultiTargetEffect(class'X2Ability_GrenadierAbilitySet'.static.HoloTargetEffect());
-			if (AbilityTemplate.AssociatedPassives.Find('HoloTargeting') == INDEX_NONE)
-			{
-				AbilityTemplate.AssociatedPassives.AddItem('HoloTargeting');
-			}
-		}
+		// Add Holo Targeting effect -- Firaxis didn't want multi target abilities to apply holo targeting.
+		//bEffectFound = false;
+		//foreach AbilityTemplate.AbilityMultiTargetEffects(Effect)
+		//{
+		//	if (X2Effect_HoloTarget(Effect) != none)
+		//	{
+		//		bEffectFound = true;
+		//		break;
+		//	}			
+		//}
+		//if (!bEffectFound)
+		//{
+		//	AbilityTemplate.AddMultiTargetEffect(class'X2Ability_GrenadierAbilitySet'.static.HoloTargetEffect());
+		//	if (AbilityTemplate.AssociatedPassives.Find('HoloTargeting') == INDEX_NONE)
+		//	{
+		//		AbilityTemplate.AssociatedPassives.AddItem('HoloTargeting');
+		//	}
+		//}
 	}
 }
 
@@ -202,4 +202,21 @@ static final protected function CopyLocalization(X2AbilityTemplateManager Abilit
 		Template.LocDefaultPrimaryWeapon = DonorTemplate.LocDefaultPrimaryWeapon;
 		Template.LocDefaultSecondaryWeapon = DonorTemplate.LocDefaultSecondaryWeapon;
 	}
+}
+
+
+static final protected function MakeInterruptible(const name TemplateName)
+{
+	local X2AbilityTemplateManager	AbilityMgr;
+	local X2AbilityTemplate			Template;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	Template = AbilityMgr.FindAbilityTemplate(TemplateName);
+	if (Template == none)	
+		return;
+
+	if (Template.BuildInterruptGameStateFn != none)
+		return;
+
+	Template.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
 }

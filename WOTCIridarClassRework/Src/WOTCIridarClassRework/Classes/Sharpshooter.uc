@@ -12,6 +12,24 @@ static final function PatchAbilities()
 	PatchDeathFromAbove();
 	PatchSharpshooterAim();
 	PatchReturnFire();
+
+	PatchKillZoneShot();
+
+	MakeInterruptible('LightningHands');
+	MakeInterruptible('Faceoff');
+}
+
+static private function PatchKillZoneShot()
+{
+	local X2AbilityTemplateManager		AbilityMgr;
+	local X2AbilityTemplate				AbilityTemplate;
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('KillZoneShot');
+	if (AbilityTemplate == none)
+		return;
+
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }
 
 static private function PatchReturnFire()
@@ -125,7 +143,7 @@ static private function PatchDeathFromAbove()
 
 			DeathFromAbove = new class'X2Effect_SH_DeathFromAbove';
 			DeathFromAbove.BuildPersistentEffect(1, true, false, false);
-			DeathFromAbove.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, false,,AbilityTemplate.AbilitySourceName);
+			DeathFromAbove.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage, true,,AbilityTemplate.AbilitySourceName);
 			AbilityTemplate.AddTargetEffect(DeathFromAbove);
 
 			break;
@@ -176,6 +194,10 @@ static private function PatchDeadeye()
 	ToHitCalc = X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc);
 	ToHitCalc.FinalMultiplier = 1.0f;
 	ToHitCalc.BuiltInHitMod = `GetConfigInt("IRI_SH_DeadEye_AimPenalty");
+
+	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
+
+	AbilityTemplate.bAllowFreeFireWeaponUpgrade = true;
 }
 
 static private function PatchFanFire()
@@ -199,6 +221,8 @@ static private function PatchFanFire()
 		// Make it turn-ending
 		ActionCost.bConsumeAllPoints = true;
 	}
+
+	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
 }
 
 static private function PatchSerial()

@@ -226,4 +226,13 @@ static private function PatchRapidFire()
 		return;
 
 	AddCooldown(AbilityTemplate, `GetConfigFloat("IRI_RapidFire_Cooldown"));
+
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
+
+	AbilityTemplate = AbilityMgr.FindAbilityTemplate('RapidFire2');
+	if (AbilityTemplate == none)	
+		return;
+
+	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
+	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }
