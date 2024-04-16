@@ -32,6 +32,9 @@
     <Content Include="Config\ClassRework\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\ClassRework\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>

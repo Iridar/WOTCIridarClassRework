@@ -2,15 +2,14 @@ class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
 static event OnPostTemplatesCreated()
 {
-	// TODO: Add switches for all of these
-	class'Skirmisher'.static.PatchAbilities();
-	class'Templar'.static.PatchAbilities();
-	class'Ranger'.static.PatchAbilities();
-	class'Sharpshooter'.static.PatchAbilities();
-	class'Grenadier'.static.PatchAbilities();
-	class'Specialist'.static.PatchAbilities();
-	class'SPARK'.static.PatchAbilities();
-	class'Reaper'.static.PatchAbilities();
+	if (`GetConfigBool("Skirmisher"))	class'Skirmisher'.static.PatchAbilities();
+	if (`GetConfigBool("Templar"))		class'Templar'.static.PatchAbilities();
+	if (`GetConfigBool("Ranger"))		class'Ranger'.static.PatchAbilities();
+	if (`GetConfigBool("Sharpshooter"))	class'Sharpshooter'.static.PatchAbilities();
+	if (`GetConfigBool("Grenadier"))	class'Grenadier'.static.PatchAbilities();
+	if (`GetConfigBool("Specialist"))	class'Specialist'.static.PatchAbilities();
+	if (`GetConfigBool("SPARK"))		class'SPARK'.static.PatchAbilities();
+	if (`GetConfigBool("Reaper"))		class'Reaper'.static.PatchAbilities();
 
 	//CheckClassAbilities();
 }

@@ -11,18 +11,24 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 
 ----------------------------------------------------------
 
-TODO
-- Translate ClassRework/XComGame.int to Russian
 
 ----------------------------------------------------------
 
-[WOTC] Iridar's Soldier Class Overhaul
+[WOTC] Iridar's Soldier Class Overhaul [BETA]
 
-This mod overhauls the four base game classes, three WOTC classes, and SPARKs by fixing bugs, tweaking balance, reordering ability trees and adding new perks. A few perks are completely replaced or overhauled significantly.
+This mod overhauls the four base game classes, three WOTC classes and SPARKs, by fixing bugs, tweaking balance, reordering ability trees and adding new perks. A few perks are completely replaced or overhauled significantly.
 
 This mod is intended as the go-to mod for fixing all the various issues with vanilla classes, without the need to collect dozens of mods that individually fix small issues. It integrates fixes from a lot of existing mods, making them incompatible or redundant.
 
-In general the purpose of this mod is to make using vanilla classes more fun, very few things have been nerfed.
+In general, the purpose of this mod is to make using vanilla classes more fun, very few things have been nerfed.
+
+[b][url=https://docs.google.com/spreadsheets/d/1rK5HSyUE7DJCtnkfpTZa9W0fcBU9YCqPCTpf2-Qn4pQ/edit?usp=sharing]>>> NEW PERK LAYOUTS <<<[/url][/b]
+
+[b][url=]>>> DETAILED CHANGELOG <<<[/url][/b]
+
+[h1]BETA STATUS[/h1]
+
+The mod is fresh out of the oven, and has not been playtested extensively. There could be bugs. If you encounter any issues, please comment about them below.
 
 [h1]REQUIREMENTS[/h1]
 [list]
@@ -69,12 +75,20 @@ Please [b][url=https://www.patreon.com/Iridar]support me on Patreon[/url][/b] if
 
 [h1]RANGER[/h1]
 
-Vanilla Rangers are already in the great state, but are completely outclassed by Reapers for purposes of scouting. This mod somewhat remedies the situation, and in general buffs some of the least used abilities. 
+Vanilla Rangers are already in the great state, but are completely outclassed by Reapers for purposes of scouting. This mod somewhat remedies the situation, and buffs some of the least used abilities. 
+
+I consider Blademaster, Bladestorm and Implacable to be must have abilities for a melee ranger, so I put all of them into the Assault specialization. Both Implacable and Run and Gun are powerful perks, so they're now on the same rank. Deep Cover and Conceal share the same theme of being hard to get, so they're on the same rank. Bladestorm and Untouchable are both powerful perks, so they're on the same rank. 
+
+Overall, you get two clearly different specializations/playstyles: Assault is all about offensive use of the sword. Deep Cover can help get into the position under fire, but Conceal is also a viable pick on the same rank. 
+
+Meanwile, Scout is still the poor man's Reaper, but with its own identity of waiting for the right moment, and then bashing the door in for 1-2 (3 with the consumable concealment item) powerful turns per mission.
+
+Overall, Assault is obviously much stronger, but there's only so much I can do without completely overhauling the class.
 
 [list]
-[*] Ability tree rearranged.
-[*] Phantom now additionally reduces concealment detection range by 50%.
-[*] Shadowstrike now actually applies its bonus while concealed instead of against enemies that can't see the Ranger. The bonus is now also provided for the entire turn the concealment was broken, which allows it to apply to melee attacks.
+[*] Ability tree rearranged. 
+[*] Phantom now additionally reduces detection range in concealment by 50%.
+[*] Shadowstrike now actually applies its bonus while concealed instead of against enemies that can't see the Ranger. The bonus is now also provided for the entire turn the concealment was broken, and is now applied to melee attacks in a transparent manner.
 [*] Conceal - updated description to mention it can't be used while flanked.
 [*] Implacable - updated description to no longer say you can't attack after gaining the bonus Move.
 [*] Untouchable - updated description to no longer say you have to get a kill on your turn. Added a flyover and a buff chevron when the Untouchable bonus is gained. 
@@ -84,7 +98,8 @@ Vanilla Rangers are already in the great state, but are completely outclassed by
 
 [h1]SHARPSHOOTER[/h1]
 
-Key feature is that some of the Sniper perks can now interact with Pistols. Weaker abilities buffed.
+Sharpshooters are functionally fine in vanilla for the most part, but their perk progression is awful. With my rework, key perks are given earlier, and there's a clear gameplay loop of proccing Death From Above, and then using that action point on Hunker Down to boost your accuracy with Aim. Both Aim and Death From Above now have proper interactions with pistol abilities,
+which should make the Sniper spec a bit more versatile. I also put Fan Fire earlier in the tree and on the same rank as Deadeye, as both are high damage single target abilities, and Faceoff and Serial are also on the same rank now, which makes way more sense to me than the vanilla layout.
 
 [list]
 [*] Ability tree rearranged.
@@ -100,7 +115,7 @@ Key feature is that some of the Sniper perks can now interact with Pistols. Weak
 
 [h1]GRENADIER[/h1]
 
-Bugfixes and improvements to weaker abilities. 
+Grenadiers are changed the least by the rework. The biggest changes are buffs to Suppression and Demolition, the rest are mostly bugfixes.
 
 [list]
 [*] Blast Padding - now applies to environmental damage.
@@ -130,7 +145,7 @@ Mostly bugfixes and consistency improvements. Notably, all Protocol abilities no
 
 [h1]REAPER[/h1]
 
-Vanilla Reapers are already excellent, so this rework mostly just fills the holes in their ability tree and buffs some of the weaker abilities, as well as improving the clarity of the in-game descriptions for some of the more confusing ones.
+Vanilla Reapers are already excellent, so this rework mostly just fills the holes in their ability tree and buffs some of the weaker abilities, as well as improves the clarity of the in-game descriptions for some of the more confusing ones.
 
 [list]
 [*] Ability tree reordered.
