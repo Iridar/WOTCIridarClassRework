@@ -1,46 +1,43 @@
 class X2Effect_PersistentVoidConduit_Fixed extends X2Effect_PersistentVoidConduit;
 
+// TODO: Test and document, maybe remove initial damage
+
+function int GetStartingNumTurns(const out EffectAppliedData ApplyEffectParameters)
+{
+	local XComGameState_Unit SourceUnit;
+
+	SourceUnit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(ApplyEffectParameters.SourceStateObjectRef.ObjectID));
+	if (SourceUnit == none)
+		return 1;
+
+	`AMLOG("Returning:" @ SourceUnit.GetTemplarFocusLevel());
+
+	return SourceUnit.GetTemplarFocusLevel();
+}
+
+function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<name> ActionPoints, XComGameState_Effect EffectState)
+{
+	ActionPoints.Length = 0;
+}
+
 simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState, XComGameState_Effect NewEffectState)
 {
-	local XComGameState_Unit TargetUnit;
-	local TTile TileLocation;
-
-	super.OnEffectAdded(ApplyEffectParameters, kNewTargetState, NewGameState, NewEffectState);
-
-	TargetUnit = XComGameState_Unit(kNewTargetState);
-	if (TargetUnit == none || TargetUnit.IsDead())
-		return;
-
-	TileLocation = TargetUnit.TileLocation;
-
-	TileLocation.Z += 4;
-
-	TargetUnit.SetVisibilityLocation(TileLocation);
+	//local XComGameState_Unit TargetUnit;
+	//
+	//TargetUnit = XComGameState_Unit(kNewTargetState);
+	//if (TargetUnit != none)
+	//{
+	//	TargetUnit.TakeEffectDamage(self, InitialDamage, 0, 0, ApplyEffectParameters, NewGameState);
+	//}
 }
 
 simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParameters, XComGameState NewGameState, bool bCleansed, XComGameState_Effect RemovedEffectState)
 {
-	local XComGameState_Unit TargetUnit;
-	local TTile TileLocation;
+}
 
-	super.OnEffectRemoved(ApplyEffectParameters, NewGameState, bCleansed, RemovedEffectState);
+function bool AllowDodge(XComGameState_Unit Attacker, XComGameState_Ability AbilityState) { return false; }
 
-	TargetUnit = XComGameState_Unit(NewGameState.GetGameStateForObjectID(ApplyEffectParameters.TargetStateObjectRef.ObjectID));
-	if (TargetUnit == none)
-	{
-		TargetUnit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(ApplyEffectParameters.TargetStateObjectRef.ObjectID));
-		if (TargetUnit != none)
-		{
-			TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
-		}
-	}
-	if (TargetUnit == none)
-		return;
-
-	TileLocation = TargetUnit.TileLocation;
-	if (!`XWORLD.IsFloorTile(TileLocation))
-	{
-		TileLocation.Z -= 4;
-		TargetUnit.SetVisibilityLocation(TileLocation);
-	}
+DefaultProperties
+{
+	bCanTickEveryAction = false
 }

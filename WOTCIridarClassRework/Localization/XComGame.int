@@ -124,14 +124,6 @@ LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit ch
 ; LocFlyOverText="Conceal"
 LocPromotionPopupText="<Bullet/> Concealment can be entered at any location, but when done inside the detection radii of nearby enemies the Ranger will be revealed when flanked.<br/><Bullet/> Can't be used while flanked."
 
-[Implacable X2AbilityTemplate]
-; LocFriendlyName="Implacable"
-; LocLongDescription="If you score one or more kills on your turn, you are granted a single bonus move."
-; LocHelpText="Gain up to one move per turn after making a kill."
-; LocFlyOverText="Implacable"
-; LocPromotionPopupText="<Bullet/> The <Ability:ClassName/>'s attacks cannot be used after gaining a bonus move from Implacable.<br/>"
-LocPromotionPopupText=""
-
 [Untouchable X2AbilityTemplate]
 ; LocFriendlyName="Untouchable"
 LocLongDescription="If you score a kill, the next attack against you during the enemy turn will miss."
@@ -145,11 +137,6 @@ LocHelpText="If you score a kill, the next attack against you during the enemy t
 ; LocHelpText="Fire twice in a row at an enemy. Each shot suffers an Aim penalty of <Ability:RAPIDFIREPENALTY/>."
 ; LocFlyOverText="Rapid Fire"
 LocPromotionPopupText="<Bullet/> Rapid Fire is a devastating ability for dealing ranged damage.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
-
-[DeepCover X2AbilityTemplate]
-; LocFriendlyName="Deep Cover"
-LocLongDescription="If you did not attack this turn, hunker down automatically. Additionally, Hunker Down now provides +<Ability:IRI_DeepCover_ArmorBonus/> Armor, if activated manually."
-LocHelpText="If you did not attack this turn, hunker down automatically. Additionally, Hunker Down now provides +<Ability:IRI_DeepCover_ArmorBonus/> Armor, if activated manually."
 
 ; ================================================
 ;				SHARPSHOOTER
@@ -227,8 +214,8 @@ LocHelpText="Penalize target's aim and shoot them if they move or attack."
 
 
 [CombatProtocol X2AbilityTemplate]
-LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Does not end turn."
-LocHelpText="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Requires line of sight to the target. Does not end turn."
+LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Requires line of sight to the target.  Does not end turn."
+LocHelpText="Send the GREMLIN to an enemy to jolt them, dealing armor-piercing damage, which is increased against robotic enemies. Does not end turn."
 
 [HaywireProtocol X2AbilityTemplate]
 LocLongDescription="You may target robotic and mechanical enemies with your GREMLIN, attempting to hack them and seize control. Does not end turn."
@@ -332,28 +319,68 @@ LocPromotionPopupText="<Bullet/> Bulwark adds one point of Armor.<br/><Bullet/> 
 ;				TEMPLAR
 ; ------------------------------------------------
 
+[Rend X2AbilityTemplate]
+LocLongDescription="Melee attack with a chance to stun or disorient the target. Cannot miss. Triggers Momentum. Generates Focus on kills."
+LocHelpText="Melee attack with a chance to stun or disorient the target. Triggers Momentum. Generates Focus on kills."
+LocPromotionPopupText="<Bullet/> Using Rend to kill enemies is the Templar's primary method for generating Focus.<br/><Bullet/> Rend's damage is increased at higher Focus levels.<br/><Bullet/> After casting Rend, the Templar will gain Momentum, allowing them one movement action. Use this to return to cover after attacking.<br/><Bullet/> Rend has a <Ability:RENDSTUNCHANCE/>% chance to Stun per Focus. Stunned targets also have a chance to be knocked back.<br/><Bullet/> Rend has a <Ability:RENDDISORIENTCHANCE/>% chance to Disorient per Focus.<br/>"
+
+[Volt X2AbilityTemplate]
+LocLongDescription="Ranged psionic attack that deals low armor-piercing damage. Deals double damage to psionic units. Jumps to other nearby enemies at higher Focus levels. Cannot target robotic units. Costs 1 Focus and 1 action point. Does not end turn."
+LocHelpText="Psionic attack that can jump to nearby units."
+LocPromotionPopupText="<Bullet/> Volt has no cooldown, but costs 1 Focus.<br/><Bullet/> Volt deals double damage to Psionic units.<br/><Bullet/> Volt can jump to a number of enemies equal to the current Focus level.<br/>"
+
+[Amplify X2AbilityTemplate]
+LocHelpText="Mark a target, causing them to take <Ability:AmplifyDamageMult/>% extra damage from next <Ability:IRI_GetCurrentFocus/> single-target attack(s)."
+
 [Parry X2AbilityTemplate]
-LocLongDescription="Consume Momentum to parry the next attack directed at the <Ability:ClassName/> this turn."
+LocLongDescription="Consume Momentum to parry the next attack directed at the <Ability:ClassName/> this turn, completely avoiding the damage."
 LocHelpText="Consume Momentum to parry the next attack directed at the <Ability:ClassName/> this turn."
 
+[Overcharge X2AbilityTemplate]
+LocLongDescription="Rend attacks generate Focus even when they don't kill the target."
+LocHelpText=Rend attacks generate Focus even when they don't kill the target."
+
+[Deflect X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Deflect has a <Ability:DEFLECTCHANCE/>% chance to activate at Focus Level 1, which increases by <Ability:DEFLECTCHANCEPERFOCUS/>% with each additional Focus level.<br/><Bullet/> Only ranged, single-target attacks can be deflected.<br/> If Parry is active, the <Ability:ClassName/> will attempt to Deflect first."
+
+[Reflect X2AbilityTemplate]
+LocLongDescription="When the <Ability:ClassName/> has two or more Focus, there is a chance to reflect incoming shots back at the attacker, completely avoiding the damage."
+LocHelpText="When the <Ability:ClassName/> has two or more Focus, there is a chance to reflect incoming shots back at the attacker."
+LocPromotionPopupText="<Bullet/> Reflect has a <Ability:REFLECTCHANCE/>% chance to activate at Focus Level 2, which increases by <Ability:DEFLECTCHANCEPERFOCUS/>% with each additional Focus level.<br/><Bullet/> Only ranged, single-target attacks can be reflected.<br/> Deflect and Reflect have separate rolls. Roll to Reflect happens first. If the attack is not reflected, then there will be a chance to Deflect. If the attack is not deflected either, and Parry is active, the attack will be parried.<br/><Bullet/> The chance to hit the enemy with the reflected attack depends on <Ability:ClassName/>'s Aim and ignores enemy's cover Defense bonus."
+
+[TemplarInvert X2AbilityTemplate]
+LocLongDescription="Use a standard or Momentum action point to switch locations with an enemy unit."
+LocHelpText="Switch locations with an enemy unit."
+
+[TemplarExchange X2AbilityTemplate]
+LocLongDescription="Use a standard or Momentum action point to exchange locations with a squadmate. Costs 1 Focus."
+LocHelpText="Exchange locations with a squadmate."
+
+[Pillar X2AbilityTemplate]
+LocLongDescription="Summon a pillar of Psionic energy to act as a high cover point. Pillar cannot be summoned directly adjacent to units. Costs 1 Focus. No action point cost."
+LocHelpText="Summon high cover at a target location for <Ability:IRI_GetCurrentFocus/> turn(s). No action point cost."
+LocPromotionPopupText="<Bullet/> The pillar will last for a number of turns equal to the Templar's Focus level when summoned.<br/><Bullet/> Summoning a Pillar does not cost any action points.<br/>"
 
 [StunStrike X2AbilityTemplate]
 LocFriendlyName="Stun Strike"
 LocLongDescription="Strike an enemy with Psionic force, stunning them for one turn with a chance of knocking them back in the direction of the attack. Costs 1 Focus and 1 action point. Does not end turn."
 LocHelpText="Stun an enemy for one turn with a chance to knock them back. Does not end turn."
-LocPromotionPopupText="<Bullet/> Stun Strike does not end the Templar's turn, but has a <Ability:SelfCooldown/> turn cooldown.<br/>" 
+LocPromotionPopupText="<Bullet/> Stun Strike does not end the <Ability:ClassName/>'s turn, but has a <Ability:SelfCooldown/> turn cooldown.<br/>" 
 
 [VoidConduit X2AbilityTemplate]
-LocFriendlyName="Void Conduit"
-LocLongDescription="Trap a humanoid in a Psionic prison, disabling them for one turn and transferring their health to the Templar. Costs 2 Focus. Free action."
-LocHelpText="Disable a humanoid for one turn and transfer their health to the Templar. Costs 2 Focus. Free action."
-LocPromotionPopupText="<Bullet/> Void Conduit will drain <Ability:IRI_TM_VoidConduit_HPDrain/> health from the enemy.<br/><Bullet/> Targets trapped by Void Conduit cannot take actions or dodge, but can be targeted by other attacks.<br/>"
+LocLongDescription="Trap a humanoid in a Psionic prison, immobilizing them for multiple turns and transferring their health to the Templar. Costs 1 Focus. Ends turn."
+LocHelpText="Immobilize a humanoid for <Ability:IRI_GetCurrentFocus/> turn(s), and transfer their health to the Templar."
+LocPromotionPopupText="<Bullet/> Void Conduit will drain <Ability:VOIDCONDUITACTIONDMG/> damage health, then drain <Ability:VOIDCONDUITACTIONDMG/> health each turn.<br/><Bullet/> Void Conduit lasts for enemy turns equal to the Templar's Focus level when cast.<br/><Bullet/> Targets trapped by Void Conduit cannot take actions or dodge, but can be targeted by other attacks.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [IonicStorm X2AbilityTemplate]
-LocFriendlyName="Ionic Storm"
-LocLongDescription="Summon lightning to strike all nearby enemies. Damage increases with Focus level. Costs all Focus, but generates Focus on kills."
-LocHelpText="Summon lightning to strike all nearby enemies. Costs all Focus, but generates Focus on kills."
-LocPromotionPopupText="<Bullet/> Ionic Storm's radius increases at higher Focus levels.<br/><Bullet/> Ionic Storm deals double damage to Psionic units.<br/><Bullet/> Use Ionic Storm at a high Focus level when it will kill many targets to immediately refund the Focus cost.<br/><Bullet/> Ionic Storm has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+LocLongDescription="Summon lightning to strike all nearby enemies, dealing armor-piercing damage. Damage increases with Focus level. Deals double damage to Psionic units. Costs all Focus, but generates Focus on kills."
+LocPromotionPopupText="<Bullet/> Ionic Storm's radius and damage increase at higher Focus levels.<br/><Bullet/> Ionic Storm deals double damage to Psionic units.<br/><Bullet/> Use Ionic Storm at a high Focus level when it will kill many targets to immediately refund the Focus cost.<br/><Bullet/> Ionic Storm has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
+[Ghost X2AbilityTemplate]
+LocLongDescription="Create a duplicate of the Templar from the body of a fallen humanoid. The Ghost disappears when it loses all Focus. Costs 2 Focus. Does not end turn."
+LocHelpText="Summon a duplicate Templar from the fallen body of a humanoid enemy."
+LocPromotionPopupText="<Bullet/> Ghosts start with Focus equal to the Templar's Focus level when created.<br/><Bullet/> Ghosts cannot gain Focus, and disappear when all Focus is spent, or their health reaches 0.<br/><Bullet/> Rend costs 1 Focus when used by Ghosts.<br/><Bullet/> Ghost must be cast on the corpse of a humanoid enemy, and cannot be cast on the same corpse twice.<br/><Bullet/> Ghost does not end the <Ability:ClassName/>'s turn, but has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Ghost's have the same abilities as the <Ability:ClassName/>, except for: Ghost, Overcharge, Channel, Fortress, Sustain and all of the autopistol abilities."
+
 
 [TemplarBladestorm X2AbilityTemplate]
 LocFriendlyName="Zeal"
@@ -368,5 +395,6 @@ LocLongDescription="Free shard gauntlet attacks on any enemies that enter or att
 LocHelpText="Free shard gauntlet attacks on any enemies that enter or attack from melee range. Zeal attacks do not generate Focus on kill."
 LocFlyOverText="Zeal"
 
-[XLocalizedData]
-TemplarTutorialText="Templars gain Focus during missions by killing units with Rend. Spend Focus on Volt and other abilities to gain a tactical advantage."
+[ArcWavePassive X2AbilityTemplate]
+LocLongDescription="Rend generates a wave of Psionic energy in the direction of the attack. Damage increases with Focus level. Kills with Arc Wave generate Focus."
+LocPromotionPopupText="<Bullet/> Arc Wave does not affect the target of the original Rend attack.<br/><Bullet/> Arc Wave deals damage equal to double the Templar's current Focus level, or 1 if they have no Focus.<br/><Bullet/> Arc Wave travels through environmental objects.<br/><Bullet/> Enemies hit by Arc Wave will not activate Overcharge."

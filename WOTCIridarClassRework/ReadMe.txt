@@ -12,6 +12,7 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 ----------------------------------------------------------
 
 Pivot to v3
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752][WOTC] A Better Ghost[/url][/b] - Class Rework replaces original Ghost ability for Templars with a new one, so this mod would be pointless, unless you have another soldier class that uses the old Ghost.
 
 
 ----------------------------------------------------------
@@ -61,8 +62,12 @@ The mod is fresh out of the oven, and has not been playtested extensively. There
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1465736030][WOTC] Skillful Skirmishing[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1125671906]Skirmisher Rebalance[/url][/b]
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1843332083]Whiplash Overhaul[/url][/b]
-[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752][WOTC] A Better Ghost[/url][/b] - Class Rework replaces original Ghost ability for Templars with a new one, so this mod would be pointless, unless you have another soldier class that uses the old Ghost.
+
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1129878719][WOTC] Ability Interaction Fixes[/url][/b] - all relevant fixes are integrated.
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1561966168]Templar Reflect on Parry[/url][/b]
+[*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3155092427][WOTC] Universal Threat Assessment[/url][/b] - all relevant fixes are integrated.
+
+
 [/list]
 
 [h1]CREDITS[/h1]
@@ -204,30 +209,23 @@ Templars are redesigned from the ground up to resolve their inner conflict with 
 The new Templar is all about spending Focus, particularly on Volt, which is now a free action, and meant to complement your Rend to keep up the damage output. Many abilities were overhauled to be simpler and with a more clear purpose.
 
 [list]
-[*] Ability tree almost entirely redesigned.
-[*] Rend - no longer has a chance to knockback/stun/disorient and its damage no longer scales with Focus. New icon.
-[*] Templar Focus - having Focus no longer provides passive benefits of any kind, and most abilities no longer have Focus scaling.
-[*] Volt - now a free action. Damage rebalanced to 2-3 / 3-4 / 4-5, crits psionic enemies for +2 extra damage. Description now mentions that it ignores armor.
+[*] Ability tree reordered.
+[*] Most abilities had their descriptions improved for clarity.
+[*] Rend - new icon.
+[*] Volt - no longer ends turn.
 [*] Parry - now is a defensive ability that cannot be interrupted.
 [*] Aftershock - no longer stacks with itself.
-[*] Amplify - no longer costs Focus to use. Can be used with regular or Momentum action, does not end turn. Now makes target take +33% base damage from the next attack.
-[*] Reflect - now requires Parry and works like an empowered version of Parry that costs 1 Focus and a Momentum action to reflect the next attack directed at the Templar. Focus cost is not applied if no attack is reflected. Reflected attack can miss, the chance to hit is equal to Templar's Aim. Enemy cover defense is ignored.
-[*] Deflect - now is an active ability. Free action that costs 2 Focus, and allows the Templar to deflect the next attack directed at them. Lasts indefinitely, doesn't stack.
-[*] Stun Strike - now is a guaranteed hit and can be interrupted, and instead of disorientation stuns the target.
-[*] Invert - now can target both allied and enemy units, no longer costs Focus, and can be used with Momentum actions. 
-[*] Void Conduit - now is a free action and always costs 2 Focus and lasts for 1 turn, and no longer deals initial damage. Cooldown removed. New icon.
-[*] Ionic Storm - now triggers Momentum and instead of using its own damage values just hits enemies with Volt. Hits twice if used at 2 Focus.
-[*] Pillar - removed from the tree due to currently unsolvable bugs with the way it grants cover.
-[*] Overcharge, Exchange, Deep Focus, Arc Wave - replaced with new perks that fulfill similar purposes.
+[*] Overcharge - since it applies only to non-lethal Rend attacks, chance has been increased to 100%.
+[*] Amplify - now consistently increases total attack damage.
+[*] Deflect and Reflect - now have separate rolls, and both rolls happen before Parry. Reflected attack now uses Templar's Aim for hit chance instead of a flat chance and ignores target's cover Defense bonus.
+[*] Exchange and Invert - Focus cost removed. Can be activated with regular and Momentum action points. Cooldown increased from 1 turn to 2. Exchange can no longer target turrets.
+[*] Pillar - now a free action. Cast range limited to 18 tiles. Can no longer summon on tiles adjacent to units to avoid a bug with Pillar not granting cover in that circumstance. Remaining duration now displayed on the Templar as a buff.
+[*] Stun Strike - now is a guaranteed hit and can be interrupted, and instead of disorientation stuns the target. Knockback is still not guaranteed.
+[*] Void Conduit - new icon. Can be interrupted. Visualization hang resolved. Instead of dealing 3 damage when used and draining 2 HP per [b]action[/b] at the start of enemy turn, it drains 2 HP when used, and then 2 HP every [b]turn[/b] at the start of the player's turn. Now correctly disables for the number of turns equal to Templar's Focus when cast. Cooldown increased to 3 turns.
+[*] Ghost - no longer ends turn, and has a 5 turn cooldown instead of 1 use per mission. Ghost now always has the same base HP as the Templar that summoned it. The confusing mechanic that made its HP scale with Focus is removed.
 [*] Bladestorm - renamed to "Zeal" and is always present in the ability tree (no longer an XCOM row random perk). New icon.
-[*] Reaper - removed as possible XCOM row perks. Sort of replaced by Arc Overload.
-[*] XCOM row perks - significantly expanded with more fun picks. Fortress removed for the crime of being stupid and OP.
-[*] New ability: Soul Shot - a ranged version of Rend that can miss. Has innate bonus of +20 Aim.
-[*] New ability: Overdraw (replaces Overcharge) - Rend and Soul Shot always generate a point of Focus, even when they don't kill the target.
-[*] New ability: Seal - your abilities mark enemies until the end of turn. If an ally kills a marked enemy, you generate 1 Focus. Triggers once per turn.
-[*] New ability: Spectral Stride - activate to allow yourself to walk through obstacles and jump to the top of ledges and structures until the end of turn. 3 turn cooldown. Free action.
-[*] New ability: Surge (replaces Arc Wave) - spending Focus charges your shard gauntlets, causing your next Rend or Soul Shot to generate a psionic wave that will hit other enemies near the primary target with Volt.
-[*] New ability: Arc Overload - when at maximum Focus, activate to become overloaded until the end of turn. While overloaded, killing an enemy with Volt grants an action point.
+[*] Reaper - always present in the ability tree (no longer an XCOM row random perk).
+[*] XCOM row perks - significantly expanded with more fun picks. 
 [/list]
 
 [h1]SPARK[/h1]

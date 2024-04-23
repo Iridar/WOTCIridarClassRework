@@ -108,6 +108,19 @@ static final protected function RemoveChargeCost(out X2AbilityTemplate AbilityTe
 	}
 }
 
+static final protected function RemoveFocusCost(out X2AbilityTemplate AbilityTemplate)
+{
+	local int i;
+
+	for (i = AbilityTemplate.AbilityCosts.Length - 1; i >= 0; i--)
+	{
+		if (X2AbilityCost_Focus(AbilityTemplate.AbilityCosts[i]) != none)
+		{
+			AbilityTemplate.AbilityCosts.Remove(i, 1);
+		}
+	}
+}
+
 static final protected function RemoveActionAndChargeCost(out X2AbilityTemplate AbilityTemplate)
 {
 	local int i;
@@ -150,6 +163,21 @@ static final protected function MakeNotEndTurn(out X2AbilityTemplate AbilityTemp
 			continue;
 
 		ActionCost.bConsumeAllPoints = false;
+	}
+}
+
+static final protected function MakeFreeActionCost(out X2AbilityTemplate AbilityTemplate)
+{
+	local X2AbilityCost_ActionPoints	ActionCost;
+	local X2AbilityCost					AbilityCost;
+
+	foreach AbilityTemplate.AbilityCosts(AbilityCost)
+	{
+		ActionCost = X2AbilityCost_ActionPoints(AbilityCost);
+		if (ActionCost == none)
+			continue;
+
+		ActionCost.bFreeCost = true;
 	}
 }
 

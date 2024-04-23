@@ -8,7 +8,7 @@ static final function PatchAbilities()
 	PatchGuardianForIntercept();
 	PatchShadowstrike();
 	PatchUntouchable();
-	PatchDeepCover();
+	//PatchDeepCover();
 }
 
 // Necessary only in a scenario where Slash doesn't end turn.

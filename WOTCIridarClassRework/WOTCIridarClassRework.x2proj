@@ -29,9 +29,6 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\ClassRework\XComClassData.ini">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Config\ClassRework\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -182,6 +179,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\Help.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\ConfigEngine.uc" />
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Amplify_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Battlelord_CombatPresence.uc">
       <SubType>Content</SubType>
     </Content>
@@ -197,10 +197,16 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_DeepCover_Tracker.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Deflect_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GetOverHere_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Parry_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_PersistentVoidConduit_Fixed.uc">
@@ -251,13 +257,22 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SpawnGhost_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SP_CoveringFireIgnoreCover.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_UntouchableBuff.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_VoidConduit_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ZeroIn_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2TargetingMethod_Pillar_Fixed.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2TargetingMethod_SacrificeSnapToTile.uc">

@@ -262,8 +262,8 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 	//												TEMPLAR TAGS
 	// ----------------------------------------------------------------------------------------------------------------------
 
-	case "IRI_TM_VoidConduit_HPDrain":
-		OutString = string(class'X2Ability_TemplarAbilitySet'.default.VoidConduitPerActionDamage * 2);
+	case "IRI_GetCurrentFocus":
+		OutString = string(GetCurrentFocus(ParseObj, StrategyParseOb, GameState));
 		return true;
 
 	// ----------------------------------------------------------------------------------------------------------------------
@@ -282,6 +282,47 @@ static private function string GetZeroInCritBonus(Object ParseObj, Object Strate
 {
 	return string(int(GetUnitValue(class'X2Effect_ZeroIn_Fixed'.default.UnitValueName, ParseObj, StrategyParseObj, GameState)) * class'X2Effect_ZeroIn'.default.CritPerShot);
 }
+static private function int GetCurrentFocus(Object ParseObj, Object StrategyParseObj, XComGameState GameState)
+{
+	local XComGameState_Effect	EffectState;
+	local XComGameState_Ability	AbilityState;
+	local XComGameState_Unit	UnitState;
+
+	if (StrategyParseObj != none)
+	{
+		UnitState = XComGameState_Unit(StrategyParseObj);
+		if (UnitState != none)
+		{
+			return UnitState.GetTemplarFocusLevel();
+		}
+	}
+	else
+	{
+		EffectState = XComGameState_Effect(ParseObj);
+		if (EffectState != none)
+		{
+			UnitState = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(EffectState.ApplyEffectParameters.TargetStateObjectRef.ObjectID));
+			if (UnitState != none)
+			{
+				return UnitState.GetTemplarFocusLevel();
+			}
+		}
+		else
+		{
+			AbilityState = XComGameState_Ability(ParseObj);
+			if (AbilityState != none)
+			{
+				UnitState = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(AbilityState.OwnerStateObject.ObjectID));
+				if (UnitState != none)
+				{
+					return UnitState.GetTemplarFocusLevel();
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 static private function float GetUnitValue(const name ValueName, Object ParseObj, Object StrategyParseObj, XComGameState GameState)
 {
 	local XComGameState_Effect	EffectState;

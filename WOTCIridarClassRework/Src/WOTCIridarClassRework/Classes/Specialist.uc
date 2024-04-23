@@ -12,6 +12,7 @@ static final function PatchAbilities()
 
 	PatchCoveringFire();
 	PatchAidProtocol();
+
 	//PatchThreatAssessment(); // Done in PatchAidProtocol()
 	//PatchGremlinHeal();
 	//PatchGremlinStabilize();
