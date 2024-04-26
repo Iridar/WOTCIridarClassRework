@@ -46,6 +46,7 @@ static private function PatchJustice()
 			break;
 		}
 	}
+
 }
 
 
@@ -574,6 +575,10 @@ static private function PatchSkirmisherReturnFire()
 		if (X2Effect_Persistent(Effect) != none)
 		{
 			X2Effect_Persistent(Effect).IconImage = AbilityTemplate.IconImage;
+		}
+		if (X2Effect_ReturnFire(Effect) != none)
+		{
+			X2Effect_ReturnFire(Effect).bPreEmptiveFire = true;
 		}
 	}
 

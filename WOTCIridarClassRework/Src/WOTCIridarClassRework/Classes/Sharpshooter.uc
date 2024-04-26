@@ -59,12 +59,75 @@ static private function PatchReturnFire()
 	if (AbilityTemplate == none)
 		return;
 
+	// Highlander sets this to SPT_AfterSequential to make it properly visualize after Covering Fire overwatch, but this causes a visualization bug if return fire is preemptive.
+	AbilityTemplate.AssociatedPlayTiming = SPT_None;
+
+	// After unsuccessfully experimenting with different SPT values,
+	// AbilityTemplate.AssociatedPlayTiming = SPT_None;
+	// AbilityTemplate.AssociatedPlayTiming = SPT_BeforeParallel;
+	// AbilityTemplate.AssociatedPlayTiming = SPT_BeforeSequential;
+	// Covering Fire visualizes correctly before the enemy attack. Then if Return Fire doesn't kill the target, it plays after enemy attack (wrong). If it kills the target, the shot doesn't visualize, target dies instantly after taking covering fire overwatch.
+	
+	// AbilityTemplate.AssociatedPlayTiming = SPT_AfterParallel;
+	// AbilityTemplate.AssociatedPlayTiming = SPT_AfterSequential;
+	// If Return Fire kills the target, the shot doesn't even visualize.
+
+	// ... ended up having to make a custom Merge Vis function.
+	// By default the shot seems to be put in parallel to the covering fire overwatch shot, causing it to fail to visualize.
+	AbilityTemplate.MergeVisualizationFn = PistolReturnFire_MergeVisualization;
+	
 	ToHitCalc = X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc);
 	if (ToHitCalc == none)
 		return;
 
 	ToHitCalc.bIgnoreCoverBonus = true;
-	//AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
+}
+
+static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, out X2Action VisualizationTree)
+{
+	local XComGameStateVisualizationMgr		VisMgr;
+	local X2Action_MarkerTreeInsertBegin	MarkerStart;
+	local X2Action_MarkerTreeInsertEnd		MarkerEnd;
+	local XComGameStateContext_Ability		Context;
+	local X2Action_Fire						FireAction;
+	local X2Action							EnemyExitCover;
+	local array<X2Action>					FindActions;
+	local X2Action							FindAction;
+	local int								ClosestHistoryIndex;
+
+	VisMgr = `XCOMVISUALIZATIONMGR;
+	Context = XComGameStateContext_Ability(BuildTree.StateChangeContext);
+	if (Context == none)
+		return;
+
+	MarkerStart = X2Action_MarkerTreeInsertBegin(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertBegin'));
+	MarkerEnd = X2Action_MarkerTreeInsertEnd(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertEnd'));
+	FireAction = X2Action_Fire(VisMgr.GetNodeOfType(BuildTree, class'X2Action_Fire')); 
+	if (MarkerStart == none || MarkerEnd == none || FireAction == none)
+	{
+		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
+		return;
+	}
+
+	// Find enemy's Exit Cover action that is the closest to the shooter's Fire Action.
+	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_ExitCover', FindActions,, FireAction.PrimaryTargetID); // FireAction.PrimaryTargetID - the enemy we are shooting at = enemy that triggered Return Fire.
+	ClosestHistoryIndex = MaxInt;
+	foreach FindActions(FindAction)
+	{
+		if (ClosestHistoryIndex > FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex)
+		{
+			EnemyExitCover = FindAction;
+			ClosestHistoryIndex = FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex;
+		}
+	}
+	
+	if (EnemyExitCover == none)
+	{
+		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
+		return;
+	}
+
+	VisMgr.InsertSubtree(MarkerStart, MarkerEnd, EnemyExitCover);
 }
 
 static private function PatchSharpshooterAim()
