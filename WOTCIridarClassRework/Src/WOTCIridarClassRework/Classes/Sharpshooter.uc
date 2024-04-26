@@ -83,6 +83,10 @@ static private function PatchReturnFire()
 	ToHitCalc.bIgnoreCoverBonus = true;
 }
 
+// 1. Trooper that dies to Return Fire: perfect
+// 2. Trooper that does not die to Return Fire: perfect
+// 3. Trooper that dies to return fire after covering fire overwatch: shots sync well, but enemy freezes when killed by return fire.
+// 4. Trooped that does not die to return fire after covering fire overwatch: perfect.
 static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, out X2Action VisualizationTree)
 {
 	local XComGameStateVisualizationMgr		VisMgr;
@@ -90,15 +94,25 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 	local X2Action_MarkerTreeInsertEnd		MarkerEnd;
 	local XComGameStateContext_Ability		Context;
 	local X2Action_Fire						FireAction;
-	local X2Action							EnemyExitCover;
+	local X2Action							InsertAboveAction;
 	local array<X2Action>					FindActions;
 	local X2Action							FindAction;
 	local int								ClosestHistoryIndex;
+	local X2Action_MarkerNamed				MarkerNamed;
+	local VisualizationActionMetadata		ActionMetadata;
 
 	VisMgr = `XCOMVISUALIZATIONMGR;
 	Context = XComGameStateContext_Ability(BuildTree.StateChangeContext);
 	if (Context == none)
 		return;
+
+	`LOG("====================== MAIN VIZ TREE =========================");
+	PrintActionRecursive(VisualizationTree, 0);
+	`LOG("---------------------------------------- END ----------------------------------------");
+
+	`LOG("====================== BUILD TREE =========================");
+	PrintActionRecursive(BuildTree, 0);
+	`LOG("---------------------------------------- END ----------------------------------------");
 
 	MarkerStart = X2Action_MarkerTreeInsertBegin(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertBegin'));
 	MarkerEnd = X2Action_MarkerTreeInsertEnd(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertEnd'));
@@ -109,25 +123,69 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 		return;
 	}
 
-	// Find enemy's Exit Cover action that is the closest to the shooter's Fire Action.
-	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_ExitCover', FindActions,, FireAction.PrimaryTargetID); // FireAction.PrimaryTargetID - the enemy we are shooting at = enemy that triggered Return Fire.
+	// Find the end of whichever interrupted visualization is playing on the enemy unit that triggered Return Fire.
+	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_MarkerInterruptEnd', FindActions ,, FireAction.PrimaryTargetID); // FireAction.PrimaryTargetID - the enemy we are shooting at = enemy that triggered Return Fire.
 	ClosestHistoryIndex = MaxInt;
 	foreach FindActions(FindAction)
 	{
 		if (ClosestHistoryIndex > FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex)
 		{
-			EnemyExitCover = FindAction;
+			InsertAboveAction = FindAction;
 			ClosestHistoryIndex = FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex;
 		}
 	}
+
+	`AMLOG("Found InsertAboveAction at history index:" @ InsertAboveAction.StateChangeContext.AssociatedState.HistoryIndex);
 	
-	if (EnemyExitCover == none)
+	if (InsertAboveAction == none)
 	{
 		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
 		return;
 	}
 
-	VisMgr.InsertSubtree(MarkerStart, MarkerEnd, EnemyExitCover);
+	// Shove a marker action right above it.
+	ActionMetadata = InsertAboveAction.Metadata;
+	MarkerNamed = X2Action_MarkerNamed(class'X2Action_MarkerNamed'.static.AddToVisualizationTree(ActionMetadata, Context, false,, InsertAboveAction.ParentActions));
+	MarkerNamed.SetName("Return Fire Marker");
+
+	//VisMgr.InsertSubtree(MarkerStart, MarkerEnd, MarkerNamed);
+
+	// This should wedge the Return Fire visualization between MarkerNamed and InsertAboveAction.
+	VisMgr.ConnectAction(MarkerStart, VisualizationTree, false, MarkerNamed);
+	VisMgr.ConnectAction(InsertAboveAction, VisualizationTree, false, MarkerEnd);
+
+	`LOG("====================== MAIN VIZ TREE AFTER MERGING =========================");
+	PrintActionRecursive(VisualizationTree, 0);
+	`LOG("---------------------------------------- END ----------------------------------------");
+}
+
+static function PrintActionRecursive(X2Action Action, int iLayer)
+{
+	local X2Action ChildAction;
+	local XComGameState_Unit UnitState;
+	local string strMessage;
+	local X2Action_MarkerNamed MarkerAction;
+
+	strMessage = "Action layer:" @ iLayer @ ":" @ Action.Class.Name;
+
+	MarkerAction = X2Action_MarkerNamed(Action);
+	if (MarkerAction != none)
+	{
+		strMessage @= MarkerAction.MarkerName;
+	}
+
+	UnitState = XComGameState_Unit(Action.Metadata.StateObject_NewState);
+	if (UnitState != none)
+	{
+		strMessage @= UnitState.GetFullName();
+	}
+	strMessage @= Action.StateChangeContext.AssociatedState.HistoryIndex;
+		
+	`LOG(strMessage,, 'IRIPISTOLVIZ'); 
+	foreach Action.ChildActions(ChildAction)
+	{
+		PrintActionRecursive(ChildAction, iLayer + 1);
+	}
 }
 
 static private function PatchSharpshooterAim()
