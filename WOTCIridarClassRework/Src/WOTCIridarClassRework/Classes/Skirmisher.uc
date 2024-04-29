@@ -1,25 +1,29 @@
 class Skirmisher extends Common;
 
+var localized string strReflexSpent;
+var localized string strReflexThisTurnFlyover;
+
 static final function PatchAbilities()
 {
 	PatchSkirmisherReflex();
+	PatchSkirmisherPostAbilityMelee();
 	PatchJustice();
 	PatchSkirmisherMelee();
-	PatchSkirmisherPostAbilityMelee();
-	PatchSkirmisherInterrupt();
-	PatchFullThrottle();
 	PatchZeroIn();
-	PatchBattlelord();
 	PatchWhiplash();
-	PatchParkour();
+	PatchSkirmisherInterrupt();
 	PatchCombatPresence();
-	PatchSkirmisherReturnFire();
+	PatchFullThrottle();
 	PatchSkirmisherAmbush();
+	PatchBattlelord();
+	PatchSkirmisherReturnFire();
+	PatchParkour();
 
 	//PatchRetributionAttack();
 	//PatchManualOverride();
 }
 
+// Necessary for some visualization fixes for the execute animations to line up properly.
 static private function PatchJustice()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
@@ -46,7 +50,6 @@ static private function PatchJustice()
 			break;
 		}
 	}
-
 }
 
 
@@ -86,8 +89,7 @@ static private function PatchSkirmisherPostAbilityMelee()
 	// Use skulljack animations for ripjack melee kill strikes when possible
 	AbilityTemplate.BuildVisualizationFn = PredatorStrike_BuildVisualization;
 
-	// Animations for this fire action are loaded by Perk Content for this ability in the Perk Pack.
-	// A bit noodly, but I can't be assed to copy over the assets.
+	// Animations for this fire action are loaded by Perk Content for this ability.
 	AbilityTemplate.ActionFireClass = class'X2Action_PredatorStrike';
 	AbilityTemplate.CinescriptCameraType = "IRI_PredatorStrike_Camera";
 	AbilityTemplate.bOverrideMeleeDeath = false;
@@ -282,21 +284,6 @@ static private function PatchSkirmisherInterrupt()
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Interrupt_Cooldown"));
 
-	//for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
-	//{
-	//	if (X2Effect_ReserveOverwatchPoints(AbilityTemplate.AbilityTargetEffects[i]) != none)
-	//	{
-	//		AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
-	//
-	//		ReserveOverwatchPoints = new class'X2Effect_ReserveOverwatchPoints_NoCost';
-	//		ReserveOverwatchPoints.UseAllPointsWithAbilities.Length = 0;
-	//		ReserveOverwatchPoints.ReserveType = 'ReserveInterrupt';
-	//		AbilityTemplate.AddTargetEffect(ReserveOverwatchPoints);
-	//
-	//		break;
-	//	}
-	//}
-
 	// Disallow Interrupting while Battlelord is active
 	EffectCondition = new class'X2Condition_UnitEffects';
 	EffectCondition.AddExcludeEffect(class'X2Effect_Battlelord'.default.EffectName, 'AA_DuplicateEffectIgnored');
@@ -386,6 +373,7 @@ static private function PatchSkirmisherReflex()
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate;
 	local X2Effect_SkirmisherReflex_Fixed	ReflexEffect;
+	local X2Effect_SkirmisherReflex_Tracker	TrackerEffect;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -403,6 +391,11 @@ static private function PatchSkirmisherReflex()
 			ReflexEffect.BuildPersistentEffect(1, true, false, false);
 			ReflexEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocLongDescription, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
 			AbilityTemplate.AddTargetEffect(ReflexEffect);
+
+			TrackerEffect = new class'X2Effect_SkirmisherReflex_Tracker';
+			TrackerEffect.BuildPersistentEffect(1, true, false, false);
+			TrackerEffect.SetDisplayInfo(ePerkBuff_Penalty, AbilityTemplate.LocFriendlyName, default.strReflexSpent, AbilityTemplate.IconImage, true, , AbilityTemplate.AbilitySourceName);
+			AbilityTemplate.AddTargetEffect(TrackerEffect);
 
 			break;
 		}
@@ -437,7 +430,7 @@ static private function PatchBattlelord()
 		return;
 
 	RemoveChargeCost(AbilityTemplate);
-	//AddCooldown(AbilityTemplate, `GetConfigInt("Battlelord_Cooldown"));
+	AddCooldown(AbilityTemplate, `GetConfigInt("Battlelord_Cooldown"));
 
 	// When interrupt is activated by the player, it just gives the unit a reserve action point.
 	// Actual interrupt effect will be applied when interrupting. So have to check for the action point.
@@ -467,37 +460,42 @@ static private function PatchParkour()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					AbilityTemplate; 
-	local X2Effect_GrantActionPoints		AddActionPointsEffect;
-	local X2AbilityTrigger_EventListener	ActivationTrigger;
-	local X2Effect							Effect;
+	local X2Effect_Parkour_GrantActionPoint	Effect;
+	// local X2Effect_GrantActionPoints		AddActionPointsEffect;
+	// local X2AbilityTrigger_EventListener	ActivationTrigger;
+	// local X2Effect							Effect;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('Parkour');
 	if (AbilityTemplate == none)
 		return;
 
-	AbilityTemplate.AbilityTriggers.Length = 0;
-	ActivationTrigger = new class'X2AbilityTrigger_EventListener';
-	ActivationTrigger.ListenerData.EventID = 'IRI_SkirmisherGrappleActivated';
-	ActivationTrigger.ListenerData.EventFn = class'XComGameState_Ability'.static.AbilityTriggerEventListener_Self;
-	ActivationTrigger.ListenerData.Deferral = ELD_OnStateSubmitted;
-	ActivationTrigger.ListenerData.Filter = eFilter_Unit;
-	AbilityTemplate.AbilityTriggers.AddItem(ActivationTrigger);
+	Effect = new class'X2Effect_Parkour_GrantActionPoint';
+	Effect.BuildPersistentEffect(1, true);
+	AbilityTemplate.AddTargetEffect(Effect);
 
-	foreach AbilityTemplate.AbilityShooterEffects(Effect)
-	{
-		AddActionPointsEffect = X2Effect_GrantActionPoints(Effect);
-		if (AddActionPointsEffect == none)
-			continue;
-
-		AddActionPointsEffect.PointType = class'X2CharacterTemplateManager'.default.MoveActionPoint;
-	}
-
-	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherGrapple');
-	if (AbilityTemplate == none)
-		return;
-
-	AbilityTemplate.PostActivationEvents.AddItem('IRI_SkirmisherGrappleActivated');
+	// AbilityTemplate.AbilityTriggers.Length = 0;
+	// ActivationTrigger = new class'X2AbilityTrigger_EventListener';
+	// ActivationTrigger.ListenerData.EventID = 'IRI_SkirmisherGrappleActivated';
+	// ActivationTrigger.ListenerData.EventFn = class'XComGameState_Ability'.static.AbilityTriggerEventListener_Self;
+	// ActivationTrigger.ListenerData.Deferral = ELD_OnStateSubmitted;
+	// ActivationTrigger.ListenerData.Filter = eFilter_Unit;
+	// AbilityTemplate.AbilityTriggers.AddItem(ActivationTrigger);
+	// 
+	// foreach AbilityTemplate.AbilityShooterEffects(Effect)
+	// {
+	// 	AddActionPointsEffect = X2Effect_GrantActionPoints(Effect);
+	// 	if (AddActionPointsEffect == none)
+	// 		continue;
+	// 
+	// 	AddActionPointsEffect.PointType = class'X2CharacterTemplateManager'.default.MoveActionPoint;
+	// }
+	// 
+	// AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherGrapple');
+	// if (AbilityTemplate == none)
+	// 	return;
+	// 
+	// AbilityTemplate.PostActivationEvents.AddItem('IRI_SkirmisherGrappleActivated');
 }
 
 static private function PatchWhiplash()
@@ -514,8 +512,10 @@ static private function PatchWhiplash()
 	if (AbilityTemplate == none)
 		return;
 
+	// Assign Whiplash to Ripjack so it can take damage values from it.
 	AbilityTemplate.DefaultSourceItemSlot = eInvSlot_SecondaryWeapon;
 
+	// Counteract the Ripjack's built-in Aim bonus.
 	X2AbilityToHitCalc_StandardAim(AbilityTemplate.AbilityToHitCalc).BuiltInHitMod -= 20;
 
 	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
@@ -554,7 +554,6 @@ static private function PatchWhiplash()
 
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Whiplash_Cooldown"));
-	
 }
 
 static private function PatchSkirmisherReturnFire()

@@ -77,7 +77,8 @@ Some changes are inspired by other mods listed above, but unless specified, not 
 
 Please [b][url=https://www.patreon.com/Iridar]support me on Patreon[/url][/b] if you require tech support, have a suggestion for a feature, or simply wish to help me create more awesome mods.
 
-
+TODO: Redo cross class perk list.
+Do something about Saturation Fire and weapon fixes
 
 
 [h1]RANGER[/h1]
@@ -155,17 +156,16 @@ Mostly bugfixes and consistency improvements. Notably, all Protocol abilities no
 Vanilla Reapers are already excellent, so this rework mostly just fills the holes in their ability tree and buffs some of the weaker abilities, as well as improves the clarity of the in-game descriptions for some of the more confusing ones.
 
 [list]
-[*] Ability tree reordered.
-[*] Shadow, Remote Start, Silent Killer, Needle, Banish - corrected descriptions for clarity.
+[*] Ability tree rearranged.
+[*] Many abilities had their descriptions improved for clarity.
 [*] Soul Harvest - increased Crit Chance boost per kill from 5 to 10 and max Crit Chance boost from 20 to 40. This lets you reach 100% crit at full stacks against flanked enemies if you use either upgraded Superior Laser Sight or Talon Ammo.
-[*] Sting - now a guaranteed crit and resets its charge when entering Shadow. Cooldown removed (yes, it had a cooldown despite having only one charge).
-[*] Blood Trail - bonus damage now applies to bleeding units.
-[*] New ability: Wounding Shot - Fire a shot while in Shadow, causing the target to bleed and reducing their Mobility by 33%. Reveals the Reaper.
+[*] Sting - now a guaranteed crit and has a 2 turn cooldown instead of 1 use per mission.
+[*] Blood Trail - bonus damage now also applies to bleeding units, though there's no way to apply bleeding in this mod.
+[*] Infiltration (GTS perk) - hacking bonus increased from 25 to 125.
+[*] Squadsight, Tactical Rigging - now included into the main ability tree.
 [*] New ability: Improvised Silencer - Remove the chance of being revealed on the first shot after entering Shadow.
-[*] New ability: Takedown - While in Shadow, deliver a flanking critical strike with a knife, dealing 6 damage. If this attack kills the target, the Reaper is not revealed. Takedown can also be used to silently knock out a group of civilians. One charge, resets when entering Shadow.
 [*] New ability: Shadow Rising - Shadow gains an additional charge.
 [*] New Ability: Death Dealer - Critical shots against a flanked target while in Shadow will deal double critical damage.
-[*] New ability: Makeshift Explosives - Restock one Claymore whenever you enter Shadow.
 [/list]
 
 [h1]SKIRMISHER[/h1]
@@ -178,27 +178,26 @@ This mod changes Skirmishers somewhat extensively, replacing charges with cooldo
 [b]Tactician[/b] - master of breaking the flow of enemy actions and the ultimate team player.
 
 [list]
-[*] Ability tree reordered.
+[*] Ability tree rearranged.
+[*] Most abilities had their descriptions improved for clarity.
 [*] Justice - fixed a visual bug that makes the enemy float in the air if it's pulled into high cover and then killed.
 [*] Wrath and Justice - now have a special execution animation when killing humanoid enemies.
 [*] Reckoning - no longer has a cooldown, but dash attacks (outside blue move range) consume more action points. Now has a proper icon.
-[*] Reflex - now triggers once per turn instead of once per mission.
-[*] Total Combat - now also grants a Grenade-only slot. Now a cross-class perk, but not available to Grenadiers.
-[*] Interrupt - now grants two actions and has a 3 turn cooldown instead of one use per mission. Multiple units can Interrupt together now.
+[*] Reflex - now triggers once per turn instead of once per mission, and displays a debuff while it's on cooldown.
+[*] Total Combat - now also grants a Grenade-only slot.
 [*] Zero In - now works with melee attacks and grants +20 Crit per attack (up from +10).
+[*] Whiplash - now has a 5 turn cooldown instead of one use per mission. Damage now scales with Ripjack tier, pierces armor and can crit. 
+[*] Interrupt - now grants two actions and has a 3 turn cooldown instead of one use per mission. Multiple units can Interrupt together now.
 [*] Combat Presence - can now be used during Interrupt and Battlelord.
-[*] Full Throttle - now also lowers Grapple's cooldown when procs.
-[*] Return Fire - now a part of the main ability tree and ignores enemy's Cover defense.
+[*] Full Throttle - Mobility bonus increased from 2 to 4 and now Full Throttle also reduces Grapple's current cooldown on kills.
 [*] Waylay - corrected description for clarity. Now allows reaction attacks to crit.
-[*] Whiplash - now has a 4 turn cooldown instead of one use per mission. Damage values rebalanced. Now pierces armor and can crit.
-[*] Manual Override - corrected description to make it clear it's an active ability.
-[*] Battlelord - fixed bug that prevented it from triggering more than once. Multiple units can use Battlelord together now. Battlelord and Interrupt cannot be used at the same time.
-[*] Parkour - using Grapple now grants a move-only action. Replaces the old effect.
+[*] Battlelord - fixed bug that prevented it from triggering more than once. Multiple units can use Battlelord together now. Battlelord and Interrupt cannot be used at the same time. Now has 4 turn cooldown instead of 1 use per mission.
+[*] Return Fire - now a part of the main ability tree. Now triggers preemptively (before the enemy attack) and ignores enemy's Cover defense.
+[*] Lightning Reflexes, Tactical Rigging - now included into the main ability tree.
+[*] Parkour (GTS perk) - new additional effect: using Grapple now grants a move-only action.
 [*] Ripjacks - now have 10% innate chance to crit, same as swords.
 [*] Bullpups - mag tier crit damage increased to 2, beam tier base damage increased from 6-7 to 7-8.
 [*] New ability: Forward Operator -> immediately gain an extra action when a new group of enemies is revealed. Triggers once per turn.
-[*] New ability: Thunder Lance -> Launch grenades with your grappling hook, extending their range by 6 tiles and dealing double damage and bypassing armor on direct impact.
-[*] New ability: Tactical Readiness -> using Hunker down grants you an extra action point on your next turn.
 [/list]
 
 
@@ -209,7 +208,7 @@ Templars are redesigned from the ground up to resolve their inner conflict with 
 The new Templar is all about spending Focus, particularly on Volt, which is now a free action, and meant to complement your Rend to keep up the damage output. Many abilities were overhauled to be simpler and with a more clear purpose.
 
 [list]
-[*] Ability tree reordered.
+[*] Ability tree rearranged.
 [*] Most abilities had their descriptions improved for clarity.
 [*] Rend - new icon.
 [*] Volt - no longer ends turn.

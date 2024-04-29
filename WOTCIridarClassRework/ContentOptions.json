@@ -1,6 +1,7 @@
 {
     "sfStandalone": [
         "IRIClassReworkUI",
-		"IRIClassRework_Templar"
+		"IRIClassRework_Templar",
+		"IRIPredatorStrikePerk"
     ]
 }

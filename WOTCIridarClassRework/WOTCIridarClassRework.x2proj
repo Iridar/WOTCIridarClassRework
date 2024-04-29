@@ -29,6 +29,9 @@
     <Folder Include="Src\WOTCIridarClassRework\Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Base\XComGameData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\ClassRework\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -74,9 +77,6 @@
     <Content Include="Config\Skirmisher\XComGameData_SoldierSkills.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\Skirmisher\XComTemplateCreator.ini">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
@@ -108,6 +108,12 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="ContentForCook\IRIClassRework_Templar.upk">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ContentForCook\IRIPredatorStrike.upk">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ContentForCook\IRIPredatorStrikePerk.upk">
       <SubType>Content</SubType>
     </Content>
     <Content Include="ReadMe.txt" />
@@ -176,6 +182,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_RevivalProtocolAP.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Condition_ThisUnitTurn.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2DLCInfo_WOTCIridarClassRework.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\Help.uc" />
     <Content Include="Src\WOTCIridarClassRework\Classes\ConfigEngine.uc" />
@@ -204,6 +213,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Parkour_GrantActionPoint.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Parry_Fixed.uc">
@@ -255,6 +267,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SkirmisherReflex_Tracker.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SpawnGhost_Fixed.uc">

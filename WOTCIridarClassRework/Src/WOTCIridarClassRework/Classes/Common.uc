@@ -10,6 +10,8 @@ static final protected function EnsureWeaponUpgradeInteraction(out X2AbilityTemp
 	AbilityTemplate.bAllowBonusWeaponEffects = true;
 	AbilityTemplate.bAllowFreeFireWeaponUpgrade = true;
 
+	`AMLOG("Running for:" @ AbilityTemplate.DataName);
+
 	if (AbilityTemplate.AbilityTargetEffects.Length > 0)
 	{	
 		// Add Stock Damage effect

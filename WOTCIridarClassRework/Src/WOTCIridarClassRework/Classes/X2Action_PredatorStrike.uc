@@ -7,6 +7,8 @@ var private float			fPlayingTime;
 var private float			OriginalOffset;
 var private bool			bDoOverride;
 
+var private	X2WeaponTemplate SourceWeaponTemplate;
+
 /*
 FF_PredatorStrikeMissA
 FF_PredatorStrikeStartA
@@ -28,6 +30,8 @@ function Init()
 	PrimaryTargetState = XComGameState_Unit(History.GetGameStateForObjectID(PrimaryTargetID));
 
 	TargetPawn = TargetUnit.GetPawn();
+
+	SourceWeaponTemplate = X2WeaponTemplate(SourceItemGameState.GetMyTemplate());
 	
 	if (TargetPawn != none && PrimaryTargetState!= none && PrimaryTargetState.IsDead() && TargetPawn.GetAnimTreeController().CanPlayAnimation('FF_SkulljackedStart'))
 	{
@@ -39,11 +43,29 @@ function Init()
 
 		if (bWasHit)
 		{
-			AnimParams.AnimName = 'FF_PredatorStrikeStart';
+			if (SourceWeaponTemplate != none)
+			{
+				switch (SourceWeaponTemplate.WeaponTech)
+				{
+					case 'magnetic':
+						AnimParams.AnimName = 'FF_PredatorStrikeStartMag';
+						break;
+					case 'beam':
+						AnimParams.AnimName = 'FF_PredatorStrikeStartBeam';
+						break;
+					default:
+						AnimParams.AnimName = 'FF_PredatorStrikeStart';
+						break;
+				}
+			}
+			else
+			{
+				AnimParams.AnimName = 'FF_PredatorStrikeStart';
+			}
 		}
 		else
 		{
-			AnimParams.AnimName = 'FF_PredatorStrikeMiss';
+			AnimParams.AnimName = 'FF_PredatorStrikeMiss'; // Though this ability can't actually miss
 		}
 	}
 }

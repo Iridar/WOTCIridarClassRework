@@ -144,11 +144,6 @@ function GetToHitModifiers(XComGameState_Effect EffectState, XComGameState_Unit 
 	}
 }
 
-//function bool AllowReactionFireCrit(XComGameState_Unit UnitState, XComGameState_Unit TargetState) 
-//{ 
-//	return true; 
-//}
-
 // So that the buff chevron shows up only if there are any stacks on the unit
 function bool IsEffectCurrentlyRelevant(XComGameState_Effect EffectGameState, XComGameState_Unit TargetUnit) 
 { 

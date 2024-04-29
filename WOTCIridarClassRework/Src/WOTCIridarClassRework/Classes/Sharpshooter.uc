@@ -144,7 +144,7 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 	}
 
 	// Shove a marker action right above it.
-	ActionMetadata = InsertAboveAction.Metadata;
+	ActionMetadata = FireAction.Metadata;
 	MarkerNamed = X2Action_MarkerNamed(class'X2Action_MarkerNamed'.static.AddToVisualizationTree(ActionMetadata, Context, false,, InsertAboveAction.ParentActions));
 	MarkerNamed.SetName("Return Fire Marker");
 
