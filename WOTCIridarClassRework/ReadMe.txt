@@ -10,13 +10,6 @@ Get news and updates here:
 https://github.com/Iridar/EnhancedModProjectTemplate 
 
 ----------------------------------------------------------
-
-TODO: 
-Redo cross class perk list.
-Do something about Saturation Fire and weapon fixes
-Fix Rupture in Highlander?
-Make Perk Pack not a requirement?
-
 ----------------------------------------------------------
 
 [WOTC] Iridar's Vanilla Classes Redux [BETA]
@@ -39,8 +32,9 @@ The mod is fresh out of the oven, and has not been playtested extensively. There
 
 [h1]REQUIREMENTS[/h1]
 [list]
-[*] [url=https://steamcommunity.com/workshop/filedetails/?id=1134256495][b]X2WOTCCommunityHighlander[/b][/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1796402257][b][BETA] X2WOTCCommunityHighlander[/b][/url] - v1.28 or higher is required.
 [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2363075446][b][WOTC] Iridar's Template Master - Core[/b][/url]
+[*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2833581072][b][WOTC] Iridar's Perk Pack[/b][/url]
 [/list]
 
 [h1]COMPANION MODS[/h1]

@@ -31,6 +31,9 @@
     <Content Include="Config\Base\XComGameData.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Grenadier\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -86,6 +89,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\SPARK\XComTemplateEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Specialist\XComClassData.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Specialist\XComClassRework.ini">

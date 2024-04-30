@@ -1,7 +1,5 @@
 class X2Effect_PersistentVoidConduit_Fixed extends X2Effect_PersistentVoidConduit;
 
-// TODO: Test and document, maybe remove initial damage
-
 function int GetStartingNumTurns(const out EffectAppliedData ApplyEffectParameters)
 {
 	local XComGameState_Unit SourceUnit;
