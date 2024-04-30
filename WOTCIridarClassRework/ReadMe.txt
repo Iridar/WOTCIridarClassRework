@@ -27,7 +27,7 @@ Most classes had their ability trees rearranged. Holes in the faction heroes' ab
 
 It is intended as the go-to mod for fixing all the various issues with vanilla classes, without the need to collect dozens of mods that individually fix small issues. It integrates fixes from a lot of existing mods, making them incompatible or redundant.
 
-In general, the purpose of this mod is to make using vanilla classes more fun, very few things have been nerfed.
+In general, the purpose of this mod is to make vanilla classes more fun, very few things have been nerfed.
 
 [b][url=https://docs.google.com/spreadsheets/d/1fQCoWHjhlsbIGQ8wU36VWK3yZY7JRs7mPWcldSHToqs/edit?usp=sharing]>>> NEW PERK LAYOUTS <<<[/url][/b]
 
