@@ -11,7 +11,6 @@ https://github.com/Iridar/EnhancedModProjectTemplate
 
 ----------------------------------------------------------
 
-Pivot to v3
 [*] [b][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1442995752][WOTC] A Better Ghost[/url][/b] - Class Rework replaces original Ghost ability for Templars with a new one, so this mod would be pointless, unless you have another soldier class that uses the old Ghost.
 
 
@@ -77,8 +76,11 @@ Some changes are inspired by other mods listed above, but unless specified, not 
 
 Please [b][url=https://www.patreon.com/Iridar]support me on Patreon[/url][/b] if you require tech support, have a suggestion for a feature, or simply wish to help me create more awesome mods.
 
-TODO: Redo cross class perk list.
+TODO: 
+Redo cross class perk list.
 Do something about Saturation Fire and weapon fixes
+Fix Rupture in Highlander?
+Make Perk Pack not a requirement?
 
 
 [h1]RANGER[/h1]
@@ -158,7 +160,7 @@ Vanilla Reapers are already excellent, so this rework mostly just fills the hole
 [list]
 [*] Ability tree rearranged.
 [*] Many abilities had their descriptions improved for clarity.
-[*] Soul Harvest - increased Crit Chance boost per kill from 5 to 10 and max Crit Chance boost from 20 to 40. This lets you reach 100% crit at full stacks against flanked enemies if you use either upgraded Superior Laser Sight or Talon Ammo.
+[*] Soul Harvest - increased Crit Chance boost per kill from 5 to 10 and max Crit Chance boost from 20 to 40. This lets you reach 100% crit at full stacks against flanked enemies if you use either upgraded Superior Laser Sight or Talon Ammo. Now can be triggered by Claymores, and apply to any attack that can crit, not just Vektor.
 [*] Sting - now a guaranteed crit and has a 2 turn cooldown instead of 1 use per mission.
 [*] Blood Trail - bonus damage now also applies to bleeding units, though there's no way to apply bleeding in this mod.
 [*] Infiltration (GTS perk) - hacking bonus increased from 25 to 125.

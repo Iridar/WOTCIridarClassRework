@@ -14,7 +14,7 @@ LocHelpText="Gain a grenade-only inventory  slot. Throwing a grenade or using an
 [ZeroIn X2AbilityTemplate]
 LocLongDescription="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINCRIT/> critical chance until the end of the turn. Attacks against the same target also gain +<Ability:ZEROINAIM/> hit chance."
 LocHelpText="Your <Ability:WeaponName/> and melee attacks grant a stacking bonus of +<Ability:ZEROINCRIT/> critical chance until the end of the turn. Attacks against the same target also gain +<Ability:ZEROINAIM/> hit chance."
-LocPromotionPopupText="<Bullet/> The Skirmisher's ability to accrue many actions per turn can result in massive bonuses from Zero In.<br/><Bullet/> Use Overwatch and other reaction attacks to gain an advantage on the following turn."
+LocPromotionPopupText="<Bullet/> The Skirmisher's ability to accrue many actions per turn can result in massive bonuses from Zero In.<br/><Bullet/> Use Overwatch and other reaction attacks to gain Zero In bonuses on the following turn."
 
 [Reckoning X2AbilityTemplate]
 LocLongDescription="Unlocks the <Ability:SecondaryWeaponName/> slash attack. The Slash does not end turn, but performing a \"Dash\" attack will consume additional action points."
@@ -32,8 +32,8 @@ LocHelpText="A free attack with an electrical lash. Pierces armor. Deals increas
 LocPromotionPopupText="<Bullet/> Whiplash damage increases with Ripjack upgrades.<br/><Bullet/> <Ability:Whiplash_Cooldown/> turn cooldown."
 
 [SkirmisherInterrupt X2AbilityTemplate]
-LocLongDescription="A powerful form of Overwatch. The next time an enemy moves within your line of sight, perform any <Ability:Interrupt_NumPoints/> actions."
-LocHelpText="Perform any <Ability:Interrupt_NumPoints/> actions the next time an enemy moves within your line of sight."
+LocLongDescription="A powerful form of Overwatch. After the next time an enemy moves within your line of sight, perform any <Ability:Interrupt_NumPoints/> actions."
+LocHelpText="Perform any <Ability:Interrupt_NumPoints/> actions after the next time an enemy moves within your line of sight."
 LocPromotionPopupText="<Bullet/> Some actions are not available during Interrupt, like Overwatch.<br/><Bullet/> Attacks made during Interrupt do not count as reaction fire, and do not suffer aim and crit penalties normally associated with Overwatch.<br/><Bullet/> Use Combat Presence while interrupting to give one of your Interrupt actions to another soldier.<br/><Bullet/> <Ability:Interrupt_Cooldown/> turn cooldown."
 
 [SkirmisherInterruptInput X2AbilityTemplate]
@@ -76,6 +76,8 @@ LocHelpText="Decrement all ability cooldowns by 1."
 LocPromotionPopupText="<Bullet/> Manual Override allows sacrificing an action point to reduce current cooldowns on all abilities.<br/><Bullet/> Manual Override can be used multiple times in one turn, as long as you have enough action points.<br/><Bullet/> Use the Skirmisher's abilities early and often to take full advantage of Manual Override.<br/>"
 
 [Battlelord X2AbilityTemplate]
+LocLongDescription="During the next enemy turn, gain an action after each enemy in line of sight takes a turn."
+LocHelpText="During the next enemy turn, gain an action after each enemy in line of sight takes a turn."
 LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [SkirmisherReturnFire X2AbilityTemplate]
@@ -96,11 +98,14 @@ LocHelpText="When the squad is revealed, this soldier remains concealed. Additio
 ; LocHelpText="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 ; LocLongDescription="While concealed, detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 
+[RunAndGun X2AbilityTemplate]
+LocLongDescription="Gain an additional non-Move action this turn."
+LocHelpText="Gain an additional non-Move action."
+LocPromotionPopupText="<Bullet/> Run and Gun allows <Ability:ClassName/>s to close the distance to their targets rapidly, or to easily take a flanking position.<br/><Bullet/> Run and Gun has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+
 [Shadowstrike X2AbilityTemplate]
-; LocFriendlyName="Shadowstrike"
 LocLongDescription="Gain +<Ability:SHADOWSTRIKEAIM/> bonus aim and +<Ability:SHADOWSTRIKECRIT/> bonus critical hit chance when attacking enemies while concealed and on the turn the concealment is broken."
 LocHelpText="Gain bonus aim and bonus criticial hit chance when attacking enemies while concealed and on the turn the concealment is broken."
-; LocPromotionPopupText="<Bullet/> Shadowstrike bonuses will apply if the Ranger re-enters concealment in a mission.<br/>"
 
 [IRI_RN_Shadowstrike_OnBreakConcealment X2AbilityTemplate]
 LocFriendlyName="Shadowstrike"
@@ -108,24 +113,14 @@ LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical
 LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
 
 [Stealth X2AbilityTemplate]
-; LocFriendlyName="Conceal"
-; LocLongDescription="Immediately enter concealment once per mission."
-; LocHelpText="Immediately enter concealment once per mission."
-; LocFlyOverText="Conceal"
 LocPromotionPopupText="<Bullet/> Concealment can be entered at any location, but when done inside the detection radii of nearby enemies the Ranger will be revealed when flanked.<br/><Bullet/> Can't be used while flanked."
 
 [Untouchable X2AbilityTemplate]
-; LocFriendlyName="Untouchable"
 LocLongDescription="If you score a kill, the next attack against you during the enemy turn will miss."
 LocHelpText="If you score a kill, the next attack against you during the enemy turn will miss."
-; LocFlyOverText="Untouchable"
-; LocPromotionPopupText="<Bullet/> When Untouchable is triggered, the <Ability:ClassName/> is immune to the next damage dealing attack during the enemy turn, even Area of Effect attacks.<br/>"
+LocPromotionPopupText="<Bullet/> When Untouchable is active, the <Ability:ClassName/> is immune to the next damage dealing attack during the enemy turn, even Area of Effect attacks.<br/>"
 
 [RapidFire X2AbilityTemplate]
-; LocFriendlyName="Rapid Fire"
-; LocLongDescription="Fire twice in a row at an enemy. Each shot suffers an Aim penalty of <Ability:RAPIDFIREPENALTY/>."
-; LocHelpText="Fire twice in a row at an enemy. Each shot suffers an Aim penalty of <Ability:RAPIDFIREPENALTY/>."
-; LocFlyOverText="Rapid Fire"
 LocPromotionPopupText="<Bullet/> Rapid Fire is a devastating ability for dealing ranged damage.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 ; ================================================
@@ -138,6 +133,7 @@ LocPromotionPopupText="<Bullet/> Rapid Fire is a devastating ability for dealing
 LocPromotionPopupText=""
 
 [InTheZone X2AbilityTemplate]
+LocLongDescription="A powerful chained shot ability. For every kill made with your <Ability:WeaponName/> until the end of the turn, your actions will be refunded."
 LocPromotionPopupText="<Bullet/> Serial is meant to chain enemy kills in a single action, as every kill is essentially free.<br/><Bullet/> Every successful kill reduces critical hit chance by <Ability:IRI_SH_Serial_CritChancePenaltyPerShot/> until the end of turn.<br/><Bullet/> Serial has a <Ability:SelfCooldown/> turn cooldown.<br/>"
 
 [DeathFromAbove X2AbilityTemplate]
@@ -145,28 +141,24 @@ LocLongDescription="Killing an enemy at a lower elevation refunds one action poi
 LocHelpText="Killing an enemy at a lower elevation refunds one action point and does not end your turn. Triggers once per turn."
 LocPromotionPopupText="<Bullet/> Death From Above can combo well with <Ability:SecondaryWeaponName/> abilities, or can simply make the <Ability:ClassName/> more mobile.<br/><Bullet/> Death From Above does not grant any action points if the attack did not cost any action points."
 
-
 [Deadeye X2AbilityTemplate]
 LocLongDescription="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocHelpText="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot by <Ability:IRI_SH_DeadEye_AimPenalty/>, but increases the overall damage of the shot by <Ability:DeadEyeDmg/>%.<br/><Bullet/> Deadeye has a <Ability:SelfCooldown/> turn cooldown.<br/>"
-
 
 [DeadeyeDamage X2AbilityTemplate]
 LocLongDescription="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocHelpText="Take a shot with a <Ability:IRI_SH_DeadEye_AimPenalty/> aim penalty for a <Ability:DeadEyeDmg/>% damage boost."
 LocPromotionPopupText="<Bullet/> Deadeye reduces the base hit chance of a shot by <Ability:IRI_SH_DeadEye_AimPenalty/>, but increases the overall damage of the shot by <Ability:DeadEyeDmg/>%.<br/><Bullet/> Deadeye has a <Ability:SelfCooldown/> turn cooldown.<br/>"
 
-
 [SharpshooterAim X2AbilityTemplate]
 LocLongDescription="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
 LocHelpText="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all attacks on the following turn."
-LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all ranged attacks.<br/>"
-
+LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all ranged attacks, but not to melee attacks.<br/>"
 
 [ReturnFire X2AbilityTemplate]
-LocHelpText="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
-LocLongDescription="When targeted by enemy fire, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+LocHelpText="When targeted by an enemy attack, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+LocLongDescription="When targeted by an enemy attack, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
 
 [FanFire X2AbilityTemplate]
 LocLongDescription="Fire the <Ability:IRI_BoundWeaponName/> three times at the same target."
@@ -174,7 +166,6 @@ LocLongDescription="Fire the <Ability:IRI_BoundWeaponName/> three times at the s
 [Faceoff X2AbilityTemplate]
 LocLongDescription="Fire once at every visible enemy with your <Ability:IRI_BoundWeaponName/>."
 LocHelpText="Fire once at every visible enemy with your <Ability:IRI_BoundWeaponName/>."
-
 
 ; ================================================
 ;				GRENADIER
@@ -187,12 +178,17 @@ LocLongDescription="Your gear includes layers of extra padding and blast plates,
 LocPromotionPopupText="<Bullet/> All grenades are viable for Heavy Ordnance, even non-offensive ones like Smoke Grenades.<br/>"
 
 [ChainShot X2AbilityTemplate]
-LocLongDescription="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
+LocLongDescription="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you will automatically take another shot on the same target with <Ability:CHAINSHOTPENALTY/> aim penalty."
 LocHelpText="Fire your <Ability:WeaponName/> at the selected target. If the shot hits, you take another shot with an aim penalty of <Ability:CHAINSHOTPENALTY/> on the target automatically."
+LocPromotionPopupText="<Bullet/> Chain Shot requires <Ability:SelfAmmoCost/> ammo points, and has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Chain Shot can be devastating against enemies outside cover, or when augmented with aim bonuses.<br/><Bullet/> If Holo Targeting is unlocked, the first shot will apply it, nullifying the aim penalty of the second shot.<Bullet/> If the target dies from the first shot, the second shot will not be taken, and will not consume the second point of ammo, but Chain Shot will still go on cooldown."
 
 [Suppression X2AbilityTemplate]
 LocLongDescription="Fire a barrage that pins down your target, removing Overwatch, imposing a <Ability:SUPPRESSIONPENALTY/> Aim penalty, and granting a preemptive reaction shot that ignores cover if the target attempts to move or attack."
 LocHelpText="Penalize target's aim and shoot them if they move or attack."
+LocPromotionPopupText="<Bullet/> Suppression costs <Ability:SelfAmmoCost/> ammo points to use, but has no cooldown.<br/><Bullet/> Suppression will be canceled if the suppressing unit is damaged.<br/><Bullet/> If multiple units suppress a target, the aim penalty will stack.<br/><Bullet/> Suppressing a target will apply Holo Targeting, if it is unlocked, which will also increase the hit chance of the suppression shot if the target moves or attacks."
+
+[Demolition X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Demolition requires <Ability:SelfAmmoCost/> ammo points and has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Demolition does increased environmental damage, and will destroy most cover objects.<br/><Bullet/> Demolition will apply Holo Targeting, if it is unlocked."
 
 ;[BulletShred X2AbilityTemplate]
 ;LocLongDescription="A Rupture shot deals critical damage, increased by +<Ability:RuptureAmount/>. Target takes additional +<Ability:RuptureAmount/> damage from all attacks in the future."
@@ -202,9 +198,11 @@ LocHelpText="Penalize target's aim and shoot them if they move or attack."
 ;				SPECIALIST
 ; ------------------------------------------------
 
+[IntrusionProtocol X2AbilityTemplate]
+LocLongDescription="Attempt to remotely breach security on a network access point with your <Ability:SECONDARYWEAPONNAME/>. Does not end the turn."
 
 [CombatProtocol X2AbilityTemplate]
-LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Requires line of sight to the target.  Does not end turn."
+LocLongDescription="Send the GREMLIN to an enemy to jolt them, dealing guaranteed armor-piercing damage, which is increased against robotic enemies. Requires line of sight to the target. Does not end turn."
 LocHelpText="Send the GREMLIN to an enemy to jolt them, dealing armor-piercing damage, which is increased against robotic enemies. Does not end turn."
 
 [HaywireProtocol X2AbilityTemplate]
@@ -226,9 +224,10 @@ LocPromotionPopupText="<Bullet/> Scanning Protocol has one charge per mission, b
 LocPromotionPopupText="<Bullet/> Remotely hack ADVENT targets, including mission objectives, with your <Ability:SECONDARYWEAPONNAME/> drone. <br/><Bullet/> Upgrade your <Ability:SECONDARYWEAPONNAME/> drone to increase this soldier's hacking stat.<br/>"
 
 [FieldMedic X2AbilityTemplate]
-LocPromotionPopupText="<Bullet/> If the <Ability:ClassName/> has the Medical Protocol ability, the GREMLIN gains additional charges as well.<br/>"
+LocPromotionPopupText="<Bullet/> If the <Ability:ClassName/> has the Medical Protocol ability and a medikit equipped, the GREMLIN gains additional charges as well.<br/>"
 
 [EverVigilant X2AbilityTemplate]
+LocLongDescription="If you spend all of your actions on moves, you automatically enter Overwatch at the end of the turn."
 LocPromotionPopupText="<Bullet/> Ever Vigilant enables an extremely mobile style of play for the <Ability:ClassName/>.<br/><Bullet/> Any action other than moving or grappling will invalidate Ever Vigilant.<br/>"
 
 
@@ -237,7 +236,7 @@ LocPromotionPopupText="<Bullet/> Ever Vigilant enables an extremely mobile style
 ; ------------------------------------------------
 
 [Shadow X2AbilityTemplate]
-LocLongDescription="Grants the soldier Shadow, an advanced form of concealment where attacking only has a chance to reveal the soldier."
+LocLongDescription="Grants the soldier Shadow, an advanced form of concealment where attacking only has a chance to reveal the soldier. Soldier enters Shadow automatically at the start of a mission."
 LocPromotionPopupText="<Bullet/> Chance to be revealed from Shadow increases as the soldier performs more attacks.<br/><Bullet/> Soldier has increased mobility while in Shadow.<br/><Bullet/> Enemy detection radii are smaller to soldiers in Shadow.<br/>"
 
 [RemoteStart X2AbilityTemplate]
@@ -254,14 +253,14 @@ LocPromotionPopupText="<Bullet/> A <Ability:ClassName/> that only deals killing 
 LocPromotionPopupText="<Bullet/> Only applies while the <Ability:ClassName/> is in Shadow.<br/>"
 
 [Sting X2AbilityTemplate]
-LocLongDescription="Fire a silent precision shot from the Shadow that always deals critical damage and ensures the <Ability:ClassName/> stays in the Shadow. Can be used <Ability:IRI_RP_StingCharges/> times after entering Shadow."
+LocLongDescription="Fire a silent precision shot from the Shadow that always deals critical damage and ensures the <Ability:ClassName/> stays in the Shadow."
 LocHelpText="Fire a silent precision shot from the Shadow that always deals critical damage and ensures the <Ability:ClassName/> stays in the Shadow. Can be used <Ability:IRI_RP_StingCharges/> times after entering Shadow."
-LocPromotionPopupText="<Bullet/> Sting allows the <Ability:ClassName/> to attack in situations where they absolutely do not want to be revealed.<br/><Bullet/> Sting has <Ability:IRI_RP_StingCharges/> charge(s), refreshed whenever the <Ability:ClassName/> enters Shadow."
+LocPromotionPopupText="<Bullet/> Sting allows the <Ability:ClassName/> to attack in situations where they absolutely do not want to be revealed.<br/><Bullet/> Sting has a <Ability:SelfCooldown/> turn cooldown."
 
 [SoulReaper X2AbilityTemplate]
 LocLongDescription="Fire at a target until you run out of ammo or it dies. Banish shots cannot crit. The final shot always reveals the <Ability:ClassName/>."
 LocHelpText="Fire at a target until you run out of ammo or it dies. Banish shots cannot crit. The final shot always reveals the <Ability:ClassName/>."
-LocPromotionPopupText="<Bullet/> Each shot in Banish rolls a separate chance to hit and cannot crit.<br/><Bullet/> Banish can only be activated once per mission.<br/><Bullet/> Upgrade your Vektor Rifle with an Expanded Magazine to increase the potency of Banish.<br/><Bullet/> Banish cannot be activated with only 1 ammo remaining.<br/>"
+LocPromotionPopupText="<Bullet/> Each shot in Banish rolls a separate chance to hit and cannot crit.<br/><Bullet/> Banish can only be activated once per mission.<br/><Bullet/> Upgrade your Vektor Rifle with an Expanded Magazine to increase the potency of Banish.<br/><Bullet/> Banish cannot be activated with only 1 ammo remaining.<br/><Bullet/> Banish is not affected by Improvised Silencer."
 
 [ImprovisedSilencer X2AbilityTemplate]
 LocLongDescription="Remove the chance of being revealed on the first shot after entering Shadow."
@@ -278,16 +277,21 @@ LocFriendlyName="Blood Trail"
 LocLongDescription="<Ability:WeaponName/> shots deal +<Ability:BLOODTRAILDAMAGE/> damage to units who took damage this turn or are bleeding."
 LocHelpText="<Ability:WeaponName/> shots deal +<Ability:BLOODTRAILDAMAGE/> damage to units who took damage this turn or are bleeding."
 
-[IRI_RP_MakeshiftExplosives X2AbilityTemplate]
-LocFriendlyName="Makeshift Explosives"
-LocLongDescription="Restock one Claymore whenever you enter Shadow."
-LocHelpText="Restock one Claymore whenever you enter Shadow."
-LocPromotionPopupText="<Bullet/> Makeshift Explosives will not apply if the <Ability:ClassName/> already has maximum amount of Claymores.<br/><Bullet/> Homing Mine, if unlocked, can also take advantage of additional Claymores granted by Makeshift Explosives."
+; [IRI_RP_MakeshiftExplosives X2AbilityTemplate]
+; LocFriendlyName="Makeshift Explosives"
+; LocLongDescription="Restock one Claymore whenever you enter Shadow."
+; LocHelpText="Restock one Claymore whenever you enter Shadow."
+; LocPromotionPopupText="<Bullet/> Makeshift Explosives will not apply if the <Ability:ClassName/> already has maximum amount of Claymores.<br/><Bullet/> Homing Mine, if unlocked, can also take advantage of additional Claymores granted by Makeshift Explosives."
 
 [Executioner X2AbilityTemplate]
 LocFriendlyName="Death Dealer"
 LocLongDescription="Critical attacks against a flanked target while in Shadow will deal double critical damage."
 LocHelpText="Critical attacks against a flanked target while in Shadow will deal double critical damage."
+
+[PaleHorse X2AbilityTemplate]
+LocLongDescription="Kills increase crit chance by <Ability:SOULHARVESTCRIT/> until the end of the mission, to a maximum of <Ability:SOULHARVESTMAX/>."
+LocHelpText="Kills increase crit chance by <Ability:SOULHARVESTCRIT/> until the end of the mission, to a maximum of <Ability:SOULHARVESTMAX/>."
+LocPromotionPopupText="<Bullet/> Any kill by the <Ability:ClassName/> will provide the crit chance bonus, including kills with Claymores deployed by the <Ability:ClassName/>, even if the Claymore is detonated by someone else.<br/><Bullet/> Kills with Remote Start and other non-Claymore environmental explosives will not count for Soul Harvest."
 
 
 ; ================================================
@@ -319,6 +323,10 @@ LocLongDescription="Ranged psionic attack that deals low armor-piercing damage. 
 LocHelpText="Psionic attack that can jump to nearby units."
 LocPromotionPopupText="<Bullet/> Volt has no cooldown, but costs 1 Focus.<br/><Bullet/> Volt deals double damage to Psionic units.<br/><Bullet/> Volt can jump to a number of enemies equal to the current Focus level.<br/>"
 
+[TemplarFocus X2AbilityTemplate]
+LocPromotionPopupText="<Bullet/> Templars begin missions weaker than other soldiers, but can become extremely powerful at higher Focus levels. Effectively managing Focus to get the most out of the stat boosts and each ability is critical to using a Templar.<br/><Bullet/> Focus is gained by killing enemies with Rend.<br/><Bullet/> Focus Level 1: Rend Damage +<Ability:FOCUS1RENDDAMAGE/>, Mobility +<Ability:FOCUS1MOBILITY/>, Dodge +<Ability:FOCUS1DODGE/><br/><Bullet/> Focus Level 2: Rend Damage +<Ability:FOCUS2RENDDAMAGE/>, Mobility +<Ability:FOCUS2MOBILITY/>, Dodge +<Ability:FOCUS2DODGE/>"
+
+
 [Amplify X2AbilityTemplate]
 LocHelpText="Mark a target, causing them to take <Ability:AmplifyDamageMult/>% extra damage from next <Ability:IRI_GetCurrentFocus/> single-target attack(s)."
 
@@ -336,14 +344,14 @@ LocPromotionPopupText="<Bullet/> Deflect has a <Ability:DEFLECTCHANCE/>% chance 
 [Reflect X2AbilityTemplate]
 LocLongDescription="When the <Ability:ClassName/> has two or more Focus, there is a chance to reflect incoming shots back at the attacker, completely avoiding the damage."
 LocHelpText="When the <Ability:ClassName/> has two or more Focus, there is a chance to reflect incoming shots back at the attacker."
-LocPromotionPopupText="<Bullet/> Reflect has a <Ability:REFLECTCHANCE/>% chance to activate at Focus Level 2, which increases by <Ability:DEFLECTCHANCEPERFOCUS/>% with each additional Focus level.<br/><Bullet/> Only ranged, single-target attacks can be reflected.<br/> Deflect and Reflect have separate rolls. Roll to Reflect happens first. If the attack is not reflected, then there will be a chance to Deflect. If the attack is not deflected either, and Parry is active, the attack will be parried.<br/><Bullet/> The chance to hit the enemy with the reflected attack depends on <Ability:ClassName/>'s Aim and ignores enemy's cover Defense bonus."
+LocPromotionPopupText="<Bullet/> Reflect has a <Ability:REFLECTCHANCE/>% chance to activate at Focus Level 2, which increases by <Ability:DEFLECTCHANCEPERFOCUS/>% with each additional Focus level.<br/><Bullet/> Only ranged, single-target attacks can be reflected.<br/><Bullet/> Deflect and Reflect have separate rolls. Roll to Reflect happens first. If the attack is not reflected, then there will be a chance to Deflect. If the attack is not deflected either, and Parry is active, the attack will be parried.<br/><Bullet/> The chance to hit the enemy with the reflected attack depends on <Ability:ClassName/>'s Aim and ignores enemy's cover Defense bonus."
 
 [TemplarInvert X2AbilityTemplate]
 LocLongDescription="Use a standard or Momentum action point to switch locations with an enemy unit."
 LocHelpText="Switch locations with an enemy unit."
 
 [TemplarExchange X2AbilityTemplate]
-LocLongDescription="Use a standard or Momentum action point to exchange locations with a squadmate. Costs 1 Focus."
+LocLongDescription="Use a standard or Momentum action point to exchange locations with a squadmate."
 LocHelpText="Exchange locations with a squadmate."
 
 [Pillar X2AbilityTemplate]
@@ -360,7 +368,7 @@ LocPromotionPopupText="<Bullet/> Stun Strike does not end the <Ability:ClassName
 [VoidConduit X2AbilityTemplate]
 LocLongDescription="Trap a humanoid in a Psionic prison, immobilizing them for multiple turns and transferring their health to the Templar. Costs 1 Focus. Ends turn."
 LocHelpText="Immobilize a humanoid for <Ability:IRI_GetCurrentFocus/> turn(s), and transfer their health to the Templar."
-LocPromotionPopupText="<Bullet/> Void Conduit will drain <Ability:VOIDCONDUITACTIONDMG/> damage health, then drain <Ability:VOIDCONDUITACTIONDMG/> health each turn.<br/><Bullet/> Void Conduit lasts for enemy turns equal to the Templar's Focus level when cast.<br/><Bullet/> Targets trapped by Void Conduit cannot take actions or dodge, but can be targeted by other attacks.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
+LocPromotionPopupText="<Bullet/> Void Conduit will drain <Ability:VOIDCONDUITACTIONDMG/> health immediately, then drain <Ability:VOIDCONDUITACTIONDMG/> health each turn.<br/><Bullet/> Void Conduit lasts for enemy turns equal to the Templar's Focus level when cast.<br/><Bullet/> Targets trapped by Void Conduit cannot take actions or dodge, but can be targeted by other attacks.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [IonicStorm X2AbilityTemplate]
 LocLongDescription="Summon lightning to strike all nearby enemies, dealing armor-piercing damage. Damage increases with Focus level. Deals double damage to Psionic units. Costs all Focus, but generates Focus on kills."

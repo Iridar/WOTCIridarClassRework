@@ -1,15 +1,16 @@
 [Help]
 
-ZeroIn_Buff_Description = "Gain +<Ability:IRI_ZeroIn_Aim/> hit chance and +<Ability:IRI_ZeroIn_Crit/> critical chance until the end of turn."
+ZeroIn_Buff_Description = "Critical chance increased by <Ability:IRI_ZeroIn_Crit/> until the end of the turn."
 
 Untouchable_Buff_Description = "The next attack against you during the enemy turn will miss."
 
-DeepCover_ArmorBonus_Description = "Armor increased by +<Ability:IRI_DeepCover_ArmorBonus/>."
+; Unused.
+; DeepCover_ArmorBonus_Description = "Armor increased by +<Ability:IRI_DeepCover_ArmorBonus/>."
 
 [Sharpshooter]
 
-strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> damage reduced by <Ability:IRI_SH_Serial_CritChancePenalty/>."
-SharpshooterAimBonusDesc = "This unit will receive a +<Ability:SHARPSHOOTERAIMBONUS/> Aim bonus on all attacks this turn."
+strSerialAimPenaltyEffectDesc = "Serial: <Ability:WeaponName/> critical chance reduced by <Ability:IRI_SH_Serial_CritChancePenalty/> until the end of the turn."
+SharpshooterAimBonusDesc = "Aim: +<Ability:SHARPSHOOTERAIMBONUS/> Aim until the end of the turn."
 
 [Skirmisher]
 strReflexSpent = "Reflex was activated this turn and cannot be activated again until the start of this unit's next turn."

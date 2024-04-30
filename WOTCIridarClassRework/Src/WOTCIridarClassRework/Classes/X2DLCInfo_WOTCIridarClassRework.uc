@@ -444,11 +444,15 @@ static private function X2ItemTemplate GetItemBoundToAbilityFromUnit(XComGameSta
 
 static private function string TMColor(coerce string strInput)
 {
+	return strInput;
+
 	return "<font color='#b6b5d4'>" $ strInput $ "</font>"; // light purple
 }
 
 static private function string SKColor(coerce string strInput)
 {
+	return strInput;
+
 	return "<font color='#e50000'>" $ strInput $ "</font>"; // deep red
 }
 

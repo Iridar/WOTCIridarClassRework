@@ -215,6 +215,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_GiveStandardActionPoints.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_PaleHorse_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_Parkour_GrantActionPoint.uc">
       <SubType>Content</SubType>
     </Content>

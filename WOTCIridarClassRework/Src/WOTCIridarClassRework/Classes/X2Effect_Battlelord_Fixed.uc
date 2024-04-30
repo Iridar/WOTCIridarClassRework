@@ -84,7 +84,7 @@ simulated function OnEffectRemoved(const out EffectAppliedData ApplyEffectParame
 	local XComGameState_Unit	TargetUnit;
 	local XComGameState_AIGroup	GroupState;
 	local UnitValue				GroupValue;
-	local XComGameState_Ability	AbilityState;
+	//local XComGameState_Ability	AbilityState;
 	//local UnitValue				BattlelordInterrupts;
 
 	TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(class'XComGameState_Unit', ApplyEffectParameters.TargetStateObjectRef.ObjectID));
