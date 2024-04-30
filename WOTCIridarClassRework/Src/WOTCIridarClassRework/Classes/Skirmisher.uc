@@ -580,8 +580,6 @@ static private function PatchSkirmisherReturnFire()
 			X2Effect_ReturnFire(Effect).bPreEmptiveFire = true;
 		}
 	}
-
-	//AbilityTemplate.AddTargetEffect(new class'X2Effect_ReturnFireIgnoresCover');
 }
 
 // Alternative implementation - makes Manual Override temporarily remove cooldowns from all abilities that have them, then restore them next turn.

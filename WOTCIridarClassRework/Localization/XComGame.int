@@ -326,7 +326,6 @@ LocPromotionPopupText="<Bullet/> Volt has no cooldown, but costs 1 Focus.<br/><B
 [TemplarFocus X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Templars begin missions weaker than other soldiers, but can become extremely powerful at higher Focus levels. Effectively managing Focus to get the most out of the stat boosts and each ability is critical to using a Templar.<br/><Bullet/> Focus is gained by killing enemies with Rend.<br/><Bullet/> Focus Level 1: Rend Damage +<Ability:FOCUS1RENDDAMAGE/>, Mobility +<Ability:FOCUS1MOBILITY/>, Dodge +<Ability:FOCUS1DODGE/><br/><Bullet/> Focus Level 2: Rend Damage +<Ability:FOCUS2RENDDAMAGE/>, Mobility +<Ability:FOCUS2MOBILITY/>, Dodge +<Ability:FOCUS2DODGE/>"
 
-
 [Amplify X2AbilityTemplate]
 LocHelpText="Mark a target, causing them to take <Ability:AmplifyDamageMult/>% extra damage from next <Ability:IRI_GetCurrentFocus/> single-target attack(s)."
 
@@ -378,7 +377,6 @@ LocPromotionPopupText="<Bullet/> Ionic Storm's radius and damage increase at hig
 LocLongDescription="Create a duplicate of the Templar from the body of a fallen humanoid. The Ghost disappears when it loses all Focus. Costs 2 Focus. Does not end turn."
 LocHelpText="Summon a duplicate Templar from the fallen body of a humanoid enemy."
 LocPromotionPopupText="<Bullet/> Ghosts start with Focus equal to the Templar's Focus level when created.<br/><Bullet/> Ghosts cannot gain Focus, and disappear when all Focus is spent, or their health reaches 0.<br/><Bullet/> Rend costs 1 Focus when used by Ghosts.<br/><Bullet/> Ghost must be cast on the corpse of a humanoid enemy, and cannot be cast on the same corpse twice.<br/><Bullet/> Ghost does not end the <Ability:ClassName/>'s turn, but has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Ghost's have the same abilities as the <Ability:ClassName/>, except for: Ghost, Overcharge, Channel, Fortress, Sustain and all of the autopistol abilities."
-
 
 [TemplarBladestorm X2AbilityTemplate]
 LocFriendlyName="Zeal"

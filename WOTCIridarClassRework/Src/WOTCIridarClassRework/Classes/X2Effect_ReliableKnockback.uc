@@ -1,5 +1,7 @@
 class X2Effect_ReliableKnockback extends X2Effect;
 
+// Not currently implemented. 
+
 simulated protected function OnEffectAdded(const out EffectAppliedData ApplyEffectParameters, XComGameState_BaseObject kNewTargetState, XComGameState NewGameState, XComGameState_Effect NewEffectState)
 {
 	local XComGameState_Unit UnitState;

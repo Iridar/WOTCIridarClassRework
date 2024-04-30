@@ -1,5 +1,7 @@
 class X2Effect_Charges extends X2Effect;
 
+// Currently unused.
+
 var array<name>	AbilityNames;
 
 var int		Charges;

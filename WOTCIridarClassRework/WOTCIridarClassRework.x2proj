@@ -13,7 +13,6 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
-    <Folder Include="Config\ClassRework" />
     <Folder Include="Config\Reaper" />
     <Folder Include="Config\SPARK" />
     <Folder Include="Config\Templar" />
@@ -32,9 +31,6 @@
     <Content Include="Config\Base\XComGameData.ini">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Config\ClassRework\XComClassRework.ini">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
@@ -45,6 +41,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Reaper\XComClassData.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\Reaper\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Reaper\XComGameData_SoldierSkills.ini">
@@ -78,6 +77,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Skirmisher\XComTemplateEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\SPARK\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\SPARK\XComGameData_WeaponData.ini">
@@ -237,12 +239,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReliableWorldDamage.uc">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReserveOverwatchPoints_NoCost.uc">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_ReturnFireIgnoresCover.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_RP_BloodTrail.uc">
