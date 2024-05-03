@@ -13,6 +13,8 @@ static final function PatchAbilities()
 	MakeInterruptible('ThrowShrapnel');
 	MakeInterruptible('HomingMine');
 	MakeInterruptible('RemoteStart');
+
+	UpdateShotHUDPrioritiesForClass('Reaper');
 }
 
 static private function PatchPaleHorse()
@@ -66,8 +68,6 @@ static private function PatchSoulReaper()
 		return;
 
 	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;	
-
-	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 
 	for (i=0; i < AbilityTemplate.AbilityTriggers.length; i++)
 	{

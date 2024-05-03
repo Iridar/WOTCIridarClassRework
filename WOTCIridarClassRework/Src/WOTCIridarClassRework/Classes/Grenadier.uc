@@ -12,6 +12,8 @@ static final function PatchAbilities()
 
 	PatchBulletShred();
 	PatchHailOfBullets();
+
+	UpdateShotHUDPrioritiesForClass('Grenadier');
 }
 
 static private function PatchHailOfBullets()
@@ -44,8 +46,6 @@ static private function PatchBulletShred()
 	UnitEffects = new class'X2Condition_UnitEffects';
 	UnitEffects.AddExcludeEffect(class'X2AbilityTemplateManager'.default.DisorientedName, 'AA_UnitIsDisoriented');
 	Template.AbilityShooterConditions.AddItem(UnitEffects);
-
-	Template.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }
 
 //static private function PatchRupture()
@@ -182,8 +182,6 @@ static private function PatchSaturationFire()
 	Template = AbilityMgr.FindAbilityTemplate('SaturationFire');
 	if (Template == none)	
 		return;
-
-	EnsureWeaponUpgradeInteraction(Template);
 
 	WorldDamage = new class'WOTCIridarClassRework.X2Effect_ReliableWorldDamage';
 	WorldDamage.DamageAmount = `GetConfigInt("IRI_GN_SaturationFire_Reliable_EnvDamage");

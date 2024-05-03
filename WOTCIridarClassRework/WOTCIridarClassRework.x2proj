@@ -112,6 +112,9 @@
     <Content Include="Config\Templar\XComTemplateEditor.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ContentForCook\IRIClassReworkUI.upk">
       <SubType>Content</SubType>
     </Content>

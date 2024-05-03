@@ -9,6 +9,8 @@ static final function PatchAbilities()
 	PatchShadowstrike();
 	PatchUntouchable();
 	//PatchDeepCover();
+
+	UpdateShotHUDPrioritiesForClass('Ranger');
 }
 
 // Necessary only in a scenario where Slash doesn't end turn.
@@ -227,12 +229,9 @@ static private function PatchRapidFire()
 
 	AddCooldown(AbilityTemplate, `GetConfigFloat("IRI_RapidFire_Cooldown"));
 
-	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
-
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('RapidFire2');
 	if (AbilityTemplate == none)	
 		return;
 
 	AbilityTemplate.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
-	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }

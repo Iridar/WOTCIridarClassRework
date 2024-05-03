@@ -21,6 +21,8 @@ static final function PatchAbilities()
 
 	//PatchRetributionAttack();
 	//PatchManualOverride();
+
+	UpdateShotHUDPrioritiesForClass('Skirmisher');
 }
 
 // Necessary for some visualization fixes for the execute animations to line up properly.

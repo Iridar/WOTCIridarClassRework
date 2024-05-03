@@ -1,5 +1,62 @@
 class Common extends X2Ability;
 
+static final protected function UpdateShotHUDPrioritiesForClass(const name ClassName)
+{
+	local X2SoldierClassTemplate		ClassTemplate;
+	local X2SoldierClassTemplateManager	ClassMgr;
+	local X2AbilityTemplateManager		AbilityMgr;
+	local SoldierClassRank				SoldierRank;
+	local SoldierClassAbilitySlot		AbilitySlot;
+	local int							iRank;
+
+	if (!`GetConfigBool("Update_HUD_Priorities"))
+		return;
+
+	ClassMgr = class'X2SoldierClassTemplateManager'.static.GetSoldierClassTemplateManager();
+	ClassTemplate = ClassMgr.FindSoldierClassTemplate(ClassName);
+	if (ClassTemplate == none)
+		return;
+
+	`AMLOG("--- Updating Shot HUD Priority for Class:" @ ClassName @ "---");
+
+	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
+	
+	foreach ClassTemplate.SoldierRanks(SoldierRank, iRank)
+	{
+		foreach SoldierRank.AbilitySlots(AbilitySlot)
+		{
+			UpdateAbilityPriorityRecursive(AbilitySlot.AbilityType.AbilityName, AbilityMgr, iRank);
+		}
+	}
+}
+
+static final protected function UpdateAbilityPriorityRecursive(const name AbilityName, X2AbilityTemplateManager AbilityMgr, const int iRank)
+{
+	local X2AbilityTemplate Template;
+	local name AdditionalAbility;
+
+	Template = AbilityMgr.FindAbilityTemplate(AbilityName);
+	if (Template == none)
+		return;
+
+	// If Priority isn't set or it already uses one of the rank priorities
+	if (Template.ShotHUDPriority == -1 || Template.ShotHUDPriority >= 310 && Template.ShotHUDPriority <= 370)
+	{
+		if (Template.ShotHUDPriority != 310 + iRank * 10)
+		{
+			`AMLOG("Updating priority for ability:" @ Template.DataName @ "to:" @ 310 + iRank * 10);
+		}
+
+		// Then make sure it uses the right priority.
+		Template.ShotHUDPriority = 310 + iRank * 10;
+	}
+
+	foreach Template.AdditionalAbilities(AdditionalAbility)
+	{
+		UpdateAbilityPriorityRecursive(AdditionalAbility, AbilityMgr, iRank);
+	}
+}
+
 static final protected function EnsureWeaponUpgradeInteraction(out X2AbilityTemplate AbilityTemplate)
 {
 	local X2Effect_ApplyWeaponDamage	DamageEffect;

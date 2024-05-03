@@ -1,5 +1,7 @@
 class X2DLCInfo_WOTCIridarClassRework extends X2DownloadableContentInfo;
 
+var config bool bLog;
+
 static event OnPostTemplatesCreated()
 {
 	if (`GetConfigBool("Skirmisher"))	class'Skirmisher'.static.PatchAbilities();

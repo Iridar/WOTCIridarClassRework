@@ -1,4 +1,4 @@
-`define AMLOG(msg) `LOG(GetFuncName() @ `msg, /* class'WOTCIridarClassRework_Defaults'.default.VERSION_CFG > class'WOTCIridarClassRework_MCMScreen'.default.VERSION_CFG ? class'WOTCIridarClassRework_Defaults'.default.DEBUG_LOGGING : class'WOTCIridarClassRework_MCMScreen'.default.DEBUG_LOGGING */, 'WOTCIridarClassRework')
+`define AMLOG(msg) `LOG(GetFuncName() @ `msg, class'X2DLCInfo_WOTCIridarClassRework'.default.bLog, 'WOTCIridarClassRework')
 
 `define CAPS(VarName) class'UIUtilities_Text'.static.CapsCheckForGermanScharfesS(`VarName)
 

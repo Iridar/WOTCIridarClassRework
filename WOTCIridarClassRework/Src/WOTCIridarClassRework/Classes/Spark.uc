@@ -4,6 +4,8 @@ static final function PatchAbilities()
 {
 	PatchSacrifice();
 	PatchRepair();
+
+	UpdateShotHUDPrioritiesForClass('Spark');
 }
 
 static private function PatchRepair()

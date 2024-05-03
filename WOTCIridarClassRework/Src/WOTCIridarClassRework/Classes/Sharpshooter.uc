@@ -13,10 +13,12 @@ static final function PatchAbilities()
 	PatchSharpshooterAim();
 	PatchReturnFire();
 
-	PatchKillZoneShot();
+	//PatchKillZoneShot();
 
 	MakeInterruptible('LightningHands');
 	MakeInterruptible('Faceoff');
+
+	UpdateShotHUDPrioritiesForClass('Sharpshooter');
 }
 
 static private function PatchKillZoneShot()
@@ -29,7 +31,7 @@ static private function PatchKillZoneShot()
 	if (AbilityTemplate == none)
 		return;
 
-	AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
+	//AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }
 
 static private function PatchReturnFire()

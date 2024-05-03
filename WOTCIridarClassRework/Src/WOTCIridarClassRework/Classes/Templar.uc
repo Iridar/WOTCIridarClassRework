@@ -16,6 +16,8 @@ static final function PatchAbilities()
 	PatchDeflect();
 	PatchReflectShot();
 	PatchGhost();
+
+	UpdateShotHUDPrioritiesForClass('Templar');
 }
 
 static private function PatchGhost()

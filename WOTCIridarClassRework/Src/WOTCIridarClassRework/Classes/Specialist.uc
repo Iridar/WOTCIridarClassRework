@@ -20,6 +20,8 @@ static final function PatchAbilities()
 
 	PatchCapacitorDischarge();
 	PatchRevival();
+
+	UpdateShotHUDPrioritiesForClass('Specialist');
 }
 
 
