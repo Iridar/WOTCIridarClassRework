@@ -23,8 +23,8 @@ static private function PatchFlashbangForVolatileMix()
 	local X2ItemTemplateManager	ItemMgr;
 	local X2GrenadeTemplate		Template;
 
-	ItemMgr = class'X2AbilityTemplateManager'.static.GetItemTemplateManager();
-	Template = X2GrenadeTemplate(ItemMgr.FindAbilityTemplate('FlashbangGrenade'));
+	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
+	Template = X2GrenadeTemplate(ItemMgr.FindItemTemplate('FlashbangGrenade'));
 	if (Template == none)	
 		return;
 
