@@ -13,7 +13,22 @@ static final function PatchAbilities()
 	PatchBulletShred();
 	PatchHailOfBullets();
 
+	PatchFlashbangForVolatileMix();
+
 	UpdateShotHUDPrioritiesForClass('Grenadier');
+}
+
+static private function PatchFlashbangForVolatileMix()
+{
+	local X2ItemTemplateManager	ItemMgr;
+	local X2GrenadeTemplate		Template;
+
+	ItemMgr = class'X2AbilityTemplateManager'.static.GetItemTemplateManager();
+	Template = X2GrenadeTemplate(ItemMgr.FindAbilityTemplate('FlashbangGrenade'));
+	if (Template == none)	
+		return;
+
+	Template.bAllowVolatileMix = false;
 }
 
 static private function PatchHailOfBullets()
@@ -263,7 +278,7 @@ static private function EventListenerReturn Suppression_EventListenerTrigger(Obj
 	if (bTargetAttacking || bTargetMoving)
 	{
 		// If target isn't immune to reaction fire, attempt to activate suppression shot.
-		if (bIgnoreReactionFire || !AbilityState.AbilityTriggerAgainstSingleTarget(TargetUnit.GetReference(), false))
+		if (bIgnoreReactionFire && bTargetMoving || !AbilityState.AbilityTriggerAgainstSingleTarget(TargetUnit.GetReference(), false))
 		{
 			`AMLOG("Activation failed, removing suppression effect.");
 			

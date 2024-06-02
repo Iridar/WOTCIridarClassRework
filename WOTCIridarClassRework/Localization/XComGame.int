@@ -185,10 +185,16 @@ LocPromotionPopupText="<Bullet/> Chain Shot requires <Ability:SelfAmmoCost/> amm
 [Suppression X2AbilityTemplate]
 LocLongDescription="Fire a barrage that pins down your target, removing Overwatch, imposing a <Ability:SUPPRESSIONPENALTY/> Aim penalty, and granting a preemptive reaction shot that ignores cover if the target attempts to move or attack."
 LocHelpText="Penalize target's aim and shoot them if they move or attack."
-LocPromotionPopupText="<Bullet/> Suppression costs <Ability:SelfAmmoCost/> ammo points to use and has no cooldown.<br/><Bullet/> The suppressed unit can remove Suppression by breaking line of sight to the suppressing unit with their first step.<br/><Bullet/> Units immune to reaction fire can still be suppressed, but Suppression will be removed if they attempt to attack or move.<br/><Bullet/> Suppression will be canceled if the suppressing unit is damaged.<br/><Bullet/> If multiple units suppress a target, the aim penalty will stack.<br/><Bullet/> Suppressing a target will apply Holo Targeting, if it is unlocked, which will also increase the hit chance of the suppression shot if the target moves or attacks."
+LocPromotionPopupText="<Bullet/> Suppression costs <Ability:SelfAmmoCost/> ammo points to use and has no cooldown.<br/><Bullet/> The suppressed unit can remove Suppression by breaking line of sight to the suppressing unit with their first step.<br/><Bullet/> Units immune to reaction fire can still be suppressed, but Suppression will be removed if they move.<br/><Bullet/> Suppression will be canceled if the suppressing unit is damaged.<br/><Bullet/> If multiple units suppress the same target, the aim penalty will stack.<br/><Bullet/> Suppressing a target will apply Holo Targeting, if it is unlocked, which will also increase the hit chance of the suppression shot if the target moves or attacks."
 
 [Demolition X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Demolition requires <Ability:SelfAmmoCost/> ammo points and has a <Ability:SelfCooldown/> turn cooldown.<br/><Bullet/> Demolition does increased environmental damage, and will destroy most cover objects.<br/><Bullet/> Demolition will apply Holo Targeting, if it is unlocked."
+
+[VolatileMix X2AbilityTemplate]
+LocLongDescription="Your lethal grenades deal +<Ability:VOLATILIEMIXDAMAGE/> damage."
+LocHelpText="Your lethal grenades deal more damage."
+LocPromotionPopupText="<Bullet/> Though grenade damage is increased against enemy targets, there is no increase to the level of environmental damage that your grenades will do."
+
 
 ;[BulletShred X2AbilityTemplate]
 ;LocLongDescription="A Rupture shot deals critical damage, increased by +<Ability:RuptureAmount/>. Target takes additional +<Ability:RuptureAmount/> damage from all attacks in the future."
