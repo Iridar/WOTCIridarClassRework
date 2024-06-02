@@ -13,6 +13,7 @@
     <Folder Include="Config\" />
     <Folder Include="Config\Base\" />
     <Folder Include="Config\Grenadier" />
+    <Folder Include="Config\PsiOperative" />
     <Folder Include="Config\Reaper" />
     <Folder Include="Config\SPARK" />
     <Folder Include="Config\Templar" />
@@ -35,6 +36,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Grenadier\XComClassRework.ini">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Config\PsiOperative\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\Ranger\XComClassData.ini">
@@ -140,6 +144,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Grenadier.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\PsiOperative.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\Ranger.uc">

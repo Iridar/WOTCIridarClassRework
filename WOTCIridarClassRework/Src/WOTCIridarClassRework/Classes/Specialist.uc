@@ -14,8 +14,9 @@ static final function PatchAbilities()
 	PatchAidProtocol();
 
 	//PatchThreatAssessment(); // Done in PatchAidProtocol()
-	//PatchGremlinHeal();
-	//PatchGremlinStabilize();
+
+	PatchGremlinHeal();
+	PatchGremlinStabilize();
 	//PatchGremlins();
 
 	PatchCapacitorDischarge();
@@ -107,7 +108,7 @@ static private function PatchCapacitorDischarge()
 	if (AbilityTemplate == none)	
 		return;
 
-	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+	foreach AbilityTemplate.AbilityMultiTargetEffects(Effect)
 	{
 		DamageEffect = X2Effect_ApplyWeaponDamage(Effect);
 		if (DamageEffect == none)
@@ -346,10 +347,10 @@ static private function PatchGremlinHeal()
 	if (AbilityTemplate == none)	
 		return;
 
-	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 
 	GremilinHealCharges = new class'X2AbilityCharges_GremlinHeal_Fixed';
-	GremilinHealCharges.InitialCharges = `GetConfigInt("IRI_SP_MedicalProtocol_InitialCharges");
+	GremilinHealCharges.InitialCharges = AbilityTemplate.AbilityCharges.InitialCharges;
 	AbilityTemplate.AbilityCharges = GremilinHealCharges;
 }
 static private function PatchGremlinStabilize()
@@ -363,10 +364,10 @@ static private function PatchGremlinStabilize()
 	if (AbilityTemplate == none)	
 		return;
 
-	AddActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
+	//dActionPointNameToActionCost(AbilityTemplate, default.GremlinActionPoint);
 
 	GremilinHealCharges = new class'X2AbilityCharges_GremlinHeal_Fixed';
-	GremilinHealCharges.InitialCharges = `GetConfigInt("IRI_SP_MedicalProtocol_InitialCharges");
+	GremilinHealCharges.InitialCharges = AbilityTemplate.AbilityCharges.InitialCharges;
 	AbilityTemplate.AbilityCharges = GremilinHealCharges;
 }
 

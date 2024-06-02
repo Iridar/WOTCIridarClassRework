@@ -12,7 +12,8 @@ static event OnPostTemplatesCreated()
 	if (`GetConfigBool("Specialist"))	class'Specialist'.static.PatchAbilities();
 	if (`GetConfigBool("SPARK"))		class'SPARK'.static.PatchAbilities();
 	if (`GetConfigBool("Reaper"))		class'Reaper'.static.PatchAbilities();
-
+	if (`GetConfigBool("PsiOperative"))	class'PsiOperative'.static.PatchAbilities();
+	
 	//CheckClassAbilities();
 }
 

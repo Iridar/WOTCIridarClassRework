@@ -5,12 +5,9 @@ function int GetInitialCharges(XComGameState_Ability Ability, XComGameState_Unit
 	local array<XComGameState_Item> UtilityItems;
 	local XComGameState_Item ItemIter;
 	local int TotalCharges;
-	local int MedikitBonusCharges;
 
 	TotalCharges = InitialCharges;
 	UtilityItems = Unit.GetAllInventoryItems(); // Iridar - get all inventory items instead of only utility items.
-
-	MedikitBonusCharges = `GetConfigInt("IRI_SP_MedicalProtocol_BonusChargesPerMedikit");
 
 	foreach UtilityItems(ItemIter)
 	{
@@ -19,8 +16,12 @@ function int GetInitialCharges(XComGameState_Ability Ability, XComGameState_Unit
 
 		if (ItemIter.GetWeaponCategory() == class'X2Item_DefaultUtilityItems'.default.MedikitCat)
 		{
-			TotalCharges += MedikitBonusCharges;
+			TotalCharges += ItemIter.Ammo;
 		}
+	}
+	if (bStabilize)
+	{
+		TotalCharges /= class'X2Ability_DefaultAbilitySet'.default.MEDIKIT_STABILIZE_AMMO;
 	}
 
 	return TotalCharges;

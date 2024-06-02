@@ -131,9 +131,8 @@ Grenadiers are changed the least by the rework. The biggest changes are buffs to
 [list]
 [*] Blast Padding - bugfix: now applies to environmental damage.
 [*] Demolition - buff: now a guaranteed hit and applies Holo Targeting. [i]Utility abilities shouldn't be able to miss, in my opinion, especially considering that depending on situation, it may doing absolutely nothing even on a hit.[/i]
-[*] Suppression - buff: now preemptively triggers on attacks, ignores cover defense bonus. [i]Key problem with vanilla Suppression is that it seems to have minimal effects on enemy AI, and they either just fire through it, being completely unharmed by bullets whizzing past them, or just run it, and the Suppression shot just misses most of the time, due to the double whammy of enemy sometimes getting Cover bonuses while running and the reaction fire Aim penalties.[/i]
-[*] Chain Shot - buff: aim penalty moved from the first shot to the second one. [i]It's a pretty arbitrary change. The fact that second shot of vanilla Chain shot has better accuracy than 
- but I just always hated how vanilla Chain Shot with Holo Targeting gives you like 60% hit chance on the first shot and 90% on the second one. Now it'll be a perfect ying-yang of both shots having same hit chance percent.[/i]
+[*] Suppression - buff: now ignores cover defense bonus. New triggering rules: it preemptively triggers on attacks, but suppressed unit gets one tile of movement to attempt to break line of sight, which will remove the suppression. Bugfix: units with Shadowstep and other similar abilities can also safely break suppression by movement.[i]Key problem with vanilla Suppression is that it seems to have minimal effects on enemy AI, and they either just fire through it, being completely unharmed by bullets whizzing past them, or just run it, and the Suppression shot just misses most of the time, due to the double whammy of enemy sometimes getting Cover bonuses while running and the reaction fire Aim penalties. New triggering rules will also give some counterplay to Suppression.[/i]
+[*] Chain Shot - buff: aim penalty moved from the first shot to the second one. [i]It's a pretty arbitrary change. I just always hated how vanilla Chain Shot with Holo Targeting gives you like 60% hit chance on the first shot and 90% on the second one. Now it'll be a perfect ying-yang of both shots having same hit chance.[/i]
 [*] Saturation Fire - now more reliable at destroying cover. [i]The description doesn't tell you this explicitly, but Saturation Fire uses the same logic as Demolition, and can destroy cover only if there's a unit behind it, which doesn't really make sense for a sweeping machinegun burst. With the rework, Saturation Fire will behave more like Collateral Damage from Enemy Within, and can be used to punch through walls even if there's nobody behind them.[/i]
 [*] Rupture - consistency fix: no longer usable while Disoriented.
 [/list]
@@ -223,7 +222,7 @@ A lot of people consider Templars without Bladestorm and Reaper to be second cla
 [/list]
 
 [h1]ABILITY INTERRUPTION CHANGES[/h1]
-Made a pass over all abilities used by the vanilla classes to make sure they can be interrupted by abilities like Covering Fire when it makes sense.
+Made a pass over all abilities used by the vanilla classes to make sure they can be interrupted by abilities like Covering Fire when it makes sense. This includes Psi Operatives too, which are otherwise unaffected by this mod.
 [list]
 [*] If it's an offensive ability, it can be interrupted, even if it's a free action. 
 [*] Neutral abilities can be interrupted if they're not a free action.
