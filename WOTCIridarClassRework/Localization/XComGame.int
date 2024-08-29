@@ -269,9 +269,10 @@ LocHelpText="Fire at a target until you run out of ammo or it dies. Banish shots
 LocPromotionPopupText="<Bullet/> Each shot in Banish rolls a separate chance to hit and cannot crit.<br/><Bullet/> Banish can only be activated once per mission.<br/><Bullet/> Upgrade your Vektor Rifle with an Expanded Magazine to increase the potency of Banish.<br/><Bullet/> Banish cannot be activated with only 1 ammo remaining.<br/><Bullet/> Banish is not affected by Improvised Silencer."
 
 [ImprovisedSilencer X2AbilityTemplate]
-LocLongDescription="Remove the chance of being revealed on the first shot after entering Shadow."
-LocHelpText="Remove the chance of being revealed on the first shot after entering Shadow."
-LocPromotionPopupText="<Bullet/> The chance of being revealed on the first shot of the mission is removed as well."
+LocLongDescription="Remove the chance of being revealed on the first <Ability:WeaponName/> shot after entering Shadow."
+LocHelpText="Remove the chance of being revealed on the first <Ability:WeaponName/> shot after entering Shadow."
+LocPromotionPopupText="<Bullet/> Improvised Silencer does apply to Shadow <Ability:ClassName/> enters on mission start."
+LocFlyoverText="Improvised Silencer"
 
 [ShadowRising X2AbilityTemplate]
 LocLongDescription="Shadow gains an additional charge."

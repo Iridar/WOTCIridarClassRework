@@ -252,8 +252,11 @@ static private function PatchSting()
 
 static private function PatchImprovisedSilencer()
 {
-	local X2AbilityTemplateManager			AbilityMgr;
-	local X2AbilityTemplate					AbilityTemplate;
+	local X2AbilityTemplateManager				AbilityMgr;
+	local X2AbilityTemplate						AbilityTemplate;
+	local X2Effect_SuperConcealModifier_Fixed	Effect;
+	local X2Effect_Persistent					IconEffect;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ImprovisedSilencer');
@@ -261,4 +264,26 @@ static private function PatchImprovisedSilencer()
 		return;
 
 	AbilityTemplate.IconImage = "img:///UILibrary_XPACK_Common.PerkIcons.UIPerk_improvisedsilencer";
+
+	AbilityTemplate.bShowActivation = true;
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
+	{
+		if (X2Effect_SuperConcealModifier(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
+		}
+	}
+
+	Effect = new class'X2Effect_SuperConcealModifier_Fixed';
+	Effect.BuildPersistentEffect(1, true, false, false);
+	Effect.bRemoveWhenTargetConcealmentBroken = true;
+	Effect.SetDisplayInfo(ePerkBuff_Bonus, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocLongDescription, AbilityTemplate.IconImage, true,, AbilityTemplate.AbilitySourceName);
+	AbilityTemplate.AddTargetEffect(Effect);
+
+	IconEffect = new class'X2Effect_Persistent';
+	IconEffect.BuildPersistentEffect(1, true);
+	IconEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.LocLongDescription, AbilityTemplate.IconImage, true,, AbilityTemplate.AbilitySourceName);
+	AbilityTemplate.AddTargetEffect(IconEffect);
 }
+

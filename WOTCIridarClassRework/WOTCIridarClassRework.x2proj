@@ -293,6 +293,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SP_CoveringFireIgnoreCover.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SuperConcealModifier_Fixed.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_UntouchableBuff.uc">
       <SubType>Content</SubType>
     </Content>
