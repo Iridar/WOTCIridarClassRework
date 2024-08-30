@@ -13,23 +13,24 @@ static final function PatchAbilities()
 	PatchBulletShred();
 	PatchHailOfBullets();
 
-	PatchFlashbangForVolatileMix();
+	// Patched via Template Master.
+	//PatchFlashbangForVolatileMix();
 
 	UpdateShotHUDPrioritiesForClass('Grenadier');
 }
 
-static private function PatchFlashbangForVolatileMix()
-{
-	local X2ItemTemplateManager	ItemMgr;
-	local X2GrenadeTemplate		Template;
-
-	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2GrenadeTemplate(ItemMgr.FindItemTemplate('FlashbangGrenade'));
-	if (Template == none)	
-		return;
-
-	Template.bAllowVolatileMix = false;
-}
+// static private function PatchFlashbangForVolatileMix()
+// {
+// 	local X2ItemTemplateManager	ItemMgr;
+// 	local X2GrenadeTemplate		Template;
+// 
+// 	ItemMgr = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
+// 	Template = X2GrenadeTemplate(ItemMgr.FindItemTemplate('FlashbangGrenade'));
+// 	if (Template == none)	
+// 		return;
+// 
+// 	Template.bAllowVolatileMix = false;
+// }
 
 static private function PatchHailOfBullets()
 {

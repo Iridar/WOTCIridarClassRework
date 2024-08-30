@@ -38,6 +38,9 @@
     <Content Include="Config\Grenadier\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Grenadier\XComTemplateEditor.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\PsiOperative\XComClassRework.ini">
       <SubType>Content</SubType>
     </Content>
