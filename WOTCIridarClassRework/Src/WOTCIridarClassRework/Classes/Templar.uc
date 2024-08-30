@@ -213,7 +213,31 @@ static private function PatchVolt()
 	MakeNotEndTurn(Template);
 	Template.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
 
+	// The original delegate passes 'false' in "as primary target" parameter, which makes the damage preview disregard effects applied to the target.
+	// Pretty bizarre design decision tbh.
+	Template.DamagePreviewFn = VoltDamagePreview_Fixed;
+
 	//Template.AddTargetEffect(GetSealEffect());
+}
+
+static private function bool VoltDamagePreview_Fixed(XComGameState_Ability AbilityState, StateObjectReference TargetRef, out WeaponDamageValue MinDamagePreview, out WeaponDamageValue MaxDamagePreview, out int AllowsShield)
+{
+	local XComGameState_Unit TargetUnit;
+
+	TargetUnit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(TargetRef.ObjectID));
+	if (TargetUnit != none)
+	{
+		if (TargetUnit.IsPsionic())
+		{
+			AbilityState.GetMyTemplate().AbilityTargetEffects[1].GetDamagePreview(TargetRef, AbilityState, true, MinDamagePreview, MaxDamagePreview, AllowsShield);
+		}
+		else
+		{
+			AbilityState.GetMyTemplate().AbilityTargetEffects[0].GetDamagePreview(TargetRef, AbilityState, true, MinDamagePreview, MaxDamagePreview, AllowsShield);
+		}		
+		return true;
+	}
+	return false;
 }
 
 static private function PatchTemplarBladestorm()
