@@ -266,10 +266,13 @@ static final protected function AddFreeActionCost(out X2AbilityTemplate Template
 	Template.AbilityCosts.AddItem(ActionPointCost);
 }
 
-static final protected function CopyLocalization(X2AbilityTemplateManager AbilityTemplateManager, name TemplateName, name DonorTemplateName)
+static final protected function CopyLocalization(const name TemplateName, const name DonorTemplateName)
 {
+	local X2AbilityTemplateManager AbilityTemplateManager;
 	local X2AbilityTemplate Template;
 	local X2AbilityTemplate DonorTemplate;
+
+	AbilityTemplateManager = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 
 	Template = AbilityTemplateManager.FindAbilityTemplate(TemplateName);
 	DonorTemplate = AbilityTemplateManager.FindAbilityTemplate(DonorTemplateName);

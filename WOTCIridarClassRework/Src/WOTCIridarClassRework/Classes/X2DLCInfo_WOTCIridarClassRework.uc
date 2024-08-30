@@ -188,6 +188,11 @@ static function bool AbilityTagExpandHandler_CH(string InString, out string OutS
 		OutString = SKColor(`GetConfigInt(InString) - 1);
 		return true;
 
+	case "IRI_SK_Whiplash_BonusDamageRobotic":
+		OutString = string(int(`GetConfigFloat(InString) * 100));
+		return true;
+
+
 	//case "ManualOverride_Cooldown":
 	//	OutString = SKColor(`GetConfigInt(InString) - 1);
 	//	return true;

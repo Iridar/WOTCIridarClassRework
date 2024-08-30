@@ -505,8 +505,6 @@ static private function PatchWhiplash()
 	local X2AbilityTemplateManager		AbilityMgr;
 	local X2AbilityTemplate				AbilityTemplate;
 	local X2Effect_ApplyWeaponDamage	DamageEffect;
-	local X2Condition_UnitProperty		OnlyOrganic;
-	local X2Condition_UnitProperty		OnlyRobotic;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -532,27 +530,16 @@ static private function PatchWhiplash()
 		}
 	}
 
-	OnlyOrganic = new class'X2Condition_UnitProperty';
-	OnlyOrganic.ExcludeRobotic = true;
-	OnlyOrganic.ExcludeOrganic = false;
-
-	OnlyRobotic = new class'X2Condition_UnitProperty';
-	OnlyRobotic.ExcludeRobotic = false;
-	OnlyRobotic.ExcludeOrganic = true;
-
 	DamageEffect = new class'X2Effect_ApplyWeaponDamage';
 	DamageEffect.bIgnoreBaseDamage = true;
 	DamageEffect.bIgnoreArmor = true;
 	DamageEffect.DamageTag = 'Whiplash';
-	DamageEffect.TargetConditions.AddItem(OnlyOrganic);
 	AbilityTemplate.AddTargetEffect(DamageEffect);
 
-	DamageEffect = new class'X2Effect_ApplyWeaponDamage';
-	DamageEffect.bIgnoreBaseDamage = true;
-	DamageEffect.bIgnoreArmor = true;
-	DamageEffect.DamageTag = 'Whiplash_Robotic';
-	DamageEffect.TargetConditions.AddItem(OnlyRobotic);
-	AbilityTemplate.AddTargetEffect(DamageEffect);
+	AbilityTemplate.AdditionalAbilities.AddItem('IRI_SK_Whiplash_BonusDamage');
+	
+	// This ability shouldn't be ever visible to the player, but let's be nice.
+	CopyLocalization('IRI_SK_Whiplash_BonusDamage', 'Whiplash');
 
 	RemoveChargeCost(AbilityTemplate);
 	AddCooldown(AbilityTemplate, `GetConfigInt("Whiplash_Cooldown"));

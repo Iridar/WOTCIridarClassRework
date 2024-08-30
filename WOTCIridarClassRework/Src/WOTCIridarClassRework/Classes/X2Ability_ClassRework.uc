@@ -6,8 +6,35 @@ static function array<X2DataTemplate> CreateTemplates()
 
 	Templates.AddItem(IRI_RN_Shadowstrike_OnBreakConcealment());
 	Templates.AddItem(PurePassive('IRI_RP_MakeshiftExplosives', "img:///IRIClassReworkUI.UIPerk_MakeshiftExplosives", false /*cross class*/, 'eAbilitySource_Perk', true /*display in UI*/));
+	Templates.AddItem(IRI_SK_Whiplash_BonusDamage());
 
 	return Templates;
+}
+
+static function X2AbilityTemplate IRI_SK_Whiplash_BonusDamage()
+{
+	local X2AbilityTemplate					Template;
+	local X2Effect_SK_WhiplashBonusDamage	Effect;
+	
+	`CREATE_X2ABILITY_TEMPLATE(Template, 'IRI_SK_Whiplash_BonusDamage');
+
+	Template.AbilitySourceName = 'eAbilitySource_Perk';
+	Template.IconImage = "img:///UILibrary_PerkIcons.UIPerk_shadowstrike";
+	SetHidden(Template);
+	SetPassive(Template);
+		
+	Effect = new class'X2Effect_SK_WhiplashBonusDamage';
+	Effect.BuildPersistentEffect(1, true);
+	Effect.SetDisplayInfo(ePerkBuff_Bonus, Localize("Whiplash X2AbilityTemplate", "LocFriendlyName", "XComGame"), Template.GetMyLongDescription(), Template.IconImage, false,,Template.AbilitySourceName);
+	Template.AddTargetEffect(Effect);
+
+	Template.bShowActivation = false;
+	Template.bSkipFireAction = true;
+	Template.Hostility = eHostility_Neutral;
+	Template.BuildNewGameStateFn = TypicalAbility_BuildGameState;
+	Template.BuildVisualizationFn = none;
+
+	return Template;
 }
 
 static function X2AbilityTemplate IRI_RN_Shadowstrike_OnBreakConcealment()
