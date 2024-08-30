@@ -327,9 +327,9 @@ LocHelpText="Melee attack with a chance to stun or disorient the target. Trigger
 LocPromotionPopupText="<Bullet/> Using Rend to kill enemies is the Templar's primary method for generating Focus.<br/><Bullet/> Rend's damage is increased at higher Focus levels.<br/><Bullet/> After casting Rend, the Templar will gain Momentum, allowing them one movement action. Use this to return to cover after attacking.<br/><Bullet/> Rend has a <Ability:RENDSTUNCHANCE/>% chance to Stun per Focus. Stunned targets also have a chance to be knocked back.<br/><Bullet/> Rend has a <Ability:RENDDISORIENTCHANCE/>% chance to Disorient per Focus.<br/>"
 
 [Volt X2AbilityTemplate]
-LocLongDescription="Ranged psionic attack that deals low armor-piercing damage. Deals double damage to psionic units. Jumps to other nearby enemies at higher Focus levels. Cannot target robotic units. Costs 1 Focus and 1 action point. Does not end turn."
+LocLongDescription="Ranged psionic attack that deals low armor-piercing damage. Psionic units take increased damage. Jumps to other nearby enemies at higher Focus levels. Cannot target robotic units. Costs 1 Focus and 1 action point. Does not end turn."
 LocHelpText="Psionic attack that can jump to nearby units."
-LocPromotionPopupText="<Bullet/> Volt has no cooldown, but costs 1 Focus.<br/><Bullet/> Volt deals double damage to Psionic units.<br/><Bullet/> Volt can jump to a number of enemies equal to the current Focus level.<br/>"
+LocPromotionPopupText="<Bullet/> Volt has no cooldown, but costs 1 Focus.<br/><Bullet/> Volt deals increased damage to Psionic units.<br/><Bullet/> Volt can jump to a number of enemies equal to the current Focus level.<br/>"
 
 [TemplarFocus X2AbilityTemplate]
 LocPromotionPopupText="<Bullet/> Templars begin missions weaker than other soldiers, but can become extremely powerful at higher Focus levels. Effectively managing Focus to get the most out of the stat boosts and each ability is critical to using a Templar.<br/><Bullet/> Focus is gained by killing enemies with Rend.<br/><Bullet/> Focus Level 1: Rend Damage +<Ability:FOCUS1RENDDAMAGE/>, Mobility +<Ability:FOCUS1MOBILITY/>, Dodge +<Ability:FOCUS1DODGE/><br/><Bullet/> Focus Level 2: Rend Damage +<Ability:FOCUS2RENDDAMAGE/>, Mobility +<Ability:FOCUS2MOBILITY/>, Dodge +<Ability:FOCUS2DODGE/>"
@@ -378,8 +378,8 @@ LocHelpText="Immobilize a humanoid for <Ability:IRI_GetCurrentFocus/> turn(s), a
 LocPromotionPopupText="<Bullet/> Void Conduit will drain <Ability:VOIDCONDUITACTIONDMG/> health immediately, then drain <Ability:VOIDCONDUITACTIONDMG/> health each turn.<br/><Bullet/> Void Conduit lasts for enemy turns equal to the Templar's Focus level when cast.<br/><Bullet/> Targets trapped by Void Conduit cannot take actions or dodge, but can be targeted by other attacks.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [IonicStorm X2AbilityTemplate]
-LocLongDescription="Summon lightning to strike all nearby enemies, dealing armor-piercing damage. Damage increases with Focus level. Deals double damage to Psionic units. Costs all Focus, but generates Focus on kills."
-LocPromotionPopupText="<Bullet/> Ionic Storm's radius and damage increase at higher Focus levels.<br/><Bullet/> Ionic Storm deals double damage to Psionic units.<br/><Bullet/> Use Ionic Storm at a high Focus level when it will kill many targets to immediately refund the Focus cost.<br/><Bullet/> Ionic Storm has a <Ability:SelfCooldown/> turn cooldown.<br/>"
+LocLongDescription="Summon lightning to strike all nearby enemies, dealing armor-piercing damage. Damage increases with Focus level. Deals increased damage to Psionic units. Costs all Focus, but generates Focus on kills."
+LocPromotionPopupText="<Bullet/> Ionic Storm's radius and damage increase at higher Focus levels.<br/><Bullet/> Ionic Storm deals increased damage to Psionic units.<br/><Bullet/> Use Ionic Storm at a high Focus level when it will kill many targets to immediately refund the Focus cost.<br/><Bullet/> Ionic Storm has a <Ability:SelfCooldown/> turn cooldown.<br/>"
 
 [Ghost X2AbilityTemplate]
 LocLongDescription="Create a duplicate of the Templar from the body of a fallen humanoid. The Ghost disappears when it loses all Focus. Costs 2 Focus. Does not end turn."
