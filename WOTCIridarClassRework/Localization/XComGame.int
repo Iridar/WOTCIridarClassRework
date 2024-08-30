@@ -92,6 +92,7 @@ LocPromotionPopupText="<Bullet/> Return Fire will only trigger once per turn.<br
 [Phantom X2AbilityTemplate]
 LocLongDescription="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
 LocHelpText="When the squad is revealed, this soldier remains concealed. Additionally, their detection radius is reduced by <Ability:IRI_Conceal_DetectionRadiusModifier/>%."
+LocPromotionPopupText="<Bullet/> Even if the squad does not start a mission concealed, <Ability:ClassName/>s with Phantom will still begin the mission with concealment.<br/><Bullet/> If the <Ability:ClassName/> is the soldier that breaks squad concealment, then Phantom does not apply.<br/><Bullet/> Attacks from concealment cannot be dodged."
 
 ; [IRI_RN_ConcealDetectionRadiusReduction X2AbilityTemplate]
 ; LocFriendlyName="Conceal"
@@ -113,7 +114,7 @@ LocLongDescription="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical
 LocHelpText="Aim is increased by +<Ability:SHADOWSTRIKEAIM/> and critical hit chance by +<Ability:SHADOWSTRIKECRIT/> until the end of the turn."
 
 [Stealth X2AbilityTemplate]
-LocPromotionPopupText="<Bullet/> Concealment can be entered at any location, but when done inside the detection radii of nearby enemies the Ranger will be revealed when flanked.<br/><Bullet/> Can't be used while flanked."
+LocPromotionPopupText="<Bullet/> Concealment can be entered at any location, but when done inside the detection radii of nearby enemies the Ranger will be revealed when flanked.<br/><Bullet/> Can't be used while flanked.<br/><Bullet/> Attacks from concealment cannot be dodged."
 
 [Untouchable X2AbilityTemplate]
 LocLongDescription="If you score a kill, the next attack against you during the enemy turn will miss."
@@ -243,7 +244,7 @@ LocPromotionPopupText="<Bullet/> Ever Vigilant enables an extremely mobile style
 
 [Shadow X2AbilityTemplate]
 LocLongDescription="Grants the soldier Shadow, an advanced form of concealment where attacking only has a chance to reveal the soldier. Soldier enters Shadow automatically at the start of a mission."
-LocPromotionPopupText="<Bullet/> Chance to be revealed from Shadow increases as the soldier performs more attacks.<br/><Bullet/> Soldier has increased mobility while in Shadow.<br/><Bullet/> Enemy detection radii are smaller to soldiers in Shadow.<br/>"
+LocPromotionPopupText="<Bullet/> Chance to be revealed from Shadow increases as the soldier performs more attacks.<br/><Bullet/> Soldier has increased mobility while in Shadow.<br/><Bullet/> Enemy detection radii are smaller to soldiers in Shadow.<br/><Bullet/> Attacks from Shadow concealment cannot be dodged."
 
 [RemoteStart X2AbilityTemplate]
 LocLongDescription="Detonate an environmental explosive, causing it to deal double damage within twice its normal radius. Does not reveal the <Ability:ClassName/>. Cannot target Claymores."
