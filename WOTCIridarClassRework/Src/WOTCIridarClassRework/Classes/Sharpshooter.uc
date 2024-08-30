@@ -87,20 +87,20 @@ static private function PatchReturnFire()
 
 // 1. Trooper that dies to Return Fire: perfect
 // 2. Trooper that does not die to Return Fire: perfect
-// 3. Trooper that dies to return fire after covering fire overwatch: shots sync well, but enemy freezes when killed by return fire.
-// 4. Trooped that does not die to return fire after covering fire overwatch: perfect.
+// 2a. Trooper that does not die to Return Fire and then kills shaprshooter: perfect
+
+// 3. Trooper that dies to return fire after covering fire overwatch: 
+// 4. Trooped that does not die to return fire after covering fire overwatch: 
 static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, out X2Action VisualizationTree)
 {
 	local XComGameStateVisualizationMgr		VisMgr;
 	local X2Action_MarkerTreeInsertBegin	MarkerStart;
 	local X2Action_MarkerTreeInsertEnd		MarkerEnd;
 	local XComGameStateContext_Ability		Context;
-	local X2Action_Fire						FireAction;
-	local X2Action							InsertAboveAction;
+	local XComGameStateContext_Ability		InterruptedContext;
+	local X2Action							InsertBelowAction;
 	local array<X2Action>					FindActions;
 	local X2Action							FindAction;
-	local int								ClosestHistoryIndex;
-	local X2Action_MarkerNamed				MarkerNamed;
 	local VisualizationActionMetadata		ActionMetadata;
 
 	VisMgr = `XCOMVISUALIZATIONMGR;
@@ -108,57 +108,59 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 	if (Context == none)
 		return;
 
-	`LOG("====================== MAIN VIZ TREE =========================");
-	PrintActionRecursive(VisualizationTree, 0);
-	`LOG("---------------------------------------- END ----------------------------------------");
+	`AMLOG(`ShowVar(Context.InterruptionHistoryIndex));
+	`AMLOG(`ShowVar(Context.ResumeHistoryIndex));
+	`AMLOG(`ShowVar(Context.HistoryIndexInterruptedBySelf));
 
-	`LOG("====================== BUILD TREE =========================");
-	PrintActionRecursive(BuildTree, 0);
-	`LOG("---------------------------------------- END ----------------------------------------");
+	InterruptedContext = XComGameStateContext_Ability(VisualizationTree.StateChangeContext);
 
+	`AMLOG(`ShowVar(InterruptedContext.InterruptionHistoryIndex));
+	`AMLOG(`ShowVar(InterruptedContext.ResumeHistoryIndex));
+	`AMLOG(`ShowVar(InterruptedContext.HistoryIndexInterruptedBySelf));
+
+	// `LOG("====================== MAIN VIZ TREE =========================");
+	// PrintActionRecursive(VisualizationTree, 0);
+	// `LOG("---------------------------------------- END ----------------------------------------");
+	// 
+	// `LOG("====================== BUILD TREE =========================");
+	// PrintActionRecursive(BuildTree, 0);
+	// `LOG("---------------------------------------- END ----------------------------------------");
+
+	// #1. Find start and end of the Return Fire Shot visualization.
 	MarkerStart = X2Action_MarkerTreeInsertBegin(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertBegin'));
 	MarkerEnd = X2Action_MarkerTreeInsertEnd(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertEnd'));
-	FireAction = X2Action_Fire(VisMgr.GetNodeOfType(BuildTree, class'X2Action_Fire')); 
-	if (MarkerStart == none || MarkerEnd == none || FireAction == none)
+	if (MarkerStart == none || MarkerEnd == none)
 	{
 		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
 		return;
 	}
 
-	// Find the end of whichever interrupted visualization is playing on the enemy unit that triggered Return Fire.
-	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_MarkerInterruptEnd', FindActions ,, FireAction.PrimaryTargetID); // FireAction.PrimaryTargetID - the enemy we are shooting at = enemy that triggered Return Fire.
-	ClosestHistoryIndex = MaxInt;
+	// #2. Find start of interruption where we need to insert the return fire shot visualization.
+	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_MarkerInterruptBegin', FindActions ,, Context.InputContext.PrimaryTarget.ObjectID);
 	foreach FindActions(FindAction)
 	{
-		if (ClosestHistoryIndex > FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex)
+		if (FindAction.StateChangeContext.AssociatedState.HistoryIndex == InterruptedContext.ResumeHistoryIndex)
 		{
-			InsertAboveAction = FindAction;
-			ClosestHistoryIndex = FireAction.StateChangeContext.AssociatedState.HistoryIndex - FindAction.StateChangeContext.AssociatedState.HistoryIndex;
+			InsertBelowAction = FindAction;
+			break;
 		}
 	}
-
-	`AMLOG("Found InsertAboveAction at history index:" @ InsertAboveAction.StateChangeContext.AssociatedState.HistoryIndex);
-	
-	if (InsertAboveAction == none)
+	if (InsertBelowAction == none)
 	{
+		`AMLOG("Failed to find Insert Below Action out of this many Interrupt Start Markers:" @ FindActions.Length);
 		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
 		return;
 	}
+	`AMLOG("Found InsertBelowAction at history index:" @ InsertBelowAction.StateChangeContext.AssociatedState.HistoryIndex);
+	
 
-	// Shove a marker action right above it.
-	ActionMetadata = FireAction.Metadata;
-	MarkerNamed = X2Action_MarkerNamed(class'X2Action_MarkerNamed'.static.AddToVisualizationTree(ActionMetadata, Context, false,, InsertAboveAction.ParentActions));
-	MarkerNamed.SetName("Return Fire Marker");
+	// Need to specifically use InsertSubtree() to make X2Action_ExitCover::HasNonEmptyInterruption() recognize that an interrupt took place.
+	VisMgr.InsertSubtree(MarkerStart, MarkerEnd, InsertBelowAction);
+	
 
-	//VisMgr.InsertSubtree(MarkerStart, MarkerEnd, MarkerNamed);
-
-	// This should wedge the Return Fire visualization between MarkerNamed and InsertAboveAction.
-	VisMgr.ConnectAction(MarkerStart, VisualizationTree, false, MarkerNamed);
-	VisMgr.ConnectAction(InsertAboveAction, VisualizationTree, false, MarkerEnd);
-
-	`LOG("====================== MAIN VIZ TREE AFTER MERGING =========================");
-	PrintActionRecursive(VisualizationTree, 0);
-	`LOG("---------------------------------------- END ----------------------------------------");
+	// `LOG("====================== MAIN VIZ TREE AFTER MERGING =========================");
+	// PrintActionRecursive(VisualizationTree, 0);
+	// `LOG("---------------------------------------- END ----------------------------------------");
 }
 
 static function PrintActionRecursive(X2Action Action, int iLayer)
