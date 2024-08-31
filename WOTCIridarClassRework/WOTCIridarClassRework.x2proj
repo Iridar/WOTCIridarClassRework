@@ -278,6 +278,9 @@
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_DeathFromAbove.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_ReturnFire.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\WOTCIridarClassRework\Classes\X2Effect_SH_SharpshooterAim.uc">
       <SubType>Content</SubType>
     </Content>

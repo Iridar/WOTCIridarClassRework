@@ -28,12 +28,6 @@ static function X2AbilityTemplate IRI_SK_Whiplash_BonusDamage()
 	Effect.SetDisplayInfo(ePerkBuff_Bonus, Localize("Whiplash X2AbilityTemplate", "LocFriendlyName", "XComGame"), Template.GetMyLongDescription(), Template.IconImage, false,,Template.AbilitySourceName);
 	Template.AddTargetEffect(Effect);
 
-	Template.bShowActivation = false;
-	Template.bSkipFireAction = true;
-	Template.Hostility = eHostility_Neutral;
-	Template.BuildNewGameStateFn = TypicalAbility_BuildGameState;
-	Template.BuildVisualizationFn = none;
-
 	return Template;
 }
 

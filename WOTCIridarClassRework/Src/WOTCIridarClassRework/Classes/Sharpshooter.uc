@@ -34,29 +34,40 @@ static private function PatchKillZoneShot()
 	//AbilityTemplate.AddTargetEffect(default.WeaponUpgradeMissDamage);
 }
 
+// Makes Return Fire preemtpitve and makes it ignore cover defense bonus.
+// Makes Return Fire ability activate at the end of the player turn, and last until the start of their next turn.
+// This is done in order to make it trigger after Covering Fire Overwatch.
+// The passive icon from Return Fire effect is disabled, another passive ability added to display it.
+// A custom merge visualization function is used to make the Return Fire visualization play at the right time.
 static private function PatchReturnFire()
 {
 	local X2AbilityTemplateManager		AbilityMgr;
 	local X2AbilityTemplate				AbilityTemplate;
-	local X2Effect						Effect;
-	local X2Effect_ReturnFire			FireEffect;
+	local X2Effect_SH_ReturnFire		FireEffect;
 	local X2AbilityToHitCalc_StandardAim ToHitCalc;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('ReturnFire');
 	if (AbilityTemplate == none)
 		return;
 
-	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+	// Replace original Return Fire effect with the one with reduced priority
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
 	{
-		FireEffect = X2Effect_ReturnFire(Effect);
-		if (X2Effect_ReturnFire(Effect) == none)
-			continue;
+		if (X2Effect_ReturnFire(AbilityTemplate.AbilityTargetEffects[i]) != none)
+		{
+			AbilityTemplate.AbilityTargetEffects.Remove(i, 1);
 
-		FireEffect.bPreEmptiveFire = true;
-		break;
+			FireEffect = new class'X2Effect_SH_ReturnFire';
+			FireEffect.BuildPersistentEffect(1, true, false, false, eGameRule_PlayerTurnBegin);
+			FireEffect.SetDisplayInfo(ePerkBuff_Passive, AbilityTemplate.LocFriendlyName, AbilityTemplate.GetMyLongDescription(), AbilityTemplate.IconImage,,,AbilityTemplate.AbilitySourceName);
+			FireEffect.bPreEmptiveFire = true; // it's also preemptive
+			AbilityTemplate.AddTargetEffect(FireEffect);
+			break;
+		}
 	}
-	
+
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('PistolReturnFire');
 	if (AbilityTemplate == none)
 		return;
@@ -85,12 +96,13 @@ static private function PatchReturnFire()
 	ToHitCalc.bIgnoreCoverBonus = true;
 }
 
-// 1. Trooper that dies to Return Fire: perfect
-// 2. Trooper that does not die to Return Fire: perfect
-// 2a. Trooper that does not die to Return Fire and then kills shaprshooter: perfect
+// 1. Enemy dies to Return Fire: perfect
+// 2. Enemy does not die to Return Fire: perfect
+// 2. Enemy does not die to Return Fire and then kills shaprshooter: perfect
+// 3. Enemy dies to return fire after covering fire overwatch: perfect
+// 3. Enemy dies to covering fire overwatch: perfect
+// 4. Enemy does not die to return fire after covering fire overwatch: perfect
 
-// 3. Trooper that dies to return fire after covering fire overwatch: 
-// 4. Trooped that does not die to return fire after covering fire overwatch: 
 static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, out X2Action VisualizationTree)
 {
 	local XComGameStateVisualizationMgr		VisMgr;
@@ -98,10 +110,10 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 	local X2Action_MarkerTreeInsertEnd		MarkerEnd;
 	local XComGameStateContext_Ability		Context;
 	local XComGameStateContext_Ability		InterruptedContext;
+	local X2Action							InsertAboveAction;
 	local X2Action							InsertBelowAction;
 	local array<X2Action>					FindActions;
 	local X2Action							FindAction;
-	local VisualizationActionMetadata		ActionMetadata;
 
 	VisMgr = `XCOMVISUALIZATIONMGR;
 	Context = XComGameStateContext_Ability(BuildTree.StateChangeContext);
@@ -118,13 +130,13 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 	`AMLOG(`ShowVar(InterruptedContext.ResumeHistoryIndex));
 	`AMLOG(`ShowVar(InterruptedContext.HistoryIndexInterruptedBySelf));
 
-	// `LOG("====================== MAIN VIZ TREE =========================");
-	// PrintActionRecursive(VisualizationTree, 0);
-	// `LOG("---------------------------------------- END ----------------------------------------");
-	// 
-	// `LOG("====================== BUILD TREE =========================");
-	// PrintActionRecursive(BuildTree, 0);
-	// `LOG("---------------------------------------- END ----------------------------------------");
+	`AMLOG("====================== MAIN VIZ TREE =========================");
+	PrintActionRecursive(VisualizationTree, 0);
+	`AMLOG("---------------------------------------- END ----------------------------------------");
+	
+	`LOG("====================== BUILD TREE =========================");
+	PrintActionRecursive(BuildTree, 0);
+	`AMLOG("---------------------------------------- END ----------------------------------------");
 
 	// #1. Find start and end of the Return Fire Shot visualization.
 	MarkerStart = X2Action_MarkerTreeInsertBegin(VisMgr.GetNodeOfType(BuildTree, class'X2Action_MarkerTreeInsertBegin'));
@@ -135,32 +147,52 @@ static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, 
 		return;
 	}
 
-	// #2. Find start of interruption where we need to insert the return fire shot visualization.
-	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_MarkerInterruptBegin', FindActions ,, Context.InputContext.PrimaryTarget.ObjectID);
-	foreach FindActions(FindAction)
+	// #2. Find end of interruption where we need to insert the return fire shot visualization.
+	// Look for the end specifically and insert above the end so we visaulize after overwatch.
+
+	VisMgr.GetNodesOfType(VisualizationTree, class'X2Action_MarkerInterruptEnd', FindActions,, Context.InputContext.PrimaryTarget.ObjectID);
+
+	if (FindActions.Length == 1)
 	{
-		if (FindAction.StateChangeContext.AssociatedState.HistoryIndex == InterruptedContext.ResumeHistoryIndex)
+		InsertAboveAction = FindActions[0];
+	}
+	else
+	{
+		foreach FindActions(FindAction)
 		{
-			InsertBelowAction = FindAction;
-			break;
+			InsertAboveAction = FindAction;
+
+			// If the target dies to another ability that also interrupts visualization, the ResumeHistoryIndex will be -1, so have to code around it.
+			if (FindAction.StateChangeContext.AssociatedState.HistoryIndex == InterruptedContext.ResumeHistoryIndex)
+			{
+				
+				break;
+			}
 		}
 	}
-	if (InsertBelowAction == none)
+	if (InsertAboveAction == none)
 	{
 		`AMLOG("Failed to find Insert Below Action out of this many Interrupt Start Markers:" @ FindActions.Length);
 		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
 		return;
 	}
-	`AMLOG("Found InsertBelowAction at history index:" @ InsertBelowAction.StateChangeContext.AssociatedState.HistoryIndex);
-	
+	`AMLOG("Using InsertAboveAction at history index:" @ InsertAboveAction.StateChangeContext.AssociatedState.HistoryIndex);
+
+	// Shouldn't be possible
+	if (InsertAboveAction.ParentActions.Length == 0)
+	{	
+		Context.SuperMergeIntoVisualizationTree(BuildTree, VisualizationTree);
+		return;
+	}
+
+	InsertBelowAction = InsertAboveAction.ParentActions[0];
 
 	// Need to specifically use InsertSubtree() to make X2Action_ExitCover::HasNonEmptyInterruption() recognize that an interrupt took place.
 	VisMgr.InsertSubtree(MarkerStart, MarkerEnd, InsertBelowAction);
-	
 
-	// `LOG("====================== MAIN VIZ TREE AFTER MERGING =========================");
-	// PrintActionRecursive(VisualizationTree, 0);
-	// `LOG("---------------------------------------- END ----------------------------------------");
+	`AMLOG("====================== MAIN VIZ TREE AFTER MERGING =========================");
+	PrintActionRecursive(VisualizationTree, 0);
+	`AMLOG("---------------------------------------- END ----------------------------------------");
 }
 
 static function PrintActionRecursive(X2Action Action, int iLayer)
@@ -185,7 +217,7 @@ static function PrintActionRecursive(X2Action Action, int iLayer)
 	}
 	strMessage @= Action.StateChangeContext.AssociatedState.HistoryIndex;
 		
-	`LOG(strMessage,, 'IRIPISTOLVIZ'); 
+	`AMLOG(strMessage); 
 	foreach Action.ChildActions(ChildAction)
 	{
 		PrintActionRecursive(ChildAction, iLayer + 1);
