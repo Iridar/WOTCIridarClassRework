@@ -116,7 +116,7 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<name> ActionPoints, XComGameState_Effect EffectState)
 {
 	// Do nothing during Skirmisher Interrupt, we can't grant AP there, because Interrupt will wipe away all AP before giving its own.
-	if (UnitState.IsUnitAffectedByEffectName(class'X2Effect_SkirmisherInterrupt'.default.EffectName))
+	if (UnitState.IsUnitAffectedByEffectName(class'X2Effect_SkirmisherInterrupt'.default.EffectName) || UnitState.IsUnitAffectedByEffectName(class'X2Effect_Battlelord'.default.EffectName))
 		return;
 
 	super.ModifyTurnStartActionPoints(UnitState, ActionPoints, EffectState);
