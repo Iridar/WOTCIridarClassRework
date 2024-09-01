@@ -4,7 +4,7 @@ function bool IsEffectCurrentlyRelevant(XComGameState_Effect EffectGameState, XC
 {
 	local UnitValue UV;
 
-	return TargetUnit.GetUnitValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, UV);
+	return TargetUnit.GetUnitValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, UV);
 }
 
 defaultproperties

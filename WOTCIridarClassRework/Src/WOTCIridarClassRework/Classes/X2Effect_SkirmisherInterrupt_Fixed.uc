@@ -80,6 +80,7 @@ function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<nam
 
 	if (GroupState.ObjectID != GroupValue.fValue && UnitState.IsAbleToAct())
 	{
+		// Wipe out regular action points given to the unit at the start of the turn.
 		ActionPoints.Length = 0;
 
 		iNumPoints = `GetConfigInt("Interrupt_NumPoints");

@@ -96,13 +96,12 @@ static private function PatchReturnFire()
 	ToHitCalc.bIgnoreCoverBonus = true;
 }
 
-// 1. Enemy dies to Return Fire: perfect
-// 2. Enemy does not die to Return Fire: perfect
-// 2. Enemy does not die to Return Fire and then kills shaprshooter: perfect
-// 3. Enemy dies to return fire after covering fire overwatch: perfect
-// 3. Enemy dies to covering fire overwatch: perfect
-// 4. Enemy does not die to return fire after covering fire overwatch: perfect
-
+// Enemy dies to Return Fire: perfect
+// Enemy does not die to Return Fire: perfect
+// Enemy does not die to Return Fire and then kills shaprshooter: perfect
+// Enemy dies to return fire after covering fire overwatch: perfect
+// Enemy dies to covering fire overwatch: perfect
+// Enemy does not die to return fire after covering fire overwatch: perfect
 static private function PistolReturnFire_MergeVisualization(X2Action BuildTree, out X2Action VisualizationTree)
 {
 	local XComGameStateVisualizationMgr		VisMgr;

@@ -10,7 +10,6 @@ function RegisterForEvents(XComGameState_Effect EffectGameState)
 	EventMgr.RegisterForEvent(EffectObj, 'AbilityActivated', SkirmisherReflexListener, ELD_OnStateSubmitted, 40, ,, EffectObj); // Reduced priority to make it trigger after Return Fire.
 }
 
-// Same as original, just replaced eCleanup_BeginTactical with eCleanup_BeginTurn
 static private function EventListenerReturn SkirmisherReflexListener(Object EventData, Object EventSource, XComGameState GameState, Name Event, Object CallbackData)
 {
 	local XComGameState_Effect EffectGameState;
@@ -35,11 +34,14 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 	`AMLOG("Initial checks done");
 
 	SourceUnit = XComGameState_Unit(GameState.GetGameStateForObjectID(AbilityContext.InputContext.SourceObject.ObjectID)); // For some reason this started failing once I reduced listener priority.
-	`AMLOG("Got source unit:" @ SourceUnit.GetFullName());
 	if (SourceUnit == none)
 	{
 		SourceUnit = XComGameState_Unit(`XCOMHISTORY.GetGameStateForObjectID(AbilityContext.InputContext.SourceObject.ObjectID));
 		`AMLOG("Got source unit from history:" @ SourceUnit.GetFullName());
+	}
+	else
+	{
+		`AMLOG("Got source unit:" @ SourceUnit.GetFullName());
 	}
 	if (SourceUnit == none)
 		return ELR_NoInterrupt;
@@ -63,7 +65,7 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 			if (TargetUnit.IsFriendlyUnit(SourceUnit))
 				return ELR_NoInterrupt;
 
-			TargetUnit.GetUnitValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, TotalValue);
+			TargetUnit.GetUnitValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, TotalValue);
 			if (TotalValue.fValue >= 1)
 				return ELR_NoInterrupt;
 
@@ -74,6 +76,8 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 				{
 					NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState("Skirmisher Reflex Immediate Action");
 					TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
+
+					// TotalEarnedValue is not used for anything in the reworked effect, but keep it around in case some other mod needs it for something else.
 					TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, TotalValue.fValue + 1, eCleanup_BeginTurn);
 					TargetUnit.ActionPoints.AddItem(class'X2CharacterTemplateManager'.default.StandardActionPoint);
 
@@ -81,14 +85,16 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 				}
 			}
 			//	if it's not their turn, increment the counter for next turn
-			else if (`TACTICALRULES.GetCachedUnitActionPlayerRef().ObjectID != TargetUnit.ControllingPlayer.ObjectID)
+			else
 			{
 				TargetUnit.GetUnitValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, ReflexValue);
 				if (ReflexValue.fValue == 0)
 				{
 					NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState("Skirmisher Reflex For Next Turn Increment");
 					TargetUnit = XComGameState_Unit(NewGameState.ModifyStateObject(TargetUnit.Class, TargetUnit.ObjectID));
-					TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, 1, eCleanup_BeginTurn);
+
+					// Use Begin Tactical here. ModifyTurnStartActionPoints() will clean this unit value anyway, but until it's used up, we need to preserve it, so it doesn't tick away during Skirmisher Interrupt.
+					TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.ReflexUnitValue, 1, eCleanup_BeginTactical); 
 					TargetUnit.SetUnitFloatValue(class'X2Effect_SkirmisherReflex'.default.TotalEarnedValue, TotalValue.fValue + 1, eCleanup_BeginTurn);
 					
 					bActionGiven = true;
@@ -107,6 +113,14 @@ static private function EventListenerReturn SkirmisherReflexListener(Object Even
 	return ELR_NoInterrupt;
 }
 
+function ModifyTurnStartActionPoints(XComGameState_Unit UnitState, out array<name> ActionPoints, XComGameState_Effect EffectState)
+{
+	// Do nothing during Skirmisher Interrupt, we can't grant AP there, because Interrupt will wipe away all AP before giving its own.
+	if (UnitState.IsUnitAffectedByEffectName(class'X2Effect_SkirmisherInterrupt'.default.EffectName))
+		return;
+
+	super.ModifyTurnStartActionPoints(UnitState, ActionPoints, EffectState);
+}
 
 static private function TriggerReflexFlyover_PostBuildVisualization(XComGameState VisualizeGameState)
 {
