@@ -81,9 +81,9 @@ LocHelpText="During the next enemy turn, gain an action after each enemy in line
 LocPromotionPopupText="<Bullet/> Battlelord can allow the Skirmisher to prevail in the most dire of circumstances.<br/><Bullet/> Turns from the Lost and enemy pod reveals do not grant the immediate action.<br/><Bullet/> Combat Presence can be used while Battlelord is active.<br/><Bullet/> <Ability:SelfCooldown/> turn cooldown."
 
 [SkirmisherReturnFire X2AbilityTemplate]
-LocHelpText="When targeted by an attack during the enemy turn, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
-LocLongDescription="When targeted by an enemy attack during the enemy turn, automatically fire back with your <Ability:WeaponName/> once per turn, ignoring enemy's cover defense bonus."
-LocPromotionPopupText="<Bullet/> Return Fire will only trigger once per turn.<br/><Bullet/> Return Fire can be triggered by melee attacks and Area of Effect attacks.<br/><Bullet/> Return Fire will not trigger when targeted by Overwatch fire.<br/><Bullet/> Return Fire activates before the enemy attack, potentially killing the enemy and preventing the attack."
+LocHelpText="When attacked by an enemy during the enemy turn, automatically fire back at them with your <Ability:WeaponName/>, ignoring enemy's cover defense bonus."
+LocLongDescription="When attacked by an enemy during the enemy turn, automatically fire back at them with your <Ability:WeaponName/>, ignoring enemy's cover defense bonus."
+LocPromotionPopupText="<Bullet/> Return Fire can trigger multiple times per turn, as long as <Ability:WeaponName/> has ammo.<br/><Bullet/> Return Fire can be triggered by melee attacks and Area of Effect attacks.<br/><Bullet/> Return Fire will not trigger when targeted by Overwatch fire.<br/><Bullet/> Return Fire will not activate if the enemy attack kills the <Ability:ClassName/>."
 
 ; ================================================
 ;				RANGER
@@ -158,8 +158,10 @@ LocHelpText="Hunker Down now confers +<Ability:SHARPSHOOTERAIMBONUS/> Aim to all
 LocPromotionPopupText="<Bullet/> The bonus granted by Aim can apply to all ranged attacks, but not to melee attacks.<br/>"
 
 [ReturnFire X2AbilityTemplate]
-LocHelpText="When targeted by an enemy attack, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
-LocLongDescription="When targeted by an enemy attack, automatically fire back with your <Ability:SecondaryWeaponName/> once per turn. Return Fire activates before the enemy attack and ignores enemy's cover defense bonus."
+LocHelpText="When attacked by an enemy during the enemy turn, automatically fire back at them with your <Ability:SecondaryWeaponName/>, ignoring enemy's cover defense bonus."
+LocLongDescription="When attacked by an enemy during the enemy turn, automatically fire back at them with your <Ability:SecondaryWeaponName/>, ignoring enemy's cover defense bonus."
+LocPromotionPopupText="<Bullet/> Return Fire can trigger multiple times per turn.<br/><Bullet/> Return Fire can be triggered by melee attacks and Area of Effect attacks.<br/><Bullet/> Return Fire will not trigger when targeted by Overwatch fire.<br/><Bullet/> Return Fire will not activate if the enemy attack kills the <Ability:ClassName/>."
+
 
 [FanFire X2AbilityTemplate]
 LocLongDescription="Fire the <Ability:IRI_BoundWeaponName/> three times at the same target."

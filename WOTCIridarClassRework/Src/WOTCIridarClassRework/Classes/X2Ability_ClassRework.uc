@@ -228,8 +228,26 @@ static function	SetSelfTarget_WithEventTrigger(out X2AbilityTemplate Template, n
 static function PrintActionRecursive(X2Action Action, int iLayer)
 {
 	local X2Action ChildAction;
+	local XComGameState_Unit UnitState;
+	local string strMessage;
+	local X2Action_MarkerNamed MarkerAction;
 
-	`LOG("Action layer: " @ iLayer @ ": " @ Action.Class.Name @ Action.StateChangeContext.AssociatedState.HistoryIndex,, 'IRIPISTOLVIZ'); 
+	strMessage = "Action layer:" @ iLayer @ ":" @ Action.Class.Name;
+
+	MarkerAction = X2Action_MarkerNamed(Action);
+	if (MarkerAction != none)
+	{
+		strMessage @= MarkerAction.MarkerName;
+	}
+
+	UnitState = XComGameState_Unit(Action.Metadata.StateObject_NewState);
+	if (UnitState != none)
+	{
+		strMessage @= UnitState.GetFullName();
+	}
+	strMessage @= Action.StateChangeContext.AssociatedState.HistoryIndex;
+		
+	`AMLOG(strMessage); 
 	foreach Action.ChildActions(ChildAction)
 	{
 		PrintActionRecursive(ChildAction, iLayer + 1);

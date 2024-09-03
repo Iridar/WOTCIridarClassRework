@@ -547,26 +547,27 @@ static private function PatchWhiplash()
 
 static private function PatchSkirmisherReturnFire()
 {
-	local X2AbilityTemplateManager		AbilityMgr;
-	local X2AbilityTemplate				AbilityTemplate;
-	local X2Effect						Effect;
+	local X2AbilityTemplateManager			AbilityMgr;
+	local X2AbilityTemplate					AbilityTemplate;
+	local X2Effect_ReturnFire				FireEffect;
+	local X2AbilityToHitCalc_StandardAim	ToHitCalc;
+	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
 	AbilityTemplate = AbilityMgr.FindAbilityTemplate('SkirmisherReturnFire');
 	if (AbilityTemplate == none)
 		return;
-	
+
 	AbilityTemplate.IconImage = "img:///IRIClassReworkUI.perk_ReturnFire"; // Icon copied from PCP with permission
-	
-	foreach AbilityTemplate.AbilityTargetEffects(Effect)
+
+	for (i = AbilityTemplate.AbilityTargetEffects.Length - 1; i >= 0; i--)
 	{
-		if (X2Effect_Persistent(Effect) != none)
+		FireEffect = X2Effect_ReturnFire(AbilityTemplate.AbilityTargetEffects[i]);
+		if (FireEffect != none)
 		{
-			X2Effect_Persistent(Effect).IconImage = AbilityTemplate.IconImage;
-		}
-		if (X2Effect_ReturnFire(Effect) != none)
-		{
-			X2Effect_ReturnFire(Effect).bPreEmptiveFire = true;
+			FireEffect.bDirectAttackOnly = false;
+			FireEffect.MaxPointsPerTurn = 999; 
+			break;
 		}
 	}
 }
