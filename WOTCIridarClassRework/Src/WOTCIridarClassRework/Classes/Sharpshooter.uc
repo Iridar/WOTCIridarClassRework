@@ -64,7 +64,6 @@ static private function PatchReturnFire()
 		FireEffect = X2Effect_ReturnFire(AbilityTemplate.AbilityTargetEffects[i]);
 		if (FireEffect != none)
 		{
-			FireEffect.bDirectAttackOnly = false;
 			FireEffect.MaxPointsPerTurn = 999; 
 			break;
 		}
