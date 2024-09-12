@@ -225,6 +225,12 @@ static private function EventListenerReturn Suppression_EventListenerTrigger(Obj
 		// Find the suppression effect applied by us, if any.
 		if (SuppressionEffectState == none && EffectName == class'X2Effect_Suppression'.default.EffectName && EffectState.ApplyEffectParameters.SourceStateObjectRef.ObjectID == AbilityState.OwnerStateObject.ObjectID)
 		{
+			if (EffectState.bRemoved)
+			{	
+				`AMLOG("Suppression effect was removed previously, exiting.");
+				return ELR_NoInterrupt;
+			}
+
 			SuppressionEffectState = EffectState;
 		}
 
@@ -242,10 +248,11 @@ static private function EventListenerReturn Suppression_EventListenerTrigger(Obj
 	if (AbilityContext == none)
 		return ELR_NoInterrupt;
 
-		`AMLOG("Target Unit:" @ TargetUnit.GetMyTemplateName() @ "Ability:" @ AbilityContext.InputContext.AbilityTemplateName @ "Interrupt:" @ AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt);
+	`AMLOG("Target Unit:" @ TargetUnit.GetMyTemplateName() @ "Ability:" @ AbilityContext.InputContext.AbilityTemplateName @ "Interrupt:" @ AbilityContext.InterruptionStatus == eInterruptionStatus_Interrupt);
 
 	if (!bIgnoreReactionFire && class'X2Ability_DefaultAbilitySet'.default.OverwatchIgnoreAbilities.Find(AbilityContext.InputContext.AbilityTemplateName) != INDEX_NONE)
 	{
+		`AMLOG("Ability ignores reaction fire");
 		bIgnoreReactionFire = true;
 	}
 
@@ -261,12 +268,15 @@ static private function EventListenerReturn Suppression_EventListenerTrigger(Obj
 	{
 		bTargetAttacking = true;
 	}
-	else if (IsTargetUnitMoving(TargetUnit.ObjectID, AbilityContext.InputContext.MovementPaths))
+	// else // not sure why past me wanted to make movement and attack checks mutually exclusive, but for now this is causing a bug with Suppression shot triggering on Codex Teleport.
+	
+	if (IsTargetUnitMoving(TargetUnit.ObjectID, AbilityContext.InputContext.MovementPaths))
 	{
 		// If target is performing a move, do nothing on the first tile of movement, so that the unit has a chance to move outside LoS.
 		// This will still trigger properly when moving to a directly adjacent tile.
 		if (!bIgnoreReactionFire && ChainStartTargetUnit.TileLocation == TargetUnit.TileLocation)
 		{
+			`AMLOG("Unit is on 0th tile of movement, exit listener.");
 	 		return ELR_NoInterrupt;
 		}
 
@@ -303,7 +313,7 @@ static private function bool IsTargetUnitMoving(const int ObjectID, const array<
     {
         if (MovementPath.MovingUnitRef.ObjectID == ObjectID && MovementPath.MovementTiles.Length > 0)
         {
-			`AMLOG("0th tile:" @ MovementPath.MovementTiles[0].X @ MovementPath.MovementTiles[0].Y @ MovementPath.MovementTiles[0].Z);
+			// `AMLOG("0th tile:" @ MovementPath.MovementTiles[0].X @ MovementPath.MovementTiles[0].Y @ MovementPath.MovementTiles[0].Z);
             return true;
         }
     }
