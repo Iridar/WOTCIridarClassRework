@@ -276,6 +276,7 @@ static private function PatchStunStrike()
 {
 	local X2AbilityTemplateManager			AbilityMgr;
 	local X2AbilityTemplate					Template;
+	local X2Effect_Persistent				PersistentEffect;
 	local int i;
 
 	AbilityMgr = class'X2AbilityTemplateManager'.static.GetAbilityTemplateManager();
@@ -290,20 +291,21 @@ static private function PatchStunStrike()
 		//	Template.AbilityTargetEffects.Remove(i, 1);
 		//}
 
-		if (X2Effect_Persistent(Template.AbilityTargetEffects[i]).EffectName == class'X2AbilityTemplateManager'.default.DisorientedName)
+		PersistentEffect = X2Effect_Persistent(Template.AbilityTargetEffects[i]);
+
+		if (PersistentEffect != none && PersistentEffect.EffectName == class'X2AbilityTemplateManager'.default.DisorientedName)
 		{
 			Template.AbilityTargetEffects.Remove(i, 1);
+			Template.AddTargetEffect(class'X2StatusEffects'.static.CreateStunnedStatusEffect(2, 100, false));
+			break;
 		}
 	}
 
 	Template.AbilityToHitCalc = default.DeadEye;
 
-	Template.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;
-
-	Template.AddTargetEffect(class'X2StatusEffects'.static.CreateStunnedStatusEffect(2, 100, false));
+	Template.BuildInterruptGameStateFn = TypicalAbility_BuildInterruptGameState;	
 
 	//Template.AddTargetEffect(new class'X2Effect_ReliableKnockback');
-
 	//Template.AddTargetEffect(GetSealEffect());
 }
 
